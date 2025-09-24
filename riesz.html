@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sitemap</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- allow latex, inline equations go between \(\) 
+    and block equations go in \[\]-->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="mainContent">
+        <h1>Riesz Representation Theorem for Finite-Dimensional Spaces</h1>
+        Say that we have linear functional \(f: V \to \mathbb{C}, \mid\vec{v}\rangle \mapsto f\mid\vec{v}\rangle\) for a complex vector space \(V\) with orthonormal basis \(\{\vec{\mid e_i \rangle}\}_{i=1,...,n}\), and that the linear application for dual correspondence is \(C\).
+        <br><br>
+        Since \(f\) is linear, when it acts on an arbitrary vector \(\mid\vec{v}\rangle\), it acts individually on the orthonormal basis of \(V\):
+        \[
+            \begin{align}
+                \vec{v} &= \Sigma_{i=1}^n c_i\mid\vec{e_i}\rangle \tag{1}\\
+                f\mid\vec{v}\rangle &= f(\Sigma_{i=1}^n c_i\mid\vec{e_i}\rangle) \\
+                &= \Sigma_{i=1}^n c_if(\vec{\mid e_i\rangle}) \tag{2}
+            \end{align}
+        \]
+        Since \(f\) maps to the the complex field \(\mathbb{C}\), \(f(\mid\vec{e_i}\rangle)\) is some complex value, let's call it \(\alpha_i\) for now.
+        This means that we can write:
+        \[f\mid\vec{v}\rangle = \Sigma_{i=1}^n c_i \alpha_i \tag{3}\]
+        <br><br>
+        Let's now consider another vector, \(\mid\vec{w}\rangle\), which is defined by the complex conjugate of \(\{\alpha_i\}_{i=1,...,n}\), \(\{\alpha_i^*\}_{i=1,...,n}\):
+        \[
+            \begin{align}
+                \mid\vec{w}\rangle &= \Sigma^n_{i=1}\alpha_i^* \mid\vec{e_i}\rangle \\
+                \langle\vec{w}\mid &= C\mid\vec{w}\rangle \\
+                &= \langle (\Sigma^n_{i=1}\alpha_i^* \mid\vec{e_i}\rangle) \mid \\
+                &= \langle \Sigma^n_{i=1}\alpha_i^* \vec{e_i}\mid \\
+                &= \Sigma^n_{i=1}\alpha_i \langle\vec{e_i}\ \mid \tag{4}
+            \end{align}
+        \]
+        <br><br>
+        Now, if do \(\langle\vec{w}\mid\vec{v}\rangle\), we can use expressions (2) and (4) to arrive at the following:
+        \[
+            \begin{align}
+                \langle\vec{w}\mid\vec{v}\rangle &= (\Sigma^n_{i=1}\alpha_i \langle\vec{e_i}\ \mid) \mid\vec{v}\rangle \\
+                &=  \Sigma^n_{i=1}\alpha_i \langle\vec{e_i}\ \mid\vec{v}\rangle \tag{5}
+            \end{align}
+        \]
+        Knowing the <a href="definitions.html#identity">resolution of identity</a>, which says that the sum of all <a href="definitions.html#projectors">projectors</a> of the orthonormal basis vectors, \(\mid\vec{e_i}\rangle\langle\vec{e_i}\mid\) results in the identity matrix \(\mathbf{I}\),
+        we can manipulate equation (1) like so:
+        \[
+            \begin{align}
+                \vec{v} &= \Sigma_{i=1}^n c_i\mid\vec{e_i}\rangle \\
+                &= \mathbf{I}\mid\vec{v}\rangle = (\Sigma_{i=1}^n \mid\vec{e_i}\rangle\langle\vec{e_i}\mid)\mid\vec{v}\rangle \\
+                &= \Sigma_{i=1}^n \mid\vec{e_i}\rangle\langle\vec{e_i}\mid\vec{v}\rangle \\
+                &= \Sigma_{i=1}^n \langle\vec{e_i}\mid\vec{v}\rangle \mid\vec{e_i}\rangle \\
+                c_i &= \langle\vec{e_i}\mid\vec{v}\rangle \tag{6}
+            \end{align}
+        \]
+        So, substituting (4) into (5), we can now write: 
+        \[
+            \begin{align}
+                \langle\vec{w}\mid\vec{v}\rangle &= \Sigma^n_{i=1}\alpha_i \langle\vec{e_i}\ \mid\vec{v}\rangle \\
+                &= \Sigma^n_{i=1}\alpha_i c_i
+            \end{align}
+        \]
+        This is exactly the expression defined in (3)! So, \(\langle\vec{w}\mid\vec{v}\rangle = f\mid\vec{v}\rangle\).
+        <br><br>
+        Since we can define any vector in \(V\) as we did in (1), we can always form a vector \(\mid\vec{w}\rangle\) and arrive at the result in (6). 
+        Essentially, we have shown that every single linear function \(f\) can be represented by a unique \(\langle\vec{w}\mid \in V^*\) which is the dual of the ket \(\mid\vec{w}\rangle \in V\).
+        <br><br>
+        <h2 id="correspprops">Properties of the Dual Correspondence</h2>
+        Now we know that every linear functional has a corresponding bra in the dual space of \(V\), or formally:
+        \[
+            \begin{align}
+            \forall f \in V^*, f &= C\mid\vec{w}\rangle\\
+            &= C [\Sigma^n_{i=1}\alpha_i^* \mid\vec{e_i}\rangle]\\
+            &=C[\Sigma_{i=1}^n (f\mid\vec{e_i}\rangle)^*\mid\vec{e_i}\rangle]
+            \end{align}
+        \]
+        Which tells us that we can also define a \(C^{-1}\) to recover \(\mid\vec{w}\rangle\) from \(f\):
+        \[C^{-1}: V^*\to V, f \mapsto \Sigma^n_{i=1}\alpha_i^* \mid\vec{e_i}\rangle = \Sigma_{i=1}^n (f\mid\vec{e_i}\rangle)^*\mid\vec{e_i}\rangle\]
+        indicating that \(dim(V) = dim(V^*)\). 
+        <br><br>
+        Since \(C\) maps all kets to a bra in this way, we can see that \(C\) is also anti-linear:
+        \[C(\alpha\mid\vec{v}\rangle + \beta \mid\vec{w}\rangle) = \alpha^*\langle\vec{v}\mid + \beta^*\langle\vec{w}\mid\]
+    </div>
+  </body>
+</html>

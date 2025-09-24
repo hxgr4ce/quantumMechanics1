@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Adjoint</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- allow latex, inline equations go between \(\) 
+    and block equations go in \[\]-->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="mainContent">
+        <h1>The Adjoint</h1>
+        <p>
+            Say that we have the adjoint of linear application \(T: H\to H\) in a finite dimensional space Hilbert space \(H\), called \(T^\dagger\) where:
+            \[T^\dagger=(T^T)^*\tag{1}\]
+            which acts as:
+            \[\langle\vec{v}\mid T\mid\vec{u}\rangle = \langle T^\dagger \vec{v}\mid\vec{u}\rangle = \langle \vec{u}\mid T^\dagger \mid\vec{v}\rangle^*\tag{2}\]
+            We say that \(T^\dagger\) maps one vector in \(H\) to another vector in the same space. 
+            But what does that actually mean?
+        </p>
+        <p>
+            <h2>What it do</h2>
+            From what we know about <a href="definitions.html#linearFCN">linear functionals</a>, some vector \(\mid\vec{v}\rangle\) corresponds to a linear functional \(\langle\vec{v}\mid\).
+            <br><br>
+            We can see that \(\langle\vec{v}\mid T\) is also a linear functional. 
+            If it acts on some input vector \(\mid\vec{u}\rangle\): \(\langle\vec{v}\mid T\mid\vec{u}\rangle\), we first obtain \(T\mid\vec{u}\rangle = \mid\vec{u'}\rangle\), 
+            then obtain \(\langle\vec{v}\mid\vec{u'}\rangle=c\).
+            From this action we can see that \(\langle\vec{v}\mid T\) is linear:
+            \[
+                \begin{align}
+                    \langle\vec{v}\mid T\mid\vec{u_1}+\vec{u_2}\rangle &= \langle\vec{v}\mid T\vec{u_1}+T\vec{u_2}\rangle \\
+                    &= \langle\vec{v}\mid \vec{u_1'}+\vec{u_2'}\rangle \\
+                    &= \langle\vec{v}\mid \vec{u_1'}\rangle+\langle\vec{v}\mid\vec{u_2'}\rangle \\
+                    &= c_1 +c_2 \\
+                    &= \langle\vec{v}\mid T\mid\vec{u_1}\rangle+\langle\vec{v}\mid T\mid\vec{u_2}\rangle
+                \end{align}
+            \]
+            and certainly maps a vector in \(H\) to a scalar in its field, so it is a linear functional (in a finite dimensional Hilbert space).
+            <br><br>
+            (To be a linear functional in an infinite-dimensional Hilbert space, you have to also be continuous! 
+            But we haven't covered that yet...)
+            <br><br>
+            Mathematically, a bra (e.g. \(\langle\vec{v}\mid\)) which is just a row vector, times a matrix (e.g. \(T\)), yields another row vector, a.k.a. a bra (e.g. the resulting \(\langle\vec{t}\mid\)), which is a linear functional.
+            <br><br>
+            Anyway, let's write \(\langle\vec{v}\mid T\) as \(\langle\vec{t}\mid\) and say we have <a href="definitions.html#dualcorresp">dual correspondence</a> \(C\).
+            We can get the vector corresponding to \(\langle\vec{t}\mid\) by \(C^{-1}\langle\vec{t}\mid\).
+            <br><br>
+            We have essentially mapped the vector \(\mid\vec{v}\rangle\) to the vector \(\mid\vec{t}\rangle\) by doing:
+            \[\mid\vec{t}\rangle = C^{-1}[C(\mid\vec{v}\rangle) T]\tag{3}\]
+            <!-- Another way to say this is that \(T^\dagger \mid\vec{v}\rangle = \mid T^\dagger\vec{v}\rangle = \mid\vec{t}\rangle\). -->
+            <hr>
+            How do we use the notation \(T^\dagger\)? 
+            Since \(T^\dagger\) takes \(\mid\vec{v}\rangle\) as input and outputs \(\mid\vec{t}\rangle\) via the transformation described in (3), we can write:
+            \(T^\dagger\mid\vec{v}\rangle = \mid\vec{t}\rangle\). 
+            Taking advantage of ket notation, we can also write this as \(\mid T^\dagger\vec{v}\rangle \), which lets us say the following:
+            \[
+                \begin{align}
+                    C\mid T^\dagger\vec{v}\rangle &= \langle T^\dagger\vec{v}\mid \\
+                    C\mid\vec{t}\rangle &= \langle\vec{t}\mid =  \langle \vec{v}\mid T \\
+                    \langle \vec{v}\mid T &= \langle T^\dagger\vec{v}\mid \tag{4}
+                \end{align}
+            \]
+            So we have \(\langle \vec{v}\mid T = \langle T^\dagger\vec{v}\mid\), which tells us how to use \(T^\dagger\) while working with bra-ket notation.
+        </p>
+        <p>
+            <h2>Deriving the Matrix Representation of \(T^\dagger\)</h2>
+            From our <a href="linappMat.html">matrix representation of linear applications</a> we know that an element in the matrix looks like \(L_{ki}=\langle\vec{w_k}\mid\hat{L}\mid\vec{v_i}\rangle\), where \(\vec{w_i}\) are the output basis vectors and \(\vec{v_i}\) are the input basis vectors.
+            <br><br>The existing \(T\) has matrix elements \(L_{ki}=\langle\vec{w_k}\mid T\mid\vec{v_i}\rangle\). 
+            From (4) we know we can write this as \(L_{ki}=\langle T^\dagger\vec{w_k}\mid\vec{v_i}\rangle\). 
+            Via the last property of <a href="definitions.html#innerProduct">the inner product</a>:
+            \[\langle T^\dagger\vec{w_k}\mid\vec{v_i}\rangle = \langle\vec{v_i}\mid T^\dagger\vec{w_k}\rangle^* = \langle\vec{v_i}\mid T^\dagger\mid\vec{w_k}\rangle^*\]
+            Which equates the assertion made in (2) and leads to the definition of \(T^\dagger\) made in (1), where \(T^\dagger\) is the complex conjugate transpose of \(T\).
+        </p>
+    </div>
+  </body>
+</html>

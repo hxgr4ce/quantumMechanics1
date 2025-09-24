@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Linear Algebra Definitions</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- allow latex, inline equations go between \(\) 
+    and block equations go in \[\]-->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="mainContent">
+        <h1>Linear Algebra Definitions</h1>
+        <h2 id="groups">Groups</h2>
+        <div class="mainContent">
+        A group, G, is a <b><i>set</i></b> with an internal operator + such that
+        \[+: G \times G \to G, \quad (a, b) \mapsto a + b\]
+        
+        The + operator has the following properties:
+        <ul>
+            <li>
+                <b>Associative</b>: 
+                \(\forall a, b, c \in G, (a+b)+c = a+(b+c)\)
+            </li>
+            <li>
+                <b>Neutral Element</b>/Identity: 
+                \(\forall a \in G, \exists e_+ \mid a + e_+ = e_+ + a = a\)
+            </li>
+            <li>
+                <b>Symmetric Elements</b>/Inverses: 
+                \(\forall a \in G, \exists b \in G \mid a+b = b+a = e_+\)
+            </li>
+        </ul>
+        If a group has the extra property:
+        <ul><li><b>Commutative</b>: \(\forall a, b \in G, a+b = b+a\)</li></ul>
+        Then it is a commutative or <b><i>abelian</i></b> group.
+        </div>
+        <br>
+        <u>Examples</u>:
+        <ul>
+            <li>
+                \((\mathbb{Z}, +)\), the group of integers equipped with the + operator, is an <b><i>abelian group</i></b> with resepect to +, where \(e_+ = 0\).
+            </li>
+            <li>\((\mathbb{R}, +)\) and \((\mathbb{C}, \cdot)\) are also <b><i>abelian groups</i></b>. 
+            </li>
+            <li>
+                The <a href="planaSym.html">set of planar symmetries of an equilateral triangle</a> is the smallest <b><i>non-abelian</i></b> group.
+            </li>
+        </ul>
+        <p><u>Note 1</u>: I use the symbol + for convenience; if I used \(\cdot\) the definition would be the same-- it applies to <i>any</i> operator which follows the above definition, including addition and multiplication for some sets.</p>
+        <p><u>Note 2</u>: \(\mathbb{R}\) and \(\mathbb{Z}\) are <i>not</i> abelian groups with respect to multiplication. The only integers which have symmetric elements that are also integers are 1 and -1, and since 0 exists in \(\mathbb{R}\) and there is no real number \(n \mid n\cdot 0 =1\), \(\mathbb{R}/\{0\}\) is abelian with respect to \(\cdot\) but \(\mathbb{R}\) is not.</p>
+        <h2 id="fields">Fields</h2>
+        <div class="mainContent">
+            A field, F, is a <b><i>group</i></b> which has the + operator as defined <a href="#groups">above</a>, and another internal operator \(\cdot\) such that \[\cdot: F \times F \to F, (a, b) \mapsto a \cdot b\]
+            The \(\cdot\) operator has the following properties:
+            <ul>
+                <li>
+                    <b>Associative</b>: \(\forall a,b,c \in F, (ab)c=a(bc)\)
+                </li>
+                <li>
+                    <b>Commutative</b>: \(\forall a,b \in F, a \cdot b = b \cdot a\)
+                </li>
+                <li>
+                    <b>Distributive over the sum</b>: \(\forall a, b, c \in F, a(b+c) = ab+ac\)
+                </li>
+                <li>
+                    <b>Neutral Element</b>/Identity: \(\forall a \in F, \exists e_\cdot \mid a\cdot e_\cdot = e_\cdot \cdot a = a\)
+                </li>
+                <li>
+                    <b>Symmetric Element</b>/Inverses: \(\forall a \neq 0 \in F, \exists b \mid a\cdot b = b\cdot a = e_\cdot\)
+                </li>
+            </ul>
+        </div>
+        <p>Examples:
+            <li>
+                \(\mathbb{C}\), \(\mathbb{R}\), and \(\mathbb{Q}\) are all fields.</li>
+        </p>
+        <p><u>Note 1</u>: A field \(F\) is a set which is an abelian group with respect to +, and \(F/\{0\}\) is abelian group with respect to \(\cdot\).</p>
+        <p>
+            <u>Note 2:</u> In quantum mechanics, we want to work with fields (as they're equipped with useful operators that behave as defined above). 
+            So why don't we work with \(\mathbb{Q}\) or \(\mathbb{R}\)? Why do we work with \(\mathbb{C}\) specifically?
+            This is because \(\mathbb{Q}\) and \(\mathbb{R}\) are not <a href="rqCompleteness.html">complete</a>.
+        </p>
+        <h2 id="vectorSpaces">Vector Spaces</h2>
+        <div class="mainContent">
+            <p>A vector space, V, is an space over a field, F. They are not fields themselves, but they are abelian groups with respect to + (where the zero vector \(\vec{0}\) is the neutral element).</p>
+            <p>Vector space V is equipped with a "multiply by scalar" operator \(F\times V \to V, (c\in F, \vec{v}\in V) \mapsto c\vec{v}\) and has the following properties:</p>
+            <ul>
+                <li>
+                    <b>Distributive over  sum in F</b>: \(\forall a,b \in F, \forall \vec{v} \in V, \vec{v}(a+b) = a\vec{v} + b\vec{v}\)
+                </li>
+                <li>
+                    <b>Distributive over  sum in V</b>: \(\forall a \in F, \forall \vec{u}, \vec{v} \in V, a(\vec{u}+\vec{v}) =a\vec{u}+a\vec{v} \)
+                </li>
+                <li>
+                    <b>Associative</b>: \(\forall a, b \in F, \forall \vec{v} \in V, a(b\vec{v})=(ab)\vec{v}\)
+                </li>
+                <li><b>Neutral Element</b>/Identity: \(e_\cdot \in F, \forall \vec{v} \in V, e_\cdot\vec{v}=\vec{v}\)</li>
+            </ul>
+        </div>
+        <p><u>Example</u>: Any \((\mathbb{R}^n, \mathbb{R})\) or \((\mathbb{C}^n, \mathbb{C})\).</p>
+        <p><u>Note</u>: To see more about vector spaces, click <a href="vectorSpaceFeatures.html">here</a>.</a></p>
+        <h2 id="conjugate">The Complex Conjugate Transpose</h2>
+        <div class="mainContent">
+            The complex conjugate transpose of an \(m\times n\) matrix \(\mathbf{A}\) is:
+            \[\mathbf{A}^\dagger=\mathbf{A}^{T*}\]
+            where \(^T\) indicates a matrix transpose and \(^*\) indicates that the complex conjugate of each element is taken.
+            This also applies to vectors, essentially single column or row matrices.
+        </div>
+        <h2 id="innerProduct">Inner Product Spaces</h2>
+        <div class="mainContent">
+            <p>An inner product/scalar product space is a vector space, V, over a field F, that also has an operator called the inner product or scalar product \[\langle\cdot\mid\cdot\rangle: V \times V \to F, (a, b) \mapsto \langle\vec{a}\mid\vec{b}\rangle\] with the following set of properties:</p>
+            <ul>
+                <li>
+                    \(\forall \vec{a}, \in V, \langle\vec{a}\mid\vec{a}\rangle \geq 0, \langle\vec{a}\mid\vec{a}\rangle \in \mathbb{R}, \langle\vec{a}\mid\vec{a}\rangle=0 \iff \vec{a}=\vec{0}\)
+                </li>
+                <li>\(\forall \vec{a}, \vec{b}, \vec{c} \in V, \forall \alpha, \beta \in F, \langle\vec{c}\mid\alpha\vec{a}+\beta\vec{b}\rangle = \alpha\langle\vec{c}\mid\vec{a}\rangle+\beta\langle\vec{c}\mid\vec{b}\rangle\)</li>
+                <li>\(\forall \vec{a}, \vec{b} \in V, \langle\vec{a}\mid\vec{b}\rangle= \langle\vec{b}\mid\vec{a}\rangle^*\)</li>
+            </ul>
+        </div>
+        <p><u>Note 1</u>: Following from the fact that \(\forall \vec{a}, \vec{b} \in V, \langle\vec{a}\mid\vec{b}\rangle= \langle\vec{b}\mid\vec{a}\rangle^*\), we see that the scalar product is anti-linear in the second entry:
+            \[
+                \begin{align}
+                \langle\alpha\vec{a}+\beta\vec{b}\mid\vec{c}\rangle & = \langle\vec{c}\mid\alpha\vec{a}+\beta\vec{b}\rangle^*\\
+                & =(\langle\vec{c}\mid\alpha\vec{a}\rangle+\langle\vec{c}\mid\beta\vec{b}\rangle)^*\\
+                & =(\alpha\langle\vec{c}\mid\vec{a}\rangle+\beta\langle\vec{c}\mid\vec{b}\rangle)^*\\
+                & =\alpha^*\langle\vec{a}\mid\vec{c}\rangle+\beta^*\langle\vec{b}\mid\vec{c}\rangle
+                \end{align}
+            \]
+        </p>
+        <p><u>Note 2</u>: If the vector space is some \(\mathbb{R}^n\), the scalar product is the same as the dot product.
+        </p>
+        <p><u>Note 3</u>: With the scalar product, we have introduced a sense of geometry by by introducing relationships between vectors.
+            For example, if two vectors \(\vec{a}, \vec{b} \in V\) have an inner product of 0, they are <b>orthogonal</b> (perpendicular). 
+            We can also induce the <b>norm</b> with the scalar product, which means we can also calculate the distance between vectors and the magnitude of vectors.
+        </p>
+        <h2 id="linearFCN">Linear Functionals</h2>
+        <div class="mainContent">
+            In a vector space \((V, F)\), linear functional \(f:V\to F\) maps elements of a vector space to elements in its field.
+            <br><br>
+            We can generate a specifc linear functional from \(\vec{u} \in V, f_{\vec{u}}\), which takes a vector \(\vec{v} \in V, f_{\vec{u}}\vec{v} \mapsto \langle\vec{u}\mid(\mid\vec{v}\rangle)=\langle\vec{u}\mid\vec{v}\rangle\).
+            This corresponds to a scalar product where \(\vec{u}\) is always in the first entry.
+        </div>
+        <h2 id="braket">Bra-Ket Notation</h2>
+        <div class="mainContent">
+            Bra-ket notation is used in complex vector spaces.
+            <br><br>
+            A bra looks like \(\langle f\mid\). It's the linear functional\(f:V\to \mathbb{C}\) for vector space \((V, \mathbb{C})\).
+            <br><br> 
+            A ket looks like \(\mid\vec{v}\rangle\). It is a vector, \(\vec{v}\), in vector space \((V, \mathbb{C})\), and is used to represent a physical state of some quantum system.
+        </div>
+        <p><u>Note</u>: You don't have to write the vector arrows over the elements in bra-ket notation like I do, but it is nice to differentiate between vectors and other terms that might be in there, e.g. operators/linear applications.</p>
+        <h2 id="operators">Operators</h2>
+        <div class="mainContent">
+            In quantum mechanics, physical states are represented by vectors. 
+            An operator is a function that maps one vector space to another (which is possibly the same space), 
+            meaning that one physical state is mapped to another.
+            <br><br>
+            Observables are a more specific type of operator, which will be defined as a quantum postulate later.
+        </div>
+        <h2 id="linearApp">Linear Applications</h2>
+        <div class="mainContent">
+            <p>Say \(V\) and \(W\) are vector spaces over the same field \(F\). A linear application \(\hat{L}\) is a funtion \(\hat{L}:V\to W, \vec{v} \mapsto \hat{L}\vec{w}\) with properties:</p>
+            <ul>
+                <li>\(\forall \vec{u}, \vec{v} \in V, \hat{L}(\vec{u}+\vec{v})=\hat{L}\vec{u}+\hat{L}\vec{v}\)</li>
+                <li>\(\forall \vec{v} \in V, \forall c \in F, \hat{L}(c\vec{v})=c\hat{L}\vec{v}\)</li>
+            </ul>
+            <p>A linear application can be written as a matrix. Click <a href="linappMat.html">here</a> for the full demonstration.</p>
+        </div>
+        <h2 id="dualspace">Dual Spaces</h2>
+        <div class="mainContent">
+            The set of all linear functionals from \(V\) to \(F\) is itself a vector space called a dual space, \(V^*=\{f: V \to \mathbb{C}\}\).
+            Each vector space \(V\) has a dual space \(V^*\), and \(V^*\) itself is a vector space, since \(\forall f, g \in V^*, \forall \alpha, \beta \in \mathbb{C}, (\alpha f + \beta g \mid \vec{v}\rangle = \alpha f\mid\vec{v}\rangle+\beta g \mid\vec{v}\rangle\) (this comes from how \(+\) and \(\cdot\) are defined for \(V^*\)).
+        </div>
+        <h2 id="dualcorresp">Dual Correspondence</h2>
+        <div class="mainContent">
+            A dual correspondence is a linear application that maps a vector space \(V\) to its dual space \(V^*\): 
+            \[C: V \to V^*, \mid\vec{v}\rangle \mapsto f_{\vec{v}}\]
+            and by the <a href="definitions.html#riesz">Riesz Representation Theorem</a>, \(f_{\vec{v}}=\langle\vec{v}\mid\).
+            <br><br>
+            \(C\) is also anti-linear:
+            \[C(\alpha\mid\vec{v}\rangle + \beta \mid\vec{w}\rangle) = \alpha^*\langle\vec{v}\mid + \beta^*\langle\vec{w}\mid\]
+            and invertible:
+            \[C^{-1}:V^*\to V, f_{\vec{v}} \mapsto \mid \vec{v}\rangle\]
+            and \(dim(V)=dim(V^*)\).
+        </div>
+        <p>
+            <u>Note</u>: The <a href="definitions.html#riesz">Riesz Representation Theorem</a> shows that every bra in a dual space has a corresponding ket in the non-dual space, allowing us to <a href="riesz.html#correspprops">prove the above properties of \(C\)</a>.
+        </p>
+        <h2 id="riesz">Riesz Representation Theorem</h2>
+        <div class="mainContent">
+            In a finite-dimensional space, <i>every</i> linear functional \(f: V \to F\) in vector space \(V, F\), has a corresponding <i>unique</i> vector \(\mid\vec{v_f}\rangle\) such that \(f(\mid \vec{u}\rangle)=\langle\vec{v_f}\mid\vec{u}\rangle, \forall \mid\vec{u}\rangle \in V.\)
+        </div>
+        <p>
+            <u>Note</u>: Click <a href="riesz.html">here</a> for the demonstration that this is true.
+        </p>
+        <h2 id="norm">Norm</h2>
+        <div class="mainContent">
+            A norm is a function on a vector space \((V, F), f: V \to \mathbb{R}, \vec{v} \in V \mapsto ||\vec{v}||\) that describes the magnitude or length of a vector.
+            <br><br>
+            You may have seen it defined as Euclidean distance, but typically it is defined with the inner product: 
+            \[||\vec{v}||=\sqrt{\langle\vec{v}\mid\vec{v}\rangle}\]
+        </div>
+        <h2 id="hilbert">Hilbert Space</h2>
+        <div class="mainContent">
+            A Hilbert space is an inner product space that is also a <a href="rqCompleteness.html#metricIncompleteness">metric space</a> with respect to distance induced by the <a href="#norm">norm</a>.
+            As a result, unlike Euclidean space (which is at most three-dimensional), it can describe infinite dimensional spaces.
+            <br><br>
+            A Hilbert space space is <i>separable</i> if and only if it has a countable orthonormal basis. 
+        </div>
+        <p>
+            <u>Note</u>: Most of the Hilbert spaces in quantum mechanics are separable, thus are all isomorphic to each other.
+            (This means the <a href="vectorSpaceFeatures.html#basis">basis</a> of one space can be mapped to any basis of another. 
+            And since they're infinite dimensional and have a countable basis, this means their bases are countably infinite!)
+            <br><br>
+            So some people call all infinite-dimensional separable Hilbert space "the Hilbert space" or just "Hilbert space".
+        </p>
+        <h2 id="adjoint">Adjoint</h2>
+        <div class="mainContent">
+            Say we have a linear application \(T: H\to H\) that specifically maps from and to the <i>same</i> finite dimensional space Hilbert space \(H\).
+            <br><br>
+            The adjoint (or Hermitian conjugate) of \(T\) is another linear application called \(T^\dagger\) where:
+            \[T^\dagger=(T^T)^*\]
+            which acts as:
+            \[\langle\vec{v}\mid T\mid\vec{u}\rangle = \langle T^\dagger \vec{v}\mid\vec{u}\rangle = \langle \vec{u}\mid T^\dagger \mid\vec{v}\rangle^*\]
+            Meaning that \(T^\dagger\) maps a vector \(\mid\vec{v}\rangle\) (corresponding to linear functional \(\langle\vec{v}\mid\)) to a totally different vector \(\mid\vec{u}\rangle\).
+            <br><br>
+        </div>
+        <p></p>
+        <div class="mainContent">
+            If an application \(T\) is <a href="definitions.html#hermitian">Hermitian</a> and \(T=T^\dagger\), it is "self-adjoint". 
+            This requirement for \(T=T^\dagger\) means that the domain of \(A\) has to equal the domain of \(A^\dagger\).
+        </div>
+        <p>
+            <u>Note 1</u>: Click <a href="adoint.html">here</a> for a more in depth understanding of the action of \(T^\dagger\).
+            <br><br>
+            <u>Note 2</u>: 
+                I don't think only linear applications \(T:H\to H\) can have adjoints, I think any \(T:H_1\to H_2\) can have an adjoint.
+                But that was how it was written on the board...
+        </p>
+        <h2 id="hermitian">Hermitian Operators</h2>
+        <div class="mainContent">
+            Linear application \(A\) over vector space \(V\) is a Hermitian operator if:
+            \[\forall \vec{v},\vec{w} \in V, \langle\vec{v}\mid A\mid\vec{w}\rangle=\langle\vec{w}\mid A\mid\vec{v}\rangle^*\]
+            In a finite-dimensional space, being <a href="definitions.html#adjoint">self-adjoint</a> \(\iff\) Hermicity.
+            In the infinite-dimensional case, a matrix can be Hermitian but not self-adjoint.
+        </div>
+        <p>
+            <u>Example</u>: 
+            <ul>
+                <li>The matrix \(\begin{pmatrix} i & 0 \\ 0 & 0 \end{pmatrix}\) is <i>not</i> Hermitian.</li>
+                <li>
+                    Any matrix of the form
+                    \(\begin{pmatrix} a & c-id \\ c+id & b\end{pmatrix}\)
+                    is Hermitian, e.g.
+                    \(\begin{pmatrix} 2 & 1-i \\ 1+i & 3\end{pmatrix}\)
+                    is a Hermitian matrix.
+                </li>
+                <li>I don't have a good example for a Hermitian but not self-adjoint operator... you'll just have to trust me, I guess.</li>
+            </ul>
+        </p>
+        <h2 id="projectors">Projectors</h2>
+        <div class="mainContent">
+            Linear application \(P: V \to V\) is a projector if P is self-adjoint:
+            \[P = P^\dagger\]
+            and idempotent:
+            \[PP=P\]
+            Typically they look like \(\mid\vec{p}\rangle\langle\vec{p}\mid\), so that when it acts on a vector \(\mid\vec{v}\rangle\):
+            \[\mid\vec{p}\rangle\langle\vec{p}\mid\vec{v}\rangle\]
+            the <i>length</i> of \(\mid\vec{v}\rangle\) projected on vector \(\mid\vec{p}\rangle\), <a href="innerProduct.html">which is the term \(\langle\vec{p}\mid\vec{v}\rangle\)</a>, is <i>directed along \(\mid\vec{e_i}\rangle\)</i>.
+        </div>
+        <p>
+            <u>Notes</u>:
+            Projectors as we have defined them here (specifically with the first property that \(P=P^\dagger\)) are mutually orthogonal. 
+            This means that any two projectors \(P_1\) and \(P_2\) project to orthogonal  spaces \(V_1\) and \(V_2\) where \(V_1\cap V_2=\{\vec{0}\} \). (Why?)
+        </p>
+        <p>
+            <u>Examples</u>:
+            <ul>
+                <li>
+                    Say \(\{\mid\vec{e_i}\rangle\}\) is an orthonormal basis and linear application \(A=\mid\vec{e_i}\rangle\langle\vec{e_i}\mid\)
+                    <br>
+                    \(A\) is self adjoint:
+                    \[
+                        \begin{align}
+                            A^\dagger\mid\vec{v}\rangle &= \mid A^\dagger\vec{v}\rangle \\
+                            &= C^{-1}(\langle A^\dagger\vec{v}\mid) = C^{-1}(\langle\vec{v}\mid A) \\
+                            &= C^{-1}(\langle\vec{v}\mid\vec{e_i}\rangle\langle\vec{e_i}\mid) \\
+                            &= \langle\vec{v}\mid\vec{e_i}\rangle^*\mid\vec{e_i}\rangle \\
+                            &= \mid\vec{e_i}\rangle\langle\vec{v}\mid\vec{e_i}\rangle^* \\
+                            &= \mid\vec{e_i}\rangle\langle\vec{e_i}\mid\vec{v}\rangle \\
+                            &= A\mid\vec{v}\rangle 
+                        \end{align}
+                    \]
+                    since \(C^{-1}\) is anti-linear and \(\langle\vec{v}\mid\vec{e_i}\rangle\) is a scalar value.
+                    <br>
+                    \(A\) is also idempotent:
+                    \[
+                        \begin{align}
+                        AA\mid\vec{v}\rangle &= \mid\vec{e_i}\rangle\langle\vec{e_i}\mid\vec{e_i}\rangle\langle\vec{e_i}\mid\vec{v}\rangle \\
+                        &= \mid\vec{e_i}\rangle\langle\vec{e_i}\mid\vec{v}\rangle \\
+                        &= A\mid\vec{v}\rangle
+                        \end{align}
+                    \]
+                    Since \(\{\mid\vec{e_i}\rangle\}\) is an orthonormal basis, all \(\langle\vec{e_i}\mid\vec{e_i}\rangle = 1\) (and all \(\langle\vec{e_i}\mid\vec{e_j}\rangle = 0, i\neq j\)).
+                </li>
+                <li>
+                    Say \(\{\mid\vec{e_i}\rangle\}\) is an orthonormal basis and linear application \(B=\Sigma_{i}\mid\vec{e_i}\rangle\langle\vec{e_i}\mid\)
+                    <br>
+                    For the same reasons as the previous example, \(B\) is self-adjoint.
+                    <br>
+                    \(B\) is also idempotent:
+                    \[
+                        \begin{align}
+                            BB\mid\vec{v}\rangle &= (\Sigma_{j}\mid\vec{e_j}\rangle\langle\vec{e_j}\mid)(\Sigma_{i}\mid\vec{e_i}\rangle\langle\vec{e_i}\mid)\mid\vec{v}\rangle \\
+                            &= (\Sigma_{j}\Sigma_{i}\mid\vec{e_j}\rangle\langle\vec{e_j}\mid\vec{e_i}\rangle\langle\vec{e_i}\mid)\mid\vec{v}\rangle \\
+                            &= (\Sigma_{j}\Sigma_{i}\mid\vec{e_j}\rangle\delta_{ij}\langle\vec{e_i}\mid)\mid\vec{v}\rangle \\
+                            &= (\Sigma_{i}\mid\vec{e_i}\rangle\langle\vec{e_i}\mid)\mid\vec{v}\rangle \\
+                            &= B\mid\vec{v}\rangle
+                        \end{align}
+                    \]
+                </li>
+            </ul>
+        </p>
+        <h2 id="identity">Resolution of Identity</h2>
+        <div class="mainContent">
+            Given an orthonormal basis of vectors \(\{\mid\vec{e_i}\rangle\}\), an arbitrary vector \(\mid\vec{v}\rangle\) can be written as:
+            \[\mid\vec{v}\rangle=\Sigma_i c_i\mid\vec{e_i}\rangle\]
+            This basically means that an arbitrary vector has some length \(c_i\) along each direction described by each \(\mid\vec{e_i}\rangle\) in the basis.
+            <br><br>
+            We can also think of this <i>length</i> \(c_i\) as the component of \(\mid\vec{v}\rangle\) along \(\mid\vec{e_i}\rangle\), which is the scalar product <a href="innerProduct.html">\(\langle\vec{e_i}\mid\vec{v}\rangle\)</a>.
+            This allows us to rewrite \(\mid\vec{v}\rangle\) as:
+            \[
+                \begin{align}
+                    \mid\vec{v}\rangle &= \Sigma_i \langle\vec{e_i}\mid\vec{v}\rangle\mid\vec{e_i}\rangle \\
+                    &= \Sigma_i \mid\vec{e_i}\rangle\langle\vec{e_i}\mid\vec{v}\rangle
+                \end{align}
+            \]
+            implying that \(\Sigma_i \mid\vec{e_i}\rangle\langle\vec{e_i}\mid = \mathbb{I}\).
+        </div>
+        <h2 id="eigen">Eigenvalues, eigenvectors, etc.</h2>
+        <div class="mainContent">
+            If linear application \(A\) for a vector space \(V\) satisfies this condition:
+            \[A\mid\vec{v}\rangle = \lambda\mid\vec{v}\rangle, \langle\vec{v}\mid\vec{v}\rangle\neq0\]
+            then it has a set of eigenvalues \(\lambda\) and corresponding eigenvectors \(\mid\vec{v}\rangle\).
+            <br><br>
+            To find the eigenvalues of \(A\), solve:
+            \[\mid A-\lambda\mathbb{I}\mid=0\]
+            And then solve the above equation with the obtained \(\lambda\)s to get corresponding eigenvectors.
+            <br><br>
+            An eigenspace corresponds to an eigenvalue \(\lambda\), and is the space spanned by \(\lambda\)'s corresponding eigenvectors. 
+            That is, the space of all vectors generated by every possible linear combination of \(\lambda\)'s eigenvectors:
+            \[V_\lambda=\{\mid\vec{u}\rangle \in V \mid A\mid\vec{u}\rangle =\lambda\mid\vec{u}\rangle\}
+            \]
+            where the dgeneracy of that \(\lambda\) is the dimension of its corresponding eigenspace.
+            Note that the sum of all eigenspaces equals the space \(V\).
+            <br><br>
+            The spectrum of \(A\) is simply the set of all of its unique eigenvalues:
+            \[\sigma_A=\{\lambda \mid \exists\mid\vec{u}\rangle \in V with A\mid\vec{u}\rangle=\lambda\mid\vec{u}\rangle\}\]
+
+        </div>
+        <h2 id="spectral">Spectral Theorem (Finite Dimensional)</h2>
+        <div class="mainContent">
+            If linear application \(A \in \mathbb{R}^{nxn}, A: V\to V\) is <a href="definitions.html#adjoint">self-adjoint</a> (and <a href="definitions.html#hermitian">Hermitian</a>), it has \(n\) orthogonal eigenvectors, which you can use as a basis for \(V\).
+        </div>
+        <p>
+            <u>Note</u>: Click <a href="spectral.html">here</a> for a demonstration of the spectral theorem.
+        </p>
+    </div>
+  </body>
+</html>

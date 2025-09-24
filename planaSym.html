@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Planar Symmetries of an Equliateral Triangle</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- allow latex, inline equations go between \(\) 
+    and block equations go in \[\]-->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="mainContent">
+        <h1>Planar Symmetries of an Equliateral Triangle</h1>
+        <h2 id="groups">Symmetries</h2>
+        <p>A symmetry is a transformation that maps a triangle onto itself (note that the points and edges can be interchanged, as long as the resulting triangle is otherwise identical).</p>
+        <p>We can form a set of six symmetries for an equilateral triangle using identity, reflection, and rotation transformations.</p>
+
+        1. <b>Identity</b>: Make no changes to the original triangle.
+        <svg width=300, height="100">
+            <polygon points="50,80 75,35 100,80" fill="none" stroke="black" stroke-width="2"/>
+            <text x="69" y="25">A</text>
+            <text x="30" y="80">B</text>
+            <text x="110" y="80">C</text>
+
+            <!-- arrow -->
+            <line x1="130" y1="50" x2="170" y2="50" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+            
+            <polygon points="200,80 225,35 250,80" fill="none" stroke="black" stroke-width="2"/>
+            <text x="219" y="25">A</text>
+            <text x="180" y="80">B</text>
+            <text x="256" y="80">C</text>
+
+            <!-- arrow def -->
+            <defs>
+                <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3"
+                        orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L6,3 L0,6 Z" fill="black"/>
+                </marker>
+            </defs>
+        </svg>
+
+        2. <b>Reflection</b>: There are three reflections. Hold one corner constant, flip the other two:
+        <svg width=570, height="100">
+            <!-- og triangle -->
+            <polygon points="50,80 75,35 100,80" fill="none" stroke="black" stroke-width="2"/>
+            <text x="69" y="25">A</text>
+            <text x="30" y="80">B</text>
+            <text x="110" y="80">C</text>
+
+            <!-- arrow -->
+            <line x1="130" y1="50" x2="170" y2="50" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+            
+            <!-- refA -->
+            <polygon points="200,80 225,35 250,80" fill="none" stroke="black" stroke-width="2"/>
+            <text x="219" y="25">A</text>
+            <text x="180" y="80">C</text>
+            <text x="256" y="80">B</text>
+
+            <!-- refB -->
+            <polygon points="350,80 375,35 400,80" fill="none" stroke="black" stroke-width="2"/>
+            <text x="369" y="25">C</text>
+            <text x="330" y="80">B</text>
+            <text x="406" y="80">A</text>
+
+            <!-- refC -->
+            <polygon points="500,80 525,35 550,80" fill="none" stroke="black" stroke-width="2"/>
+            <text x="519" y="25">B</text>
+            <text x="480" y="80">A</text>
+            <text x="556" y="80">C</text>
+
+            <!-- arrow def -->
+            <defs>
+                <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3"
+                        orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L6,3 L0,6 Z" fill="black"/>
+                </marker>
+            </defs>
+        </svg>
+
+        3. <b>Rotation</b>: There are two reflections, a clockwise and a counter clockwise rotation of \(120^\circ\).
+        <svg width=570, height="100">
+            <!-- og triangle -->
+            <polygon points="50,80 75,35 100,80" fill="none" stroke="black" stroke-width="2"/>
+            <text x="69" y="25">A</text>
+            <text x="30" y="80">B</text>
+            <text x="110" y="80">C</text>
+
+            <!-- arrow -->
+            <line x1="130" y1="50" x2="170" y2="50" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+            
+            <!-- rotcw -->
+            <polygon points="200,80 225,35 250,80" fill="none" stroke="black" stroke-width="2"/>
+            <text x="219" y="25">B</text>
+            <text x="180" y="80">C</text>
+            <text x="256" y="80">A</text>
+
+            <!-- rotccw -->
+            <polygon points="350,80 375,35 400,80" fill="none" stroke="black" stroke-width="2"/>
+            <text x="369" y="25">C</text>
+            <text x="330" y="80">A</text>
+            <text x="406" y="80">B</text>
+
+            <!-- arrow def -->
+            <defs>
+                <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3"
+                        orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L6,3 L0,6 Z" fill="black"/>
+                </marker>
+            </defs>
+        </svg>
+
+        <h2 id="groups">Proving Group Properties</h2>
+        <p>Say we call the identity transformation \(\mathbb{I}\), the reflection with point \(i\) held constant
+        \(ref_i\), and the rotations \(rot_{cw}\) and \(rot_{ccw}\).</p>
+        <p>Is the set S = \(\{\mathbb{I}, ref_A, ref_B, ref_C, rot_{cw}, rot_{ccw}\}\) a group? Yes!</p>
+        <ul>
+            <li>
+                <p><b>Associative</b>: \(\forall a, b \in S, (a+b)+c = a+(b+c)\) holds, since the grouping of transformations does not matter as long as their order is preserved.</p>
+                <p>E.g. \(rot_{cw} + (ref_A + ref_B) = (rot_{cw} + ref_A) + ref_B\). The transformation \(ref_A + ref_B\) is the same as \(rot_{cw}\):</p>
+                <svg width=570, height="100">
+                    <!-- og triangle -->
+                    <polygon points="50,80 75,35 100,80" fill="none" stroke="black" stroke-width="2"/>
+                    <text x="69" y="25">A</text>
+                    <text x="30" y="80">B</text>
+                    <text x="110" y="80">C</text>
+
+                    <!-- arrow -->
+                    <line x1="130" y1="50" x2="170" y2="50" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+                    
+                    <!-- refA -->
+                    <polygon points="200,80 225,35 250,80" fill="none" stroke="black" stroke-width="2"/>
+                    <text x="219" y="25">A</text>
+                    <text x="180" y="80">C</text>
+                    <text x="256" y="80">B</text>
+
+                    <!-- arrow -->
+                    <line x1="280" y1="50" x2="320" y2="50" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+
+                    <!-- rotcw -->
+                    <polygon points="350,80 375,35 400,80" fill="none" stroke="black" stroke-width="2"/>
+                    <text x="369" y="25">B</text>
+                    <text x="330" y="80">C</text>
+                    <text x="406" y="80">A</text>
+
+                    <!-- arrow def -->
+                    <defs>
+                        <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3"
+                                orient="auto" markerUnits="strokeWidth">
+                        <path d="M0,0 L6,3 L0,6 Z" fill="black"/>
+                        </marker>
+                    </defs>
+                </svg>
+                <p>and the transformation \(rot_{cw} + ref_A\) is the same as \(ref_C\):</p>
+                <svg width=570, height="100">
+                    <!-- og triangle -->
+                    <polygon points="50,80 75,35 100,80" fill="none" stroke="black" stroke-width="2"/>
+                    <text x="69" y="25">A</text>
+                    <text x="30" y="80">B</text>
+                    <text x="110" y="80">C</text>
+
+                    <!-- arrow -->
+                    <line x1="130" y1="50" x2="170" y2="50" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+                    
+                    <!-- rotcw -->
+                    <polygon points="200,80 225,35 250,80" fill="none" stroke="black" stroke-width="2"/>
+                    <text x="219" y="25">B</text>
+                    <text x="180" y="80">C</text>
+                    <text x="256" y="80">A</text>
+
+                    <!-- arrow -->
+                    <line x1="280" y1="50" x2="320" y2="50" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+
+                    <!-- refA -->
+                    <polygon points="350,80 375,35 400,80" fill="none" stroke="black" stroke-width="2"/>
+                    <text x="369" y="25">B</text>
+                    <text x="330" y="80">A</text>
+                    <text x="406" y="80">C</text>
+
+                    <!-- arrow def -->
+                    <defs>
+                        <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3"
+                                orient="auto" markerUnits="strokeWidth">
+                        <path d="M0,0 L6,3 L0,6 Z" fill="black"/>
+                        </marker>
+                    </defs>
+                </svg>
+                Thus 
+                \[
+                    \begin{align}
+                        rot_{cw} + (ref_A + ref_B) & = rot_{cw} + rot_{cw} \\
+                        & = rot_{ccw} \\
+                        (rot_{cw} + ref_A) + ref_B & = ref_C + ref_B \\
+                        & = rot_{ccw} \\
+                        rot_{cw} + (ref_A + ref_B) & = (rot_{cw} + ref_A) + ref_B
+                    \end{align}
+                \]
+            <p>Coming up with the full table of pairwise transformations and their equivalent single transformations to prove this for all \(s \in S\) is left as an exercise for the reader :)</p>
+            </li>
+            <li>
+                The <b>neutral element</b> in this case is clearly \(\mathbb{I}\), since \(\forall s \in S, \mathbb{I} + s = s+\mathbb{I} = s\)
+            </li>
+            <li>
+                Each symmetry has an inverse, or a corresponding <b>symmetric element</b>: 
+                <ul>
+                    <li>Each \(ref_i\) is the inverse of itself, so that \(ref_i + ref_i = \mathbb{I}\)</li>
+                    <li>\(rot_{cw} + rot_{ccw} = \mathbb{I}\), and \(rot_{ccw} + rot_{cw} = \mathbb{I}\)</li>
+                    <li>\(\mathbb{I} + \mathbb{I} = \mathbb{I}\)</li>
+                </ul>
+            </li>
+        </ul>
+        <p>So S is a group.</p>
+        <p>However, S is not an <b>abelian</b> group. The order these symmetries are applied matters. For example, if we do: \(rot_{cw} + ref_A\) we perform the transformation:</p>
+        <svg width=570, height="100">
+            <!-- og triangle -->
+            <polygon points="50,80 75,35 100,80" fill="none" stroke="black" stroke-width="2"/>
+            <text x="69" y="25">A</text>
+            <text x="30" y="80">B</text>
+            <text x="110" y="80">C</text>
+
+            <!-- arrow -->
+            <line x1="130" y1="50" x2="170" y2="50" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+            
+            <!-- rotcw -->
+            <polygon points="200,80 225,35 250,80" fill="none" stroke="black" stroke-width="2"/>
+            <text x="219" y="25">B</text>
+            <text x="180" y="80">C</text>
+            <text x="256" y="80">A</text>
+
+            <line x1="280" y1="50" x2="320" y2="50" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+
+            <!-- refA -->
+            <polygon points="350,80 375,35 400,80" fill="none" stroke="black" stroke-width="2"/>
+            <text x="369" y="25">B</text>
+            <text x="330" y="80">A</text>
+            <text x="406" y="80">C</text>
+
+            <!-- arrow def -->
+            <defs>
+                <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3"
+                        orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L6,3 L0,6 Z" fill="black"/>
+                </marker>
+            </defs>
+        </svg>
+        <p>which is equivalent to \(ref_C\). But if we do \(ref_A+rot_{cw}\) we perform the transformation:</p>
+        <svg width=570, height="100">
+            <!-- og triangle -->
+            <polygon points="50,80 75,35 100,80" fill="none" stroke="black" stroke-width="2"/>
+            <text x="69" y="25">A</text>
+            <text x="30" y="80">B</text>
+            <text x="110" y="80">C</text>
+
+            <!-- arrow -->
+            <line x1="130" y1="50" x2="170" y2="50" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+            
+            <!-- refA -->
+            <polygon points="200,80 225,35 250,80" fill="none" stroke="black" stroke-width="2"/>
+            <text x="219" y="25">A</text>
+            <text x="180" y="80">C</text>
+            <text x="256" y="80">B</text>
+
+            <line x1="280" y1="50" x2="320" y2="50" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+
+            <!-- rotcw -->
+            <polygon points="350,80 375,35 400,80" fill="none" stroke="black" stroke-width="2"/>
+            <text x="369" y="25">C</text>
+            <text x="330" y="80">B</text>
+            <text x="406" y="80">A</text>
+
+            <!-- arrow def -->
+            <defs>
+                <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3"
+                        orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L6,3 L0,6 Z" fill="black"/>
+                </marker>
+            </defs>
+        </svg>
+        <p>which is equivalent to \(ref_B\).</p>
+    </div>
+  </body>
+</html>

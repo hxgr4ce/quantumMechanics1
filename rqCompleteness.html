@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Completemess of R and Q</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- allow latex, inline equations go between \(\) 
+    and block equations go in \[\]-->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="mainContent">
+        <h1>The Completeness of \(\mathbb{R}\) and \(\mathbb{Q}\)</h1>
+        <h2 id="metricIncompleteness">Metric incompleteness</h2>
+        <p>
+            A <b>metric space</b> is a set \(S\) equipped with the concept of <i>distance</i> between its elements (e.g. points), where the distance \(d\) has the following properties:
+            \[d: S \times S \to \mathbb{R}\]
+        </p>
+        <ul>
+            <li>The distance between a point and itself is 0: \(\forall a \in S, d(a, a) = 0\)</li>
+            <li>Positivity: \(\forall a, b, a \neq b \in S, d(a, b)>0\)</li>
+            <li>Symmetry: \(\forall a, b \in S, d(a, b)=d(b, a)\)</li>
+            <li>Triangle inequality: \(\forall a, b, c \in S, d(x, z) \leq d(x,y)+d(y, z)\)</li>
+        </ul>
+        <p>
+            A <b>Cauchy Sequence</b> is a sequence with elements that converge so they are eventually arbitrarily close to each other. 
+            Or:<br><br> A sequence \((x_n)_{n=1}^{\infty}\) is a Cauchy sequence if for all small positive distances \(\epsilon\), \(\exists N \in \mathbb{N} \mid \forall i,j \geq N, d(x_i,x_j) \lt \epsilon\) 
+            (All points indexed by all pairs of \(i\) and \(j \geq N\) are closer together than distance \(\epsilon\)).
+        </p>
+        <p>There are infinitely many Cauchy sequences in a non-trivial metric space. If all Cauchy sequences do not converge in a field, it implies that the sequence is attempting to converge on <i>a value that does not exist in the field</i>.
+            <br><br>(A number of theorems require this type of completeness, e.g, Intermediate Value Theorem, Extreme Value Theorem for \(\mathbb{R}\), Banach fixed-point theorem, and infinite series analysis.)
+        </p>
+
+        <p>
+            <b>\(\mathbb{Q}\) is not metrically complete</b>. For example, the sequence
+            \((\frac{F_{i-1}}{F_i})_{i=1}^{\infty}\) where, \(F_i\) is the \(i\)th term in the Fibonacci sequence, converges on the irrational value \(\phi\), 
+            which is clearly not an element of the rational numbers \(\mathbb{Q}\).
+        </p>
+        <p>
+            \(\mathbb{R}\) fixes these issues; in fact, <a href="https://en.wikipedia.org/wiki/Completeness_of_the_real_numbers" target="_blank">can be generated from \(\mathbb{Q}\) using the set of all Cauchy sequences</a>, though that's outside the scope of this class, I'm pretty sure.
+        </p>
+
+        <h2>Algebraic incompleteness</h2>
+        <p>Though \(\mathbb{R}\) is metrically complete where \(\mathbb{Q}\) is metrically incomplete, both of these fields are still <i>algebraically incomplete/closed.</i></p>
+        <p>Given a polynomial in field \(F, P_m(x)=\Sigma_{i=0}^mc_ix^m, \forall c_i, x \in F, F\) is only algebraically closed if \(\forall P_m, \exists \{\lambda_i\}_{i=1,...,m}, \lambda_i \in F \mid P_m(x) = \Pi_{i=1}^m (x-\lambda_i)\)</p>
+        <p>Essentially, a field is only algebraically closed if the solutions to each possible polynomials is an element of the field.</p>
+        <p>Since the polynomial \(x^2-2=0\) only has irrational solutions \(\pm\sqrt2\), \(\mathbb{Q}\) is not algebraically complete, and since the polynomials \(x^2 + 1 = 0\) only has imaginary solution \(\pm i\), \(\mathbb{R}\) is not algebraically closed, either.</p>
+        <p>\(\mathbb{C}\) is both metrically and algebraically closed, so we often use it in quantum mechanics.</p>
+    </div>
+  </body>
+</html>

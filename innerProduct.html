@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Properties of the Inner Product</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- allow latex, inline equations go between \(\) 
+    and block equations go in \[\]-->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="mainContent">
+      <h1>Properties of the Inner Product</h1>
+      <h2>Geometric meaning of the Dot Product</h2>
+      The inner product extends the concept of dot products/scalar products of Cartesian coordinate vectors to possibly infinite-dimensional and complex spaces.
+      Say that we have vectors \(\mid\vec{u}\rangle=\begin{pmatrix}1\\0\end{pmatrix}\) and \(\mid\vec{v}\rangle=\begin{pmatrix}2\\1\end{pmatrix}\) in \((\mathbb{R}^2, \mathbb{R})\), which look like:
+      <svg width=300, height="120">
+        <!-- axes -->
+        <line x1="10" y1="100" x2="10" y2="10" stroke="gray" stroke-width="1" marker-end="url(#arrow)"/>
+        <line x1="10" y1="100" x2="100" y2="100" stroke="gray" stroke-width="1" marker-end="url(#arrow)"/>
+        <!-- u -->
+        <line x1="10" y1="100" x2="50" y2="100" stroke="orange" stroke-width="2" marker-end="url(#greenarrow)"/>
+        <!-- v -->
+        <line x1="10" y1="100" x2="90" y2="60" stroke="orange" stroke-width="2" marker-end="url(#greenarrow)"/>
+        <text x="100" y="60">v</text>
+        <text x="60" y="90">u</text>
+        <!-- arrow def -->
+         <defs>
+            <marker id="greenarrow" markerWidth="6" markerHeight="6" refX="3" refY="3"
+                    orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L6,3 L0,6 Z" fill="orange"/>
+            </marker>
+        </defs>
+        <defs>
+            <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3"
+                    orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L6,3 L0,6 Z" fill="gray"/>
+            </marker>
+        </defs>
+      </svg>
+      \(\langle\vec{u}\mid\vec{v}\rangle = 2\), which is the length of the component of \(\mid\vec{v}\rangle\) parallel to \(\mid\vec{u}\rangle\).
+      <br>
+      Say instead that \(\mid\vec{u}\rangle=\begin{pmatrix}2\\3\end{pmatrix}\), in which case our two vectors look like this:
+      <svg width=300, height="170">
+        <!-- axes -->
+        <line x1="10" y1="150" x2="10" y2="10" stroke="gray" stroke-width="1" marker-end="url(#arrow)"/>
+        <line x1="10" y1="150" x2="100" y2="150" stroke="gray" stroke-width="1" marker-end="url(#arrow)"/>
+        <!-- u -->
+        <line x1="10" y1="150" x2="90" y2="30" stroke="orange" stroke-width="2" marker-end="url(#greenarrow)"/>
+        <!-- v -->
+        <line x1="10" y1="150" x2="90" y2="110" stroke="orange" stroke-width="2" marker-end="url(#greenarrow)"/>
+        <text x="100" y="110">v</text>
+        <text x="100" y="30">u</text>
+      </svg>
+      \(\langle\vec{u}\mid\vec{v}\rangle = 7\), which is clearly <i>not</i> the length of the component of \(\mid\vec{v}\rangle\) parallel to \(\mid\vec{u}\rangle\).
+      It's actually that length <i>multiplied by the length of \(\mid\vec{u}\rangle\)</i>. 
+      The length of \(\mid\vec{v}\rangle\) along \(\mid\vec{u}\rangle\) is then \(\frac{7}{\sqrt13}\).
+      <br><br>
+      In our previous example, the length of \(\mid\vec{u}\rangle\) was 1, so we missed this particular nuance...
+      <!-- but this is just how the regular dot product works in general.
+      What if instead, \(\mid\vec{u}\rangle=\begin{pmatrix}i\\0\end{pmatrix}\) and \(\mid\vec{v}\rangle=\begin{pmatrix}2i\\1\end{pmatrix}\)?
+      <br><br>
+      Then \(\langle\vec{u}\mid\vec{v}\rangle = -2+0=-2\).
+      The vector \(\mid\vec{u}\rangle\) still has a length of 
+      \(
+        ||\mid\vec{u}\rangle||
+        =\sqrt{\langle\vec{u}\mid\vec{u}\rangle}
+        =\sqrt{i\cdot-i+0\cdot0}
+        =1
+      \), 
+      so this is saying that our projected length is -2. 
+      <br><br>
+      In the vector space \((\mathbb{R}^2, \mathbb{R})\), it's obviously not possible to have a negative length-- this is where the scalar product differs from the Cartesian dot product.
+      <br><br>
+      What if instead,  \(\mid\vec{u}\rangle=\begin{pmatrix}2i\\3\end{pmatrix}\) and \(\mid\vec{v}\rangle=\begin{pmatrix}2i\\1\end{pmatrix}\)? 
+      <br><br>
+      Then \(\langle\vec{u}\mid\vec{v}\rangle = -4+3=-1\). 
+      The length of \(\mid\vec{u}\rangle\) is again still what it was in our real example:
+      \(
+        ||\mid\vec{u}\rangle||
+        =\sqrt{\langle\vec{u}\mid\vec{u}\rangle}
+        =\sqrt{2i\cdot-2i+3\cdot3}
+        =\sqrt{13}
+      \), 
+      but now, the projected length seems to then be \(-\frac{1}{\sqrt{13}}\). 
+      Because the first elements of the two vectors are both imaginary, the magnitude of this length seems to be much shorter than its real counterpart. -->
+      <h2>The Action of the Inner Product</h2>
+      For two vectors \(\mid\vec{u}\rangle\) and \(\mid\vec{v}\rangle\) of dimension \(n\), the inner product \(\langle\vec{u}\mid\vec{v}\rangle\) is \(\Sigma_{i=1}^n u_i^*v_i\) for each element \(u_i\) and \(v_i\) in \(\mid\vec{u}\rangle\) and \(\mid\vec{v}\rangle\).
+      <h2>The Inner Product of Continuous Functions</h2>
+      If we have a continuous function, that is a function that is continuous for all possible inputs, then it must have infinitely many possible output values along the interval on which it is defined.
+      We can then represent these continuous functions as infinite-dimensional vector.
+      <br><br>
+      Given two continous functions, \(f(x)\) and \(g(x)\) defined along the inerval \([a,b]\), the inner product of their vector representations is: 
+      \[
+        \begin{align}
+          \langle\vec{f}\mid\vec{g}\rangle &= \int_a^b f^*(x)g(x)dx
+        \end{align}
+      \]
+      Which is essentially the same as the dot product, just defined over a continuous set of possible \(x\).
+      <h2 id="orthonormalization">Orthonormal vectors</h2>
+        As defined <a href="definitions.html#innerProduct">earlier</a>, two vectors in a vector space \(V\) are orthogonal if they have an inner product of 0.
+        A set of vectors \(S=\{\mid\vec{v_i}\rangle\}\) is an orthogonal set of all vectors in \(S\) are orthogonal to all other vectors in \(S\).
+        <br><br>
+        If each vectors in \(S\) is also normalized (has a length of 1), then \(S\) is an <i>orthonormal</i> set.
+        <br><br>
+        The most common orthonormalization process (a process which generates a set of orthonormal vectors) is <i>Gram-Schmidt Orthonormalization</i>, which follows the following process:
+        <ol>
+          <li>Pick an arbitrary vector \(\mid\vec{v_1}\rangle\) and normalize it to create:
+            \(\mid\vec{e_1}\rangle=\frac{\mid\vec{v_1}\rangle}{\sqrt{\langle\vec{v_1}\mid\vec{v_1}\rangle}}\)
+          </li>
+          <li>
+            Pick a vector \(\mid\vec{v_2}\rangle\) and select its component orthogonal to \(\mid\vec{e_1}\rangle\) (and \(\mid\vec{v_1}\rangle\), since they are parallel):
+            \(\mid\vec{v_{2\perp}}\rangle = \mid\vec{v_2}\rangle - \mid\vec{e_1}\rangle\langle\vec{e_1}\mid\vec{v_2}\rangle\). 
+            <br><bR>
+            Note that since \(\mid\vec{e_1}\rangle\) is normalized, we don't have to account for its length in the term \(\mid\vec{e_1}\rangle\langle\vec{e_1}\mid\vec{v_2}\rangle\).
+          </li>
+          <li>Normalize \(\mid\vec{v_{2\perp}}\rangle\) to get \(\mid\vec{e_2}\rangle=\frac{\mid\vec{v_2}\rangle - \mid\vec{e_1}\rangle\langle\vec{e_1}\mid\vec{v_2}\rangle}{\sqrt{\langle\mid\vec{v_2}\rangle - \mid\vec{e_1}\rangle\langle\vec{e_1}\mid\vec{v_2}\rangle\mid\mid\vec{v_2}\rangle - \mid\vec{e_1}\rangle\langle\vec{e_1}\mid\vec{v_2}\rangle\rangle}}\)</li>
+          <li>
+            Repeat steps 2 and 3 until you have all orthonormal vectors. 
+            <br><br>
+            Note that in step 2, you must select the component of your vector that is orthogonal to <i>all</i> other vectors you have created so far:
+            \(\mid\vec{v_{i\perp}}\rangle = \mid\vec{v_i}\rangle - \mid\vec{e_1}\rangle\langle\vec{e_1}\mid\vec{v_i}\rangle- \mid\vec{e_2}\rangle\langle\vec{e_2}\mid\vec{v_i}\rangle-...- \mid\overrightarrow{e_{i-1}}\rangle\langle\overrightarrow{e_{i-1}}\mid\vec{v_i}\rangle\)
+          </li>
+        </ol>
+      <h2 id="schwarz">Schwarz Inequality</h2>
+      <div class="mainContent">
+        The Schwarz inequality says that for a vector space \(V\):
+        \[
+          \forall \mid\vec{u}\rangle, \mid\vec{v}\rangle \in V, 
+          \mid\langle\vec{u}\mid\vec{v}\rangle\mid \leq ||\mid\vec{u}\rangle||\cdot||\mid\vec{v}\rangle||
+        \]
+        or equivalently,
+        \[
+          \forall \mid\vec{u}\rangle, \mid\vec{v}\rangle \in V, 
+          \mid\langle\vec{u}\mid\vec{v}\rangle\mid^2 \leq \langle\vec{u}\mid\vec{u}\rangle\cdot\langle\vec{v}\mid\vec{v}\rangle
+        \]
+        Essentially this states that the magnitude of the projection of \(\mid\vec{v}\rangle\) onto some \(\mid\vec{u}\rangle\) (if \(\mid\vec{u}\rangle\) has unit length) must be less than the length of \(\langle\vec{v}\mid\vec{v}\rangle\).
+      </div>
+      <p>Derive later...</p>
+      <h2 id="triangle">Triangle Inequality</h2>
+        <div class="mainContent">
+          The triangle inequality says that for a vector space \(V\):
+          \[
+            \forall \mid\vec{u}\rangle, \mid\vec{v}\rangle \in V, 
+            || \mid\overrightarrow{u+v}\rangle ||^2 \leq ||\mid\vec{u}\rangle||+||\mid\vec{v}\rangle||
+          \]
+          Which mirrors the normal geometric triangle inequality.
+        </div>
+        <p>also derive later...</p>
+    </div>
+  </body>
+</html>

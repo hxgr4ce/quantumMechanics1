@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quantum Definitions</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- allow latex, inline equations go between \(\) 
+    and block equations go in \[\]-->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="mainContent">
+      <h1>Quantum Definitions</h1>
+      <h2 id="expectation">Expectation Value</h2>
+      <div class="mainContent">
+        The expectation value of an observable \(A\) when the system is already in state \(\mid\vec{\alpha}\rangle\) is:
+        \[\langle A\rangle_\alpha=\langle\vec{\alpha}\mid A\mid\vec{\alpha}\rangle\]
+      </div>
+      <p>
+        <u>Note</u>: This definition matches the traditional defintion of expected value. 
+        Say that state \(\mid\vec{\alpha}\rangle\) is a combination of eigenvectors of \(A\), which include \(\mid\vec{a'}\rangle\) and \(\mid\vec{a''}\rangle\) that correspond to eigenvalues \(a'\) and \(a''\):
+        \[
+            \begin{align}
+            \langle A\rangle_\alpha &= \langle\vec{\alpha}\mid A\mid\vec{\alpha}\rangle \\
+            &= \Sigma_{a''}\Sigma_{a'} \langle\vec{\alpha}\mid \vec{a''}\rangle\langle\vec{a''}\mid A\mid \vec{a'}\rangle\langle\vec{a'}\mid\vec{\alpha}\rangle \\
+            &= \Sigma_{a'} \langle\vec{\alpha}\mid \vec{a'}\rangle\langle\vec{a'}\mid A\mid \vec{a'}\rangle\langle\vec{a'}\mid\vec{\alpha}\rangle \\
+            &= \Sigma_{a'} |\langle\vec{\alpha}\mid \vec{a'}\rangle|^2\langle\vec{a'}\mid A\mid \vec{a'}\rangle\\
+            &= \Sigma_{a'} |\langle\vec{\alpha}\mid \vec{a'}\rangle|^2 a' \\
+            \end{align}
+        \]
+        Since the double summation has terms that are 0 whenever \(a''\neq a'\), and \(\langle\vec{a'}\mid A\mid \vec{a'}\rangle=a'\), since it is the expectation value of \(A\) when the system has alredy been measured and \(a'\) observed.
+        Clearly, if you measure \(A\) multiple times in quick succession, you will always get the same value, so \(\langle\vec{a'}\mid A\mid \vec{a'}\rangle=a'\).
+      </p>
+      <h2 id="commutators">Commutators</h2>
+      <div class="mainContent">
+        The commutator of two observables, \(A\) and \(B\), have commutator: \[[A, B]=AB-BA\]
+        They are said to <i>commute</i> if \([A,B]=0\), which means that the order in which you measure \(A\) and \(B\) doesn't affect the measurements, and that the probability of each measurement is unchanged.
+      </div>
+      <h2 id="anticomm">Anti-commutators</h2>
+      <div class="mainContent">
+        The anti-commutator of observables \(A\) and \(B\) is
+        \[\{A,B\}=AB+BA\]
+      </div>
+      <h2 id="compatibleObs">Compatible Observables</h2>
+      <div class="mainContent">
+        Two operators, \(A\) and \(B\) are compatible if:
+        \[A=A^\dagger, B=B^\dagger, [A,B]=0\]
+        You can define a common basis of eigenvectors for compatible operators.
+      </div>
+      <h2 id="incompatibleObs">Incompatible Observables</h2>
+      <div class="mainContent">
+        Two observables, \(A\) and \(B\) are incompatible if:
+        \[[A,B]\neq 0\]
+      </div>
+      sg experiments, measurements, representations
+    </div>
+  </body>
+</html>

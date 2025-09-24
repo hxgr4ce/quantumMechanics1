@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quantum Postulates</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- allow latex, inline equations go between \(\) 
+    and block equations go in \[\]-->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="mainContent">
+      <h1>Quantum Postulates</h1>
+      <h2>The Ontological Postulates</h2>
+      These define what fundamental objects in our framework are.
+      <ol>
+        <li>
+            <b>A state is a ray (a vector with infinite magnitude) in a complex separable Hilbert space, \(\mid\vec{\psi}\rangle\).</b>
+            <br><br>
+            This indicates that each of the countable bases in the space represent some identifying physical quality, and we care more about the direction of a ray, rather than the magnitude of a vector.
+            <br><br>
+        </li>
+        <li>
+            <b>Any physical quantity \(\mathscr{A}\) can  be represented as an observable: a self-adjoint, Hermitian operator \(A\) in Hilbert space.</b>
+            <br><br>
+            (The reverse is also true, all self-adjoint operators \(A\) represent some physical quantity \(\mathscr{A}\).)
+        </li>
+      </ol>
+      <h2>The Measurement Postulates</h2>
+      <ol>
+        <li>
+            <b>The result of measuring a physical quantity \(\mathscr{A}\), is some eigenvalue of the corresponding observable \(A\), \(\lambda\).</b>
+            <br><br>
+        </li>
+        <li>
+            <b>Measuring \(\mathscr{A}\) and observing quantity \(\lambda\) transforms the initial state of the system \(\mid\vec{\psi}\rangle\) into \(\hat{P}_\lambda\mid\vec{\psi}\rangle\), where \(\hat{P}_\lambda\) is the projector to \(\lambda\)'s eigenspace.</b>
+            <br><br>
+            This means that that initial state is destroyed and totally lost; the only thing that remains is \(\mid\vec{\psi}\rangle\)'s shadow in that eigenspace.
+        </li>
+        <li>
+            <b>The probabilty of measuring \(\lambda\) is \(\frac{||\hat{P}_\lambda\mid\vec{\psi}\rangle||^2}{||\mid\vec{\psi}\rangle||^2}\).</b> (Born's Rule)
+            <br><br>
+        </li>
+        <li>
+            <b>The state of an isolated system evolves as a time unitary: \(\mid\psi(t)\rangle=U(t)\mid\psi(t=0)\).</b>
+        </li>
+      </ol>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Demonstration of the Matrix Form of Linear Applications</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- allow latex, inline equations go between \(\) 
+    and block equations go in \[\]-->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="mainContent">
+      <h1>Demonstration of the Matrix Form of Linear Applications</h1>
+      <p>
+        Say we have linear application \(\hat{L}: V \to W, \vec{v} \mapsto \hat{L}\vec{w}\) for vector spaces \(V\) and \(W\).
+        Vector space \(V\) has basis \(\{\vec{v_i}\}_{i=1,...,n}\) and vector space \(W\) has basis \(\{\vec{w_j}\}_{j=1,...,m}\).
+      </p>
+      <p>
+        Our input vector \(\vec{v}\) can be written as a linear combination of all vectors in \(\{\vec{v_i}\}_{i=1,...,n}\):
+        \[\vec{v}=\Sigma_i c_i\vec{v_i}, c_i \in F\]
+        We can plug this into \(\hat{L}\vec{v}\) to get \(\hat{L}(\Sigma_i c_i\vec{v_i})\). According to the <a href="definitions.html#linearApp">definition of linear applications</a>, we can write this as:
+        \[\hat{L}\vec{v}=\Sigma_i c_i\hat{L}\vec{v_i} \tag{1}\]
+        This means that \(\hat{L}\vec{v}\) is a linear combination of \(\hat{L}\)'s action on each basis vector of \(V\). 
+        Since \(\hat{L}:V\to W\), we can know \(\hat{L}\vec{v_i}\) is a vector in \(W\) and thus can be written as a linear combination of \(W\)'s basis vectors, like this:
+        \[\hat{L}\vec{v_i}=\Sigma_jL_{ji}\vec{w_j} \tag{2}\]
+        where \(L_{ji}\) is a scalar value in \(F\), and corresponds to the "contribution" of \(\vec{w_j}\) in the linear combination that makes up \(\vec{v_i}\). 
+        Now we plug (2) into (1) to get:
+        \[
+            \begin{align}
+                \hat{L}\vec{v}& =\Sigma_i c_i(\Sigma_jL_{ji}\vec{w_j}) \\
+                & = \Sigma_j \vec{w_j} \Sigma_ic_iL_{ji} \tag{3}
+            \end{align}
+        \]
+        Which indicates that each \(\vec{v}\) can be written as a linear combination of all vectors in \(\{\vec{w_j}\}\) where the coefficient is \(\Sigma_ic_iL_{ji}\).
+        </p>
+        <p>
+            We can now write \(\hat{L}\) as a matrix where each element is a different \(L_{ji}\). 
+            This matrix must operate on a vector of dimension \(n\) and output a vector of dimension \(m\), so it has to be a matrix with size \(m \times n\).
+            Index \(i\) ranges from 1 to \(n\) and index \(j\) ranges from 1 to \(m\). So, our matrix looks like this, where \(j\) runs over rows and \(i\) runs over columns:
+            \[\mathbf{L}=\begin{pmatrix} 
+                L_{11} & L_{12} & \cdots & L_{1n} \\ 
+                L_{21} & L_{22} & \cdots & L_{2n} \\ 
+                \vdots &        & \ddots &        \\
+                L_{m1} & L_{m2} & \cdots & L_{mn} 
+            \end{pmatrix}\]
+        </p>
+        <p>
+            As we mentioned above, a vector \(\vec{v}\) can be written as a linear combination of all vectors in \(\{\vec{w_j}\}\) where the coefficient is \(\Sigma_ic_iL_{ji}\).
+            Then the coefficient for a specific \(\vec{w_j}\) is a linear combination of all elements in that <i>column</i> of our matrix.
+        </p>
+        <p>
+            We can then say that the columns of \(\mathbf{L}\) are <i>images</i> of the vectors in \(V\)'s basis (which means, in plain terms, that the columns of \(\mathbf{L}\) are each a \(\hat{L}\vec{v_i}\)). 
+            This means each column in \(\mathbf{L}\) is <i>the input basis vectors in terms of the output's reference frame</i>.
+        </p>
+
+        <h2>Strictly Orthonormal Bases, Bra-ket Notation</h2>
+        <p>
+            In our previous demonstration, we made no assertions about the sets of basis vectors \(\{\vec{v_i}\}\) or \(\{\vec{w_j}\}\). 
+            But what if we repeat our demonstration with strictly orthonormal bases? 
+            Now we know \(\langle\vec{v_i}\mid\vec{v_j}\rangle=\delta_{ij}\) and \(\langle\vec{w_i}\mid\vec{w_j}\rangle=\delta_{ij}\).
+            <br><br>
+            Say we do \(\langle\vec{w_k}\mid\hat{L}\vec{v_i}\rangle\), we can substitute in equation (2), giving us:
+            \[\langle\vec{w_k}\mid\hat{L}\vec{v_i}\rangle=\langle\vec{w_k}\mid\Sigma_jL_{ji}\vec{w_j}\rangle\]
+            Because the inner product is <a href="definitions.html#innerProduct">linear with respect to the first entry</a>, we can write this as:
+            \[\langle\vec{w_k}\mid\hat{L}\vec{v_i}\rangle=\Sigma_jL_{ji}\langle\vec{w_k}\mid\vec{w_j}\rangle\]
+            And because \(\{\vec{w_j}\}\) is strictly orthonormal, we know that \(\langle\vec{w_k}\mid\vec{w_j}\rangle=0\) unless \(j=k\).
+            So: \[\begin{align}
+                \langle\vec{w_k}\mid\hat{L}\vec{v_i}\rangle &= \Sigma_jL_{ji}\langle\vec{w_k}\mid\vec{w_j}\rangle \\
+                &= L_{ji}\langle\vec{w_k}\mid\vec{w_k}\rangle \\
+                &= L_{ki}
+            \end{align}\]
+            Thus we can define \(L_{ji}\) as \(\langle\vec{w_j}\mid\hat{L}\vec{v_i}\rangle\). 
+            We know that \(\langle\vec{w_j}\mid\) is the <a href="definitions.html#linearFCN">linear functional</a> \(f_{\vec{w_j}}\), 
+            and that \(\mid\hat{L}\vec{v_i}\rangle\) is the vector that results from applying \(\hat{L}\) to vector \(\vec{v_i}\), which we can write as \(\hat{L}\mid\vec{v_i}\rangle\) instead.
+            <br><br>
+            Then, we can write \(L_{ji}=\langle\vec{w_j}\mid\hat{L}\mid\vec{v_i}\rangle\), which follows <a href="definitions.html#braket">bra-ket notation</a>.
+        </p>
+    </div>
+  </body>
+</html>
