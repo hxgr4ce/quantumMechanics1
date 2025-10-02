@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Derivation of Heisenberg's Uncertainty Principle</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- allow latex, inline equations go between \(\) 
+    and block equations go in \[\]-->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="mainContent">
+      <h1>Derivation of Heisenberg's Uncertainty Principle</h1>
+      Say that we have observables \(A\) and \(B\).
+      They may or may not commute.
+      We start by defining two functions/vectors: \(\mid\phi_A\rangle=(A-\langle A\rangle)\mid\psi\rangle\) and \(\mid\phi_B\rangle=(B-\langle B\rangle)\mid\psi\rangle\) which take existing state \(\mid\psi\rangle\) as input.
+      <br><br>
+      According to the <a href="innerProduct.html#schwarz">Schwarz inequality</a>, we know that 
+      \[|\langle \phi_A\mid\phi_B\rangle| \leq||\mid\phi_A\rangle||\cdot||\mid\phi_B\rangle||\]
+      Let's work on the right hand side of this inequality first:
+      \[\begin{align}
+        ||\mid\phi_A\rangle||^2 &= \langle\phi_A\mid\phi_A\rangle \\
+        &= \langle\psi\mid(A-\langle A\rangle)^2\mid\psi\rangle \\
+        &= \sigma_A^2
+      \end{align}\]
+      (see the definition of <a href="qmDefs.html#variance">standard deviation</a>)
+      and similarly, 
+      \[\begin{align}
+        ||\mid\phi_B\rangle||^2 &= \sigma_B^2
+      \end{align}\]
+      Now, on the left hand side:
+      \[\begin{align}
+        \langle\phi_A\mid\phi_B\rangle = \langle\psi\mid(A-\langle A\rangle)(B-\langle B\rangle)\mid\psi\rangle 
+      \end{align}\]
+      for convenience let us refer to \(A-\langle A\rangle\) as \(\Delta A\) and \(B-\langle B\rangle\) as \(\Delta B\) so that we have:
+      \[\begin{align}
+        \langle\phi_A\mid\phi_B\rangle = \langle\psi\mid\Delta A\Delta B\mid\psi\rangle \tag{1}
+      \end{align}\]
+      \(\Delta A\Delta B\) can be written as:
+      \[\begin{align}
+        \Delta A\Delta B &= \frac{1}{2}(\Delta A\Delta B+\Delta B\Delta A) + \frac{1}{2}\frac{i}{i}(\Delta A\Delta B-\Delta B\Delta A) \tag{2}\\
+      \end{align}\]
+      each of these terms are self-adjoint:
+      \[\begin{align}
+        (\Delta A\Delta B+\Delta B\Delta A)^\dagger &= \Delta B^\dagger \Delta A^\dagger + \Delta A^\dagger\Delta B^\dagger \\
+        &= \Delta B\Delta A + \Delta A\Delta B \\
+        (\Delta A\Delta B-\Delta B\Delta A)^\dagger &= \Delta B^\dagger \Delta A^\dagger - \Delta A^\dagger\Delta B^\dagger \\
+        &= \Delta B\Delta A - \Delta A\Delta B
+      \end{align}\]
+      this means that the value of \(\langle\phi_A\mid\phi_B\rangle\) must be real, by the <a href="definitions.html#spectral">spectral theorem</a>.
+      If we subsititute (2) into (1), we get:
+      \[\begin{align}
+        \langle\phi_A\mid\phi_B\rangle &= \langle\psi\mid\Delta A\Delta B\mid\psi\rangle \\
+        &= \langle\psi\mid\frac{1}{2}(\Delta A\Delta B+\Delta B\Delta A) + \frac{1}{2}\frac{i}{i}(\Delta A\Delta B-\Delta B\Delta A)\mid\psi\rangle \\
+        &= \langle\psi\mid\frac{1}{2}(\Delta A\Delta B+\Delta B\Delta A)\mid\psi\rangle + \frac{i}{2}\langle\psi\mid(\frac{\Delta A\Delta B-\Delta B\Delta A}{i})\mid\psi\rangle \\
+        &= \frac{1}{2}\langle\psi\mid(\{\Delta A,\Delta B\})\mid\psi\rangle + \frac{i}{2}\langle\psi\mid(\frac{[\Delta A,\Delta B]}{i})\mid\psi\rangle \\
+        |\langle\phi_A\mid\phi_B\rangle|^2 &= |\frac{1}{2}\langle\psi\mid(\{\Delta A,\Delta B\})\mid\psi\rangle + \frac{i}{2}\langle\psi\mid(\frac{[\Delta A,\Delta B]}{i})\mid\psi\rangle|^2 \\
+        &= \frac{1}{4}|\langle\psi\mid\{\Delta A,\Delta B\}\mid\psi\rangle|^2 +\frac{1}{4}|\langle\psi\mid[\Delta A,\Delta B]\mid\psi\rangle|^2 \\
+        &\geq \frac{1}{4}|\langle\psi\mid[\Delta A,\Delta B]\mid\psi\rangle|^2
+      \end{align}\]
+      (Note that because we're taking the complex conjugate squared, the \(i\) terms disappear!)
+      We can plug in everything we've derived back into the Schwarz inequality, to get:
+      \[\begin{align}
+        \frac{1}{4}|\langle[\Delta A,\Delta B]\rangle|^2 &\leq \sigma_A^2\sigma_B^2 \\
+        \frac{1}{2}|\langle[\Delta A,\Delta B]\rangle| &\leq \sigma_A\sigma_B \\
+      \end{align}\]
+      The last thing we need to determine is the value of \([\Delta A,\Delta B]\):
+      \[\begin{align}
+        [\Delta A,\Delta B] &= [A-\langle A\rangle, B-\langle B\rangle] \\
+        &= [A,B] -[\langle A\rangle,B] - [A,\langle B\rangle] + [\langle A\rangle,\langle B\rangle]
+      \end{align}\]
+      An expectation value is just a scalar.
+      For an arbitrary scalar \(c\), say we have observable \(O\). \([c, O]=cO-Oc=0\), and \([0, c]=Oc-cO=0\), so the commutator between an operator and a scalar is 0.
+      So, 
+      \[[\Delta A,\Delta B]=[A,B]\]
+      and we finally arrive at Heisenberg's Uncertainty Principle:
+      \[\begin{align}
+        \frac{1}{2}|\langle[A, B]\rangle| &\leq \sigma_A\sigma_B \\
+      \end{align}\]
+    </div>
+  </body>
+</html>

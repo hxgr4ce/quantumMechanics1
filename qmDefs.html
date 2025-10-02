@@ -66,9 +66,12 @@
         \]
         and the <i>standard deviation</i> is defined accordingly:
         \[
-          \sqrt{\langle(\Delta A)^2\rangle} = \sqrt{\langle A^2\rangle - \langle A\rangle^2}
+          \sigma_A=\sqrt{\langle(\Delta A)^2\rangle} = \sqrt{\langle A^2\rangle - \langle A\rangle^2}
         \]
       </div>
+      <p>
+        <u>Note</u>: To see the full proof of the correctness of the expression for standard deviation above, click <a href="variance.html">here</a>.
+      </p>
       <h2 id="commutators">Commutators</h2>
       <div class="mainContent">
         The commutator of two observables, \(A\) and \(B\), have commutator: \[[A, B]=AB-BA\]
@@ -177,16 +180,41 @@
       </div>
       <p>
         <u>Notes</u>: Measuring more than one observable will always change the final <i>state</i> of the system compared to <i>the resulting state when just a single observable is measured</i>, regardless of whether the observables commute or not.
+        For a more in-depth discussion click <a href="changedState.html">here</a>.
+      </p>
+      <h2 id="heisenberg">Heisenberg Uncertainty Principle</h2>
+      <div class="mainContent">
+        This is a theorem that states that for any two observables \(A\) and \(B\):
+        \[\sigma_a\sigma_b \geq \frac{1}{2}|\langle[A,B]\rangle|\]
+      </div>
+      <p>
+        <u>Note 1</u>: For the derivation of this theorem, click <a href="heisenberg.html">here</a>.
         <br><br>
-        Say that \(A\) and \(B\) are observables that <i>may not commute</i>, and we have a system in initial state \(\mid\psi\rangle\).
-        If we simply measure \(A\) and observe value \(a\), the output state is \(P_a\mid\psi\rangle\).
-        The probability of measuring \(a\) is \(\langle\psi\mid P_a\mid\psi\rangle\).
+        <u>Note 2</u>: This was briefly discussed when we talked about <a href="variance.html">standard deviation</a>, but if two observables \(A\) and \(B\) are compatible, the uncertainty of measuring a system in an eigenstate of \(A\) and \(B\) is 0.
         <br><br>
-        If we measure \(B\), and only let the particles that yield value \(b\) through, then measure \(A\), the probability of observing some value \(a\) <i>given</i> that we have observed \(b\) is:
-        \[
-          ||P_a\Lambda_b\mid\psi\rangle||^2 = \langle\psi\mid \Lambda_b^\dagger P^\dagger_a P_a \Lambda_b \mid \psi\rangle = \langle\psi\mid \Lambda_b P_a \Lambda_b \mid \psi\rangle
-        \]
-        
+        This is not guaranteed for non-compatible observables, but it is <i>possible</i> to find <i>some</i> (but obviously not all) shared eigenstates where measuring both quantities has an uncertainty of 0.
+        For example:
+        <br><br>
+        Momentum and position famously do not commute: \([x, p]=i\hbar\), which tells us that \(\sigma_A\sigma_B \geq \frac{1}{2}|\langle\psi \mid i\hbar\mid\psi\rangle|\), and \(\frac{1}{2}|\langle\psi \mid i\hbar\mid\psi\rangle|\) is the constant \(\frac{\hbar}{2}\), which means that neither \(\sigma_A\) nor \(\sigma_B\) can ever get arbitrarily small enough to make the left-hand side of the inequality 0, their product is always a non-zero value.
+        <br><br>
+        Angular momentum observables \([L_x\) and \(L_y\) also do not commute; \([L_x,L_y]=i\hbar L_z\), so the value on the right-hand side of our inequality <i>can</i> be 0, provided that \(L_z=0\).
+        Indeed, \(\mid l,m\rangle=\mid0,0\rangle\) yields \(\sigma_{L_x}=\sigma_{L_y}=0\), but you can't do this for <i>all</i> eigenstates of these two observables.
+      </p>
+      <h2 id="unitary">Unitary Operators</h2>
+      <div class="mainContent">
+        An operator \(U\) is unitary if \(UU^\dagger=U^\dagger U=\mathbb{I}\).
+        <br><br>
+        \(U\) must be invertible and \(U^{-1}=U^\dagger\).
+      </div>
+      <p>
+        <u>Note 1</u>: We can see that a unitary operator preserves the scalar product/norm:
+        \[\langle U\psi\mid U\phi\rangle = \langle\psi\mid U^\dagger U\mid\phi\rangle = \langle\psi\mid\phi\rangle\]
+        <u>Note 2</u>: An <i>isometry</i> is.a typeof transformation that preserves the scalar product (and so also the norm), meaning that angles and lengths are preserved.
+        <i>Not all isometries are invertible</i>, so not all isometries are unitary!!
+        <br><br>
+        Take the case where a vector is transformed by "shifting" it by one-- that is, prepending an element with a value of zero. 
+        That means the output is only vectors that have a \(0^{th}\) first element, and there is no input that allows the output to have a non-zero first element.
+        This transformation is not surjective, so not invertible.
       </p>
     </div>
   </body>

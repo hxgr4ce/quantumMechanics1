@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Standard Deviation</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- allow latex, inline equations go between \(\) 
+    and block equations go in \[\]-->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="mainContent">
+        <h1>Standard Deviation</h1>
+        <p>
+            Given some observable \(A=A^\dagger\), an arbitrary initial state \(\mid\psi\rangle\) can be written as a linear combination of eigenvectors of \(A\): 
+            \[\mid\psi\rangle = \sum_i c_i\mid i\rangle\]
+            from which we know that \(c_i=\langle i\mid\psi\rangle\):
+            \[\begin{align}
+                \mid\psi\rangle &= \mathbb{I}\mid\psi\rangle = \sum_i \mid i\rangle\langle i\mid\psi\rangle \\
+                \mid\psi\rangle &= \sum_i c_i\mid i\rangle \\
+                c_i &= \langle i\mid\psi\rangle
+            \end{align}\]
+            We know that the distribution of probabilities for observing each possible eigenvalue \(\lambda_i\) when measuring \(\mathscr{A}\) is directly proportional to how much each state \(\mid i\rangle\) contributes to \(\mid\psi\rangle\) (see the example in <a href="changedState.html">Any Measurement Changes a System's State</a>).
+            Mathetmatically, we can verify this using one of the <a href="qmPostulates.html">quantum postulates</a>, assuming that the initial state is normalized:
+            \[\begin{align}
+                p(\lambda_i) &= \frac{||\mid i\rangle\langle i \mid\psi\rangle||^2}{||\mid\psi\rangle||^2} \\
+                &= ||\mid i\rangle\langle i \mid\psi\rangle||^2 \\
+                &= \langle\psi\mid i\rangle\langle i\mid i\rangle\langle i \mid\psi\rangle \\
+                &= \langle\psi\mid i\rangle\langle i \mid\psi\rangle \\
+                &= |\langle i \mid\psi\rangle|^2 \\
+                &= |c_i|^2
+            \end{align}\]
+            To avoid confusion, I'll write the probability of measuring \(\lambda_i\) \(p(\lambda_i)\) simply as \(p_i\).
+            <br><br>
+            The typical definition for standard deviation of an operator \(A\) is 
+            \[\sigma_A = \sqrt{\sum_i p_i(\lambda_i-\overline{\lambda})^2}\tag{1}\]
+            By definition, the average value for \(\lambda\) is \(\overline{\lambda}=\langle\psi\mid A\mid\psi\rangle = \langle A\rangle = \sum_i p_i\lambda_i\).
+            in order to recover the definition for variance, we need to figure out what \(\langle A^2\rangle\) is.
+            \[\begin{align}
+                \langle A^2\rangle &= \langle\psi\mid A^2\mid\psi\rangle \\
+                &= \langle\psi\mid \mathbb{I}A^2\mid\psi\rangle \\
+                &= \sum_i\langle\psi\mid i\rangle\langle i\mid A^2\mid\psi\rangle \tag{2}\\
+            \end{align}\]
+            The action of \(A^2\) on state \(\mid\psi\rangle\) is:
+            \[\begin{align}
+                A^2\mid\psi\rangle &= A(A\mid\psi\rangle) \\
+                &= A(A\sum_i c_i\mid i\rangle) = A(\sum_i c_i A\mid i\rangle) \\
+                &= A(\sum_i c_i \lambda_i \mid i\rangle) = \sum_i c_i \lambda_i A\mid i\rangle \\
+                &= \sum_i c_i \lambda_i^2\mid i\rangle \\
+                &= \mid\psi\rangle\sum_i \lambda_i^2\ \\
+            \end{align}\]
+            Continuing on from (2):
+            \[\begin{align}
+                \sum_i\langle\psi\mid i\rangle\langle i\mid A^2\mid\psi\rangle 
+                &= \sum_i\langle\psi\mid i\rangle\langle i\mid \psi\rangle \lambda_i^2 \\
+                &= \sum_i|\langle i\mid \psi\rangle|^2 \lambda_i^2 \\
+            \end{align}\]
+            We know that \(p(\lambda_i)=|\langle i \mid\psi\rangle|^2\), so we can say that \(\langle A^2\rangle=\sum_i \lambda_i^2 p_i\).
+            Now, we can write the expression \(\langle(A-\langle A\rangle)^2\rangle\) as:
+            \[\begin{align}
+                \langle(A-\langle A\rangle)^2\rangle &= \langle A^2-2A\langle A\rangle + \langle A\rangle^2 \rangle \\
+                &= \langle A^2\rangle-2\langle A\rangle\langle A\rangle + \langle A\rangle^2 \\
+                &= \langle A^2\rangle -2\langle A\rangle^2 + \langle A\rangle^2 \\
+                &= \langle A^2\rangle - \langle A\rangle^2 \\
+                &= \sum_i \lambda_i^2 p_i - \langle A\rangle^2 \\
+                &= \sum_i \lambda_i^2 p_i - \langle A\rangle^2 - 2\langle A\rangle\sum_i p_i\lambda_i + 2\langle A\rangle\sum_i p_i\lambda_i \\
+                &= \sum_i \lambda_i^2 p_i - \langle A\rangle^2 - 2\langle A\rangle\sum_i p_i\lambda_i + 2\langle A\rangle\langle A\rangle \\
+                &= \sum_i \lambda_i^2 p_i - \langle A\rangle^2 - 2\langle A\rangle\sum_i p_i\lambda_i + 2\langle A\rangle^2 \\
+                &= \sum_i \lambda_i^2 p_i + \langle A\rangle^2 - 2\langle A\rangle\sum_i p_i\lambda_i \\
+            \end{align}\]
+            since the sum of all probabilities for all possible eigenvalues is 1, or \(\sum_i p_i=1\), so we can continue on with:
+            \[\begin{align}
+                \langle(A-\langle A\rangle)^2\rangle &= \sum_i \lambda_i^2 p_i + \langle A\rangle^2 - 2\langle A\rangle\sum_i p_i\lambda_i \\
+                &= \sum_i \lambda_i^2 p_i + \sum_i p_i\langle A\rangle^2 - \sum_i 2\langle A\rangle p_i\lambda_i \\
+                &= \sum_i p_i (\lambda_i^2 + \langle A\rangle^2 - 2\langle A\rangle \lambda_i ) \\
+                &= \sum_i p_i (\lambda_i - \langle A\rangle) ^2 \\
+                &= \sum_i p_i (\lambda_i - \overline{\lambda}) ^2 \\
+            \end{align}\]
+            So, we have showed that our definition of standard deviation from (1) is equal to the definition of standard deviation in terms of expected value:
+            \[
+                \sigma_A = \sqrt{\sum_i p_i(\lambda_i-\overline{\lambda})^2} = \sqrt{\langle(A-\langle A\rangle)^2\rangle}
+            \]
+            From this defintion, we can clearly see that if the initial state \(\mid\psi\rangle\) is an eigenvector of \(A\), then the uncertainty is 0.
+            <br><br>
+            Further, if we have two compatible observables \(A\) and \(B\), and they share a common basis of eigenvectors, \(\mid i\rangle\), and if \(\mid\psi\rangle=\mid i\rangle\), the uncertainty of measuring <i>both</i> \(A\) and \(B\) is 0.
+            For any eigenstate of \(A\) we can find a vector in that corresponding eigenspace that is an eigenstate of \(B\), so this is always guaranteed to be true.
+            For <i>incompatible</i> observables, however, we reference the <a href="qmDefs.html#heisenberg">Heisenberg's Uncertainty Principle</a>.
+        </p> 
+    </div>
+  </body>
+</html>

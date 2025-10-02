@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Any Measurement Changes a System's State</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- allow latex, inline equations go between \(\) 
+    and block equations go in \[\]-->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="mainContent">
+        <h1>Any Measurement Changes a System's State</h1>
+        <i>Case 1</i>. Say that \(A\) and \(B\) are observables that <i>may not commute</i>, and we have a system in initial state \(\mid\psi\rangle\).
+        If we simply measure \(A\) and observe value \(a\), the output state is \(P_a\mid\psi\rangle\).
+        The probability of measuring \(a\) is \(\langle\psi\mid P_a\mid\psi\rangle\).
+        <br><br>
+        <i>Case 2</i>. If we first measure \(B\), and only let the particles that yield value \(b\) through, then measure \(A\), the probability of observing some value \(a\) <i>given</i> that we have observed \(b\) is:
+        \[
+            ||P_a\Lambda_b\mid\psi\rangle||^2 = \langle\psi\mid \Lambda_b^\dagger P^\dagger_a P_a \Lambda_b \mid \psi\rangle = \langle\psi\mid \Lambda_b P_a \Lambda_b \mid \psi\rangle
+        \]
+        In the very special case that \(A\) and \(B\) commute, we know that their projectors commute, (see <a href="qmDefs.html#compatibleObs">compatible observables</a>), so we can just write the probability as \(\langle\psi\mid P_a \Lambda_b \mid \psi\rangle\).
+        <br><br>
+        <i>Case 3</i>. Say that we measure \(B\) first, allow all particles through regardless of what value \(b\) is measured, then measure \(A\)?
+        Of course, we have the same probability of measuring some \(b\), then some \(a\) from Case 2: \(\langle\psi\mid \Lambda_b P_a \Lambda_b \mid \psi\rangle\), just for all possible outcomes from measuing \(B\), not for just a single possible value.
+        <br><br>
+        What if, in Case 3, <i>we didn't know that \(B\) was measured?</i> To us, it would seem like we simply measured \(A\), so we would expect the states and probabilities from Case 1, but in reality we would still be getting the result from Case 2, and the more general result from Case 3.
+        <br><br>
+        More precisely, we would expect that the probability of obtaining a measurement \(a\) is \(\langle\psi\mid P_a\mid\psi\rangle\) and that after the measurement, we would have a system in state \(P_a\mid\psi\rangle\).
+        <br><br>
+        In reality, if we measured \(A\) and observed a <i>single, specific</i> value, \(a\), many times, we would see that there is more than one single possible post-measurement state. 
+        This would be the states \(\Lambda_b P_a \mid \psi\rangle\), one for each possible \(b\) that could have been secretly measured, unbeknownst to us. 
+        Each of these states would occur with probability \(\langle\psi\mid \Lambda_b P_a \Lambda_b \mid \psi\rangle\).
+        <br><br>
+        In the case that \(A\) and \(B\) commute, we know that the probability of measuring some \(a\) after measuring a single possible \(b\) is \(\langle\psi\mid \Lambda_b P_a \mid \psi\rangle\), and if we sum this over all possible \(b\), we get:
+        \[
+            \sum_{b\in\sigma_B} \langle\psi\mid \Lambda_b P_a \mid \psi\rangle
+            = \langle\psi\mid \sum_{b\in\sigma_B} \Lambda_b P_a \mid \psi\rangle
+            = \langle\psi\mid \mathbb{I} P_a \mid \psi\rangle = \langle\psi\mid P_a \mid \psi\rangle
+        \]
+        so the <i>probability</i> of measuring some \(a\) would be the same as Case 1, but the <i>state</i> would still appear different.
+        Specifically, the output states would be \(\Lambda_b P_a\mid\psi\rangle\) for each possible \(b\), while we expect state \(P_a \mid\psi\rangle\) from Case 1.
+        <br><br>
+        This means that regardless of whether \(A\) and \(B\) commute, <i>if we measure two observables</i>, a specific final measurement will have a corresponding <i>ensemble</i> of post-measurement states, not just one.
+        <hr>
+        As a more articulated example: Say that we have have a hydrogen atom prepared to be spin up, and at energy level \(n=3\).
+        <br><br>
+        If you remember our discussion on <a href="qmDefs.html#csco">CSCOs</a>, you know that we still need to specify the orbital angular momentum \(l\) and the magnetic quantum number \(m\), and that these are eigenvalues of \(L^2\) and \(L_z\) respectively.
+        We can describe the state of our system as \(\mid n=3, l, m, \sigma=\frac{1}{2}\rangle\), which we will abbreviate to \(\mid l, m\rangle\).
+        <br><br>
+        Let's also say that our initial state \(\psi\) is a linear combination of multiple states, 
+        \(\mid \psi\rangle = \frac{1}{2}(\mid 0,0\rangle+\mid 1,0\rangle+\mid 1,1\rangle+\mid 2,0\rangle)\), where \(\mid 0,0\rangle\) indicates \(\mid l=0,m=0\rangle\).
+        <br><br>
+        <i>Case 1</i>. In this scenario, we simply measure \(L_z\).
+        Looking at our initial state, we see that we can get two possible values for \(m\): \(0\) and \(1\).
+        Since we have an equal linear combination of all states, we know that after measurement, we have an equal change of collapsing into any of the four states that compose \(\mid\psi\rangle\).
+        <br><br>
+        So, we know that we will measure \(m=0\) with a probaiblity of \(\frac{3}{4}\) (since three out of our four states within \(\mid\psi\rangle\) have an \(m\) of 0), and that we would measure \(m=1\) with a probability of \(\frac{1}{4}\), since there is only one state out of the four with \(m=1\).
+        <br><br>
+        <i>Case 2</i>. In this scenario, we simply measure \(L^2\).
+        For reasons similar to Case 1, we know that there are three possible values that we can observe from this measurement: 0, 1, and 2.
+        We also know that the probability of measuring \(l=0\) is \(\frac{1}{4}\), the probability of measuring \(l=1\) is \(\frac{1}{2}\), and the probability of measuring \(l=2\) is \(\frac{1}{4}\).
+        <br><br>
+        <i>Case 3</i>. Say that after measuring \(L^2\) as we do in case 2, we then measure \(L_z\), regardless of what we get from measuring \(L^2\).
+        The probabilities and measurements we would get are as follows:
+        <table border="1" style="margin: 0 auto; text-align: center;">
+            <tr>
+            <th>Result of measuring \(L^2\)</th>
+            <th>Result of subsequently measuring \(L_z\)</th>
+            <th>Overall state</th>
+            <th>Overall Probability</th>
+            </tr>
+            <tr>
+            <td>\(l=0\)</td>
+            <td>\(m=0\)</td>
+            <td>\(\mid 0, 0\rangle\)</td>
+            <td>\(\frac{1}{4}\)</td>
+            </tr>
+            <tr>
+            <td>\(l=1\)</td>
+            <td>\(m=0\)</td>
+            <td>\(\mid 1, 0\rangle\)</td>
+            <td>\(\frac{1}{4}\)</td>
+            </tr>
+            <tr>
+            <td>\(l=1\)</td>
+            <td>\(m=1\)</td>
+            <td>\(\mid 1, 1\rangle\)</td>
+            <td>\(\frac{1}{4}\)</td>
+            </tr>
+            <tr>
+            <td>\(l=2\)</td>
+            <td>\(m=0\)</td>
+            <td>\(\mid 2, 0\rangle\)</td>
+            <td>\(\frac{1}{4}\)</td>
+            </tr>
+        </table>
+        <br>
+        Clearly, in this case, we obtain the same probabilities of measuring \(m\) in Case 1, with an ensemble of three different possible resulting post-measurement states if we measure \(L_z\) to be 0, and a single possible post-measurement state if we measure \(L_z\) to be 1.
+    </div>
+  </body>
+</html>
