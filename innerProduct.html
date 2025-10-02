@@ -27,7 +27,7 @@
         <text x="100" y="60">v</text>
         <text x="60" y="90">u</text>
         <!-- arrow def -->
-         <defs>
+        <defs>
             <marker id="greenarrow" markerWidth="6" markerHeight="6" refX="3" refY="3"
                     orient="auto" markerUnits="strokeWidth">
             <path d="M0,0 L6,3 L0,6 Z" fill="orange"/>
@@ -87,7 +87,7 @@
       but now, the projected length seems to then be \(-\frac{1}{\sqrt{13}}\). 
       Because the first elements of the two vectors are both imaginary, the magnitude of this length seems to be much shorter than its real counterpart. -->
       <h2>The Action of the Inner Product</h2>
-      For two vectors \(\mid\vec{u}\rangle\) and \(\mid\vec{v}\rangle\) of dimension \(n\), the inner product \(\langle\vec{u}\mid\vec{v}\rangle\) is \(\Sigma_{i=1}^n u_i^*v_i\) for each element \(u_i\) and \(v_i\) in \(\mid\vec{u}\rangle\) and \(\mid\vec{v}\rangle\).
+      For two vectors \(\mid\vec{u}\rangle\) and \(\mid\vec{v}\rangle\) of dimension \(n\), the inner product \(\langle\vec{u}\mid\vec{v}\rangle\) is \(\sum_{i=1}^n u_i^*v_i\) for each element \(u_i\) and \(v_i\) in \(\mid\vec{u}\rangle\) and \(\mid\vec{v}\rangle\).
       <h2>The Inner Product of Continuous Functions</h2>
       If we have a continuous function, that is a function that is continuous for all possible inputs, then it must have infinitely many possible output values along the interval on which it is defined.
       We can then represent these continuous functions as infinite-dimensional vector.
@@ -138,17 +138,43 @@
         \]
         Essentially this states that the magnitude of the projection of \(\mid\vec{v}\rangle\) onto some \(\mid\vec{u}\rangle\) (if \(\mid\vec{u}\rangle\) has unit length) must be less than the length of \(\langle\vec{v}\mid\vec{v}\rangle\).
       </div>
-      <p>Derive later...</p>
+      <p>
+        <u>Proof</u>: Consider the inner product \(\langle\vec{v}+\lambda\vec{w}\mid\vec{v}+\lambda\vec{w}\rangle\) which must be greater or equal to 0.
+        \[\langle\vec{v}+\lambda\vec{w}\mid\vec{v}+\lambda\vec{w}\rangle = \langle\vec{v}\mid\vec{v}\rangle + |\lambda|^2\langle\vec{w}\mid\vec{w}\rangle + 2Re\{\lambda\langle\vec{v}\mid\vec{w}\rangle\} \geq 0\]
+        If we pick \(\lambda = -\frac{\langle\vec{w}\mid\vec{v}\rangle}{\langle\vec{w}\mid\vec{w}\rangle}\), then we have:
+        \[
+          \begin{align}  
+            \langle\vec{v}\mid\vec{v}\rangle + |-\frac{\langle\vec{w}\mid\vec{v}\rangle}{\langle\vec{w}\mid\vec{w}\rangle}|^2\langle\vec{w}\mid\vec{w}\rangle + 2Re\{-\frac{\langle\vec{w}\mid\vec{v}\rangle}{\langle\vec{w}\mid\vec{w}\rangle}\langle\vec{v}\mid\vec{w}\rangle\} &\geq 0 \\
+            ||\vec{v}||^2 + \frac{|\langle\vec{w}\mid\vec{v}\rangle|^2}{||\vec{w}||^4}||\vec{w}||^2 + 2Re\{-\frac{\langle\vec{w}\mid\vec{v}\rangle\langle\vec{v}\mid\vec{w}\rangle} {||\vec{w}||^2} \} &\geq 0 \\
+            ||\vec{v}||^2 + \frac{|\langle\vec{w}\mid\vec{v}\rangle|^2}{||\vec{w}||^2} - 2\frac{|\langle\vec{w}\mid\vec{v}\rangle|^2} {||\vec{w}||^2} &\geq 0 \\
+            ||\vec{v}||^2 - \frac{|\langle\vec{w}\mid\vec{v}\rangle|^2} {||\vec{w}||^2} &\geq 0 \\
+            ||\vec{v}||^2||\vec{w}||^2 - |\langle\vec{w}\mid\vec{v}\rangle|^2 &\geq 0 \\
+            ||\vec{v}||^2||\vec{w}||^2 &\geq |\langle\vec{w}\mid\vec{v}\rangle|^2 \\
+            ||\vec{v}||||\vec{w}|| &\geq |\langle\vec{w}\mid\vec{v}\rangle| \\
+          \end{align}
+        \]
+      </p>
       <h2 id="triangle">Triangle Inequality</h2>
         <div class="mainContent">
           The triangle inequality says that for a vector space \(V\):
           \[
             \forall \mid\vec{u}\rangle, \mid\vec{v}\rangle \in V, 
-            || \mid\overrightarrow{u+v}\rangle ||^2 \leq ||\mid\vec{u}\rangle||+||\mid\vec{v}\rangle||
+            || \mid\overrightarrow{u+v}\rangle || \leq ||\mid\vec{u}\rangle||+||\mid\vec{v}\rangle||
           \]
           Which mirrors the normal geometric triangle inequality.
         </div>
-        <p>also derive later...</p>
+        <p>
+          <u>Proof</u>: An equivalent statement of the inequality is \(|| \mid\overrightarrow{u+v}\rangle ||^2 \leq (||\vec{u}||+||\vec{v}||)^2\). 
+          \[
+            \begin{align}
+              || \mid\overrightarrow{u+v}\rangle ||^2 &= \langle \overrightarrow{u+v}\mid\overrightarrow{u+v}\rangle \\
+              &= \langle\vec{u}\mid\vec{u}\rangle + \langle\vec{v}\mid\vec{v}\rangle +2Re\{\langle\vec{u}\mid\vec{v}\rangle\} \\
+              &= ||\vec{u}||^2+||\vec{v}||^2 + 2|\langle\vec{u}\mid\vec{v}\rangle| \\
+              &\leq ||\vec{u}||^2+||\vec{v}||^2 + 2||\vec{u}||\cdot||\vec{v}|| \\
+              &\leq (||\vec{u}||+||\vec{v}||)^2
+            \end{align}
+          \]
+        </p>
     </div>
   </body>
 </html>

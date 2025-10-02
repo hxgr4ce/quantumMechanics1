@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Stern-Gerlach Experiment</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- allow latex, inline equations go between \(\) 
+    and block equations go in \[\]-->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="mainContent">
+      <h1>The Stern-Gerlach Experiment</h1>
+      <h2>Initial Motivation</h2>
+      <p>
+        The Stern-Gerlach experiment (summarized reductively) involved shooting a beam of silver atoms through a magnetic field.
+        <br><br>
+        Silver has the following electron configuration: 
+        \[[Ag]=[Kr]4d^{10}5s^{1}\]
+        meaning that the outermost electron is alone in its shell.
+        <br><br>
+        If a silver atom has a magnetic moment caused by its single outer electron, it will accelerate in a non-uniform magnetic field just like a magnetic dipole.
+        <br><br>
+        (A magnetic dipole is any system that produces a magnetic field that is equivalent to the field produced by two magnetic poles.
+        A magnetic dipole then has a magnetic <i>moment</i>, a vector that describes the strength and direction of the dipole's field.)
+        <br><br>
+        Classically, we expect this electron can orbit in a clockwise or counter-clockwise direction, resulting in <i>two</i> different possible orbital angular moments for the atom as a whole.
+        However, we don't control of the orientation of the atoms as a whole, they should accelerate every which way in a non-uniform magnetic field, forming a spread out blob.
+        <br><br>
+        (For more information, <a href="https://pubs.aip.org/physicstoday/article/56/12/53/632269/Stern-and-Gerlach-How-a-Bad-Cigar-Helped-Reorient">“Stern and Gerlach: how a bad cigar helped reorient atomic physics,”</a> by Friedrich and Herschbach was an interesting read... I'm really not a reliable source of information on the history...)
+        <br><br>
+        But, it turned out that the beam of atoms split in two distinct blobs, not one!
+      </p>
+      <h2>The Experiment</h2>
+      <div style="text-align:center">
+        <img src="sg.png" width="80%">
+        <br><i>Fig 1.</i> The Stern-Gerlach Experiment. From <i>Modern Quantum Mechanics, Third Edition</i> , by J. J. Sakurai and Jim Napolitano.
+      </div>
+      <p>
+        The magnetic field must be non-uniform so that the a magnetic dipole will accelerate in it.
+        Thus they designed a magnetic apparatus as depicted in <i>Fig. 1</i>, with a wedge-shaped north pole and a U-shaped south pole, so that the field is denser near the north pole than the south.
+        <br><br>
+        The silver atoms are heated in an oven, which has a small hole which allows that allows the silver atoms escape. 
+        The beam goes through a collimator and then enters this inhomogeneous magnetic field.
+        <br><br>
+        Since I've spoiled it, we already know that the beam is split by this magnetic field, and it is split into two <i></i>equal</i> parts.
+        It follows that there are two discrete states that an atom can have, which results in this splitting.
+        In modern times, we can say that these results are caused by two discrete, <i>intrinsic</i> possible spins of the electron which are not caused by the electron orbiting
+        (but they didn't know that at the time the experiment was first done).
+        <br><br>
+        When the magnetic field is oriented along the positive \(z\) direction, we call these states "up" and "down", or \(\mid S_z,+\rangle\) and \(\mid S_x,-\rangle\). More simply (and more commonly), though, these are called \(\mid+\rangle\) and \(\mid-\rangle\).
+        You'll see the beam split no matter how the field is oriented; the positive \(z\) direction isn't special.
+        <br><br>
+        The states that result in an observed splitting when the magnetic field is oriented in the positive \(x\) direction are called \(\mid S_x,+\rangle\) and \(\mid S_x,-\rangle\), and in the positive \(y\) direction, we have \(\mid S_y,+\rangle\) and \(\mid S_y,-\rangle\).
+      </p>
+      <h2>Variations</h2>
+      <div style="text-align:center">
+        <img src="sg2.png" width="80%">
+        <br><i>Fig 2.</i> Variations on the Stern-Gerlach Experiment. From <i>Modern Quantum Mechanics, Third Edition</i> , by J. J. Sakurai and Jim Napolitano.
+      </div>
+      <p>
+        <b><i>Variation 1.</i></b>
+        Instead of passing the beam of atoms through a single magnetic field, say we have two magnetic apparatuses, both oriented in the positive \(z\) direction,
+        as in <i>Fig 2a.</i>
+        After the first magnetic field splits the beam, <i>we only keep the atoms from the upper "blob"</i>, which are the atoms in state \(\mid S_z,+\rangle\).
+        <br><br>
+        If we pass this filtered beam through another magnetic field along the positive \(z\) direction, as expected, we see a singular blob, located in the same place where only \(\mid S_z,+\rangle\) atoms would land.
+        <br><br>
+        <b><i>Variation 2.</i></b>
+        What if we instead pass the filtered beam of \(\mid S_z,+\rangle\) atoms through a magnetic field oriented along the positive \(x\) axis, as in <i>Fig 2b</i>?
+        <br><br>
+        We see an equal amount of atoms being split into two blobs along the \(x\) axis, as one might classically expect, since the orientation of a magnetic moment in the \(z\) direction has nothing to do with how it is oriented in the \(x\) direction.
+        <br><br>
+        <b><i>Variation 3.</i></b>
+        If we filter out only \(\mid S_z,+\rangle\) atoms with the first magnetic field, then <i>further</i> filter the beam with a second magnetic field so it only contains \(\mid S_x,+\rangle\) atoms, we expect the resulting beam to contain only atoms that are in the \(\mid S_z,+\rangle\) and \(\mid S_x,+\rangle\) states, see <i>Fig 2c</i>.
+        <br><br>
+        If we pass this resulting beam through another magnetic field along the \(z\) axis, however, <i>we again observe half of the beam being deflected upwards, and half of the beam deflected downwards</i>, indicating that there are still atoms in state \(\mid S_z,-\rangle\) in the beam!
+      </p>
+      <h2>Interpreting the Results</h2>
+      Filtering the beam to only contain \(\mid S_x,+\rangle\) atoms with the second magnetic field in variation 3 <i>completely destroys any previous information about the spin in the \(z\) direction</i>.
+      We are uncovering some of the <a href="qmPostulates.html">postulates of quantum mechanics</a>, or properties about the state of these systems which are inherent to the systems themselves.
+      <br><br>
+      To see demonstration of how this is somewhat analogous to a classical situation, click <a href="polarized.html">here</a>.
+    </div>
+  </body>
+</html>

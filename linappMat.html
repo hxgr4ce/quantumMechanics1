@@ -19,21 +19,21 @@
       </p>
       <p>
         Our input vector \(\vec{v}\) can be written as a linear combination of all vectors in \(\{\vec{v_i}\}_{i=1,...,n}\):
-        \[\vec{v}=\Sigma_i c_i\vec{v_i}, c_i \in F\]
-        We can plug this into \(\hat{L}\vec{v}\) to get \(\hat{L}(\Sigma_i c_i\vec{v_i})\). According to the <a href="definitions.html#linearApp">definition of linear applications</a>, we can write this as:
-        \[\hat{L}\vec{v}=\Sigma_i c_i\hat{L}\vec{v_i} \tag{1}\]
+        \[\vec{v}=\sum_i c_i\vec{v_i}, c_i \in F\]
+        We can plug this into \(\hat{L}\vec{v}\) to get \(\hat{L}(\sum_i c_i\vec{v_i})\). According to the <a href="definitions.html#linearApp">definition of linear applications</a>, we can write this as:
+        \[\hat{L}\vec{v}=\sum_i c_i\hat{L}\vec{v_i} \tag{1}\]
         This means that \(\hat{L}\vec{v}\) is a linear combination of \(\hat{L}\)'s action on each basis vector of \(V\). 
         Since \(\hat{L}:V\to W\), we can know \(\hat{L}\vec{v_i}\) is a vector in \(W\) and thus can be written as a linear combination of \(W\)'s basis vectors, like this:
-        \[\hat{L}\vec{v_i}=\Sigma_jL_{ji}\vec{w_j} \tag{2}\]
+        \[\hat{L}\vec{v_i}=\sum_jL_{ji}\vec{w_j} \tag{2}\]
         where \(L_{ji}\) is a scalar value in \(F\), and corresponds to the "contribution" of \(\vec{w_j}\) in the linear combination that makes up \(\vec{v_i}\). 
         Now we plug (2) into (1) to get:
         \[
             \begin{align}
-                \hat{L}\vec{v}& =\Sigma_i c_i(\Sigma_jL_{ji}\vec{w_j}) \\
-                & = \Sigma_j \vec{w_j} \Sigma_ic_iL_{ji} \tag{3}
+                \hat{L}\vec{v}& =\sum_i c_i(\sum_jL_{ji}\vec{w_j}) \\
+                & = \sum_j \vec{w_j} \sum_ic_iL_{ji} \tag{3}
             \end{align}
         \]
-        Which indicates that each \(\vec{v}\) can be written as a linear combination of all vectors in \(\{\vec{w_j}\}\) where the coefficient is \(\Sigma_ic_iL_{ji}\).
+        Which indicates that each \(\vec{v}\) can be written as a linear combination of all vectors in \(\{\vec{w_j}\}\) where the coefficient is \(\sum_ic_iL_{ji}\).
         </p>
         <p>
             We can now write \(\hat{L}\) as a matrix where each element is a different \(L_{ji}\). 
@@ -47,7 +47,7 @@
             \end{pmatrix}\]
         </p>
         <p>
-            As we mentioned above, a vector \(\vec{v}\) can be written as a linear combination of all vectors in \(\{\vec{w_j}\}\) where the coefficient is \(\Sigma_ic_iL_{ji}\).
+            As we mentioned above, a vector \(\vec{v}\) can be written as a linear combination of all vectors in \(\{\vec{w_j}\}\) where the coefficient is \(\sum_ic_iL_{ji}\).
             Then the coefficient for a specific \(\vec{w_j}\) is a linear combination of all elements in that <i>column</i> of our matrix.
         </p>
         <p>
@@ -62,12 +62,12 @@
             Now we know \(\langle\vec{v_i}\mid\vec{v_j}\rangle=\delta_{ij}\) and \(\langle\vec{w_i}\mid\vec{w_j}\rangle=\delta_{ij}\).
             <br><br>
             Say we do \(\langle\vec{w_k}\mid\hat{L}\vec{v_i}\rangle\), we can substitute in equation (2), giving us:
-            \[\langle\vec{w_k}\mid\hat{L}\vec{v_i}\rangle=\langle\vec{w_k}\mid\Sigma_jL_{ji}\vec{w_j}\rangle\]
+            \[\langle\vec{w_k}\mid\hat{L}\vec{v_i}\rangle=\langle\vec{w_k}\mid\sum_jL_{ji}\vec{w_j}\rangle\]
             Because the inner product is <a href="definitions.html#innerProduct">linear with respect to the first entry</a>, we can write this as:
-            \[\langle\vec{w_k}\mid\hat{L}\vec{v_i}\rangle=\Sigma_jL_{ji}\langle\vec{w_k}\mid\vec{w_j}\rangle\]
+            \[\langle\vec{w_k}\mid\hat{L}\vec{v_i}\rangle=\sum_jL_{ji}\langle\vec{w_k}\mid\vec{w_j}\rangle\]
             And because \(\{\vec{w_j}\}\) is strictly orthonormal, we know that \(\langle\vec{w_k}\mid\vec{w_j}\rangle=0\) unless \(j=k\).
             So: \[\begin{align}
-                \langle\vec{w_k}\mid\hat{L}\vec{v_i}\rangle &= \Sigma_jL_{ji}\langle\vec{w_k}\mid\vec{w_j}\rangle \\
+                \langle\vec{w_k}\mid\hat{L}\vec{v_i}\rangle &= \sum_jL_{ji}\langle\vec{w_k}\mid\vec{w_j}\rangle \\
                 &= L_{ji}\langle\vec{w_k}\mid\vec{w_k}\rangle \\
                 &= L_{ki}
             \end{align}\]

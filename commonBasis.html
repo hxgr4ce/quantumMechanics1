@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>A Common Basis of Eigenvectors</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- allow latex, inline equations go between \(\) 
+    and block equations go in \[\]-->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="mainContent">
+      <h1>A Common Basis of Eigenvectors</h1>
+      <p>
+        Say that we have observables \(A=A^\dagger, B=B^\dagger, [A,B]=0\), so that \(A\) and \(B\) are compatible observables.
+            Note that it's rare that two observables are compatible.
+            Starting from the <a href="definitions.html#spectral">spectral theorem</a>, we know that 
+            \[A=\sum_{\lambda\in\sigma_\lambda}\lambda P_\lambda\]
+            where \(P_\lambda\) projects to an eigenspace of \(A\).
+            We can also say that 
+            \[
+            \begin{align}
+                [A,B] &= 0 \\
+                P_\mu[A,B]P_\lambda &= 0
+            \end{align}
+            \]
+            where \(P_\mu\) projects to some other eigenspace of \(A\).
+            From here, we can work out the following:
+            \[
+            \begin{align}
+                P_\mu[A,B]P_\lambda &= 0 \\
+                &= P_\mu ABP_\lambda - P_\mu BAP_\lambda \\
+                &= (P_\mu A)BP_\lambda - P_\mu B(AP_\lambda) \\
+                &= (\mid\mu\rangle\langle\mu\mid A)BP_\lambda - P_\mu B(A\mid\lambda\rangle\langle\lambda\mid) \\
+                &= (\mid\mu\rangle\langle\mu\mid \sum_{\lambda\in\sigma_\lambda}\lambda P_\lambda)BP_\lambda - P_\mu B(\lambda\mid\lambda\rangle\langle\lambda\mid) \\
+                &= ( \sum_{\lambda\in\sigma_\lambda}\lambda \mid\mu\rangle\langle\mu\mid\lambda\rangle\langle\lambda\mid)BP_\lambda - P_\mu B(\lambda\mid\lambda\rangle\langle\lambda\mid) \\
+                &= \mu P_\mu BP_\lambda - P_\mu B\lambda P_\lambda \\
+                &= (\mu-\lambda) (P_\mu B P_\lambda) \\
+            \end{align}
+            \]
+            When \(\mu\neq\lambda\) (so, when we are projecting into different eigenspaces), we know that \(P_\mu B P_\lambda\) must equal 0.
+            When \(\mu=\lambda\), \(P_\mu B P_\lambda=P_\lambda B P_\lambda\) can be anything.
+            That means we can write this entire relationship as 
+            \[P_\mu B P_\lambda=\delta_{\mu\lambda}P_\lambda B P_\lambda\]
+            Because of the <a href="definitions.html#identity">resolution of identity</a>, we can write
+            \[\begin{align}
+            B &= (\sum_\lambda P_\lambda) B (\sum_\mu P_\mu) = \sum_{\lambda,\mu} P_\lambda B P_\mu \\
+            P_\mu B P_\lambda &= \delta_{\mu\lambda}P_\lambda B P_\lambda \\
+            (P_\mu B P_\lambda)^\dagger &= (\delta_{\mu\lambda}P_\lambda B P_\lambda)^\dagger \\
+            P_\lambda B P_\mu &= \delta_{\mu\lambda}P_\lambda B P_\lambda \\
+            B &= \sum_{\lambda,\mu} \delta_{\mu\lambda}P_\lambda B P_\lambda \\
+            &= \sum_{\lambda\in\sigma_A} P_\lambda B P_\lambda
+            \end{align}\]
+            This tells us that the action of \(B\) is identical to the action of B if the input is projected into \(\lambda\)'s eigenspace, B acts, and then the result is projected into \(\lambda\)'s eigenspace.
+            This means that if \(B\) acts on an eigenvector \(\mid\lambda\rangle\) of \(A\), the result, \(B\mid\lambda\rangle\), is still in the same eigenspace as \(\mid\lambda\rangle\) was.
+            <br><br>
+            Formally, \(B\) preserves each eigenspace of \(A\)  bcause it maps each eigenspace of \(A\) to itself, or every eigenspace \(H_\lambda\) of \(A\) is closed under the action of \(B\).
+            <br><br>
+            That means within each eigenspace \(H_\lambda\), we can find a set of orthonormal vectors in which \(B\) is a diagonal matrix, so that it maps each eigenvector to their original eigenstates.
+            Mathematically, \( P_\lambda B P_\lambda\) is a projector and all projectors can be diagonalized.
+        </p>
+        <div class="mainContent">
+            <b><i>An aside about diagonal matrices.</i></b>
+            A diagonal matrix will uniformly scale each basis vector, independently of the other basis vectors. e.g.
+            \[\begin{align}
+                \begin{pmatrix}a&0\\0&b\end{pmatrix}
+                \begin{pmatrix}1\\0\end{pmatrix}
+                &= \begin{pmatrix}a\\0\end{pmatrix} \\
+                \begin{pmatrix}a&0\\0&b\end{pmatrix}
+                \begin{pmatrix}0\\1\end{pmatrix}
+                &= \begin{pmatrix}0\\b\end{pmatrix}
+            \end{align}\]
+            this includes the components of these basis vectors in an arbitrary vector:
+            \[\begin{align}
+                \begin{pmatrix}a&0\\0&b\end{pmatrix}
+                \begin{pmatrix}1\\1\end{pmatrix}
+                &= \begin{pmatrix}a\\b\end{pmatrix}
+            \end{align}\]
+            However, this is only true for the basis \(\begin{pmatrix}1\\0\end{pmatrix}\) and \(\begin{pmatrix}0\\1\end{pmatrix}\). 
+            <br><br>
+            If we use a different basis, for example a basis that is rotated by \(45^o\) from our previous basis vectors so that we have \(\begin{pmatrix}\frac{\sqrt2}{2}\\\frac{\sqrt2}{2}\end{pmatrix}\) and \(\begin{pmatrix}-\frac{\sqrt2}{2}\\\frac{\sqrt2}{2}\end{pmatrix}\), then we write
+            \(\begin{pmatrix}a&0\\0&b\end{pmatrix}\) as \(\begin{pmatrix}\frac{a+b}{2}&\frac{-a+b}{2}\\ \frac{-a+b}{2}&\frac{a+b}{2}\end{pmatrix}\) instead, which is obviously not diagonal and doesn't scale \(\begin{pmatrix}1\\0\end{pmatrix}\) and \(\begin{pmatrix}0\\1\end{pmatrix}\) independently.
+            Obviously for convenience we don't use other bases like this very often, though.
+        </div>
+        <p>
+            Once we find a basis in the eigenspace of \(H_\lambda\), \(\{\mid v\rangle\}\), in which \(B\) is diagonalized, we know that \(P_\lambda B P_\lambda\mid v\rangle = B\mid v\rangle = c\mid v \rangle\), so these basis vectors are eigenvectors of \(B\) as well!
+            Of course, because these vectors are in an eigenspace of \(A\), they are eigenvectors of \(A\) as well.
+            <br><br>
+            After we find a basis in each eigenspace \(H_\lambda\) where \(B\) is diagonalized, we have found a basis for the entire space, made out of vectors that are eigenvectors of both \(A\) and \(B\).
+        </p>
+    </div>
+  </body>
+</html>

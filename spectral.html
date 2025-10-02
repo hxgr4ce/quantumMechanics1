@@ -13,7 +13,303 @@
   <body>
     <div class="mainContent">
       <h1>The Spectral Theorem in Finite Dimensions</h1>
-      
+      <h2 id="dgeneracy">Motivation: Degeneracy</h2>
+      <p>
+        Say we have a linear operator \(A\) that maps from vector space \(V, dim(V)=n\) so that \(A\mid\vec{v}\rangle = \lambda\mid\vec{v}\rangle\). 
+        We know that there must be at least one eigenvalue and eigenvector, but we aren't guaranteed to have \(n\) eigenvalues.
+        For example, matrix 
+        \(
+          \begin{pmatrix}
+          0 & 1 \\
+          0 & 0
+          \end{pmatrix}
+        \)
+        only has one eigenvalue, \(\lambda=1\).
+      </p>
+      <p>
+        Why does this happen? Say that we write \(A\) as some matrix \(\mathbb{A}\) and \(\mid\vec{v}\rangle\) as a column vector \(\mathbb{c}\).
+        \[
+          \begin{align}
+            \mathbb{A}\mathbb{c}&=\lambda\mathbb{c} \\
+            (\mathbb{A}-\lambda\mathbb{I})\mathbb{c} &= 0
+          \end{align}
+        \]
+        And if \(\mathbb{A}-\lambda\mathbb{I}=\mathbb{B}\), we can say \(\mathbb{Bc}=0\).
+        The multiplication of \(\mathbb{Bc}\) can be written as:
+        \[
+          \begin{pmatrix}
+            B_{11} & B_{12} & \cdots & B_{1n} \\
+            \vdots & \ddots & & \vdots \\
+            B_{m1} & \cdots & & B_{mn}
+          \end{pmatrix}
+          \begin{pmatrix}
+            c_1 \\ \vdots \\ c_n
+          \end{pmatrix}
+          = 
+          \begin{pmatrix}
+            B_{11}c_1 + B_{12}c_2 + ... + B_{1n}c_n \\ 
+            \vdots \\ 
+            B_{m1}c_1 + B_{m2}c_2 + ... + B_{mn}c_n
+          \end{pmatrix}
+          =
+          \begin{pmatrix}
+            0 \\ \vdots \\ 0
+          \end{pmatrix}
+        \]
+        Passing over the case where \(\mathbb{c}\) is \(\mid\vec{0}\rangle\) (and an eigenvector cannot be \(\mid\vec{0}\rangle\) by definition!),
+        we can also write
+        \[
+          \begin{pmatrix}
+            B_{11}c_1 + B_{12}c_2 + ... + B_{1n}c_n \\ 
+            \vdots \\ 
+            B_{m1}c_1 + B_{m2}c_2 + ... + B_{mn}c_n
+          \end{pmatrix}
+          = c_1
+          \begin{pmatrix}
+            B_{11} \\ 
+            \vdots \\ 
+            B_{m1}
+          \end{pmatrix}
+         + c_2
+          \begin{pmatrix}
+            B_{12} \\ 
+            \vdots \\ 
+            B_{m2}
+          \end{pmatrix}
+          + \cdots
+          +  c_n
+          \begin{pmatrix}
+            B_{1n} \\ 
+            \vdots \\ 
+            B_{mn}
+          \end{pmatrix}
+        \]
+        or, as a linear combination of the columns of \(\mathbb{B}\)! 
+        Since we're not considering the case where \(\mathbb{c}\) is \(\mid\vec{0}\rangle\), we are then requiring the columns of \(\mathbb{B}\) to be linearly dependent.
+      </p>
+      <div class="mainContent">
+        <b><i>An aside about determinants.</i></b>
+        If the columns of \(\mathbb{B}\) are linearly dependent, then its determinant is 0.
+        This comes from the fact that if there are \(n\) columns in a matrix, then the input space had a dimension of \(n\).
+        If the columns are linearly dependent, then they must describe <i>less than \(n\)</i> distinct vectors.
+        <br><br>
+        The determinant of a matrix describes how the matrix scales an area (in 2D) or a volume (in 3D), etc.
+        But if there are less than \(n\) distinct columns, then the output space has a smaller dimension than the input space.
+        This means that the transformation does not scale the volume of the space, instead a dimension is destroyed, which corresponds to a determinant of 0.
+      </div>
+      <p>
+        If we write \(B\) in terms of \(A\) and \(\lambda\), it looks like:
+        \[
+          \begin{pmatrix}
+            A_{11}-\lambda & A_{12} & \cdots & A_{1n} \\
+            A_{21} & A_{22}-\lambda & \cdots & A_{2n} \\
+            \vdots & \ddots & & \vdots \\
+            A_{m1} & \cdots & & A_{mn}-\lambda
+          \end{pmatrix}
+        \]
+        Which means that the determinant can be written as a polynomial in which \(\lambda\) is the only unknown (we know all the values of the matrix \(\mathbb{A}\)...).
+        So, the possible values of \(\lambda\) are the roots of the characteristic polynomial.
+        <br><br>
+        There are \(n\) columns in \(\mathbb{A}\), hence there are \(n\) \(A_{ij}-\lambda\) terms in the characteristic polynomial.
+        Of course, this means that <b>there are at <i>most</i> \(n\) possible values of \(\lambda\)</b>.
+        <br><br>
+        <u>Examples</u>:
+        <ul>
+          <li>
+            \(
+              \begin{pmatrix}
+                0 & 1 \\
+                1 & 0
+              \end{pmatrix}
+            \)
+            has characteristic polynomial \(\lambda^2-1=(\lambda-1)(\lambda+1)\) has roots \(\pm1\)
+          </li>
+          <li>
+            \(
+          \begin{pmatrix}
+            1 & 0 \\
+            0 & 1
+          \end{pmatrix}
+        \)
+        has characteristic polynomial \((1-\lambda)^2\), which has root 1 with a multiplicity of 2.
+          </li>
+        </ul>
+      </p>
+      <h2>Demonstration of the Spectral Theorem</h2>
+      <p>
+        Say we have <a href="definitions.html#hermitian">Hermitian operator</a> \(A: V \to V, A \in \mathbb{R}^{nxn}, V \in \mathbb{C}^n, \mathbb{A}^\dagger=\mathbb{A}\).
+        A linear functional \(f: \{\mid\vec{v}\rangle \in V, ||\mid\vec{v}\rangle||=1\} \to \mathbb{R}, \mid\vec{v}\rangle \mapsto \langle\vec{v}\mid A \mid\vec{v}\rangle\) takes all vectors with ends on a sphere (or circle, or whatever n-th dimensional sphere you have) and maps them to a value \(\in \mathbb{R}\).
+        <br><br>
+        The values are also indeed real. Remembering that \(\langle\vec{v}\mid\) is represented as the conjugate transpose of \(\mid\vec{v}\rangle\) which in matrix form we can write as \(\mathbb{v}^\dagger\),
+        \[
+          \begin{align}
+            \langle\vec{v}\mid A \mid\vec{v}\rangle &= \mathbb{v}^\dagger\mathbb{Av} \\
+            &= \mathbb{v}^\dagger\mathbb{A^\dagger v} \\
+            &= (\mathbb{v}^\dagger\mathbb{A v} )^*
+          \end{align}
+        \]
+        \(f\) is <i>closed</i> and <i>bounded</i>, in terms of its domain: it takes <i>all</i> vectors with endpoints on the continuous surface of a sphere, and only those on a sphere with radius 1.
+        Then, the Bolzano-Weierstrauss theorem holds and says that the continuous function \(f\) realizes the minimum and maximum of its compact set.
+        <br><br>
+        We take advantage of this and use the vector that produces \(f\)'s maximum value, call it vector \(|\vec{v_1}\rangle\) and matrix \(\mathbb{v_1}\).
+        Using <a href="innerProduct.html#orthonormalization">Gram-Schmidt Orthonormalization</a>, we can generate an accompanying set of orthonormal values \(\{|\vec{w_2}\rangle,...,|\vec{w_n}\rangle\}\)
+        so that \(\langle \vec{w_i}|\vec{v_1}\rangle=0\) and \(\langle \vec{w_i}|\vec{w_j}\rangle=\delta_{ij}\) 
+        (and we know by definition all input vectors \(|\vec{v}\rangle\) to \(f\) have a length of 1). 
+        Call the matrix representation of these vectors \(\mathbb{w_i}\).
+        <br><br>
+        We can also guarantee that if \(\langle\vec{w_2}|A|\vec{v_1}\rangle=i\), we can just use \(i|\vec{w_2}\rangle\) instead, since we're just changing the phase of the vector, not its length or orientation.
+        We can do this for all \(|\vec{w_i}\rangle\).
+        <br><br>
+        So. Now we consider a vector \(|\vec{v_i}\rangle=\mathbb{v_i}\):
+        <svg width=300, height="125">
+          <line x1="10" y1="120" x2="10" y2="30" stroke="gray" stroke-width="1" marker-end="url(#arrow)"/>
+          <line x1="10" y1="120" x2="100" y2="120" stroke="gray" stroke-width="1" marker-end="url(#arrow)"/>
+          <line x1="10" y1="120" x2="73.64" y2="56.36" stroke="orange" stroke-width="2" marker-end="url(#greenarrow)"/>
+          <text x="10" y="20">v<tspan style="baseline-shift:sub;font-size:0.6em;">1</tspan></text>
+          <text x="110" y="120">w<tspan style="baseline-shift:sub;font-size:0.6em;">i</tspan></text>
+          <text x="80" y="40">v<tspan style="baseline-shift:sub;font-size:0.6em;">i</tspan></text>
+          <path d="M 10 90 C 20 80, 30 80, 38 91" stroke="gray" stroke-width="1" fill="none" />
+          <text x="25" y="70">&#952;</text>
+          <defs>
+              <marker id="greenarrow" markerWidth="6" markerHeight="6" refX="3" refY="3"
+                      orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L6,3 L0,6 Z" fill="orange"/>
+              </marker>
+          </defs>
+          <defs>
+              <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3"
+                      orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L6,3 L0,6 Z" fill="gray"/>
+              </marker>
+          </defs>
+      </svg>
+      We can describe this vector as \(\mathbb{v_i}(i, \theta) = \mathbb{v_1} cos(\theta) + \mathbb{w_i} sin(\theta)\), and we can also say that
+      \(\mathbb{v_1} = \mathbb{v_1} cos(0) + \mathbb{w_i} sin(0)\), so \(\theta=0\), which tells us that there's a turning point in \(f(\mathbb{v_i}(i, \theta))\) at \(\theta=0\), or:
+      \[
+        \begin{align}
+          0=\begin{bmatrix}\frac{d}{d\theta}f(\mathbb{v_i}(i, \theta))\end{bmatrix}_{\theta=0}
+        \end{align}
+      \]
+      Keeping in mind that \(f(|\vec{v_i}\rangle)=\langle\vec{v}\mid A\mid\vec{v}\rangle = \mathbb{v^\dagger}\mathbb{A}\mathbb{v}\) and that the operator \(A\) contains no \(\theta\) term:
+      \[
+        \begin{align}
+          0 &= \begin{bmatrix}\frac{d}{d\theta}f(\mathbb{v_i}(i, \theta))\end{bmatrix}_{\theta=0} \\
+          &= \frac{d}{d\theta}\begin{bmatrix}\mathbb{v^\dagger}(i, \theta)\mathbb{A}\mathbb{v}(i, \theta)\end{bmatrix}_{\theta=0} \\
+          &= \frac{d}{d\theta}\begin{bmatrix}\mathbb{v}(i, \theta)\end{bmatrix}^\dagger_{\theta=0}\mathbb{A}\mathbb{v}(i, \theta)
+          + \mathbb{v^\dagger}(i, \theta)\mathbb{A}\frac{d}{d\theta}\begin{bmatrix}\mathbb{v}(i, \theta)\end{bmatrix}_{\theta=0} \tag{1}\\
+        \end{align}
+      \]
+      Where (1) is just a result of the product rule. \(\frac{d}{d\theta}\mathbb{v}(i, \theta)=-\mathbb{v_1}sin(\theta)+\mathbb{w_i}cos(\theta)\), so we can carry on our calculation to get:
+      \[
+        \begin{align}
+          (-\mathbb{v_1}^\dagger sin(0)+\mathbb{w_i}^\dagger cos(0))\mathbb{A}(\mathbb{v_1} cos(0) + \mathbb{w_i} sin(0)) \\
+          + (\mathbb{v_1}^\dagger cos(0) + \mathbb{w_i}^\dagger sin(0))\mathbb{A}(-\mathbb{v_1}sin(\theta)+\mathbb{w_i}cos(0)) \\
+          = \mathbb{w_i}^\dagger\mathbb{A}\mathbb{v_1} 
+          + \mathbb{v_1}^\dagger\mathbb{A}\mathbb{w_i} \\
+        \end{align}
+      \]
+      We know that \(A\) is self-adjoint and that \(\mathbb{A}=\mathbb{A}^\dagger\), and we picked real values of \(\mathbb{w_i}\) so we can say that 
+      \[
+        \mathbb{v_1}^\dagger\mathbb{A}\mathbb{w_i} = (\mathbb{w_i}^\dagger \mathbb{A}^\dagger\mathbb{v_1})^*= \mathbb{w_i}^\dagger \mathbb{A}\mathbb{v_1}
+      \]
+      Thus we get that
+      \[\begin{align}
+        0 = 2\mathbb{w_i}^\dagger\mathbb{A}\mathbb{v_1} \\
+        0 = \mathbb{w_i}^\dagger\mathbb{A}\mathbb{v_1}
+      \end{align}\]
+      \(\mathbb{w_i}^\dagger\mathbb{A}\mathbb{v_1}\) is the scalar product between \(\mathbb{w_i}\) and \(\mathbb{A}\mathbb{v_1}\), which means that \(\mathbb{w_i}\) and \(\mathbb{A}\mathbb{v_1}\) are orthogonal to each other.
+      We knew originally that \(\mathbb{v_i}\) was orthogonal to the set \(\{\mathbb{w_i}\}\) and that together with \(\mathbb{v_1}\), there were \(n\) vectors total.
+      <br><br>
+      For \(\mathbb{Av_1}\) to remain orthogonal to all \(\mathbb{w_i}\) means that \(\mathbb{Av_1}\) <i>is still in the same direction as the original \(\mathbb{v_1}\)</i>.
+      This means \(\mathbb{Av_1} = c\mathbb{v_1}\), or that <b>\(\mathbb{v_1}\) is an eigenvector of \(\mathbb{A}\) with eigenvalue \(\mathbb{v_1^\dagger Av_1}\)</b>.
+      Also note that this means that the eigenvalue and eigenvector are <b>real valued</b>.
+      <br><br>
+      We can now restrict \(\mathbb{A}\) to the dimensions orthogonal to \(\mathbb{v_1}\) and repeat this entire process all over again, producing another eigenvector of \(\mathbb{A}\).
+      We can do this \(n-1\) times, since there are \(n\) dimensions in \(A\)'s input and output space, meaning we get <b>\(n\) orthonormal eigenvectors of \(\mathbb{A}\)</b>.
+      </p>
+      <h2>Spectral Decomposition</h2>
+      <p>
+        Because we're guaranteed a set \(\{\mid\vec{e_i}\rangle\}\) of eigenvectors of \(\mathbb{A}\) that can be used as a basis for \(V\), 
+        we can draw on the <a href="definitions.html#identity">the resolution of Identity</a> which tells us that
+        \[\sum_i \mid\vec{e_i}\rangle\langle\vec{e_i}\mid = \mathbb{I}\]
+        (Note that since you can also write an arbitrary vector \(\mid\vec{u}\rangle\) as a linear combination of the orthonormal basis of its space: \(\mid\vec{u}\rangle = \sum_i c_i\mid\vec{e_i}\rangle\), we also get the expected result that each \(c_i = \langle\vec{e_i}\mid\vec{u}\rangle\)...)
+        <br><br>
+        We can then write \(A\) as:
+        \[A = AI = A\sum_i \mid\vec{e_i}\rangle\langle\vec{e_i}\mid\]
+        and since \(A\) is a linear operator, we get:
+        \[A\sum_i \mid\vec{e_i}\rangle\langle\vec{e_i}\mid = \sum_i A\mid\vec{e_i}\rangle\langle\vec{e_i}\mid = \sum_i \lambda_i\mid\vec{e_i}\rangle\langle\vec{e_i}\mid\]
+        To write this more succinctly, say that projector \(P_i = \mid\vec{e_i}\rangle\langle\vec{e_i}\mid\):
+        \[A = \sum_i \lambda_i P_i\]
+        In the case that there is degeneracy, we end up with eigenspaces that are more than one-dimensional, which correspond to more than one eigenvector (we are still guaranteed \(n\) eigenvectors).
+        You can write a projector to an eigenspace instead as:
+        \[P_\lambda = \sum_{i=1}^{\gamma_\lambda} \mid\lambda, i\rangle\langle\lambda, i\mid\]
+        where \(\gamma_\lambda\) is the number of dimensions in the eigenspace that corresponds to \(\lambda\) and \(\mid\lambda, i\rangle\) is the \(i\)th eigenvector that corresponds to \(\lambda\).
+        \[A = \sum_{\lambda \in \sigma_A}\lambda P_\lambda\]
+      </p>
+      <h2>Defining Eigenspaces</h2>
+      <p>
+        You can define an eigenspace of \(A\) with many different sets of orthonormal eigenvectors.
+        Given an eigenspace that corresponds to eigenvalue \(\lambda\) and eigenvectors \(\mid\vec{v_1}\rangle\) and \(\mid\vec{v_2}\rangle\), you can create:
+        \[
+          \begin{align}
+            \mid\vec{w_1}\rangle &= \mid\vec{v_1}\rangle cos\theta + e^{i\theta} \mid\vec{v_2}\rangle sin\theta \\
+            \mid\vec{w_2}\rangle &= -\mid\vec{v_1}\rangle sin\theta + e^{i\theta} \mid\vec{v_2}\rangle cos\theta \\
+            \langle\vec{w_1}\mid\vec{w_2}\rangle &= (\langle\vec{v_1}\mid cos\theta + e^{-i\theta} \langle\vec{v_2}\mid sin\theta)
+                                                    (-\mid\vec{v_1}\rangle sin\theta + e^{i\theta} \mid\vec{v_2}\rangle cos\theta) \\
+            &=  -cos\theta sin\theta \langle\vec{v_1}\mid\vec{v_1}\rangle
+                + e^{-i\theta}e^{i\theta} sin\theta cos\theta \langle\vec{v_2}\mid\vec{v_2}\rangle
+                + cos\theta e^{i\theta}cos\theta\langle \vec{v_1}\mid\vec{v_2\rangle} \\
+                &+ e^{i\theta}sin\theta(-sin\theta)\langle\vec{v_2}\mid\vec{v_1\rangle} \\
+            &= -cos\theta sin\theta \langle\vec{v_1}\mid\vec{v_1}\rangle
+                + e^{-i\theta}e^{i\theta} sin\theta cos\theta \langle\vec{v_2}\mid\vec{v_2}\rangle \\
+            &= -cos\theta sin\theta + sin\theta cos\theta \\
+            &= 0 \\
+            \langle\vec{w_2}\mid\vec{w_1}\rangle &= (-\langle\vec{v_1}\mid sin\theta + e^{-i\theta} \langle\vec{v_2}\mid cos\theta)
+                                                    (\mid\vec{v_1}\rangle cos\theta + e^{i\theta} \mid\vec{v_2}\rangle sin \theta) \\
+            &=  -sin\theta cos\theta \langle\vec{v_1}\mid\vec{v_1}\rangle + e^{-i\theta}e^{i\theta}cos\theta sin\theta\langle\vec{v_2}\mid\vec{v2}\rangle
+            = 0 \\
+            \langle\vec{w_1}\mid\vec{w_1}\rangle &= (\langle\vec{v_1}\mid cos\theta + e^{-i\theta} \langle\vec{v_2}\mid sin\theta)
+                                                    (\mid\vec{v_1}\rangle cos\theta + e^{i\theta} \mid\vec{v_2}\rangle sin \theta) \\
+            &= cos^2\theta\langle\vec{v_1}\mid\vec{v_1}\rangle + sin^2\theta \langle\vec{v_2}\mid\vec{v_2}\rangle \\
+            &= 1 \\
+            \langle\vec{w_2}\mid\vec{w_2}\rangle &= (-\langle\vec{v_1}\mid sin\theta + e^{-i\theta} \langle\vec{v_2}\mid cos\theta)
+                                                    (-\mid\vec{v_1}\rangle sin\theta + e^{i\theta} \mid\vec{v_2}\rangle cos\theta) \\
+            &= sin^2\theta\langle\vec{v_1}\mid\vec{v_1}\rangle + cos^2\theta \langle\vec{v_2}\mid\vec{v_2}\rangle \\
+            &= 1 \\
+          \end{align}
+        \]
+        We have defined a new basis for this eigenspace such that 
+        \[
+          P_\lambda=\mid\vec{v_1}\rangle\langle\vec{v_1}\mid+\mid\vec{v_2}\rangle\langle\vec{v_2}\mid
+          =\mid\vec{w_1}\rangle\langle\vec{w_1}\mid+\mid\vec{w_2}\rangle\langle\vec{w_2}\mid
+        \]
+      </p>
+      <h2>Eigenvectors of Different Eigenvalues are Orthonormal</h2>
+      <p>
+        For eigenvector \(\mid\vec{v}\rangle\) of \(A\), \(\langle\vec{v}\mid A\mid\vec{v}\rangle = \lambda \langle\vec{v}\mid\vec{v}\rangle = \lambda \langle\vec{v}\mid\vec{v}\rangle^*\)
+        so \(\langle\vec{v}\mid\vec{v}\rangle \in \mathbb{R}\).
+        You can also see that:
+        \[
+          \lambda = \frac{\langle\vec{v}\mid A\mid\vec{v}\rangle}{\langle\vec{v}\mid\vec{v}\rangle}
+          = \frac{\langle\vec{v}\mid A^\dagger\mid\vec{v}\rangle^*}{\langle\vec{v}\mid\vec{v}\rangle}
+          = \frac{\langle\vec{v}\mid A\mid\vec{v}\rangle^*}{\langle\vec{v}\mid\vec{v}\rangle}
+        \]
+        so \(\langle\vec{v}\mid A\mid\vec{v}\rangle \in \mathbb{R}\) . (We already knew this, though, since we showed above that the eigenvectors and eigenvalues of \(A\) are real...)
+        <br><br>
+        Say that we have eigenvector \(\mid\vec{v}\rangle\) that corresponds to eigenvalue \(\lambda\) and eigenvector  \(\mid\vec{w}\rangle\) that corresponds to eigenvalue \(\mu\).
+        \[
+          \begin{align}
+            \lambda \neq \mu, \langle\vec{w}\mid A\mid\vec{v}\rangle &= \lambda\langle\vec{w}\mid\vec{v}\rangle \\
+            &= \langle\vec{v}\mid A^\dagger\mid\vec{w}\rangle^* = \langle\vec{v}\mid A\mid\vec{w}\rangle^* \\
+            &= (\langle\vec{v}\mid\mu\vec{w}\rangle)^* \\
+            &= \mu\langle\vec{v}\mid\vec{w}\rangle^* = \mu\langle\vec{w}\mid\vec{v}\rangle \\
+            \lambda\langle\vec{w}\mid\vec{v}\rangle &= \mu\langle\vec{w}\mid\vec{v}\rangle \\
+            (\lambda-\mu)\langle\vec{w}\mid\vec{v}\rangle &= 0 \\
+            \langle\vec{w}\mid\vec{v}\rangle &= 0
+          \end{align}
+        \]
+        hence eigenvectors of different eigenvalues must be orthonormal. Or, the eigenspaces of \(A\) are all orthonormal to each other.
+      </p>
     </div>
   </body>
 </html>

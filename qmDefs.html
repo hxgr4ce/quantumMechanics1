@@ -15,24 +15,60 @@
       <h1>Quantum Definitions</h1>
       <h2 id="expectation">Expectation Value</h2>
       <div class="mainContent">
-        The expectation value of an observable \(A\) when the system is already in state \(\mid\vec{\alpha}\rangle\) is:
-        \[\langle A\rangle_\alpha=\langle\vec{\alpha}\mid A\mid\vec{\alpha}\rangle\]
+        The expectation value of an observable \(A\) when the system is already in normalized state \(\mid\alpha\rangle\) is:
+        \[\langle A\rangle_\alpha=\langle\alpha\mid A\mid\alpha\rangle\]
       </div>
       <p>
-        <u>Note</u>: This definition matches the traditional defintion of expected value. 
-        Say that state \(\mid\vec{\alpha}\rangle\) is a combination of eigenvectors of \(A\), which include \(\mid\vec{a'}\rangle\) and \(\mid\vec{a''}\rangle\) that correspond to eigenvalues \(a'\) and \(a''\):
+        <u>Note 1</u>: This definition matches the traditional defintion of expected value. 
+        Say that we are in state \(\mid\alpha\rangle\), which is a combination of eigenvectors of \(A\), including \(\mid a'\rangle\) and \(\mid a''\rangle\) which correspond to eigenvalues \(a'\) and \(a''\):
         \[
-            \begin{align}
-            \langle A\rangle_\alpha &= \langle\vec{\alpha}\mid A\mid\vec{\alpha}\rangle \\
-            &= \Sigma_{a''}\Sigma_{a'} \langle\vec{\alpha}\mid \vec{a''}\rangle\langle\vec{a''}\mid A\mid \vec{a'}\rangle\langle\vec{a'}\mid\vec{\alpha}\rangle \\
-            &= \Sigma_{a'} \langle\vec{\alpha}\mid \vec{a'}\rangle\langle\vec{a'}\mid A\mid \vec{a'}\rangle\langle\vec{a'}\mid\vec{\alpha}\rangle \\
-            &= \Sigma_{a'} |\langle\vec{\alpha}\mid \vec{a'}\rangle|^2\langle\vec{a'}\mid A\mid \vec{a'}\rangle\\
-            &= \Sigma_{a'} |\langle\vec{\alpha}\mid \vec{a'}\rangle|^2 a' \\
-            \end{align}
+          \begin{align}
+            \langle A\rangle_\alpha &= \langle\alpha\mid A\mid\alpha\rangle \\
+            &= \sum_{a''}\sum_{a'} \langle\alpha\mid a''\rangle\langle a''\mid A\mid a'\rangle\langle a'\mid\alpha\rangle \\
+            &= \sum_{a'} \langle\alpha\mid a'\rangle\langle a'\mid A\mid a'\rangle\langle a'\mid\alpha\rangle \\
+            &= \sum_{a'} |\langle\alpha\mid a'\rangle|^2\langle a'\mid A\mid a'\rangle\\
+            &= \sum_{a'} |\langle\alpha\mid a'\rangle|^2 a' \\
+          \end{align}
         \]
-        Since the double summation has terms that are 0 whenever \(a''\neq a'\), and \(\langle\vec{a'}\mid A\mid \vec{a'}\rangle=a'\), since it is the expectation value of \(A\) when the system has alredy been measured and \(a'\) observed.
-        Clearly, if you measure \(A\) multiple times in quick succession, you will always get the same value, so \(\langle\vec{a'}\mid A\mid \vec{a'}\rangle=a'\).
+        Which is exactly the traditional definition of expected value.
+        This is because the double summation has terms that are 0 whenever \(a''\neq a'\), and \(\langle a'\mid A\mid a'\rangle=a'\), since it is the expectation value of \(A\) when the system has already been measured and \(a'\) observed.
+        <br><br>
+        Clearly, if you measure \(A\) and observe \(a'\), the state of the system is in a corresponding eigenstate of \(A\). If you measure the same quantity immediately after, the system is still in this state and you will always observe \(a'\).
+        <br><br>
+        <u>Note 2</u>: You can also find this relationship in "reverse". Given that the probability of observing \(\lambda\) is \(p_\lambda\), we can start from the traditional definition of expected value and achieve the above definition from there:
+        \[
+          \begin{align}
+            \langle A\rangle_\alpha &= \sum_{\lambda\in\sigma_A}\lambda p_\lambda \\
+            &= \sum_{\lambda\in\sigma_A}\lambda \frac{||P_\lambda \mid\alpha\rangle||^2}{||\mid\alpha\rangle||^2} \\
+            &= \sum_{\lambda\in\sigma_A}\lambda \frac{\langle P_\lambda \alpha\mid P_\lambda \alpha\rangle}{\langle\alpha\mid\alpha\rangle}
+            = \sum_{\lambda\in\sigma_A}\lambda \frac{\langle \alpha P_\lambda\mid P_\lambda \alpha\rangle}{\langle\alpha\mid\alpha\rangle}
+            = \sum_{\lambda\in\sigma_A}\lambda \frac{\langle \alpha\mid P_\lambda P_\lambda\mid \alpha\rangle}{\langle\alpha\mid\alpha\rangle} \\
+            &= \sum_{\lambda\in\sigma_A}\lambda \frac{\langle \alpha\mid P_\lambda \mid \alpha\rangle}{\langle\alpha\mid\alpha\rangle} \\
+            &= \frac{\langle \alpha\mid \sum_{\lambda\in\sigma_A}\lambda P_\lambda \mid \alpha\rangle}{\langle\alpha\mid\alpha\rangle} \\
+            &= \frac{\langle \alpha\mid A \mid \alpha\rangle}{\langle\alpha\mid\alpha\rangle}
+          \end{align}    
+        \]
+        This is the definition above, except we don't have to ensure that \(\mid\alpha\rangle\) is normalized.
       </p>
+      <h2 id="variance">Variance</h2>
+      <div class="mainContent">
+        The variance (or dispersion, or mean-squared deviation) of an observable \(A\) is small or 0 when the state in question is an eigenstate of \(A\), so that measuring the system in this state has a well-defined value.
+        We can think of it as the uncertainty in a measurement of \(\mathscr{A}\).
+        <br><br>
+        Mathematically, it is defined as: \(\langle(\Delta A)^2\rangle\) where \(\Delta A=A-\langle A \rangle\)
+        This means that:
+        \[
+          \langle(\Delta A)^2\rangle = \langle (A^2 - 2A\langle A\rangle + \langle A\rangle^2)\rangle = \langle A^2\rangle - \langle A\rangle^2
+        \]
+        For <i>any</i> state we have the following inequality for observables \(A\) and \(B\):
+        \[
+          \langle(\Delta A)^2\rangle\langle(\Delta B)^2\rangle \geq \frac{1}{4}|\langle[A,B]\rangle|^2
+        \]
+        and the <i>standard deviation</i> is defined accordingly:
+        \[
+          \sqrt{\langle(\Delta A)^2\rangle} = \sqrt{\langle A^2\rangle - \langle A\rangle^2}
+        \]
+      </div>
       <h2 id="commutators">Commutators</h2>
       <div class="mainContent">
         The commutator of two observables, \(A\) and \(B\), have commutator: \[[A, B]=AB-BA\]
@@ -45,16 +81,113 @@
       </div>
       <h2 id="compatibleObs">Compatible Observables</h2>
       <div class="mainContent">
+        From our <a href="qmPostulates.html">quantum postulates</a> we know that an observable is a self-adjoint operator in a Hilbert space \(H\).
         Two operators, \(A\) and \(B\) are compatible if:
         \[A=A^\dagger, B=B^\dagger, [A,B]=0\]
-        You can define a common basis of eigenvectors for compatible operators.
       </div>
+      <p>
+        <u>Note 1</u>: You can define a common basis of eigenvectors for compatible operators. Click <a href="commonBasis.html">here</a> to see the full demonstration.
+        <br><br>
+        <u>Note 2</u>: The order in which you measure compatible observables does <i>not</i> change what values are measured or the probabilities with which they are obtained:
+        <br><br>
+        Say we measure \(\mathscr{A}\), then \(\mathscr{B}\), and we know:
+        \[
+          [A,B]=0, A=\sum_{\lambda\in \sigma_A}\lambda P_\lambda, B=\sum_{\mu\in \sigma_B}\mu \Lambda_\mu
+        \]
+        Because \(A\) and \(B\) share a <a href="commonBasis.html">common basis of eigenvectors</a>, we can say that:
+        \[
+          \begin{align}
+            P_{\lambda'}\mid\lambda, \mu, i\rangle &= \delta_{\lambda \lambda'}\mid\lambda, \mu, i\rangle \\
+            \Lambda_{\mu'}\mid\lambda, \mu, i\rangle &= \delta_{\mu \mu'}\mid\lambda, \mu, i\rangle \\
+            \Lambda_\mu P_{\lambda'}\mid\lambda, \mu, i\rangle &= \delta_{\mu \mu'}\delta_{\lambda \lambda'}\mid\lambda, \mu, i\rangle \\
+            &= P_{\lambda'}\Lambda_\mu(\mid\lambda, \mu, i\rangle)
+          \end{align}
+        \]
+        which clearly tells us that \([P_\lambda, \Lambda_\mu]=0\).
+        <br><br>
+        Then, if we we have a system in state \(\mid\psi\rangle\) and measure \(A\) and observe \(\lambda\) first, then we measure \(B\) and observe \(\mu\), the final state is \(\Lambda_\mu P_\lambda\mid\psi\rangle\).
+        If we measure \(B\) and observe \(\mu\) first, then we measure \(A\) and observe \(\lambda\), the final state is \(P_\lambda\Lambda_\mu\mid\psi\rangle\).
+        Obviously, the final state after doing the two measurements is the same regardless of the order.
+        <br><br>
+        This also means that the probabilities are the same:
+        \[
+          \begin{align}
+            p_{\lambda,\mu} &= p_\lambda\cdot p_{\mu\mid\lambda} = \frac{||P_\lambda\mid\psi\rangle||^2}{||\mid\psi\rangle||^2}\cdot\frac{||\Lambda_\mu P_\lambda\mid\psi\rangle||^2}{||P_\lambda\mid\psi\rangle||^2} = \frac{||\Lambda_\mu P_\lambda\mid\psi\rangle||^2}{||\mid\psi\rangle||^2} \\
+            p_{\mu,\lambda} &= p_\mu\cdot p_{\lambda\mid\mu} = \frac{||\Lambda_mu\mid\psi\rangle||^2}{||\mid\psi\rangle||^2}\cdot\frac{||P_\lambda\Lambda_\mu\mid\psi\rangle||^2}{||P_\lambda\mid\psi\rangle||^2} = \frac{||P_\lambda \Lambda_\mu \mid\psi\rangle||^2}{||\mid\psi\rangle||^2}
+          \end{align} 
+        \]
+      </p>
+      <h2 id="csco">Complete Sets of Commuting Observables</h2>
+      <div class="mainContent">
+        If we have two observables, \(A\) and \(B\) which are degenerate in the same eigenspaces, <i>we cannot uniquely describe a state with the observed values from \(A\) and \(B\) alone</i>.
+        A complete set of commuting observables (CSCO) is a set of commuting observables whose measurements can uniquely describe a state.
+        <br><br>
+        In other words, their eigenvalues identify a unique vector in the space, and their common eigenvectors can be used as a basis to describe any state.
+      </div>
+      <p>
+        <u>Notes</u>:
+        <ul>
+          <li>
+            If we have an observable \(A\) which is not degenerate, each possible eigenvalue uniquely corresponds to one dimension on the space \(A\) operates in.
+            When we observe \(mathscr{A}\), then, we know exactly what state the system is in, since each eigenvalue corresponds to one unique eigenvector.
+            <br><br>
+            Non-degenerate observables are in themselves CSCOs.
+          </li>
+          <br>
+          <li>
+            If we have an observable \(A\) that <i>is</i> degenerate, then a single measurement may not tell use exactly what state the system is in, since one eigenvalue then corresponds to more than one eigenvector.
+            We need to distinguish between the eigenvectors corresponding to degenerate eigenvalues!
+            <br><br>
+            We can do this if we have an observable \(B\) which is <i>not</i> degenerate in the same spaces as \(A\), and commutes with \(A\).
+            We know that there is a <a href="commonBasis.html">common basis of eigenvectors</a> between them.
+            Any pair of eigenvalues from \(A\) and \(B\) will then correspond to different subsets of the space in which they operate, and as we know, the <a href="definitions.html#eigen">eigenspaces</a> of an observable do not overlap and cover the entire space they operate in.
+            <br><br>
+            This means that any pair of eigenvalues will uniquely isolate a specific eigenvector/dimension of the space!
+          </li>
+        </ul>
+        <u>Examples</u>:
+        <ul>
+          <li>
+            To uniquely describe a quantum state we need to specify: 
+            <ul>
+              <li>\(n\), the quantum energy level</li>
+              <li>\(l\), the orbital angular momentum</li>
+              <li>\(m\), the magnetic quantum number (which corresponds to the orientation of orbitals)</li>
+              <li>\(\sigma\), the spin quantum number</li>
+            </ul>
+          </li>
+          <li>
+            Non-dgenerate observables like the Hamiltonian for the particle in a box configuration (knowing \(E_n=\frac{\hbar(n\pi)^2}{2m(b-a)^2}\) for box wall locations \(a, b\) and particle mass \(m\) is enough to describe the entire state) and \(S_z\) (knowing \(\pm\frac{\hbar}{2}\) is enough to tell us \(\mid\pm\rangle\) for sure) are CSCOs on their own.
+          </li>
+          <li>
+            \(\{L^2,L_z\}\) is a CSCO: If our Hilbert space \(H=\{\frac{x^ny^mz^k}{\pi{n+m+k}}, n,m,k\in\mathbb{N}\}\), and 
+            \[
+              \langle f\mid g\rangle = \int_{-1}^1\int_0^{2\pi} dcos\theta d\phi \cdot f^*(\theta,\phi)g(\theta,\phi)
+            \]
+            (see spherical harmonics), then \(L^2\) gives you \(l=0,1,2... \), where each \(l\gt 0\) has multiple corresponding states,
+            and \(L_z\) gives you \(m=-l,...,l\) to differentiate between those states,
+            or \(L^2\mid f\rangle = \hbar^2 l(l+1)\mid f\rangle\) and \(L_z\mid f\rangle=\hbar m \mid f\rangle\).
+            So \(\mid f \rangle\) is unique described up to a phase factor/normalization factor.
+          </li>
+        </ul>
+      </p>
       <h2 id="incompatibleObs">Incompatible Observables</h2>
       <div class="mainContent">
-        Two observables, \(A\) and \(B\) are incompatible if:
-        \[[A,B]\neq 0\]
+        Two observables, \(A\) and \(B\) are incompatible if \([A,B]\neq 0\)
       </div>
-      sg experiments, measurements, representations
+      <p>
+        <u>Notes</u>: Measuring more than one observable will always change the final <i>state</i> of the system compared to <i>the resulting state when just a single observable is measured</i>, regardless of whether the observables commute or not.
+        <br><br>
+        Say that \(A\) and \(B\) are observables that <i>may not commute</i>, and we have a system in initial state \(\mid\psi\rangle\).
+        If we simply measure \(A\) and observe value \(a\), the output state is \(P_a\mid\psi\rangle\).
+        The probability of measuring \(a\) is \(\langle\psi\mid P_a\mid\psi\rangle\).
+        <br><br>
+        If we measure \(B\), and only let the particles that yield value \(b\) through, then measure \(A\), the probability of observing some value \(a\) <i>given</i> that we have observed \(b\) is:
+        \[
+          ||P_a\Lambda_b\mid\psi\rangle||^2 = \langle\psi\mid \Lambda_b^\dagger P^\dagger_a P_a \Lambda_b \mid \psi\rangle = \langle\psi\mid \Lambda_b P_a \Lambda_b \mid \psi\rangle
+        \]
+        
+      </p>
     </div>
   </body>
 </html>

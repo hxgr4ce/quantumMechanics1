@@ -17,7 +17,7 @@
       <div class="mainContent">
         <p>A set of vectors \(\{\vec{v_i}\}_{i=1,...,n}, \vec{v_i} \in V\), where \(V\) is a vector space over field \(F\), is linearly dependent if some non-trivial linear combination of each vector in the set equals \(\vec{0}\). 
             Formally, it is linearly dependent only if:
-            \[\exists \{c_i\}_{i=1,...,n}, c_i \in F, \exists c_i \neq 0 \mid \Sigma_{i=1}^n c_i\vec{v_i}=\vec{0}\]
+            \[\exists \{c_i\}_{i=1,...,n}, c_i \in F, \exists c_i \neq 0 \mid \sum_{i=1}^n c_i\vec{v_i}=\vec{0}\]
         </p>
       </div>
       <p><u>Example</u>: 
@@ -35,7 +35,7 @@
       <div class="mainContent">
          <p>A set of vectors \(\{\vec{g_i}\}\) in vector space \(V\) over field \(F\) <i>generates</i> \(V\) if <i>all</i> linear combinations of \(\{\vec{g_i}\}\) describe an element in \(V\). 
          Formally, \(\{\vec{g_i}\}\) is a generator of \(V\) if: 
-         \[\forall \{c_i\}, c_i \in F, \Sigma_{i}c_i\vec{g_i}=\vec{v}, \vec{v} \in V \]</p>
+         \[\forall \{c_i\}, c_i \in F, \sum_{i}c_i\vec{g_i}=\vec{v}, \vec{v} \in V \]</p>
       </div>
       <p><u>Example</u>: \( \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix} \), \( \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix} \), and \( \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \) generate the vector space \((\mathbb{R}^3, \mathbb{R})\).
       </p>
@@ -71,9 +71,9 @@
       <p><u>Example</u>: \( \begin{pmatrix} 1 \\ 0 \end{pmatrix} \) and \( \begin{pmatrix} 0 \\ 1 \end{pmatrix} \) are the basis of \((\mathbb{R}^2, \mathbb{R})\).</p>
       <h2 id="subspaceSum">Sums of Subspaces</h2>
       <div class="mainContent">
-        <p>If \(U\) and \(W\) are subspaces of \((V, F)\) (vector space \(V\) over field \(F\)), then \(U+W=\{\vec{u}+\vec{w}\mid\vec(U)\in U, \vec{w} \in W\}\) is also a subspace of \(V\).</p>
+        <p>If \(U\) and \(W\) are subspaces of \((V, F)\) (vector space \(V\) over field \(F\)), then \(U+W=\{\vec{u}+\vec{w}\mid\vec{u}\in U, \vec{w} \in W\}\) is also a subspace of \(V\).</p>
         <p>
-          If \(\forall \vec{v} \in V, \exists! \vec{u} \in U, \vec{w} \in W \mid \vec{u}+\vec{w}=\vec{v}\), then \(U+W\) is more specifically called a <i>direct</i> sum, \(U\oplus V\). 
+          If \(\forall \vec{v} \in U+W, \exists! \vec{u} \in U, \vec{w} \in W \mid \vec{u}+\vec{w}=\vec{v}\), then \(U+W\) is more specifically called a <i>direct</i> sum, \(U\oplus V\). 
           <br><br>Say that \(U\) has basis \(\{u_i\}_{i=1,...,n}\) and \(W\) has basis \(\{w_i\}_{i=1,...,m}\). Then
           \(U \oplus V \iff \{u_1,...,u_n, w_1,...,w_m\} \) is linearly independent.
         </p>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Spin Measurements</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- allow latex, inline equations go between \(\) 
+    and block equations go in \[\]-->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="mainContent">
+      <h1>Spin Measurements</h1>
+      <h2>Measurement is a Stochastic Process</h2>
+      <div style="text-align:center">
+        <img src="sg2.png" width="80%">
+        <br><i>Fig 1.</i> Variations on the Stern-Gerlach Experiment. From <i>Modern Quantum Mechanics, Third Edition</i> , by J. J. Sakurai and Jim Napolitano.
+      </div>
+      <p>
+        We know that if we filter a beam of silver atoms to only contain \(\mid+\rangle\) atoms, then observe the spin along the \(x\) axis, we see that the filtered beam is split evenly into two, as in <i>Fig 1b</i>.
+        We can say that the probability of observing a certain physical quantity is the norm squared of the corresponding state after measurement, which comes from our <a href="qmPostulates.html">quantum postulates</a>.
+        <br><br>
+        We are absolutely certain that the atoms in the incoming beam to the second magnetic field are in state \(\mid+\rangle\). In our case, we can say that this probability is normalized to 1, since we filtered the beam to guarantee that all remaining atoms are in this state.
+        (Still, the length of \(\mid+\rangle\) is 1 anyway, so the norm squared is 1 anyway...)
+        <br><br>
+        What is the state of the atoms in the beam after we pass it through the second magnetic field, oriented in the \(x\) direction?
+        We don't know! All we can say is that, from quantum postulates, the probability of an atom being in state \(\mid S_x\pm\rangle\) is:
+        \[\begin{align}
+            \frac{||\mid S_x\pm\rangle\langle S_x\pm\mid+\rangle||^2}{||\mid+\rangle||^2} &= ||\mid S_x\pm\rangle\langle S_x\pm\mid+\rangle||^2 \\
+            & = (\langle+\mid S_x\pm\rangle\langle S_x\pm)(\mid S_x\pm\rangle\langle S_x\pm\mid+\rangle) \\
+            & = \langle+\mid S_x\pm\rangle\langle S_x\pm\mid S_x\pm\rangle\langle S_x\pm\mid+\rangle \\
+            & = \langle+\mid S_x\pm\rangle\langle S_x\pm\mid+\rangle \\
+            &= |\langle+\mid S_x\pm\rangle|^2
+        \end{align}\]
+        After substituting in for the state \(\mid S_x\pm\rangle\):
+        \[\begin{align}
+            \frac{||\mid S_x\pm\rangle\langle S_x\pm\mid+\rangle||^2}{||\mid+\rangle||^2} &= |\langle+\mid S_x\pm\rangle|^2 \\
+            &= |\langle+\mid(\frac{\mid+\rangle\pm\mid-\rangle}{\sqrt2})|^2 \\
+            &= \frac{1}{2}|\langle+\mid(\mid+\rangle\pm\mid-\rangle)|^2 \\
+            &= \frac{1}{2}|\langle+\mid+\rangle\pm\langle+\mid-\rangle|^2 \\
+            &= \frac{1}{2}|1+0|^2 = \frac{1}{2}
+        \end{align}\]
+        So all we can say is that there is an equal chance of an incoming atom being in state \(\mid S_x, + \rangle\) or \(\mid S_x,-\rangle\), <i>even though we prepared each atom to be in the exact same initial state</i>.
+        Since this probabilty is well-defined, but the outcome for each individual atom is truly random, the measurement of spin along a certain axis is truly a stochastic process.
+      </p>
+    </div>
+  </body>
+</html>
