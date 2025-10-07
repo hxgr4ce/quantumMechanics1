@@ -58,3 +58,18 @@ a:active { color: darkred; }
     background-color: white;
     border: 1px solid var(--headerColor);
 }
+
+.scrollBox {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.fixed-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 5%;
+  text-align: center;
+  padding: 10px;
+  z-index: 1000;
+}

@@ -12,7 +12,34 @@
   </head>
   <body>
     <div class="mainContent">
-        <h1>Linear Algebra Definitions</h1>
+        <h1 id="top">Linear Algebra Definitions</h1>
+        <h2>Table of Contents</h2>
+        <div class="mainContent scrollBox" style="height:200px">
+            <ul>
+                <li><a href="#groups">Groups</a></li>
+                <li><a href="#fields">Fields</a></li>
+                <li><a href="#vectorSpaces">Vector Spaces</a></li>
+                <li><a href="#conjugate">The Complex Conjugate Transpose</a></li>
+                <li><a href="#innerProduct">Inner Product Spaces</a></li>
+                <li><a href="#linearFCN">Linear Functionals</a></li>
+                <li><a href="#braket">Bra-Ket Notation</a></li>
+                <li><a href="#operators">Operators</a></li>
+                <li><a href="#linearApp">Linear Applications</a></li>
+                <li><a href="#dualspace">Dual Spaces</a></li>
+                <li><a href="#dualcorresp">Dual Correspondence</a></li>
+                <li><a href="#riesz">Riesz Representation Theorem</a></li>
+                <li><a href="#norm">Norm</a></li>
+                <li><a href="#hilbert">Hilbert Space</a></li>
+                <li><a href="#adjoint">Adjoint</a></li>
+                <li><a href="#hermitian">Hermitian Operators</a></li>
+                <li><a href="#projectors">Projectors</a></li>
+                <li><a href="#identity">Resolution of Identity</a></li>
+                <li><a href="#eigen">Eigenvalues, eigenvectors, etc.</a></li>
+                <li><a href="#determinant">Determinants</a></li>
+                <li><a href="#phase">Phase Factors</a></li>
+                <li><a href="#spectral">Spectral Theorem (Finite Dimensional)</a></li>
+            </ul>
+        </div>
         <h2 id="groups">Groups</h2>
         <div class="mainContent">
         A group, G, is a <b><i>set</i></b> with an internal operator + such that
@@ -366,7 +393,106 @@
             <hr>
             The spectrum of \(A\) is simply the set of all of its unique eigenvalues:
             \[\sigma_A=\{\lambda \mid \exists\mid\vec{u}\rangle \in V, A\mid\vec{u}\rangle=\lambda\mid\vec{u}\rangle\}\]
+        </div>
+        <h2 id="determinant">Determinants</h2>
+        <div class="mainContent">
+            The determinant of a matrix is:
+            <ol>
+                <li><i>A multilinear function of columns:</i>
+                    <br>
+                    A set of columns (say, column vectors) \(\mathbb{a}, \mathbb{b}, \mathbb{c}, \text{ and }, \mathbb{d}\) can form a matrix where the first column is \(\alpha\mathbb{a}+\beta\mathbb{b}\), the second column is \(\mathbb{c}\), and the third column is \(\mathbb{d}\):
+                    \[\begin{bmatrix}\alpha\mathbb{a}+\beta\mathbb{b}\mid\mathbb{c}\mid\mathbb{d}\end{bmatrix}\]
+                    then, 
+                    \[
+                        \text{det}\begin{bmatrix}\alpha\mathbb{a}+\beta\mathbb{b}\mid\mathbb{c}\mid\mathbb{d}\end{bmatrix}
+                        = \alpha\text{det}\begin{bmatrix}\mathbb{a}\mid\mathbb{c}\mid\mathbb{d}\end{bmatrix}
+                        + \beta\text{det}\begin{bmatrix}\mathbb{b}\mid\mathbb{c}\mid\mathbb{d}\end{bmatrix}
+                    \]
+                </li>
+                <li><i>Antisymmetric under a change of columns:</i>
+                    <br>
+                    Say we have two matrices
+                    \[
+                        \mathbb{A} = \begin{bmatrix}\cdots\mid\mathbb{a}\mid\cdots\mid\mathbb{b}\mid\cdots\end{bmatrix}
+                    \]
+                    where column \(\mathbb{a}\) is the \(i\)-th column and column \(\mathbb{b}\) is the \(j\)-th column, and
+                    \[
+                        \mathbb{B} = \begin{bmatrix}\cdots\mid\mathbb{b}\mid\cdots\mid\mathbb{a}\mid\cdots\end{bmatrix}
+                    \]
+                    where column \(\mathbb{b}\) is the \(i\)-th column and column \(\mathbb{a}\) is the \(j\)-th column.
+                    Then
+                    \[\text{det}(\mathbb{A}) = -\text{det}(\mathbb{B})\]
 
+                </li>
+
+                <li><i>One on \(\mathbb{1}\):</i>
+                    \[\text{det}(\mathbb{1}) = 1\]
+                </li>
+            </ol>
+        </div>
+        <p>
+            <u>Note</u>: As we mention conceptually (and briefly) in our <a href="spectral.html#specDet">demonstration of the spectral theorem in fininte dimensions</a>, a matrix with linearly dependent columns has a determinant of 0.
+            The mathematical proof of this is as follows:
+            <br><br>
+            Say matrix \(\mathbb{C}\) has columns \(\mathbb{c^i}\), and these columns are linearly dependent, so
+            \[
+                \sum^n_{i=1} \mathbb{c}^i\alpha_i = 0
+            \]
+            where not all \(\alpha_i\) are 0.
+            We can then describe the first column, \(\mathbb{c^1}\), in terms of all other columns:
+            \[
+                \begin{align}
+                    \sum^n_{i=1} \mathbb{c}^i\alpha_i &= 0 \\
+                    \alpha_1\mathbb{c^1} + \sum^n_{i=2} \mathbb{c}^i\alpha_i &= 0 \\
+                    \mathbb{c^1} &= -\frac{1}{\alpha_1} \sum^n_{i=2} \mathbb{c}^i\alpha_i \\
+                    &= \sum^n_{i=2} -\frac{\alpha_i}{\alpha_1}\mathbb{c}^i \\
+                \end{align}
+            \]
+            Then, we can write:
+            \[
+                \text{det}(\mathbb{C}) = \text{det}\begin{bmatrix}\sum^n_{i=2} -\frac{\alpha_i}{\alpha_1}\mathbb{c}^i \mid \mathbb{c}^2 \mid \mathbb{c}^3\mid \cdots \end{bmatrix}
+            \]
+            According to the first property of the determinant listed above, we can pull out the constant and separate over each term of the sum:
+            \[
+                \begin{align}
+                    &\text{det}\begin{bmatrix}\sum^n_{i=2} -\frac{\alpha_i}{\alpha_1}\mathbb{c}^i \mid \mathbb{c}^2 \mid \mathbb{c}^3\mid \cdots \end{bmatrix} \\
+                    &= -\frac{\alpha_2}{\alpha_1}\text{det}\begin{bmatrix}\mathbb{c}^2 \mid \mathbb{c}^2 \mid \mathbb{c}^3\mid \cdots \end{bmatrix} 
+                    -\frac{\alpha_3}{\alpha_1}\text{det}\begin{bmatrix}\mathbb{c}^3 \mid \mathbb{c}^2 \mid \mathbb{c}^3\mid \cdots \end{bmatrix}
+                    \cdots \\
+                    &-\frac{\alpha_i}{\alpha_1}\text{det}\begin{bmatrix}\mathbb{c}^i \mid \mathbb{c}^2 \mid \cdots \mid \mathbb{c}^i \mid \cdots \mathbb{c}^n \end{bmatrix}
+                    -\frac{\alpha_n}{\alpha_1}\text{det}\begin{bmatrix}\mathbb{c}^n \mid \mathbb{c}^2 \mid \cdots \mid \mathbb{c}^n\end{bmatrix}
+                \end{align}        
+            \]
+            Notice that each matrix in this expansion has two columns which are identical!
+            According to the second property of the determinant listed above, 
+            \[
+                \text{det}\begin{bmatrix}\cdots\mid\mathbb{a}\mid\cdots\mid\mathbb{b}\mid\cdots\end{bmatrix} = -\text{det}\begin{bmatrix}\cdots\mid\mathbb{b}\mid\cdots\mid\mathbb{a}\mid\cdots\end{bmatrix}
+            \]
+            so,
+            \[
+                \text{det}\begin{bmatrix}\cdots\mid\mathbb{a}\mid\cdots\mid\mathbb{a}\mid\cdots\end{bmatrix} = -\text{det}\begin{bmatrix}\cdots\mid\mathbb{a}\mid\cdots\mid\mathbb{a}\mid\cdots\end{bmatrix}
+            \]
+            implying that the determinant of a matrix that has two (or more) identical columns <i>must have a determinant of 0</i>.
+            <br><br>
+            This means that \(det(\mathbb{C}) = 0\).
+        </p>
+        <h2 id="phase">Phase Factors</h2>
+        <div class="mainContent">
+            Given some orthonormal basis \(\{\mid 1\rangle, \mid 2\rangle, \mid 3\rangle\}\), you can introduce a <i>phase factor</i> to each vector and have them still be an orthonormal basis (and eigenvectors of whatever operator the original ONB vectors were eigenvectors of). 
+            <br><br>
+            e.g. \(\{i\mid 1\rangle, e^{i\frac{\pi}{3}}\mid 2\rangle, -\mid 3\rangle\}\) still has vectors of length 1:
+            \[
+                ||i\mid 1\rangle|| = \sqrt{(-i\langle 1\mid) (i\mid 1\rangle)} = \sqrt{-i^2 \langle 1\mid 1\rangle} = \sqrt{1} = 1
+            \]
+            \[
+                ||e^{i\frac{\pi}{3}}\mid 2\rangle|| = \sqrt{(e^{-i\frac{\pi}{3}}\langle 2\mid) (e^{i\frac{\pi}{3}}\mid 2\rangle)} = \sqrt{e^0 \langle 2\mid 2\rangle} = \sqrt{1} = 1
+            \]
+            \[
+                ||-\mid 3\rangle|| = \sqrt{(-\langle 3\mid) (-\mid 3\rangle)} = \sqrt{\langle 3\mid 3\rangle} = \sqrt{1} = 1
+            \]
+            and since each introduced factor is simply a scalar, it does not change the <i>direction</i> of the vectors, hence they are all still orthogonal.
+            <br><br>
+            Dr. Argenti says it just changes the "flavor" of the vector...
         </div>
         <h2 id="spectral">Spectral Theorem (Finite Dimensional)</h2>
         <div class="mainContent">
@@ -379,5 +505,8 @@
             <u>Note</u>: Click <a href="spectral.html">here</a> for a demonstration of the spectral theorem.
         </p>
     </div>
+    <footer class="fixed-footer">
+      <a href="#top">↑</a>
+    </footer>
   </body>
 </html>
