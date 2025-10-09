@@ -217,73 +217,19 @@
       <h2 id="unitary">Unitary Operators</h2>
       <div class="mainContent">
         An operator \(U\) is unitary if \(UU^\dagger=U^\dagger U=\mathbb{I}\).
-        <br><br>
         \(U\) must be invertible and \(U^{-1}=U^\dagger\).
         <br><br>
-        Unitary operators are surjective isometries.
+        Unitary operators are surjective isometries, and preserve the scalar product/norm.
         <br><br>
-        \([U, U^\dagger]=0\).
-        <br><br>
-        From all of these properties, we can see that \(U\) has <i>complex</i> eigenvalues (see Note 2).
+        \([U, U^\dagger]=0\), and \(U\) has <i>complex</i> eigenvalues.
       </div>
       <p>
-        <u>Note 1</u>: We can see that a unitary operator preserves the scalar product/norm:
-        \[\langle U\psi\mid U\phi\rangle = \langle\psi\mid U^\dagger U\mid\phi\rangle = \langle\psi\mid\phi\rangle\]
-        Intuitively, then, if we have an orthonormal basis \(\{\mid\phi_i\rangle\}\), \(\{U\mid\phi_i\rangle\}\) is also a basis.
-        <br><br>
-        Formally, if we have two orthonormal bases, \(\{\mid v_i \rangle\}\) and \(\{\mid u_i \rangle\}\) where \(U\mid u_i \rangle = \mid v_i\rangle\), then we can write \(U\) as:
-        \[
-          \begin{align}
-            U &= \sum^n_{i=1} \mid v_i\rangle\langle u_i\mid \\
-            U\mid u_j\rangle &= \sum^n_{i=1} \mid v_i\rangle\langle u_i\mid u_j\rangle \\
-            &= \sum^n_{i=1} \mid v_i\rangle\delta_{ij} \\
-            &= \mid v_j\rangle
-          \end{align}
-        \]
-        (Note that \(n\) can be infinity; \(U\) is surjective so it applies to infinite dimensional Hilbert spaces...)
-        <br><br>
-        <u>Note 2</u>: We can describe any operator as 
-        \[U = \frac{U+U^\dagger}{2} + i\frac{U-U^\dagger}{2i}\]
-        \[X = \frac{U+U^\dagger}{2}\]
-        \[Y = \frac{U-U^\dagger}{2i}\]
-        We know that \(X\) and \(Y\) are self-adjoint:
-        \[X^\dagger = (\frac{U+U^\dagger}{2})^\dagger = \frac{U^\dagger+U}{2} = X\]
-        \[Y^\dagger = (\frac{U-U^\dagger}{2i})^\dagger = \frac{U^\dagger-U}{-2i} = \frac{U-U^\dagger}{2i} = Y\]
-        and so on. 
-        (Note the similarity to the "trick" we used while deriving <a href="heisenberg.html">Heisenberg's uncertainty principle</a>!)
-        <br><br>
-        But since \(U\) and \(U^\dagger\) commute, we <i>also</i> know that \(X\) and \(Y\) commute.
-        That means there's a common basis of eigenvectors between \(X\) and \(Y\):
-        \[
-          X\mid\lambda,\mu,i\rangle = \lambda \mid\lambda,\mu,i\rangle \text{ and } Y\mid\lambda,\mu,i\rangle = \mu\mid\lambda,\mu,i\rangle
-        \]
-        which also means:
-        \[
-          U\mid\lambda,\mu,i\rangle = (\lambda+ i\mu)\mid\lambda,\mu,i\rangle
-        \]
-        so \(U\) must have complex values. 
-        What are these values?
-        <br><br>
-        For some arbitrary normalized eigenvector \(\mid\lambda\rangle\) (disregarding any variables used previously):
-        \[
-          \begin{align}
-            U\mid\lambda\rangle &= \lambda\mid\lambda\rangle \\
-            ||U\mid\lambda\rangle||^2 &= \langle U\lambda \mid U\lambda\rangle
-            = |\lambda|^2 \langle\lambda\mid\lambda\rangle \\
-            & = \langle \lambda \mid U^\dagger U\mid \lambda\rangle
-            = \langle\lambda\mid\lambda\rangle \\
-            |\lambda|^2 \langle\lambda\mid\lambda\rangle &= \langle\lambda\mid\lambda\rangle \\
-            |\lambda|^2 &= 1 \\
-            \lambda &= 1\cdot e^{i\theta}
-          \end{align}
-        \]
-        <u>Note 3</u>: An <i>isometry</i> is a type of transformation that preserves the scalar product (and so also the norm), meaning that angles and lengths are preserved.
-        However, <i>not all isometries are invertible</i>, so not all isometries are unitary!!
-        <br><br>
-        Take the case where a vector is transformed by "shifting" it by one-- that is, prepending an element with a value of zero. 
-        That means the output is only vectors that have a \(0^{th}\) first element, and there is no input that allows the output to have a non-zero first element.
-        This transformation is not surjective, so not invertible.
+        <u>Note</u>: For a more in-depth discussion of these properties, see <a href="unitary.html">Features of Unitary Transformations</a>.
       </p>
+    </div>
+    <h2 id="wavefcn">Wave Tunctions</h2>
+    <div class="mainContent">
+      position space, momentum space, \(\langle x|\psi\rangle\), (\(x\) is treated as a continuous variable, so \(\psi(x)\) is not a scalar, it's a vector) etc.
     </div>
     <footer class="fixed-footer">
       <a href="#top">↑</a>

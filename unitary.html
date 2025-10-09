@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Unitary Transformations</title>
+        <link rel="stylesheet" href="style.css">
+        <!-- allow latex, inline equations go between \(\) 
+        and block equations go in \[\]-->
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </head>
+    <body>
+        <div class="mainContent">
+            <h1>Properties of Unitary Transformations</h1>
+            <p>
+                <h2>Unitary Transformations preserve the scalar product</h2>
+                We can see that a unitary operator preserves the scalar product/norm:
+                \[\langle \hat{U}\psi\mid \hat{U}\phi\rangle = \langle\psi\mid \hat{U}^\dagger \hat{U}\mid\phi\rangle = \langle\psi\mid\phi\rangle\]
+                Intuitively, then, if we have an orthonormal basis \(\{\mid\phi_i\rangle\}\), \(\{\hat{U}\mid\phi_i\rangle\}\) is also a basis.
+                <br><br>
+                Formally, if we have two orthonormal bases, \(\{\mid v_i \rangle\}\) and \(\{\mid u_i \rangle\}\) where \(\hat{U}\mid u_i \rangle = \mid v_i\rangle\), then we can write \(\hat{U}\) as:
+                \[
+                \begin{align}
+                    \hat{U} &= \sum^n_{i=1} \mid v_i\rangle\langle u_i\mid \\
+                    \hat{U}\mid u_j\rangle &= \sum^n_{i=1} \mid v_i\rangle\langle u_i\mid u_j\rangle \\
+                    &= \sum^n_{i=1} \mid v_i\rangle\delta_{ij} \\
+                    &= \mid v_j\rangle
+                \end{align}
+                \]
+                (Note that \(n\) can be infinity; \(\hat{U}\) is surjective so it applies to infinite dimensional Hilbert spaces...)
+                <h2>The Eigenvalues of Unitary Transformations</h2>
+                We can describe any operator as 
+                \[\hat{U} = \frac{\hat{U}+\hat{U}^\dagger}{2} + i\frac{\hat{U}-\hat{U}^\dagger}{2i}\]
+                \[\hat{X} = \frac{\hat{U}+\hat{U}^\dagger}{2}\]
+                \[\hat{Y} = \frac{\hat{U}-\hat{U}^\dagger}{2i}\]
+                We know that \(\hat{X}\) and \(\hat{Y}\) are self-adjoint:
+                \[\hat{X}^\dagger = (\frac{\hat{U}+\hat{U}^\dagger}{2})^\dagger = \frac{\hat{U}^\dagger+\hat{U}}{2} = \hat{X}\]
+                \[\hat{Y}^\dagger = (\frac{\hat{U}-\hat{U}^\dagger}{2i})^\dagger = \frac{\hat{U}^\dagger-\hat{U}}{-2i} = \frac{\hat{U}-\hat{U}^\dagger}{2i} = \hat{Y}\]
+                and so on. 
+                (Note the similarity to the "trick" we used while deriving <a href="heisenberg.html">Heisenberg's uncertainty principle</a>!)
+                <br><br>
+                But since \(\hat{U}\) and \(\hat{U}^\dagger\) commute, we <i>also</i> know that \(\hat{X}\) and \(\hat{Y}\) commute.
+                That means there's a common basis of eigenvectors between \(\hat{X}\) and \(\hat{Y}\):
+                \[
+                    \hat{X}\mid\lambda,\mu,i\rangle = \lambda \mid\lambda,\mu,i\rangle \text{ and } \hat{Y}\mid\lambda,\mu,i\rangle = \mu\mid\lambda,\mu,i\rangle
+                \]
+                which also means:
+                \[
+                    \hat{U}\mid\lambda,\mu,i\rangle = (\lambda+ i\mu)\mid\lambda,\mu,i\rangle
+                \]
+                <b><i>so \(\hat{U}\) must have complex eigenvalues.</i></b>
+                <br><br>
+                For some arbitrary normalized eigenvector \(\mid\lambda\rangle\) (disregarding any variables used previously):
+                \[
+                    \begin{align}
+                        \hat{U}\mid\lambda\rangle &= \lambda\mid\lambda\rangle \\
+                        ||\hat{U}\mid\lambda\rangle||^2 &= \langle \hat{U}\lambda \mid \hat{U}\lambda\rangle
+                        = |\lambda|^2 \langle\lambda\mid\lambda\rangle \\
+                        & = \langle \lambda \mid \hat{U}^\dagger \hat{U}\mid \lambda\rangle
+                        = \langle\lambda\mid\lambda\rangle \\
+                        |\lambda|^2 \langle\lambda\mid\lambda\rangle &= \langle\lambda\mid\lambda\rangle \\
+                        |\lambda|^2 &= 1 \\
+                        \lambda &= 1\cdot e^{i\theta}
+                    \end{align}
+                \]
+                <b><i>\(\lambda\)'s real component has a magnitude of 1</i></b>.
+                <h2>Not all isometries are unitary</h2>
+                An <i>isometry</i> is a type of transformation that preserves the scalar product (and so also the norm), meaning that angles and lengths are preserved.
+                However, <i>not all isometries are invertible</i>, so not all isometries are unitary!!
+                <br><br>
+                Take the case where a vector is transformed by "shifting" it by one-- that is, prepending an element with a value of zero. 
+                That means the output is only vectors that have a \(0^{th}\) first element, and there is no input that allows the output to have a non-zero first element.
+                This transformation is not surjective, so not invertible.
+                <h2>Unitary Transformations and Self-adjoint Operators</h2>
+                If \(\hat{A} = \hat{A}^\dagger\), there is a \(\hat{\hat{U}} = e^{-i\hat{A}}\) that is unitary (the exponent is negative just by convention).
+                We can see this in two ways:
+                <ol>
+                    <li>\(\hat{U}^\dagger = e^{i\hat{A}^\dagger}\), so \(\hat{U}\hat{U}^\dagger = \hat{U}^\dagger \hat{U} = e^{i\hat{A}^\dagger -i\hat{A}} = e^{i\hat{A} -i\hat{A}} = \mathbb{1}\)</li>
+                    <li>According to the spectral theorem:
+                        \[
+                            \hat{A} = \sum_{\lambda\in\sigma(A)} \lambda\hat{P}_\lambda
+                        \]
+                        Which means that if we apply a function \(f\), we get:
+                        \[
+                            f(\hat{A}) = \sum_{\lambda\in\sigma(A)} f(\lambda)\hat{P}_\lambda
+                        \]
+                        Then we can define an operator \(\hat{U}\):
+                        \[\begin{align}
+                            \hat{U} &= \sum_{\lambda\in\sigma(A)} e^{-i\lambda}\hat{P}_\lambda \\
+                            \hat{U}^\dagger &= \sum_{\lambda\in\sigma(A)} e^{i\lambda}\hat{P}_\lambda \\
+                            \hat{U}\hat{U}^\dagger &= \sum_{\lambda\in\sigma(A)} e^{-i\lambda}\hat{P}_\lambda \sum_{\lambda'\in\sigma(A)} e^{i\lambda'}\hat{P}_{\lambda'} \\
+                            &= \sum_{\lambda,\lambda'} e^{-i\lambda+i\lambda'} \hat{P}_\lambda\hat{P}_{\lambda'} \\
+                        \end{align}\]
+                        if \(\lambda \neq \lambda'\), then their corresponding eigenspaces are orthogonal, so we just get 0. 
+                        This means we can write:
+                        \[\begin{align}
+                            \hat{U}\hat{U}^\dagger &= \sum_{\lambda,\lambda'} e^{-i\lambda+i\lambda'} \hat{P}_\lambda\hat{P}_{\lambda'} \\
+                            &= \sum_{\lambda,\lambda'} e^{-i\lambda+i\lambda} \delta_{\lambda\lambda'}\hat{P}_\lambda\hat{P}_{\lambda} \\
+                            &= \sum_{\lambda,\lambda'} e^{0} \delta_{\lambda\lambda'}\hat{P}_\lambda \\
+                            &= \sum_{\lambda}\hat{P}_\lambda = \hat{1}\\
+                        \end{align}\]
+                        it's apparent that for similar reasons, \(\hat{U}^\dagger\hat{U} = \hat{1}\) also, so we've shown that \(\hat{U}\) is unitary.
+                    </li>
+                </ol>
+                The opposite is also true: If \(\hat{\hat{U}}\) is unitary, there is a \(\hat{A} = \hat{A}^\dagger\) so that \(\hat{U}= e^{-i\hat{A}}\).
+                The demonstration is as follows:
+                \[
+                    \hat{U}\mid\lambda,i\rangle = \lambda\mid\lambda,i\rangle, \lambda\in\mathbb{C}, |\lambda|=1
+                \]
+                which means that we can visualize all \(\lambda\) as points on the unit circle in the complex plane:
+                <div style="width:100%; text-align: center;">
+                    <svg style="width:250px; height:200px;">
+                        <circle cx="100" cy="100" r="50" 
+                            fill="none" 
+                            stroke="grey" 
+                            stroke-width="2" />
+                        <line x1="100" y1="25" x2="100" y2="175" stroke="black" stroke-width="1"></line> 
+                        <line x1="25" y1="100" x2="175" y2="100" stroke="black" stroke-width="1"></line> 
+                        <line x1="100" y1="100" x2="130" y2="60" stroke="black" stroke-width="1"></line> 
+                        <text x="100" y="20" font-size="15">Im</text>
+                        <text x="180" y="100" font-size="15">Re</text>
+                        <text x="140" y="55" font-size="15">λ</text>
+                        <text x="120" y="95" font-size="15">θ </text>
+                        <circle cx="130" cy="60" r="2" 
+                            fill="blue" 
+                            stroke="blue" 
+                            stroke-width="2" />
+                        <path d="M 107 90 C 113 90, 113 100, 110 100" stroke="black" stroke-width="1" fill="none"></path>
+                    </svg>
+                </div>
+                and we can uniquely define \(\lambda\) as \(\lambda = e^{i\theta}, \theta\in(-\pi,\pi]\)
+                \[
+                    \begin{align}
+                        \hat{U} = \sum_{\lambda\in\sigma(U)}\lambda\hat{P}_\lambda = \sum_{\lambda\in\sigma(U)}e^{i\theta_\lambda}\hat{P}_\lambda \\
+                        \hat{A} = -\sum_{\lambda\in\sigma(U)} \theta_\lambda\hat{P}_\lambda
+                    \end{align}
+                \]
+                Since \(\hat{A}\) is spectrally defined, it is self-adjoint.
+                <h2>Families of Unitary Operators</h2>
+                Often times, instead of just having a single standalone \(\hat{U}\), you have a \(\hat{U}(t)\), where unique values of \(t\) can produce unique operators.
+                <br><br>
+                For example, the family of translations: \(\hat{T}_{\Delta x}\) shifts a wave function \(\psi(x)\) by \(\Delta x\), so each different value of \(\Delta X\) produces a different unitary operator.
+                <div style="width:100%; text-align: center;">
+                    <svg width="340" height="130">
+                        <line x1="10" y1="100" x2="330" y2="100" stroke="black" />
+                        <path d="M 20 100 C 60 90, 80 20, 120 20 " fill="none" stroke="blue" stroke-width="2"/>
+                        <path d="M 120 20 C 160 20, 180 90, 220 100 " fill="none" stroke="blue" stroke-width="2"/>
+                        <path d="M 120 100 C 160 90, 180 20, 220 20 " fill="none" stroke="orange" stroke-width="2"/>
+                        <path d="M 220 20 C 260 20, 280 90, 320 100 " fill="none" stroke="orange" stroke-width="2"/>
+                        <line x1="20" y1="110" x2="120" y2="110" stroke="black" />
+                        <line x1="20" y1="105" x2="20" y2="115" stroke="black" />
+                        <line x1="120" y1="105" x2="120" y2="115" stroke="black" />
+                        <text x="60" y="125" font-size="15">Δx</text>
+                    </svg>
+                </div>
+                This family has members \(\hat{T}(\Delta x) = e^{-i\hat{A}\Delta x}, \hat{A}=\hat{A}^\dagger, \Delta x\in \mathbb{R}\), which means it has infinitely many members.
+                <br><br>
+                These families of \(\hat{U}(t)\)s are <i>abelian groups</i>:
+                <ul>
+                    <li>\(\hat{U}(0)=e^0=\hat{1}\), so they contain the identity.</li>
+                    <li>
+                        \(\hat{U}(t)\hat{U}(t')\) (a composition of two transformations) is:
+                        \[ \hat{U}(t)\hat{U}(t')=e^{-i\hat{A}t}e^{-i\hat{A}t'} = e^{-i\hat{A}(t-t')}=\hat{U}(t-t')\]
+                        composition is associative.
+                    </li>
+                    <li>
+                        \(\hat{U}(-t)=e^{i\hat{A}t}=\hat{U}^\dagger(t)=(\hat{U}(t))^{-1}\), so the symmetric element for each member of the family exists.
+                    </li>
+                    <li>For an arbitrary \(\hat{U(t)}\) and \(\hat{U}(t')\), \(\hat{U}(t)\hat{U}(t')=\hat{U}(t')\hat{U}(t)\), so this composition is commutative.</li>
+                </ul>
+                We can also show that it is a <i>strongly continuous group</i>: 
+                \[\forall |\psi\rangle\in H, \lim_{t\to 0} ||\hat{U}(t)|\psi\rangle-|\psi\rangle||=0\]
+                (but I won't).
+                We can also see that for these families:
+                \[\begin{align}
+                    \frac{d}{dt}\hat{U}(t) &= \frac{d}{dt}e^{-i\hat{A}t} = -i\hat{A}e^{-i\hat{A}t} \\
+                    &= -i\hat{A}e^{-i\hat{A}(0)} = -i\hat{A} \\
+                    \hat{A} &= i\frac{d}{dt}\hat{U}(t)\Big|_{t=0}
+                \end{align}\]
+                <h2>Stone Theorem</h2>
+                The Stone Theorem says that for a strongly continuous, one-parameter froup of unitary transformations:
+                \[\exists ! \hat{A}=\hat{A}^\dagger \mid \hat{U}(t)=e^{-i\hat{A}t}\]
+                \(\hat{A}\) is of course an observable, and \(\hat{U}(t)\) is a set of continuous symmetries (and analagous to classical canonical transformations).
+                So, we know that each unitary transformation \(\hat{U}(t)\) can be <i>directly</i> determined by a <i>unique</i> observable \(\hat{A}\) (sometimes, it's not so simple!).
+            </p>
+        </div>
+        
+    </body>
+</html>

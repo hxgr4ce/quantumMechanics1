@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>The Bridge Between Classical and Quantum Mechanics</title>
+        <link rel="stylesheet" href="style.css">
+        <!-- allow latex, inline equations go between \(\) 
+        and block equations go in \[\]-->
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </head>
+    <body>
+        <div class="mainContent">
+            <h1>The Bridge Between Classical and Quantum Mechanics</h1>
+            <p>
+                Say that we have a point mass moving in one dimension with mass \(m\) and position \(x\):
+                <div style="width:100%; text-align: center;">
+                    <svg style="width:200px; height:100px;">
+                        <line x1="25" y1="50" x2="175" y2="50" stroke="black" stroke-width="1" marker-end="url(#arrow)"></line> 
+                        <line x1="100" y1="50" x2="100" y2="60" stroke="black" stroke-width="1"></line> 
+                        <text x="96.5" y="70" font-size="15">x</text>
+                        <text x="94" y="40" font-size="15">m</text>
+                        <circle cx="100" cy="50" r="2" 
+                            fill="blue" 
+                            stroke="blue" 
+                            stroke-width="2" />
+                        <defs>
+                            <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto" markerUnits="strokeWidth">
+                                <path d="M0,0 L6,3 L0,6 Z" fill="black"></path>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+                \(x\in\mathbb{R}\), and since we can measure position, we know there must be an associated observable \(\hat{X}\) which is self-adjoint.
+                Since \(\hat{X}\) is self-adjoint, we know that it has as many eigenvalues as it does possible measured values.
+                \[\hat{X}|x\rangle=x|x\rangle, \sigma(\hat{X})=\mathbb{R}\tag{1}\]
+                This raises two obvious issues:
+                <ol>
+                    <li>The spectrum of \(\hat{X}\) is continuous</li>
+                    <li>The spectrum of \(\hat{X}\) is unbounded</li>
+                </ol>
+                This first issue leads us down the following rabbithole:
+                We can no longer say that:
+                \[\sum_x |x\rangle\langle x|=\hat{1}\]
+                because there is no discrete \(x\) to sum over. Instead, we have to say:
+                \[\hat{1}=\int_{-\infty}^{\infty} dx |x\rangle\langle x|\]
+                Clearly, the familiar \(|x\rangle\langle x|\) is no longer a projector, it is a <i>projector density</i>, \(\frac{d\hat{P}}{dt}\).
+                We also run into the following issue:
+                \[\begin{align}
+                    |\psi\rangle=\hat{1}|\psi\rangle &= \int_{-\infty}^{\infty} dx |x\rangle\langle x|\psi\rangle \\
+                    &= \int_{-\infty}^{\infty} dx |x\rangle\psi(x) \\
+                    \langle x|\psi\rangle &= \langle x|\hat{1}|\psi\rangle = \langle x|\int_{-\infty}^{\infty} dx' |x'\rangle\langle x'|\psi\rangle \\
+                    &= \int_{-\infty}^{\infty} dx' \langle x|x'\rangle\langle x'|\psi\rangle \\
+                \end{align}\]
+                (Note that here, we represent \(\langle x|\psi\rangle\) as \(\psi(x)\) which is the position-space <a href="qmDefs.html#wavefcn">wave function</a>.)
+                The only time that each part of this integral is not 0 is when \(x'=x\), so:
+                \[
+                    \langle x|\psi\rangle = \int_{-\infty}^{\infty} dx' \delta(x-x')\langle x'|\psi\rangle
+                \]
+                (Note that this is the <b>Dirac Delta</b>, not the Kroenecker Delta, since the integral of the Dirac Delta is 1. )
+                This indicates that \(\langle x|x\rangle=\delta(0)=\infty\), so \(|x\rangle\) is <i>not normalizable</i>.
+            </p>
+            <div class="mainContent">
+                In this situation, \(|x\rangle\) is not a ket that represents the state of quantum system, it is a <i>generalized eigenstate</i> which is used as a mathematical tool only.
+            </div>
+            <p>
+                The second issue leads us to the following conundrum:
+                The Hellinger-Toeplitz Theorem says that if an operator \(\hat{A}\) is defined on the whole Hilbert space, it is bounded.
+                <br><br>
+                As a corollary, if we know in advance that an operator \(\hat{A}]\) is unbounded, we know that <i>it is not defined on the whole Hilbert space</i>.
+            </p>
+            <div class="mainContent">
+                Some operators have a non-trivial domain.
+            </div>
+            <p>
+                Take, for example, our position operator \(\hat{X}\):
+                For some state \(|\psi\rangle\), we know that \(\langle\psi|\psi\rangle\lt\infty\).
+                Then:
+                \[
+                    \langle\psi|\hat{1}|\psi\rangle = \langle\psi|\int_{-\infty}^{\infty} dx|x\rangle\langle x|\psi\rangle = \int_{-\infty}^{\infty} dx\langle\psi|x\rangle\langle x|\psi\rangle = \int_{-\infty}^{\infty} dx|\psi(x)|^2 \lt \infty
+                \]
+                Which tells us that \(\psi(x)\in L^2(\mathbb{R})\), or the set of square-integrable functions (functions where \(\int_{-\infty}^{\infty} dx|f(x)|^2 \lt \infty\) is true).
+                This means that we have some functional \(\langle x |\) which has the following action:
+                \[\langle x |:H\to L^2(\mathbb{R}), |\psi\rangle \mapsto \langle x |\psi\rangle\tag{2}\]
+                Based on what we know about linear algebra, we also know that \(\langle x |\psi\rangle\) is the component of the state vector \(|\psi\rangle\) at some position (eigenvalue) \(x\), which corresponds to eigenstate \(|x\rangle\) of \(\hat{X}\) (see definition in (1)).
+                <br><br>
+                So, to be able to determine the position of a system in state \(|\psi\rangle\), we first need to <i>project it into the position basis</i>: \(\hat{X}|\psi\rangle\), then <i>check if it exists at a certain position</i>: \(\langle x|\hat{X}|\psi\rangle\).
+                <br><br>
+                This will only work if the result of \(\langle x|\hat{X}|\psi\rangle\) is a vector in \(L^2(\mathbb{R})\), since we know from (2) that \(\langle x|\) must map to \(L^2(\mathbb{R})\).
+                Let's take a look at what the general result of \(\langle x|\hat{X}|\psi\rangle\) is:
+                \[\begin{align}
+                    \langle x|\hat{X}|\psi\rangle &= \langle x | \hat{X} \int_{-\infty}^{\infty} dx' |x'\rangle\langle x'|\psi\rangle = \int_{-\infty}^{\infty} dx' \langle x | \hat{X} | x'\rangle\langle x'|\psi\rangle \\
+                    &= \int_{-\infty}^{\infty} dx' \langle x | (x'| x'\rangle)\psi(x') \\
+                    &= \int_{-\infty}^{\infty} dx' x'\langle x | x'\rangle\psi(x') = \int_{-\infty}^{\infty} dx' x'\delta(x-x')\psi(x') \\
+                    &= x\psi(x)
+                \end{align}\]
+                If \(\psi(x)=\frac{1}{\sqrt{(1+x^2)\pi}}\), we see that even though it is square-integrable, its result, \(\langle x|\hat{X}|\psi\rangle=x\psi(x)\) is not!
+                \[\begin{align}
+                    \int_{-\infty}^{\infty} dx |\psi(x)|^2 &= \frac{1}{\pi}\int_{-\infty}^{\infty} dx \frac{1}{1+x^2}=1 \\
+                    \int_{-\infty}^{\infty} dx |x\psi(x)|^2 &= \frac{1}{\pi}\int_{-\infty}^{\infty} dx \frac{x^2}{1+x^2}=\infty \\
+                \end{align}\]
+                The implications of this are as we stated above: not all operators have domains over the entire space; some have non-trivial domains.
+                In this case, the vector/wave function \(\psi(x)=\frac{1}{\sqrt{(1+x^2)\pi}}\) is not in the domain of \(\hat{X}\) (though, as you might have noticed, you can restrict the interval over which we integrate, and then get a finite value...).
+            </p>
+        </div>
+    </body>
+</html>

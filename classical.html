@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Classical Physics</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- allow latex, inline equations go between \(\) 
+    and block equations go in \[\]-->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="mainContent">
+        <h1>A Crash Course on Classical Lagrangian and Hamiltonian Mechanics</h1>
+        In undergraduate physics, you mostly stay in the realm of Netwonian physics, and may briefly touch on Lagrangian and Hamiltonian mechanics.
+        You study these more in depth in graduate school, but I quite haven't had the time to go to grad school for physics yet, so this will have to be good enough...
+        <h2>Newtonian Mechanics</h2>
+        The general process for Newtonian mechanics is to:
+        <ol>
+            <li>Describe all <b><i>forces</i></b> acting on an object.</li>
+            <li>Use \(\vec{F}=m\vec{a}\) to describe the acceleration, and by extension the velocity and position of the object over time.</li>
+        </ol>
+        For example, the motion of the bob on a pendulum as depicted below has acceleration \(\ddot\theta = -\frac{g}{l}sin\theta\).
+        (The two dots in \(\ddot\theta\) indicate that \(\theta\) is a function with respect to time, and \(\ddot\theta\) is the second derivative of this function.)
+        <div style="text-align: center; width:100%">
+            <svg style="width:110px; height: 110px">
+                <line x1="10" y1="10" x2="100" y2="10" stroke="black" stroke-width="1"/>
+                <line x1="80" y1="100" x2="55" y2="10" stroke="black" stroke-width="1"/>
+                <line x1="55" y1="100" x2="55" y2="10" stroke="orange" stroke-width="1"/>
+                <circle cx="80" cy="100" r="5" fill="blue" stroke="blue" stroke-width="2" />
+                <path d="M 55 40 C 58 40, 60 42, 62 35" stroke="gray" stroke-width="1" fill="none" />
+                <text x="30" y="35">θ</text>
+                <text x="80" y="70">l</text>
+                <text x="90" y="110">m</text>
+            </svg>
+        </div>
+        As you can imagine, \(\ddot\theta\) describes the acceleration of the bob over time.
+        <h2 id="lagra">Lagrangian Mechanics</h2>
+        <p>
+            The general process for Lagrangian mechanics is to:
+            <ol>
+                <li>
+                    Describe all <b><i>energies</i></b> corresponding to an object as the <b><i>Lagrangian</i></b>: 
+                    \[L=K-U\]
+                    where \(K\) is kinetic energy and \(U\) is potential energy.
+                </li>
+                <li>
+                    Use <b><i>the Euler-Lagrange equation</i></b> to obtain the equation of motion:
+                    \[\frac{d}{dt}\frac{\partial L}{\partial \dot{q}} = \frac{\partial L}{\partial q}\]
+                    where \(q\) is a singular coordinate (for example the position of a particle along the \(x\) axis, or the angle a pendulum makes with the vertical).
+                </li>
+            </ol>
+            In our pendulum example, say \(s\) is the arc length travelled by the bob from the vertical so that \(s = l\theta\).
+            (Note that \(\theta\) is a function of time \(t\)!!)
+            \(\dot{s}\) then represents the velocity of the bob at \(t\).
+            <br><br>
+            Also say that \(y=0\) is at the height of the pivot and anything below it is in the negative direction.
+            We can determine the Lagrangian by doing:
+            \[
+                \begin{align}
+                    K &= \frac{1}{2}m\vec{v^2}
+                    = \frac{1}{2}m\dot{s}^2 \\
+                    &= \frac{1}{2}ml^2\dot{\theta}^2 \\
+                    U &= -mglcos\theta \\
+                    L &= \frac{1}{2}ml^2\dot{\theta}^2 + mgl\cdot cos\theta
+                \end{align}
+            \]
+            Then the Euler-Lagrange equation for this particular situation is:
+            \[
+                \begin{align}
+                    ml^2\ddot\theta = -mgl\cdot sin\theta
+                \end{align}
+            \]
+            which, with a little rearranging, will recover the same equation of motion that we obtained before:
+            \[
+                \begin{align}
+                    ml^2\ddot\theta &= -mglsin\theta \\
+                    l\ddot\theta &= -gsin\theta \\
+                    \ddot\theta &= -\frac{g}{l}sin\theta
+                \end{align}
+            \]
+            Note that the Euler-Lagrange equation mirrors the Newtonian \(\vec{F}=m\vec{a}\): 
+            Generally, if \(L = \frac{1}{2} m \dot{q^2} - U(q)\), then \(\frac{\partial L}{\partial {q}} = -\frac{\partial U}{\partial q} = \vec{F}\).
+            Furthermore, \(\frac{\partial L}{\partial \dot{q}} = m\dot{q}, \frac{d}{dt}\frac{\partial L}{\partial \dot{q}} = m\ddot{q} = m\vec{a}\), so we end up with \(\vec{F}=m\vec{a}\) again.
+            The Euler-Lagrange equation simply generalizes this relationship so that it applies to any coordinate system.
+        </p>
+        <div class="mainContent">
+            \(\frac{\partial L}{\partial {q}}\) is the <i>generalized force</i> corresponding to coordinate \(q\).
+            <br>
+            \(\frac{\partial L}{\partial \dot{q}}\) is the (canonically conjugated) momentum corresponding to coordinate \(q\).
+        </div>
+        <p>
+            <h2>I talk about things I don't fully understand</h2>
+            Lagrangian mechanics is based on the "principle of stationary action". 
+            Say that a system has a coordinate \(q\) that changes with time.
+            Each section of the path that \(q\) traverses has an associated energy, and the system spends some amount of time in that section.
+            <br><br>
+            An action is defined then as:
+            \[S(q(t)) = \int L(q, \dot q, t) dt\]
+            (With units of \(\text{energy}\cdot\text{time}\)... The same as Planck's constant \(h\) and \(\hbar\)...)
+            <br><br>
+            In other words, for each path of coordinate \(q\) over time \(t\), there is an associated action \(S\) which describes how "costly" that path is, in terms of energy and time.
+            <br><br>
+            This principle says that a system will choose a path where, <i>even if the path varies slightly</i>, the action does not change.
+            So, the paths chosen have actions that are on extrema-- minimums, maximums, or saddle points-- of the action function.
+            <br><br>
+            Applying this concept to our above equation for \(S(q(t))\) is what yields the Euler-Lagrange equation.
+            <br><br>
+            This means that instead of the defining concept being "force causes acceleration" as in Newtonian mechanics, the defining concept is "motion abides by extremal action".
+        </p>
+        <h2 id="ham">Hamiltonian Mechanics</h2>
+        The general process for Hamiltonian mechanics is to:
+        <ol>
+            <li>
+                Describe all <b><i>energies</i></b> corresponding to an object as the <b><i>Hamiltonian</i></b>: 
+                \[H=p\dot{q}-L\]
+                where \(p\) is momentum and \(L\) is the Lagrangian. 
+                <br>
+                (Also, occasionally this will look like \(H=K+U\), or the total energy of the system!)
+            </li>
+            <li>
+                From \(p = \frac{\partial L}{\partial \dot{q}}\), you can write \(\dot{q}\) in terms of p, then plug this into the Hamiltonian-- you want the Hamiltonian to be in terms of variables \(p\) and \(\theta\).
+            </li>
+            <li>
+                Use <b><i>Hamilton's equations</i></b> to obtain the equations of motion:
+                \[
+                    \begin{align}
+                        \dot\theta &= \frac{\partial H}{\partial p} \\
+                        \dot p &= -\frac{\partial H}{\partial \theta}
+                    \end{align}
+                \]
+            </li>
+        </ol>
+        In our pendulum example, \(\frac{\partial L}{\partial \dot{q}} = p = ml^2\dot\theta\) which means that \(\dot\theta = \frac{p}{ml^2}\).
+        Thus the Hamiltonian is:
+        \[\begin{align}
+            H &= \frac{p^2}{ml^2} - \frac{1}{2}ml^2\dot{\theta}^2 - mgl\cdot cos\theta \\
+            &= \frac{p^2}{ml^2} - \frac{1}{2}ml^2\dot{\frac{p}{ml^2}}^2 - mgl\cdot cos\theta \\
+            &= \frac{p^2}{ml^2} - \frac{1}{2}\dot{\frac{p^2}{ml}} - mgl\cdot cos\theta \\
+            &= \frac{p^2}{2ml^2} - mgl\cdot cos\theta \\
+        \end{align}\]
+        and the resulting Hamilton equations are:
+        \[
+            \begin{align}
+                \dot\theta &= \frac{\partial H}{\partial p} = \frac{p}{ml^2} \\
+                \dot p &= -\frac{\partial H}{\partial \theta} = -mgl\cdot sin\theta
+            \end{align}
+        \]
+        From the first equation we can get an alternative expression for \(\dot p\), and then set this equal to the second equation:
+        \[
+            \begin{align}
+                \dot\theta &= \frac{\partial H}{\partial p} = \frac{p}{ml^2} \\
+                \ddot\theta &= \frac{\dot p}{ml^2} \\
+                \dot p &= ml^2\ddot\theta = -mgl\cdot sin\theta \\
+                l\ddot\theta &= -g\cdot sin\theta \\
+                \ddot\theta &= -\frac{g}{l}\cdot sin\theta
+            \end{align}
+        \]
+        <h2>I talk about things I don't fully understand again</h2>
+        Hamiltonian mechanics comes from the same principle of stationary action, though I'm not sure of the math behind it yet...
+        The Legendre Transform obtains the Hamiltonian from the Lagrangian, is all I know.
+        <br><br>
+        Hamiltonian mechanics also has the concept of "phase space": a two-dimensional space with the axes defining momentum and a coordinate \(q\).
+        <br><br>
+        A "flow" on this phase space is a path taken with varying coordinate \(q\) and momentum \(p\).
+        The energy at any point on a specific flow on a phase space is <i>constant</i>.
+        For example, these are some of the possible flows on a phase space for our pendulum example:
+        <img src="phasespace.png" style="width:100%">
+        Notice that the lines that do not connect in a complete loop are cases where the starting momentum is so high that the pendulum flips straight over its pivot and comes around on the other side!
+        <br><br>
+        In quantum mechanics, a function (or flow) on a phase space becomes the concept of operators on a state space, and in general, you'll see the Hamiltonian as an operator quite often.
+    </div>
+  </body>
+</html>
