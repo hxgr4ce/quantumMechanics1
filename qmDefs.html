@@ -24,7 +24,9 @@
                 <li><a href="#csco">Complete Sets of Commuting Observables</a></li>
                 <li><a href="#incompatibleObs">Incompatible Observables</a></li>
                 <li><a href="#heisenberg">Heisenberg Uncertainty Principle</a></li>
-                <li><a href="#unitary">Unitary Operators</a></li>
+                <li><a href="#poswavefcn">Position-Space Wave Functions</a></li>
+                <li><a href="#momwavefcn">Momentum-Space Wave Functions</a></li>
+                <li><a href="#ops">Position and Momentum Operators</a></li>
             </ul>
         </div>
       <h2 id="expectation">Expectation Value</h2>
@@ -214,7 +216,6 @@
         Angular momentum observables \([L_x\) and \(L_y\) also do not commute; \([L_x,L_y]=i\hbar L_z\), so the value on the right-hand side of our inequality <i>can</i> be 0, provided that \(L_z=0\).
         Indeed, \(\mid l,m\rangle=\mid0,0\rangle\) yields \(\sigma_{L_x}=\sigma_{L_y}=0\), but you can't do this for <i>all</i> eigenstates of these two observables.
       </p>
-      <h2 id="unitary">Unitary Operators</h2>
       <div class="mainContent">
         An operator \(U\) is unitary if \(UU^\dagger=U^\dagger U=\mathbb{I}\).
         \(U\) must be invertible and \(U^{-1}=U^\dagger\).
@@ -226,10 +227,112 @@
       <p>
         <u>Note</u>: For a more in-depth discussion of these properties, see <a href="unitary.html">Features of Unitary Transformations</a>.
       </p>
-    </div>
-    <h2 id="wavefcn">Wave Tunctions</h2>
-    <div class="mainContent">
-      position space, momentum space, \(\langle x|\psi\rangle\), (\(x\) is treated as a continuous variable, so \(\psi(x)\) is not a scalar, it's a vector) etc.
+      <h2 id="poswavefcn">Position-Space Wave Functions</h2>
+      <div class="mainContent">
+        A <i>position-space</i> wave function describes a system's position in time. 
+        <br><br>
+        Since a system can be in a superposition of multiple states, we have, in the past, written the state of a system as \(|\alpha\rangle=\sum_i c_i|i\rangle, c_i=\langle i|\alpha\rangle\).
+        Now we have a continuous set of possible positions, so we write 
+        \[|\alpha\rangle=\int dx |x\rangle\langle x|\alpha\rangle\tag{1}\]
+        instead, where \(|x\rangle\) are eigenstates of position operator \(\hat{x}\).
+        (In a dynamic system, \(|\alpha\rangle\) will evolve with time!)
+        <br><br>
+        The expression \(\langle x |\alpha\rangle\) is called the <i>position-space</i> wave function (or just wave function) for a specific state \(|\alpha\rangle\), and is often written as \(\psi_\alpha(x)\).
+        <br><br>
+        From (1) we can see that the <i>probability density</i> of finding the system at position \(x\) at time \(t\) is:
+        \[|\langle x|\alpha\rangle|^2 dx\]
+        for normalized \(|\alpha\rangle\) 
+        (else we would have to normalize ourselves. Recall Born's Rule from the <a href="qmPostulates.html">quantum postulates</a>).
+        That is, it is the probability that the system is at a position within a distance \(dx\) of position \(x\).
+        Clearly then, for normalized \(|\alpha\rangle\),
+        \[\int|\langle x|\alpha\rangle|^2 dx = \int \langle\alpha|x\rangle\langle x|\alpha\rangle dx = \hat{1}\langle\alpha|\alpha\rangle = 1\]
+      </div>
+      <p>
+        <u>Notes</u>:
+          <ul>
+            <li>When we say \(\langle x|\alpha\rangle\), \(x\) is <i>not</i> a specific value, but a variable, and the state \(|\alpha\rangle\) evolves over time, so \(\langle x|\alpha\rangle\) is not a scalar value even if \(x\) is fixed, it's a vector.</li>
+            <li>If we know what the state of a system is, sometimes we just say \(\psi(x)\) and \(\phi(p)\) instead of \(\psi_\alpha(x)\) and \(\phi_\alpha(p)\).</li>
+            <li>
+              Say we have two states \(|\alpha\rangle\) and \(|\beta\rangle\), and wave functions \(\psi_\alpha(x)=\langle x|\alpha\rangle\) and \(\psi_\beta(x)=\langle x|\beta\rangle\).
+              The <i>probability amplitude for a system in state \(|\alpha\rangle\) to be found in state \(|\beta\rangle\)</i> is:
+              \[
+                \langle\beta|\alpha\rangle
+                =\int dx\langle\beta|x\rangle\langle x|\alpha\rangle
+                =\int dx \psi_\beta^*(x)\psi_\alpha(x)
+              \]
+            </li>
+          </ul>
+      </p>
+      <h2 id="momwavefcn">Momentum-Space Wave Functions</h2>
+      <div class="mainContent">
+        As before, the state of a system \(|\alpha\rangle\) can be written as:
+        \[|\alpha\rangle=\int dp |p\rangle\langle p|\alpha\rangle\tag{1}\]
+        where \(|p\rangle\) are eigenstates of position operator \(\hat{p}\).
+        Instead of \(\psi\), \(\phi\) is used for the momentum-space wave function, and \(\langle p|\alpha\rangle\) can be written as \(\phi_\alpha(p)\).
+        <br><br>
+        Again, from (1) we can see that the <i>probability density</i> of observing that the system has momentum \(p\) at time \(t\) is:
+        \[|\langle p|\alpha\rangle|^2 dp\]
+        for normalized \(|\alpha\rangle\).
+        Then, for normalized \(|\alpha\rangle\),
+        \[\int|\langle p|\alpha\rangle|^2 dp = 1\]
+      </div>
+      <h2 id="ops">Position and Momentum Operators</h2>
+      <div class="mainContent">
+        Say we have a system in state \(|\alpha\rangle\). 
+        In the position basis: 
+        \[\hat{x}\psi(x) = x\psi(x) = x\langle x|\alpha\rangle\] 
+        and 
+        \[\hat{p}\psi(x) = -i\hbar\frac{d}{dx}\psi(x) = -i\hbar\frac{d}{dx}\langle x|\alpha\rangle\]
+        where measuring momentum of a system with position-space wave function \(\psi(x)\) projects the system into an eigenstate of momentum, and yields another function that varies with \(x\).
+        Essentially this tells us that a single momentum eigenstate corresponds with many position eigenstates.
+        <br><br>
+        Finally, of course,
+        \[[\hat{x},\hat{p}]=i\hbar\]
+        <hr>
+        If we want to change bases from position-space to momentum-space, we can use:
+        \[\begin{align}
+          \psi_\alpha(x) &= \frac{1}{\sqrt{2\pi\hbar}} \int dp \text{ } exp[\frac{ipx}{\hbar}] \phi_\alpha(p) \\
+          \phi_\alpha(x) &= \frac{1}{\sqrt{2\pi\hbar}} \int dx \text{ } exp[\frac{-ipx}{\hbar}] \psi_\alpha(p)
+        \end{align}\]
+        or, in three dimensions:
+        \[\begin{align}
+          \psi_\alpha(\vec{x}) &= \frac{1}{2\pi\hbar^{3/2}} \int d^3p \text{ } exp[\frac{i\vec{p}\cdot\vec{x}}{\hbar}] \phi_\alpha(\vec{p}) \\
+          \phi_\alpha(\vec{p}) &= \frac{1}{\sqrt{2\pi\hbar}} \int d^3x \text{ } exp[\frac{-i\vec{p}\cdot\vec{x}}{\hbar}] \psi_\alpha(\vec{x})
+        \end{align}\]
+        where \(\vec{x}\) and \(\vec{p}\) are vectors \((x_i, x_j, x_k)\) and \((p_i, p_j, p_k)\) respectively.
+      </div>
+      <p>
+        <u>Note</u>:
+        To derive the equations above: We can use a matrix/operator just like we do for two arbitrary bases.
+        <br><br>
+        In this case, our transformation function is \(\langle x|p\rangle\), which is the probability amplitude of a system in momentum eigenstate \(|p\rangle\) being found at position \(x\).
+        <br><br>
+        What is \(\langle x|p\rangle\)? 
+        Say that we are in state \(|p\rangle\), so our position-space wave function is \(\langle x|p \rangle\).
+        Then:
+        \[\begin{align}
+          \hat{p}\langle x|p\rangle &= -i\hbar\frac{d}{dx}\langle x|p\rangle \\
+          \hat{p}\langle x|p\rangle &= \langle x|p|p\rangle = p\langle x|p\rangle \\
+          p\langle x|p\rangle &= -i\hbar \frac{d}{dx}\langle x|p\rangle
+        \end{align}\]
+        where the solution to this final line is:
+        \[\langle x|p\rangle = N e^{\frac{ipx}{\hbar}}\]
+        where \(N\) is a normalization constant \(\frac{1}{\sqrt{2\pi\hbar}}\).
+        With this information in hand, we can say that for an arbitrary state \(|\alpha\rangle\):
+        \[\begin{align}
+          \psi_\alpha(x) = \langle x|\alpha\rangle &= \int dp\langle x|p\rangle\langle p|\alpha\rangle \\
+          &= \int dp\langle x|p\rangle \phi_\alpha(p) \\
+          &= \int dp \frac{1}{\sqrt{2\pi\hbar}}e^{\frac{ipx}{\hbar}} \phi_\alpha(p) \\
+          \psi_\alpha(x) &= \frac{1}{\sqrt{2\pi\hbar}} \int dp \text{ } e^{\frac{ipx}{\hbar}} \phi_\alpha(p) \\
+        \end{align}\]
+        and
+        \[\begin{align}
+          \phi_\alpha(p) = \langle p|\alpha\rangle &= \int dx\langle p|x\rangle\langle x|\alpha\rangle \\
+          &= \int dx \langle x|p\rangle \psi_\alpha(p) \\
+          &= \int dx \frac{1}{\sqrt{2\pi\hbar}}e^{-\frac{ipx}{\hbar}} \psi_\alpha(p) \\
+          \phi_\alpha(x) &= \frac{1}{\sqrt{2\pi\hbar}} \int dx \text{ } e^{\frac{-ipx}{\hbar}} \psi_\alpha(p) \\
+        \end{align}\]
+      </p>
     </div>
     <footer class="fixed-footer">
       <a href="#top">↑</a>

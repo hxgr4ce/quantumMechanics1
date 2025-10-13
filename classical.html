@@ -126,8 +126,8 @@
                 Use <b><i>Hamilton's equations</i></b> to obtain the equations of motion:
                 \[
                     \begin{align}
-                        \dot\theta &= \frac{\partial H}{\partial p} \\
-                        \dot p &= -\frac{\partial H}{\partial \theta}
+                        \dot q &= \frac{\partial H}{\partial p} \\
+                        \dot p &= -\frac{\partial H}{\partial q}
                     \end{align}
                 \]
             </li>
@@ -161,15 +161,40 @@
         Hamiltonian mechanics comes from the same principle of stationary action, though I'm not sure of the math behind it yet...
         The Legendre Transform obtains the Hamiltonian from the Lagrangian, is all I know.
         <br><br>
-        Hamiltonian mechanics also has the concept of "phase space": a two-dimensional space with the axes defining momentum and a coordinate \(q\).
+        Hamiltonian mechanics also has the concept of "phase space": a two-dimensional space with the axes defining momentum \(p\) and a coordinate \(q\).
         <br><br>
-        A "flow" on this phase space is a path taken with varying coordinate \(q\) and momentum \(p\).
+        A "flow" on this phase space is a path taken through this space.
         The energy at any point on a specific flow on a phase space is <i>constant</i>.
         For example, these are some of the possible flows on a phase space for our pendulum example:
         <img src="phasespace.png" style="width:100%">
         Notice that the lines that do not connect in a complete loop are cases where the starting momentum is so high that the pendulum flips straight over its pivot and comes around on the other side!
+        <!-- <br><br>
+        In quantum mechanics, a function (or flow) on a phase space becomes the concept of operators on a state space, and in general, you'll see the Hamiltonian as an operator quite often. -->
+        <h2>Canonical Transformations</h2>
+        A canonical transformation is a change of variables \(\) in phase space so that Hamilton's Equations still hold:
+        \[\begin{align}
+            (q, p) &\mapsto (q', p') \\
+            \dot q &= \frac{\partial H}{\partial p}, \dot p = -\frac{\partial H}{\partial q} \\
+            \dot q' &= \frac{\partial H'}{\partial p'}, \dot p' = -\frac{\partial H'}{\partial q'}
+        \end{align}\]
+        For example, keeping the coordinate \(q\) the same, and momentum is shifted based on coordinate \(q\):
+        \(q'=q, p=p+f(q)\).
         <br><br>
-        In quantum mechanics, a function (or flow) on a phase space becomes the concept of operators on a state space, and in general, you'll see the Hamiltonian as an operator quite often.
+        A canonical transformation must preserve Poisson brackets, meaning that
+        \[
+            \{q_i, q_j\}=0, \{p_i, p_j\}=0, \{q_i, p_j\}=\delta_{ij}
+        \]
+        <div class="mainContent">
+            For two functions \(f(q,p,t)\) and \(g(q,p,t)\) in an n-dimensional phase space, the Poisson bracket is:
+            \[\{f,g\} = [f,g]_{P.B.}=\sum^n_{i=1}(\frac{\partial f}{\partial q}\frac{\partial g}{\partial p}-\frac{\partial f}{\partial p}\frac{\partial g}{\partial q})\]
+            It has the following properties:
+            <ul>
+                <li>Antisymmetric: \(\{f,g\}=-\{g,f\}\)</li>
+                <li>Linear: \(\{af+bg,h\}=a\{f,h\}+b\{g,h\}\)</li>
+                <li>\(\{f,\{g,h\}\} + \{g,\{h,f\}\} + \{h,\{f,g\}\} = 0\)</li>
+                <li>\(\{fg,h\} = f\{g,h\} + g\{f,h\}\)</li>
+            </ul>
+        </div>
     </div>
   </body>
 </html>
