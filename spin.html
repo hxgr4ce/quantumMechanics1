@@ -117,8 +117,8 @@
             Clearly, we need \(e^{i\theta_-}=-1\). According to Euler's formula we can say that 
             \[
                 \begin{align}
-                    e^{i\theta_-} &= cos(\theta_-)+isin(\theta_-) \\
-                    \theta_-=\pi, e^{i\theta_-} &= cos(\pi)+isin(\pi) \\
+                    e^{i\theta_-} &= \cos(\theta_-)+i\sin(\theta_-) \\
+                    \theta_-=\pi, e^{i\theta_-} &= \cos(\pi)+i\sin(\pi) \\
                     &= -1+0 \\
                     &= -1
                 \end{align}
@@ -174,19 +174,19 @@
                     &= \frac{1}{4} (1 \pm e^{i\delta_-})(1 \pm e^{-i\delta_-}) \\
                     &= \frac{1}{4} (1 \pm (e^{i\delta_-}+e^{-i\delta_-}) + 1) \\
                     &= \frac{1}{4} (2 \pm (e^{i\delta_-}+e^{-i\delta_-})) \\
-                    &= \frac{1}{4} (2 \pm (cos(\delta_-)+isin(\delta_-)+cos(\delta_-)-isin(\delta_-))) \\
-                    &= \frac{1}{4} (2 \pm 2cos(\delta_-)) \\
-                    &= \frac{1}{2} \pm \frac{1}{2}cos(\delta_-) \\
+                    &= \frac{1}{4} (2 \pm (\cos(\delta_-)+i\sin(\delta_-)+\cos(\delta_-)-i\sin(\delta_-))) \\
+                    &= \frac{1}{4} (2 \pm 2\cos(\delta_-)) \\
+                    &= \frac{1}{2} \pm \frac{1}{2}\cos(\delta_-) \\
                 \end{align}
             \]
-            Clearly, we need \(\frac{1}{2}cos(\delta_-)=0\), which means we can pick \(\delta_-=\frac{\pi}{2}\).
+            Clearly, we need \(\frac{1}{2}\cos(\delta_-)=0\), which means we can pick \(\delta_-=\frac{\pi}{2}\).
             Plugging this back into our initial representation of \(\mid S_y,\pm\rangle\):
             \[\begin{align}
                 \mid S_y,\pm\rangle &= \frac{1}{\sqrt2}\mid+\rangle\pm\frac{1}{\sqrt2}e^{i\delta_-}\mid-\rangle \\
                 &= \frac{1}{\sqrt2}\mid+\rangle\pm\frac{1}{\sqrt2}e^{i\frac{\pi}{2}}\mid-\rangle \\
                 &= \frac{1}{\sqrt2}\mid+\rangle\pm\frac{1}{\sqrt2}i\mid-\rangle \\
             \end{align}\]
-            because \(e^{i\frac{\pi}{2}}=cos(\frac{\pi}{2})+isin(\frac{\pi}{2})=0+i=i\).
+            because \(e^{i\frac{\pi}{2}}=\cos(\frac{\pi}{2})+i\sin(\frac{\pi}{2})=0+i=i\).
             Now we can write 
             \[\mid S_y,\pm\rangle = \frac{\mid+\rangle\pm i\mid-\rangle}{\sqrt2}\]
             Note that <i>because</i> we define the eigenvalues and eigenvectors of \(S_x\) (and \(S_z\), since we could have done the above derivation with \(\mid\langle S_z, +\mid S_y, \pm\rangle\mid^2\) instead...) to be real, the eigenvectors of \(S_y\) are imaginary.

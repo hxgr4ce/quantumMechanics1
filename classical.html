@@ -21,7 +21,8 @@
             <li>Describe all <b><i>forces</i></b> acting on an object.</li>
             <li>Use \(\vec{F}=m\vec{a}\) to describe the acceleration, and by extension the velocity and position of the object over time.</li>
         </ol>
-        For example, the motion of the bob on a pendulum as depicted below has acceleration \(\ddot\theta = -\frac{g}{l}sin\theta\).
+        <b><i>Example</i></b>. 
+        The motion of the bob on a pendulum as depicted below has acceleration \(\ddot\theta = -\frac{g}{l}sin\theta\).
         (The two dots in \(\ddot\theta\) indicate that \(\theta\) is a function with respect to time, and \(\ddot\theta\) is the second derivative of this function.)
         <div style="text-align: center; width:100%">
             <svg style="width:110px; height: 110px">
@@ -51,7 +52,8 @@
                     where \(q\) is a singular coordinate (for example the position of a particle along the \(x\) axis, or the angle a pendulum makes with the vertical).
                 </li>
             </ol>
-            In our pendulum example, say \(s\) is the arc length travelled by the bob from the vertical so that \(s = l\theta\).
+            <b><i>Example continued</i></b>. 
+            Say \(s\) is the arc length travelled by the bob from the vertical so that \(s = l\theta\).
             (Note that \(\theta\) is a function of time \(t\)!!)
             \(\dot{s}\) then represents the velocity of the bob at \(t\).
             <br><br>
@@ -86,28 +88,30 @@
             The Euler-Lagrange equation simply generalizes this relationship so that it applies to any coordinate system.
         </p>
         <div class="mainContent">
-            \(\frac{\partial L}{\partial {q}}\) is the <i>generalized force</i> corresponding to coordinate \(q\).
+            \(\frac{\partial L}{\partial \dot{q}}=m\dot q=p\) is the (canonically conjugated) momentum corresponding to coordinate \(q\).
             <br>
-            \(\frac{\partial L}{\partial \dot{q}}\) is the (canonically conjugated) momentum corresponding to coordinate \(q\).
+            \(\frac{\partial L}{\partial {q}} = \vec{F} = m\ddot{q} = \dot p\) is the <i>generalized force</i> corresponding to coordinate \(q\).
         </div>
         <p>
-            <h2>I talk about things I don't fully understand</h2>
-            Lagrangian mechanics is based on the "principle of stationary action". 
-            Say that a system has a coordinate \(q\) that changes with time.
-            Each section of the path that \(q\) traverses has an associated energy, and the system spends some amount of time in that section.
-            <br><br>
-            An action is defined then as:
-            \[S(q(t)) = \int L(q, \dot q, t) dt\]
-            (With units of \(\text{energy}\cdot\text{time}\)... The same as Planck's constant \(h\) and \(\hbar\)...)
-            <br><br>
-            In other words, for each path of coordinate \(q\) over time \(t\), there is an associated action \(S\) which describes how "costly" that path is, in terms of energy and time.
-            <br><br>
-            This principle says that a system will choose a path where, <i>even if the path varies slightly</i>, the action does not change.
-            So, the paths chosen have actions that are on extrema-- minimums, maximums, or saddle points-- of the action function.
-            <br><br>
-            Applying this concept to our above equation for \(S(q(t))\) is what yields the Euler-Lagrange equation.
-            <br><br>
-            This means that instead of the defining concept being "force causes acceleration" as in Newtonian mechanics, the defining concept is "motion abides by extremal action".
+            <details>
+                <summary><b><i>I talk about things I don't fully understand</i></b></summary>
+                Lagrangian mechanics is based on the "principle of stationary action". 
+                Say that a system has a coordinate \(q\) that changes with time.
+                Each section of the path that \(q\) traverses has an associated energy, and the system spends some amount of time in that section.
+                <br><br>
+                An action is defined then as:
+                \[S(q(t)) = \int L(q, \dot q, t) dt\]
+                (With units of \(\text{energy}\cdot\text{time}\)... The same as Planck's constant \(h\) and \(\hbar\)...)
+                <br><br>
+                In other words, for each path of coordinate \(q\) over time \(t\), there is an associated action \(S\) which describes how "costly" that path is, in terms of energy and time.
+                <br><br>
+                This principle says that a system will choose a path where, <i>even if the path varies slightly</i>, the action does not change.
+                So, the paths chosen have actions that are on extrema-- minimums, maximums, or saddle points-- of the action function.
+                <br><br>
+                Applying this concept to our above equation for \(S(q(t))\) is what yields the Euler-Lagrange equation.
+                <!-- <br><br>
+                This means that instead of the defining concept being "force causes acceleration" as in Newtonian mechanics, the defining concept is "motion abides by extremal action". -->
+            </details>
         </p>
         <h2 id="ham">Hamiltonian Mechanics</h2>
         The general process for Hamiltonian mechanics is to:
@@ -123,7 +127,7 @@
                 From \(p = \frac{\partial L}{\partial \dot{q}}\), you can write \(\dot{q}\) in terms of p, then plug this into the Hamiltonian-- you want the Hamiltonian to be in terms of variables \(p\) and \(\theta\).
             </li>
             <li>
-                Use <b><i>Hamilton's equations</i></b> to obtain the equations of motion:
+                Use <b><i>Hamilton's equations/canonical equations of motion</i></b> to obtain the equations of motion:
                 \[
                     \begin{align}
                         \dot q &= \frac{\partial H}{\partial p} \\
@@ -132,7 +136,21 @@
                 \]
             </li>
         </ol>
-        In our pendulum example, \(\frac{\partial L}{\partial \dot{q}} = p = ml^2\dot\theta\) which means that \(\dot\theta = \frac{p}{ml^2}\).
+        <b><i>Obtaining the equations of motion</i></b>.
+        In general, for any function \(H\) of two variables (in our case, \(p\) and \(q\)), 
+        \[dH = \frac{\partial H}{\partial q}dq+\frac{\partial H}{\partial p}dp\]
+        and from our definition:
+        \[\begin{align}
+            H &= p\dot{q}(q, p)-L(q, \dot q(q,p)) \\
+            dH &= (\frac{\partial\dot q}{\partial q}+\frac{\partial \dot q}{\partial p})p + \dot q dp - \frac{\partial L}{\partial q}dq - \frac{\partial L}{\partial \dot q}(\frac{\partial \dot q}{\partial q}dq + \frac{\partial \dot q}{\partial p}dp) \\
+            &= (\frac{\partial\dot q}{\partial q}+\frac{\partial \dot q}{\partial p})p + \dot q dp - \dot p dq - p(\frac{\partial \dot q}{\partial q}dq + \frac{\partial \dot q}{\partial p}dp) \\
+            &= \dot q dp - \dot p dq \\
+            &= \frac{\partial H}{\partial q}dq+\frac{\partial H}{\partial p}dp
+        \end{align}\]
+        after which our equations of motion become apparent.
+        <br><br>
+        <b><i>Example continued</i></b>. 
+        For our pendulum, \(\frac{\partial L}{\partial \dot{q}} = p = ml^2\dot\theta\) which means that \(\dot\theta = \frac{p}{ml^2}\).
         Thus the Hamiltonian is:
         \[\begin{align}
             H &= \frac{p^2}{ml^2} - \frac{1}{2}ml^2\dot{\theta}^2 - mgl\cdot cos\theta \\
@@ -157,44 +175,332 @@
                 \ddot\theta &= -\frac{g}{l}\cdot sin\theta
             \end{align}
         \]
-        <h2>I talk about things I don't fully understand again</h2>
-        Hamiltonian mechanics comes from the same principle of stationary action, though I'm not sure of the math behind it yet...
-        The Legendre Transform obtains the Hamiltonian from the Lagrangian, is all I know.
-        <br><br>
-        Hamiltonian mechanics also has the concept of "phase space": a two-dimensional space with the axes defining momentum \(p\) and a coordinate \(q\).
-        <br><br>
-        A "flow" on this phase space is a path taken through this space.
-        The energy at any point on a specific flow on a phase space is <i>constant</i>.
-        For example, these are some of the possible flows on a phase space for our pendulum example:
-        <img src="phasespace.png" style="width:100%">
-        Notice that the lines that do not connect in a complete loop are cases where the starting momentum is so high that the pendulum flips straight over its pivot and comes around on the other side!
+        <details>
+            <summary><b><i>I talk about things I don't fully understand again</i></b></summary>
+            Hamiltonian mechanics comes from the same principle of stationary action, though I'm not sure of the math behind it yet...
+            The Legendre Transform obtains the Hamiltonian from the Lagrangian, is all I know.
+            <br><br>
+            Hamiltonian mechanics also has the concept of "phase space": a two-dimensional space with the axes defining momentum \(p\) and a coordinate \(q\).
+            <br><br>
+            A "flow" on this phase space is a path taken through this space.
+            The energy at any point on a specific flow on a phase space is <i>constant</i>.
+            For example, these are some of the possible flows on a phase space for our pendulum example:
+            <img src="phasespace.png" style="width:100%">
+            Notice that the lines that do not connect in a complete loop are cases where the starting momentum is so high that the pendulum flips straight over its pivot and comes around on the other side!
+        </details>
         <!-- <br><br>
         In quantum mechanics, a function (or flow) on a phase space becomes the concept of operators on a state space, and in general, you'll see the Hamiltonian as an operator quite often. -->
-        <h2>Canonical Transformations</h2>
-        A canonical transformation is a change of variables \(\) in phase space so that Hamilton's Equations still hold:
-        \[\begin{align}
-            (q, p) &\mapsto (q', p') \\
-            \dot q &= \frac{\partial H}{\partial p}, \dot p = -\frac{\partial H}{\partial q} \\
-            \dot q' &= \frac{\partial H'}{\partial p'}, \dot p' = -\frac{\partial H'}{\partial q'}
-        \end{align}\]
-        For example, keeping the coordinate \(q\) the same, and momentum is shifted based on coordinate \(q\):
-        \(q'=q, p=p+f(q)\).
-        <br><br>
-        A canonical transformation must preserve Poisson brackets, meaning that
-        \[
-            \{q_i, q_j\}=0, \{p_i, p_j\}=0, \{q_i, p_j\}=\delta_{ij}
-        \]
+        <h2>Poisson Brackets</h2>
         <div class="mainContent">
             For two functions \(f(q,p,t)\) and \(g(q,p,t)\) in an n-dimensional phase space, the Poisson bracket is:
-            \[\{f,g\} = [f,g]_{P.B.}=\sum^n_{i=1}(\frac{\partial f}{\partial q}\frac{\partial g}{\partial p}-\frac{\partial f}{\partial p}\frac{\partial g}{\partial q})\]
-            It has the following properties:
+            \[\{f,g\} = [f,g]_{P.B.}=\sum^n_{i=1}(\frac{\partial f}{\partial q_i}\frac{\partial g}{\partial p_i}-\frac{\partial f}{\partial p_i}\frac{\partial g}{\partial q_i})\]
+            The Poisson bracket has the following properties:
             <ul>
-                <li>Antisymmetric: \(\{f,g\}=-\{g,f\}\)</li>
+                <li>
+                    Antisymmetric: \(\{f,g\}=-\{g,f\}\)
+                    <br>
+                    so, \(\{f,f\}=0\)
+                </li>
                 <li>Linear: \(\{af+bg,h\}=a\{f,h\}+b\{g,h\}\)</li>
                 <li>\(\{f,\{g,h\}\} + \{g,\{h,f\}\} + \{h,\{f,g\}\} = 0\)</li>
                 <li>\(\{fg,h\} = f\{g,h\} + g\{f,h\}\)</li>
             </ul>
+            The <i>canonical</i> Poisson bracket further has the properties, for canonical coordinates \((q_i,p_i)\):
+            <ul>
+                <li>\(\{q_i,q_j\}, \{p_i,p_j\}=0\)</li>
+                <li>\(\{q_i,p_j\}=\delta_{ij}\)</li>
+            </ul>
+            which, as it turns out, are the same properties that the commutator in quantum mechanics has...
         </div>
+        <p>
+            Since (at least in this course) we always pick generalized coordinate \(q\) so that the Hamiltonian represents total energy, we're working in canonical coordinates, so all our Poisson Brackets are canonical...
+            <br><br>
+            <b><i>Obtaining the Poisson Bracket</i></b>.
+            In general, the first order Taylor Expansion tells is that
+            \[
+                \frac{df(x)}{dx}=g(x) \longleftrightarrow f(x+dx) = f(x)+dxg(x)+o(dx^2)
+            \]
+            Say that we have coordinate \(q\) and momentum \(p\), which change over an infinitesimally small time interval \(dt\) according to functions \(q(t)\) and \(p(t)\):
+            \[\begin{align}
+                \begin{cases}
+                q=q(t) \mapsto q' =q(t+dt) \\
+                p=p(t) \mapsto p' =p(t+dt)
+                \end{cases}
+            \end{align}\]
+            then we can write \(q(t+dt)\) and \(p(t+dt)\), for example:
+            \[\begin{align}
+                f(x+dx) &= f(x)+dxg(x)+o(dx^2) \\
+                q(t+dt) &= q(t)+dt\frac{dq(t)}{dt} + o(dt^2) \\
+                &= q(t)+dt\dot q + o(dt^2) \\
+                &= q(t)+dt\frac{\partial H}{\partial p} + o(dt^2) \\
+            \end{align}\] 
+            (using Hamilton's equations of motion for the last step), which allows to say
+            \[\begin{align}
+                \begin{cases}
+                q \mapsto q' = q + dt\frac{\partial H}{\partial p} + o(dt^2) \\
+                p \mapsto p' = p - dt\frac{\partial H}{\partial q} + o(dt^2)
+                \end{cases}
+            \end{align}\]
+            Say that we have some other function of \(q\) and \(p\), \(A\).
+            Over time, \(A(q,p)\mapsto A(q',p') = A(q+dt\frac{\partial H}{\partial p}, p-dt\frac{\partial H}{\partial q})\).
+            We can use the same expansion as before:
+            \[\begin{align}
+                A(q',p') &= A(q(t+dt), p(t+dt)) = A(q(t),p(t))+dt\frac{dA}{dt} + o(dt^2)
+            \end{align}\]
+            We use the same concept as before; since \(A\) is a function of \(q\) and \(p\), we can say that 
+            \[\begin{align}
+                dA &= \frac{\partial A}{\partial q}dq+\frac{\partial A}{\partial p}dp  \\
+                \frac{dA}{dt} &= \frac{\partial A}{\partial q}\frac{dq}{dt}+\frac{\partial A}{\partial p}\frac{dp}{dt} \\
+                &= \frac{\partial A}{\partial q}\dot q+\frac{\partial A}{\partial p}\dot p \\
+                &= \frac{\partial A}{\partial q}\frac{\partial H}{\partial p}-\frac{\partial A}{\partial p}\frac{\partial H}{\partial q}
+            \end{align}\]
+            or, when taking the arguments into account:
+            \[\begin{align}
+                \frac{dA}{dt} &= \frac{\partial A}{\partial q}(q, p-dt\frac{\partial H}{\partial q})\frac{\partial H}{\partial P}-\frac{\partial H}{\partial q}\frac{\partial A}{\partial p}(q+dt\frac{\partial H}{\partial p},p)
+            \end{align}\]
+            However, if we only care about the orders lower than \(dt^2\),
+            \[\frac{\partial A}{\partial q}\frac{\partial H}{\partial p}-\frac{\partial A}{\partial p}\frac{\partial H}{\partial q}\]
+            is just fine.
+            Then, we have:
+            \[\begin{align}
+                A(q',p') &= A(q(t),p(t))+dt\frac{dA}{dt} + o(dt^2) \\
+                &= A(q,p)+dt(\frac{\partial A}{\partial q}\frac{\partial H}{\partial p}-\frac{\partial A}{\partial p}\frac{\partial H}{\partial q}) + o(dt^2) \\
+                &\approx A(q,p)+dt(\frac{\partial A}{\partial q}\frac{\partial H}{\partial p}-\frac{\partial A}{\partial p}\frac{\partial H}{\partial q})
+            \end{align}\]
+            Note how this is in the form \(f(x)+dxg(x)+o(dx^2)\). 
+            In our case, the "\(g(x)\)" is really \(\frac{\partial A}{\partial q}\frac{\partial H}{\partial p}-\frac{\partial A}{\partial p}\frac{\partial H}{\partial q}\), which, as it turns out, is the Poisson bracket (in one degree of freedom):
+            \[
+                \frac{\partial A}{\partial q}\frac{\partial H}{\partial p}-\frac{\partial A}{\partial p}\frac{\partial H}{\partial q} = \{A,H\}_{P.B.}
+            \]
+            Thus we can say that (in this case) the Poisson bracket is the change in some state described by \(A(q(t),p(t))\), over a small unit of time, according to some generating function \(H\).
+            <br><br>
+            <b><i>Implications of the canonical Poisson Bracket</i></b>.
+            We can now define a <i>canonical transformation</i>.
+            Take our transformation
+            \[\begin{align}
+                \begin{cases}
+                q \mapsto q' = q + dt\frac{\partial H}{\partial p} + o(dt^2) \\
+                p \mapsto p' = p - dt\frac{\partial H}{\partial q} + o(dt^2)
+                \end{cases}
+            \end{align}\]
+            Clearly, \(\{q,p\}\) is a canonical Poisson bracket:
+            \[\begin{align}
+                \{q_j,p_j\}
+                &= \sum^n_{i=1}(\frac{\partial q_j}{\partial q_i}\frac{\partial p_j}{\partial p_i}-\frac{\partial q_j}{\partial p_i}\frac{\partial p_j}{\partial q_i}) \\
+                &= \frac{\partial q_j}{\partial q_j}\frac{\partial p_j}{\partial p_j}-0 = 1 \\
+                \{q_j,p_k\}
+                &= \sum^1_{i=1}(\frac{\partial q_j}{\partial q_i}\frac{\partial p_k}{\partial p_i}-\frac{\partial q_j}{\partial p_i}\frac{\partial p_k}{\partial q_i}) \\
+                &= 0 \\
+                \{q_j,q_k\}
+                &= \sum^n_{i=1}(\frac{\partial q_j}{\partial q_i}
+                \frac{\partial q_k}{\partial p_i}
+                -\frac{\partial q_j}{\partial p_i}
+                \frac{\partial q_k}{\partial q_i}) \\
+                &= 0
+
+            \end{align}\]
+            After transformation over some small \(dt\), \(\{q,p\}\) becomes \(\{q',p'\}\). 
+            Is \(\{q',p'\}\) still a canonical Poisson bracket?
+            Using the first order Taylor expansion:
+            \[\begin{align}
+                \{q',p'\} &= \{q+dt\partial_p H + o(dt^2), p-dt\partial_qH + o(dt^2)\} \\
+                &= \{q,p\} + dt(\{\partial_pH,p\}-\{q,\partial_qH\}) + o(dt^2) \\
+                &= \{q,p\} + dt(\frac{\partial^2H}{\partial q\partial p}\frac{\partial p}{\partial p}-\frac{\partial^2H}{\partial p^2}\frac{\partial p}{\partial q} \\
+                &- \frac{\partial^2H}{\partial p\partial q}\frac{\partial q}{\partial q}-\frac{\partial^2H}{\partial q^2}\frac{\partial q}{\partial p}) + o(dt^2) \\
+                &= \{q,p\} + dt(\frac{\partial^2H}{\partial q\partial p}\cdot1-0 - \frac{\partial^2H}{\partial p\partial q}\cdot1-0) + o(dt^2) \\
+                &= \{q,p\} + dt(0) + o(dt^2) \\
+                &\approx \{q,p\}
+            \end{align}\] 
+            (Note that in order to say that \(\frac{\partial^2H}{\partial q\partial p} - \frac{\partial^2H}{\partial p\partial q} =0\), we assume \(H\) is continuous).
+            <br><br>
+            This means that the transformation that takes place over infinitesimally small spans of time, or as we call it, "infinitesimal time translation" or "Hamiltonian flow" <i>preserves the canonical Poisson Bracket</i>.
+            <br><br>
+            Not only that, but <i>this transformation preserves the canonical equations of motion</i>.
+            For every infinitesimal time translation:
+            \[\begin{align}
+                \begin{cases}
+                q \to Q(q,p) \\
+                p \to P(q,p)
+                \end{cases}
+            \end{align}\]
+            we know that \(\{Q, P\}=\{q,p\}\), and since \(\{q,p\}\) is a canonical Poisson bracket, \(\{Q, P\}\) is a canonical Poisson bracket as well:
+            \[
+                \{Q_i,P_j\} = \{q_i,p_j\} = \delta_{ij}, \{Q_i,Q_j\}=\{P_i,P_j\}=0
+            \]
+            We can also define a new Hamiltonian (let's call it \(K\)) for this particular set of coordinates by writing the original \(q\) and \(p\) in terms of \(Q\) and \(P\):
+            \[
+                K(Q,P) = H(q(Q,P), p(Q,P)) \mid \dot Q_i = \partial_{P_i}K, \dot P_i = -\partial_{Q_i}K
+            \]
+        </p>
+
+        <h2>Canonical Transformations</h2>
+        <p>
+            Now we know that a canonical transformation is a change of variables \(q,p\) in phase space so that the canonical equations of motion still hold:
+            \[\begin{align}
+                (q, p) &\mapsto (q', p') \\
+                \dot q &= \frac{\partial H}{\partial p}, \dot p = -\frac{\partial H}{\partial q} \\
+                \dot q' &= \frac{\partial H'}{\partial p'}, \dot p' = -\frac{\partial H'}{\partial q'}
+            \end{align}\]
+            and a canonical transformation must preserve canonical Poisson brackets, meaning that
+            \[
+                \{q_i, q_j\}=0, \{p_i, p_j\}=0, \{q_i, p_j\}=\delta_{ij}
+            \]
+            So far we have worked closely with our infinitesimal time translations.
+            We can really generalize to some function \(G\), not specifically \(H\), and over any \(d\alpha\), not just specifically \(dt\).
+            (As long as \(\partial_pG=\dot q, -\partial_qG=\dot p\), of course)
+        </p>
+        <div class="mainContent">
+            The geneneric infinitesimal transformation is:
+            \[\begin{cases}
+                q \mapsto q' = q + d\alpha \frac{\partial G(q,p)}{\partial p} \\
+                p \mapsto p' = p - d\alpha \frac{\partial G(q,p)}{\partial q}
+            \end{cases}\]
+            where \(G(q,p)\) is what we call the infinitesimal generator of the canonical transformation.
+        </div>
+        <p>
+            <b><i>Invariance under transformations</i></b>.
+            Now, our \(A(q,p)\to A(q',p')\) becomes:
+            \[\begin{align}
+                A(q',p') &= A(q+d\alpha(\frac{\partial G}{\partial p}), p-d\alpha\frac{\partial G}{\partial q}) \\
+                &= A(q,p) + d\alpha (\frac{\partial A}{\partial q}\frac{\partial G}{\partial p}-\frac{\partial A}{\partial p}\frac{\partial G}{\partial q}) \\
+                &= A(q,p) + d\alpha \{A,G\}_{P.B.} \\
+                \frac{dA}{d\alpha} &= \{A,G\}_{P.B.}
+            \end{align}\] 
+            where the last line comes from the first order Taylor expansion.
+            If, in the case of the infinitesimal time translation, our generator \(G\) is \(H\), and if \(\frac{dA}{d\alpha} = \{A,H\}_{P.B.} = 0\), then we know that \(A\) is conserved under the time translations, or that \(A\) is time invariant.
+            <br><br>
+            We can even reverse this relationship and use \(A\) as an infinitesimal generator to get that \(\frac{dH}{d\alpha}=\{H, A\}_{P.B.}\), which is 0 if \(\{A,H\}_{P.B.} = 0\), in which case we say the Hamiltonian is invariant under transformation generated by \(A\) over some \(d\alpha\).
+        </p>
+        <div class="mainContent">
+        In general, if \(\{A, G\}_{P.B.}=0\), we say that \(A\) is invariant under the canonical transformation generated by \(G\).
+        </div>
+        <p>
+            <h2>Examples of Canonical Transformations</h2>
+            <b><i>Space translations</i></b>.
+            A translation in space is, intuitively
+            \[\begin{cases}
+                q\mapsto q+dq \\
+                p\mapsto p
+            \end{cases}\] 
+            We know that this is canonical if it follows 
+            \[\begin{cases}
+                q \mapsto q' = q + d\alpha \frac{\partial G(q,p)}{\partial p} \\
+                p \mapsto p' = p - d\alpha \frac{\partial G(q,p)}{\partial q}
+            \end{cases}\]
+            which it does, if \(G=p\) and \(d\alpha=dq\).
+            Thus we can say that an infinitesimal space translation is canonical and \(p\) is the infinitesimal generator of space translations.
+            <br><br>
+            <b><i>Momentum boosts (translations)</i></b>.
+            A change in momentum is, intuitively
+            \[\begin{cases}
+                q\mapsto q \\
+                p\mapsto p+dp
+            \end{cases}\] 
+            We know that this is canonical if it follows 
+            \[\begin{cases}
+                q \mapsto q' = q + d\alpha \frac{\partial G(q,p)}{\partial p} \\
+                p \mapsto p' = p - d\alpha \frac{\partial G(q,p)}{\partial q}
+            \end{cases}\]
+            which it does, if \(G=-q\) and \(d\alpha=dp\).
+            Thus we can say that an infinitesimal momentum boost is canonical and \(-q\) is the infinitesimal generator of space translations.
+            Note the difference in sign from the space translation; this is a result of a change in reference frame.
+            <br><br>
+            <b><i>Rotation</i></b>.
+            This is slightly tricky; we can't work in one dimension anymore, and we have to work out what a rotation actually looks like.
+            For an arbitrary vector \(\vec{v}\) that we rotate by an angle of \(\theta\) around an axis \(\hat{n}\):
+            <div style="text-align: center; width:100%; padding:15px">
+                <svg style="width:320px; height: 120px">
+                    <!-- first img -->
+                    <line x1="10" y1="100" x2="100" y2="100" stroke="black" stroke-width="1" marker-end="url(#arrow)"/>
+                    <line x1="10" y1="100" x2="10" y2="10" stroke="black" stroke-width="1" marker-end="url(#arrow)"/>
+                    <line x1="10" y1="100" x2="10" y2="40" stroke="black" stroke-width="1" marker-end="url(#arrow)"/>
+                    <line x1="10" y1="100" x2="100" y2="40" stroke="black" stroke-width="1" marker-end="url(#arrow)"/>
+                    <text x="15" y="15">n̂</text>
+                    <text x="100" y="120">v⟂</text>
+                    <text x="15" y="50">v∥</text>
+                    <text x="100" y="60">v</text>
+                    <!-- second img -->
+                    <line x1="210" y1="100" x2="300" y2="100" stroke="black" stroke-width="1" marker-end="url(#arrow)"/>
+                    <text x="300" y="120">v⟂</text>
+                    <line x1="210" y1="100" x2="210" y2="30" stroke="black" stroke-width="1" marker-end="url(#arrow)"/>
+                    <text x="200" y="20">v⟂'</text>
+                    <line x1="210" y1="100" x2="280" y2="60" stroke="black" stroke-width="1" marker-end="url(#arrow)"/>
+                    <text x="280" y="50">v'</text>
+                    <!-- <line x1="300" y1="100" x2="280" y2="60" stroke="pink" stroke-width="1"/> -->
+                    <circle cx="210" cy="100" r="4" fill="white" stroke="black" stroke-width="1" />
+                    <circle cx="210" cy="100" r="1" fill="black" stroke="black" stroke-width="2" />
+                    <text x="200" y="120">n̂</text>
+                    <path d="M 230 89 C 235 90, 240 98, 230 100" stroke="black" stroke-width="1" fill="none" />
+                    <text x="250" y="95">θ</text>
+                    <defs>
+                        <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3"
+                                orient="auto" markerUnits="strokeWidth">
+                        <path d="M0,0 L6,3 L0,6 Z" fill="black"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            Where the vector \(\vec{v'_\perp} = \hat{n}\times\vec{v_\perp} = |\vec{v_\perp}|\cdot\hat{n}\times\hat{v}_\perp\).
+            We see that the portion of the vector parallel to \(\hat{n}\), \(\vec{v_\parallel}\) does not change, but the portion perpendicular, \(\vec{v_\perp}\), does (left).
+            <br><br>
+            If we only consider the plane with normal \(\hat{n}\) (right),
+            we see that the portion of the new vector in this plane, \(\vec{v'}\), rotates by angle \(\theta\):
+            \[\begin{align}
+                \hat{R}_\hat{n}(\theta)\vec{v} &= \hat{R}_\hat{n}(\theta)\vec{v_\parallel} + \hat{R}_\hat{n}(\theta)\vec{v_\perp} \\
+                &= \vec{v_\parallel} + \hat{R}_\hat{n}(\theta)\vec{v_\perp}
+            \end{align}\]
+            but we still have yet to determine what \(\hat{R}_\hat{n}(\theta)\vec{v_\perp}\) is.
+            We know that its length is still the same as \(\vec{v_\perp}\), and that it can be broken down into two orthogonal components, one along \(\vec{v_\perp}\) and the other along \(\vec{v'_\perp}\).
+            \[\begin{align}
+                \vec{v_\parallel} + \hat{R}_\hat{n}(\theta)\vec{v_\perp} 
+                &= \vec{v_\parallel} + |\vec{v}_\perp|\cos\theta\cdot\hat{v}_\perp + |\vec{v}_\perp|\sin\theta\cdot\hat{v'}_\perp \\
+                &= \vec{v}_\parallel + |\vec{v}_\perp|\cos\theta\cdot\hat{v}_\perp + |\vec{v}_\perp|\sin\theta\cdot\hat{n}\times\hat{v}_\perp \\
+                &= \vec{v}_\parallel + \cos\theta\cdot\vec{v}_\perp + \sin\theta\cdot\vec{v'}_\perp \\
+            \end{align}\]
+            Given that \(\vec{v}_\perp = \vec{v} - \vec{v}_\parallel\), \(\vec{v}_\parallel = \hat{n}(\hat{n}\cdot\vec{v})\), and 
+            \[\vec{v'}_\perp = \hat{n}\times\vec{v}-\hat{n}\times\hat{n}(\hat{n}\cdot\vec{v}) = \hat{n}\times\vec{v}-0(\hat{n}\cdot\vec{v}) = \hat{n}\times\vec{v}\]
+            we can finally come to the solution:
+            \[\begin{align}  
+                \hat{R}_\hat{n}(\theta)\vec{v}    
+                &= \hat{n}(\hat{n}\cdot\vec{v}) + \cos\theta (\vec{v} - \hat{n}(\hat{n}\cdot\vec{v})) + \sin\theta\cdot(\hat{n}\times\vec{v}) \\
+                &= \hat{n}(\hat{n}\cdot\vec{v})(1-\cos\theta) + \cos\theta\cdot\vec{v}+\sin\theta\cdot(\hat{n}\times\vec{v}) \\
+                &= \hat{n}(\hat{n}\cdot\vec{v})(1-1) + 1\cdot\vec{v}+d\theta\cdot(\hat{n}\times\vec{v}) \\
+                &= \vec{v}+d\theta\cdot(\hat{n}\times\vec{v}) + o(d\theta^2)
+            \end{align}\]
+            (using the small angle approximation on the last steps) so that we have the result in terms of the original vector \(\vec{v}\).
+            Since we are in multiple dimensions, we use \(\vec{r}\) and \(\vec{p}\) instead of \(q\) and \(p\), where \(\vec{r}=(q_x, q_y, q_z)\) and \(\vec{p}=(p_x, p_y, p_z)\).
+            Our rotation will affect both the position \(\vec{r}\) and the total momentum \(\vec{p}\), so we have
+            \[\begin{align}
+                \hat{R}_\hat{n}(\theta)\vec{r} &= \vec{r}+d\theta(\hat{n}\times\vec{r}) \\
+                \hat{R}_\hat{n}(\theta)\vec{p} &= \vec{p}+d\theta(\hat{n}\times\vec{p})
+            \end{align}\]
+            If this is canonical, it must satisfy the form:
+            \[\begin{cases}
+                \vec{r} \mapsto \vec{r} + d\theta\vec{\nabla}_pG(\vec{r},\vec{p}) \\
+                \vec{p} \mapsto \vec{p} + d\theta\vec{\nabla}_rG(\vec{r},\vec{p})
+            \end{cases}\]
+            for some \(G\). 
+            Does this \(G\) exist? 
+            <br><br>
+            We want \(d\theta\vec{\nabla}_pG(\vec{r},\vec{p}) = \hat{n}\times\vec r\).
+            Since any \(\vec\nabla_\vec{r}=\vec{a}\) means that \(f\) is linear in \(\vec r\) by \(\vec a\) (we're working in multiple dimensions now, hence the \(\vec a\) instead of just \(a\)!), 
+            we know that \(G\) is linear in \(\hat n \times \vec r\) by \(\vec p\), or that \(G=(\hat{n}\times\vec r)\cdot\vec p\).
+            <br><br>
+            So, we can say that rotation is canonical and \(G=(\hat{n}\times\vec r)\cdot\vec p=\hat{n}\cdot(\vec{r}\times \vec p)\) is the infinitesimal generator of rotations.
+            We give \(\vec r\times\vec p\) a fancy name:
+            \[\vec r\times\vec p =\vec L\]
+            where \(\vec L\) is orbital angular momentum, so \(G = \hat{n}\cdot\vec L\).
+            <br><br>
+            To go a step further, we know that \(\frac{dA}{d\theta}=\{A, \hat{n}\cdot\vec L\}\).
+            If \(\frac{dA}{d\theta}=0\), then for any vector, \(A\) is invariant upon rotation, and \(\{A, \vec L\}=0\).
+            If, instead, \(\frac{dA}{d\theta}=\hat{n}\times \vec{A}=\{A, \hat{n}\cdot\vec L\}\), then via the definition of the cross product,
+            \[\begin{align}
+                \{A_i, n_j\vec L_j\} = \sum_{jk} \epsilon_{ijk}n_jA_k \\
+                \{A_i, \vec L_j\} = \sum_{k} \epsilon_{ijk}A_k \\
+            \end{align}\]
+            and if \(\vec{A}=\vec{L}, \{\vec L_i, \vec L_j\}=\sum_k\epsilon_{ijk}\vec{L_k}\).
+        </p>
+        
     </div>
   </body>
 </html>
