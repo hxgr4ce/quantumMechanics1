@@ -215,8 +215,8 @@
         <p>
             Since (at least in this course) we always pick generalized coordinate \(q\) so that the Hamiltonian represents total energy, we're working in canonical coordinates, so all our Poisson Brackets are canonical...
             <br><br>
-            <b><i>Obtaining the Poisson Bracket</i></b>.
-            In general, the first order Taylor Expansion tells is that
+            <b><i id="poisson">Obtaining the Poisson Bracket</i></b>.
+            In general, the first order Taylor Expansion tells us that
             \[
                 \frac{df(x)}{dx}=g(x) \longleftrightarrow f(x+dx) = f(x)+dxg(x)+o(dx^2)
             \]
@@ -241,8 +241,8 @@
                 p \mapsto p' = p - dt\frac{\partial H}{\partial q} + o(dt^2)
                 \end{cases}
             \end{align}\]
-            Say that we have some other function of \(q\) and \(p\), \(A\).
-            Over time, \(A(q,p)\mapsto A(q',p') = A(q+dt\frac{\partial H}{\partial p}, p-dt\frac{\partial H}{\partial q})\).
+            Say that we have some other function of \(q\) and \(p\), \(A\) (sometimes this is called a phase space function).
+            Over time, \(A(q,p)\mapsto A(q',p') = A(q+dt\frac{\partial H}{\partial p}, p-dt\frac{\partial H}{\partial q})\), as \(q\) and \(p\) change according to the infinitesimal time translation.
             We can use the same expansion as before:
             \[\begin{align}
                 A(q',p') &= A(q(t+dt), p(t+dt)) = A(q(t),p(t))+dt\frac{dA}{dt} + o(dt^2)
@@ -376,7 +376,7 @@
         </div>
         <p>
             <h2>Examples of Canonical Transformations</h2>
-            <b><i>Space translations</i></b>.
+            <b><i id="spaceTrans">Space translations</i></b>.
             A translation in space is, intuitively
             \[\begin{cases}
                 q\mapsto q+dq \\
@@ -491,14 +491,14 @@
             \[\vec r\times\vec p =\vec L\]
             where \(\vec L\) is orbital angular momentum, so \(G = \hat{n}\cdot\vec L\).
             <br><br>
-            To go a step further, we know that \(\frac{dA}{d\theta}=\{A, \hat{n}\cdot\vec L\}\).
-            If \(\frac{dA}{d\theta}=0\), then for any vector, \(A\) is invariant upon rotation, and \(\{A, \vec L\}=0\).
-            If, instead, \(\frac{dA}{d\theta}=\hat{n}\times \vec{A}=\{A, \hat{n}\cdot\vec L\}\), then via the definition of the cross product,
+            To go a step further, we know that for some phase space function \(A\), \(\frac{dA}{d\theta}=\{A, \hat{n}\cdot\vec L\}\).
+            If \(\frac{dA}{d\theta}=0\), then \(A\) is invariant upon rotation, and \(\{A, \vec L\}=0\).
+            If, instead, \(\frac{dA}{d\theta}\) was not 0 and was \(\{A, \hat{n}\cdot\vec L\} = \hat{n}\times \vec{A}\) (right hand rule!), then via the definition of the cross product:
             \[\begin{align}
                 \{A_i, n_j\vec L_j\} = \sum_{jk} \epsilon_{ijk}n_jA_k \\
                 \{A_i, \vec L_j\} = \sum_{k} \epsilon_{ijk}A_k \\
             \end{align}\]
-            and if \(\vec{A}=\vec{L}, \{\vec L_i, \vec L_j\}=\sum_k\epsilon_{ijk}\vec{L_k}\).
+            which tells us that, for any vector, \(\{\vec{L}_i,\vec{v}_j\}=\epsilon_{ijk}\vec{v}_k\) (using the dastardly Einstein notation or whatever) and if \(\vec{A}=\vec{L}, \{\vec L_i, \vec L_j\}=\sum_k\epsilon_{ijk}\vec{L_k}\).
         </p>
         
     </div>

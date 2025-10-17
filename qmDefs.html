@@ -24,6 +24,7 @@
                 <li><a href="#csco">Complete Sets of Commuting Observables</a></li>
                 <li><a href="#incompatibleObs">Incompatible Observables</a></li>
                 <li><a href="#heisenberg">Heisenberg Uncertainty Principle</a></li>
+                <li><a href="#unitary">Unitary Operators</a></li>
                 <li><a href="#poswavefcn">Position-Space Wave Functions</a></li>
                 <li><a href="#momwavefcn">Momentum-Space Wave Functions</a></li>
                 <li><a href="#ops">Position and Momentum Operators</a></li>
@@ -213,9 +214,10 @@
         <br><br>
         Momentum and position famously do not commute: \([x, p]=i\hbar\), which tells us that \(\sigma_A\sigma_B \geq \frac{1}{2}|\langle\psi \mid i\hbar\mid\psi\rangle|\), and \(\frac{1}{2}|\langle\psi \mid i\hbar\mid\psi\rangle|\) is the constant \(\frac{\hbar}{2}\), which means that neither \(\sigma_A\) nor \(\sigma_B\) can ever get arbitrarily small enough to make the left-hand side of the inequality 0, their product is always a non-zero value.
         <br><br>
-        Angular momentum observables \([L_x\) and \(L_y\) also do not commute; \([L_x,L_y]=i\hbar L_z\), so the value on the right-hand side of our inequality <i>can</i> be 0, provided that \(L_z=0\).
+        Angular momentum observables \(L_x\) and \(L_y\) also do not commute; \([L_x,L_y]=i\hbar L_z\), so the value on the right-hand side of our inequality <i>can</i> be 0, provided that \(L_z=0\).
         Indeed, \(\mid l,m\rangle=\mid0,0\rangle\) yields \(\sigma_{L_x}=\sigma_{L_y}=0\), but you can't do this for <i>all</i> eigenstates of these two observables.
       </p>
+      <h2 id="unitary">Unitary Operators</h2>
       <div class="mainContent">
         An operator \(U\) is unitary if \(UU^\dagger=U^\dagger U=\mathbb{I}\).
         \(U\) must be invertible and \(U^{-1}=U^\dagger\).
@@ -283,11 +285,12 @@
         \[\hat{x}\psi(x) = x\psi(x) = x\langle x|\alpha\rangle\] 
         and 
         \[\hat{p}\psi(x) = -i\hbar\frac{d}{dx}\psi(x) = -i\hbar\frac{d}{dx}\langle x|\alpha\rangle\]
+        (see demonstration <a href="classical-qm.html#phat">here</a>)
         where measuring momentum of a system with position-space wave function \(\psi(x)\) projects the system into an eigenstate of momentum, and yields another function that varies with \(x\).
         Essentially this tells us that a single momentum eigenstate corresponds with many position eigenstates.
         <br><br>
         Finally, of course,
-        \[[\hat{x},\hat{p}]=i\hbar\]
+        \[[\hat{x},\hat{p}]=i\hbar\] (see demonstration <a href="classical-qm.html#xpcomm">here</a>)
         <hr>
         If we want to change bases from position-space to momentum-space, we can use:
         \[\begin{align}
