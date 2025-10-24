@@ -376,6 +376,17 @@
         </div>
         <p>
             <h2>Examples of Canonical Transformations</h2>
+            <b><i id="timeTrans">Time translations</i></b>.
+            We've already discussed the canonical time translation where:
+            \[\begin{align}
+                \begin{cases}
+                q(t) \mapsto q' = q(t+dt) = q + dt\frac{\partial H}{\partial p} \\
+                p(t) \mapsto p' = p(t+dt) = p - dt\frac{\partial H}{\partial q} 
+                \end{cases}
+            \end{align}\]
+            (discarding the \(o(dt^2)\) terms).
+            The Hamiltonian \(\hat H\) is the infinitesimal generator of time translations.
+            <br><br>
             <b><i id="spaceTrans">Space translations</i></b>.
             A translation in space is, intuitively
             \[\begin{cases}
@@ -390,7 +401,7 @@
             which it does, if \(G=p\) and \(d\alpha=dq\).
             Thus we can say that an infinitesimal space translation is canonical and \(p\) is the infinitesimal generator of space translations.
             <br><br>
-            <b><i>Momentum boosts (translations)</i></b>.
+            <b><i id="momTrans">Momentum boosts (translations)</i></b>.
             A change in momentum is, intuitively
             \[\begin{cases}
                 q\mapsto q \\
@@ -405,7 +416,7 @@
             Thus we can say that an infinitesimal momentum boost is canonical and \(-q\) is the infinitesimal generator of space translations.
             Note the difference in sign from the space translation; this is a result of a change in reference frame.
             <br><br>
-            <b><i>Rotation</i></b>.
+            <b><i id="rotTrans">Rotation</i></b>.
             This is slightly tricky; we can't work in one dimension anymore, and we have to work out what a rotation actually looks like.
             For an arbitrary vector \(\vec{v}\) that we rotate by an angle of \(\theta\) around an axis \(\hat{n}\):
             <div style="text-align: center; width:100%; padding:15px">

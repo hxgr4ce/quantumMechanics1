@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>The Evolution of Quantum States Over Time</title>
+      <link rel="stylesheet" href="style.css">
+      <!-- allow latex, inline equations go between \(\) 
+      and block equations go in \[\]-->
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </head>
+    <body>
+        <div class="mainContent">
+            <h1>The Evolution of Quantum States Over Time</h1>
+            Since it is the <a href="classical-qm.html#schroe">generator of unitary time translation</a>, we know that the Hamiltonian operator \(\hat{H}\) is crucial to understanding how quantum state evolve over time.
+            We now look into the spectral properties of the Hamiltonian operator and discuss how an isolated quantum state evolves over time.
+            <br><br>
+            For eigenstates \(|\phi_i\rangle\) of \(\hat{H}\):
+            \[\hat{H}|\phi_i\rangle = E_i|\phi_i\rangle\]
+            So, if the initial state of a system is \(|\psi(t=0)\rangle = |\phi_i\rangle\):
+            \[\begin{align}
+                |\psi(t)\rangle &= e^{-i\hat{H}t/\hbar}|\psi(0)\rangle \\
+                &= e^{-i\hat{H}t/\hbar}|\phi_i\rangle \\
+                &= e^{-iE_it/\hbar}|\phi_i\rangle \\
+            \end{align}\]
+            Recalling our <a href="qmPostulates.html">quantum postulates</a> that tell us that a state is a <i>ray</i>, that is a vector whose length does not matter, this above result tells us that if we prepare a system to be in an eigenstate of \(\hat{H}\), \(|\phi_i\rangle\) it will continue to be in that state as long as it remains an isolated system.
+            This is because our \(e^{-iE_it/\hbar}\) term simply changes the length of the vector along \(|\phi_i\rangle\).
+            <br><br>
+            We can see this another way:
+            \[\begin{align}
+                \langle\hat{A}\rangle_{\psi(t)} &= \langle\psi(t)|\hat{A}|\psi(t)\rangle \\
+                &= e^{iE_it/\hbar}\langle\phi_i|\hat{A}|\phi_i\rangle e^{-iE_it/\hbar} \\
+                &= \langle\phi_i|\hat{A}|\phi_i\rangle \\
+                &= \langle\hat{A}\rangle_{\psi(0)}
+            \end{align}\]
+            The expectation value of the isolated system does not change with time!
+            The final state after measurement also does not change:
+            \[\begin{align}
+                |\psi\rangle &\mapsto \hat{P}|\psi\rangle \\
+                |\psi(t)\rangle &\mapsto \hat{P}|\psi(t)\rangle = \hat{P}e^{-iE_it/\hbar}|\phi_i\rangle \\
+                &= e^{-iE_it/\hbar}\hat{P}|\phi_i\rangle \\
+            \end{align}\]
+            The end result is a ray that is along the same direction that we would have from measuring the initial state \(|\phi_i\rangle\) right away, \(\hat{P}|\phi_i\rangle\).
+            For this reason, the eigenstate of \(\hat{H}\) are called <i>stationary states</i>.
+            <br><hr><br>
+            But what if our initial state is not a stationary state?
+            We find that the state of the system <i>does</i> change over time:
+            \[\begin{align}
+                |\psi(t)\rangle &= \sum_i |\phi_i\rangle\langle\phi_i|\psi(t)\rangle = \sum_i|\phi_i\rangle c_i(t) \\
+                |\psi(t)\rangle &= e^{-i\hat{H}t/\hbar}|\psi(0)\rangle = e^{-i\hat{H}t/\hbar}\sum_i|\phi_i\rangle c_i(0) \\
+                &= \sum_ie^{-i\hat{H}t/\hbar}|\phi_i\rangle c_i(0) \\
+                &= \sum_i|\phi_i\rangle c_i(t) \\
+                c_i(t) &= e^{-i\hat{H}t/\hbar}c_i(0)
+            \end{align}\]
+            We see that the expansion coefficient \(c_i(t)\) for each corresponding eigenbasis vector of \(\hat{H}\), \(|\phi_i\rangle\), <i>changes over time</i> at the rate \(\frac{E_i}{\hbar}\).
+            Because the eigenvalue \(E_i\) is different for each \(|\phi_i\rangle\), eacn component of \(|\psi(t)\rangle\) changes differently over time, hence 
+            \(|\psi(t)\rangle\) is <i>not</i> the same state as \(|\psi(0)\rangle\). 
+            <br><br>
+            The expectation value is also not constant:
+            \[\begin{align}
+                \langle\hat{A}\rangle_{\psi(t)} &= \langle\psi(t)|\hat{A}|\psi(t)\rangle \\
+                &= \sum_{ij} e^{iE_it/\hbar}c_i^*(0)\langle\phi_i|\hat{A}|\phi_j\rangle e^{-iE_jt/\hbar}c_j(0)
+            \end{align}\]
+            If our basis is the eigenstates of \(\hat{H}\), an element in \(\hat{A}\)'s matrix, \(A_{ij}=\langle\phi_i|\hat{A}|\phi_j\rangle\).
+            Also, call \(\omega_{ji} = \frac{E_j-E_i}{\hbar}\) the Bohr angular frequency.
+            We can then rewrite:
+            \[\langle\hat{A}\rangle_{\psi(t)} = \sum_{ij}A_{ij}c_i^*(0)c_j(0)e^{-i\omega_{ji}t}\]
+            and then break this down further:
+            \[\begin{align}
+                \langle\hat{A}\rangle_{\psi(t)} &= \sum_{j=i}A_{ii}|c_i(0)|^2 + \sum_{j\gt i}A_{ij}c_i^*(0)c_j(0)e^{-i\omega_{ji}t} + \sum_{j\lt i} A_{ij}c_i^*(0)c_j(0)e^{-i\omega_{ji}t} \tag{1}
+            \end{align}\]
+            We can flip the indices of the last term (swapping \(i\) and \(j\)) to get:
+            \[
+                \sum_{j\lt i} A_{ij}c_i^*(0)c_j(0)e^{-i\omega_{ji}t} \to \sum_{i\lt j} A_{ji}c_j^*(0)c_i(0)e^{-i\omega_{ij}t}
+            \]
+            We know that \(A_{ji}=A_{ij}^*\) and that \(\omega_{ji} = \frac{E_j-E_i}{\hbar}\), so \(\omega_{ij} = -\omega_{ji}\), so we can actually write this entire thing as:
+            \[\begin{align}
+                \sum_{i\lt j} A_{ji}c_j^*(0)c_i(0)e^{-i\omega_{ij}t} &= \sum_{i\lt j} A_{ij}^*c_j^*(0)c_i(0)e^{i\omega_{ji}t} \\
+                &= (\sum_{i\lt j} A_{ij}c_j(0)c_i^*(0)e^{-i\omega_{ji}t})^*
+            \end{align}\]
+            which is the complex conjugate of the second term in (1).
+            By definition, a complex value \(z\) plus its cojugate is \(2Re\{z\}\) so we can write:
+            \[\begin{align}
+                \langle\hat{A}\rangle_{\psi(t)} &= \sum_{j=i}A_{ii}|c_i(0)|^2 +  2 Re\{\sum_{j\gt i}A_{ij}c_i^*(0)c_j(0)e^{-i\omega_{ji}t}\}
+            \end{align}\]
+            We can also write any complex value \(z\) as \(|z|\cdot e^{i\theta}\), so we can write \(A_{ij} c_i^*(0) c_j(0)\) as \(|A_{ij} c_i^*(0) c_j(0)| \cdot e^{i\theta_{ij}}\):
+            \[\begin{align}
+                \langle\hat{A}\rangle_{\psi(t)} &= \sum_{j=i}A_{ii}|c_i(0)|^2 +  2 \sum_{j\gt i}|A_{ij} c_i^*(0) c_j(0)| \cdot Re\{ e^{i\theta_{ij}}e^{-i\omega_{ji}t}\} \\
+                <!-- &= \sum_{j=i}A_{ii}|c_i(0)|^2 +  2 \sum_{j\gt i}|A_{ij} c_i^*(0) c_j(0)| \cdot Re\{ e^{-i(\theta_{ij}+\omega_{ji}t)}\} \\ -->
+                &= \sum_{j=i}A_{ii}|c_i(0)|^2 + 2 \sum_{j\gt i}|A_{ij} c_i^*(0) c_j(0)| \cdot \cos(\omega_{ji}t-\theta_{ij}) \\
+            \end{align}\]
+            This first term, \(\sum_{j=i}A_{ii}|c_i(0)|^2\), is static since it does not vary with time, and the second term is a sinusoid with period \(T=\frac{2\pi}{\omega_{ji}}\) and is offset a distance of \(\frac{\phi_{ij}}{\omega_{ji}}\) from the origin.
+            So, the expectation value is indeed not constantl it oscillates over time!
+            <br><br>
+            The only special case where the expectation value does not vary (aside from when the initial state is a stationary state, like we saw earlier) is when \(\hat A\) commutes with \(\hat H\):
+            <br><br>
+            In order for the expectation value to be zero, the term that varies with time should be zero.
+            However, it's impossible to expect that \(\omega_{ji} = \frac{E_j-E_i}{\hbar}\) is always zero when we explicitly state that we're ranging over indices \(j\gt i\).
+            It's also impossible to expect that \(\theta_{ij}\) changes exactly so that \(\omega_{ji}-\theta_{ij}\) does not vary, or that either \(c_i(0)\) or \(c_j(0)\) are always 0.
+            Hence we have to rely on \(A_{ij}\).
+            <br><br>
+            When is \(A_{ij}\) equal to zero?
+            Recall that we stated that our basis was the eigenstates of \(\hat H\) and that the elements in \(\hat A\)'s matrix could be written as \(A_{ij} = \langle \phi_i|\hat A|\phi_j\rangle\) for eigenstates \(|\phi_i\rangle\).
+            <br><br>
+            Therefore, it is readily apparent that we can only guarantee that \(A_{ij} = \langle \phi_i|\hat A|\phi_j\rangle = 0\) for \(j\neq i\) only when \([\hat A, \hat H]=0\). That is, the matrix \(A\) is diagonalizable in \(\hat H\)'s eigenbasis, meaning that they share <a href="commonBasis.html">a common basis of eigenvectors</a>, so they commute.
+            Mathematically:
+            \[\begin{align}
+              \langle \phi_i|[\hat A, \hat H]|\phi_j\rangle &= \langle\phi_i|0|\phi_j\rangle = 0 \\
+              &= \langle \phi_i|\hat A\hat H-\hat H\hat A|\phi_j\rangle \\
+              &= \langle \phi_i|\hat A\hat H|\phi_j\rangle - \langle\phi_i|\hat H\hat A|\phi_j\rangle \\
+              &= \langle \phi_i|\hat A (E_j|\phi_j\rangle) - \langle\hat H^\dagger\phi_i|\hat A|\phi_j\rangle \\
+              &= \langle E_j\phi_i|\hat A |\phi_j\rangle - \langle\hat H\phi_i|\hat A|\phi_j\rangle = \langle E_j\phi_i|\hat A |\phi_j\rangle - \langle E_i\phi_i|\hat A|\phi_j\rangle \\
+              0 &= (E_j-E_i)\langle\phi_i|\hat A |\phi_j\rangle
+            \end{align}\]
+          As we said before, \(j\neq i\), so \(E_j\neq E_i\), meaning that \(\langle\phi_i|\hat A |\phi_j\rangle = 0\) if \(j\neq i\), so the matrix \(A\) is diagonal in \(\hat H\)'s eigenbasis and \([\hat A,\hat H]=0\).
+          <br><br>
+          Alternatively, we can think about it like this:
+          \[\begin{align}
+            \langle\hat A\rangle_{\psi(t)} &= \langle\psi(t)|\hat A|\psi(t)\rangle \\
+            &= \langle\psi(0)|e^{i\hat H t/\hbar} \hat A e^{-i\hat H t/\hbar}|\psi(0)\rangle \\
+            &= \langle\psi(0)|\hat A e^{i\hat H t/\hbar}e^{-i\hat H t/\hbar}|\psi(0)\rangle \tag{2} \\
+            &= \langle\psi(0)|\hat A|\psi(0)\rangle \\
+            &= \langle\hat A\rangle_{\psi(0)}
+          \end{align}\]
+          We are only able to move to (2) if \(\hat H\) and \(\hat A\) commute, which allows us to rearrange our operators.
+          So, we can only say that \(\langle\hat A\rangle_{\psi(t)} = \langle\hat A\rangle_{\psi(0)}\) for any arbitrary \(t\) if \([\hat H,\hat A]=0\).
+          \[[\hat A,\hat H]=0\implies\langle\hat A\rangle_{\psi(t)} \text{ is constant over t.}\]
+          <br><hr><br>
+          We can see this relationship between how \(\langle\hat A\rangle\) changes over time and \([\hat H,\hat A]\) by doing the following:
+          \[\begin{align}
+            \frac{d}{dt}\langle\hat A\rangle_{\psi(t)} &= \frac{d}{dt}\langle\psi(0)|e^{i\hat H t/\hbar} \hat A e^{-i\hat H t/\hbar}|\psi(0)\rangle \\
+            &= \langle\psi(0)|\frac{d}{dt}(e^{i\hat H t/\hbar} \hat A e^{-i\hat H t/\hbar})|\psi(0)\rangle \\
+            &= \langle\psi(0)|\frac{de^{i\hat H t/\hbar}}{dt} \hat A e^{-i\hat H t/\hbar} + e^{i\hat H t/\hbar} \hat A \frac{de^{-i\hat H t/\hbar}}{dt} |\psi(0)\rangle \\
+            &= \langle\psi(0)|\frac{i\hat H}{\hbar}e^{i\hat H t/\hbar} \hat A e^{-i\hat H t/\hbar} + e^{i\hat H t/\hbar} \hat A \frac{-i\hat H}{\hbar}e^{-i\hat H t/\hbar} |\psi(0)\rangle \\
+            &= \frac{i}{\hbar}\langle\psi(0)|\hat H e^{i\hat H t/\hbar} \hat A e^{-i\hat H t/\hbar} + e^{i\hat H t/\hbar} \hat A (-\hat H)e^{-i\hat H t/\hbar} |\psi(0)\rangle \\
+            &= \frac{i}{\hbar}\langle\psi(0)|e^{i\hat H t/\hbar} \hat H\hat A e^{-i\hat H t/\hbar} - e^{i\hat H t/\hbar} \hat A \hat He^{-i\hat H t/\hbar} |\psi(0)\rangle \\
+            <!-- &= \frac{i}{\hbar}\langle\psi(0)|e^{i\hat H t/\hbar} (\hat H\hat A - \hat A \hat H) e^{-i\hat H t/\hbar} |\psi(0)\rangle \\ -->
+            &= \frac{i}{\hbar}\langle\psi(0)|e^{i\hat H t/\hbar} [\hat H, \hat A] e^{-i\hat H t/\hbar} |\psi(0)\rangle \\
+            &= \frac{i}{\hbar}\langle\psi(t)|[\hat H, \hat A]|\psi(t)\rangle \\
+            \frac{d}{dt}\langle\hat A\rangle_{\psi(t)} &= \frac{i}{\hbar}\langle[\hat H, \hat A]\rangle_{\psi(t)} \\
+          \end{align}\]
+          We can apply this as follows: Say that we have a free particle in one dimension with \(\hat H=\frac{\hat p^2}{2m} + V(\hat x)\).
+          If \(\hat A=\hat p\), then 
+          \[\begin{align}
+            \langle x|[\hat H,\hat A] &= \langle x|[\frac{\hat p^2}{2m}+V(\hat x), \hat p] \\
+            &= \langle x|[\frac{\hat p^2}{2m}, \hat p] + \langle x|[V(\hat x), \hat p] = 0 + \langle x|[V(\hat x), \hat p] \\
+            &= \langle x|V(\hat x)\hat p + \langle x|\hat p V(\hat x)
+          \end{align}\]
+        </div>
+    </body>
+</html>

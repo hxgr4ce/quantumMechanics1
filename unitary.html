@@ -129,13 +129,15 @@
                         <path d="M 107 90 C 113 90, 113 100, 110 100" stroke="black" stroke-width="1" fill="none"></path>
                     </svg>
                 </div>
-                and we can uniquely define \(\lambda\) as \(\lambda = e^{i\theta}, \theta\in(-\pi,\pi]\)
+                and we can uniquely define \(\lambda\) as \(\lambda = e^{i\theta}, \theta\in(-\pi,\pi]\).
+                Because each eigenvector of \(\hat{U}\) corresponds to a unique eigenvalue, \(\hat U\) is therefore diagonalizable, and we can write it as:
                 \[
                     \begin{align}
                         \hat{U} = \sum_{\lambda\in\sigma(U)}\lambda\hat{P}_\lambda = \sum_{\lambda\in\sigma(U)}e^{i\theta_\lambda}\hat{P}_\lambda \\
-                        \hat{A} = -\sum_{\lambda\in\sigma(U)} \theta_\lambda\hat{P}_\lambda
                     \end{align}
                 \]
+                (do note that this is not a result of the spectral theorem as we know it, because the eigenvalue \(\lambda\) is complex and not real!) and define some \(\hat A\) such that
+                \[\hat{A} = -\sum_{\lambda\in\sigma(U)} \theta_\lambda\hat{P}_\lambda\]
                 Since \(\hat{A}\) is spectrally defined, it is self-adjoint.
                 <h2 id="unitFamilies">Families of Unitary Operators</h2>
                 Often times, instead of just having a single standalone \(\hat{U}\), you have a \(\hat{U}(t)\), where unique values of \(t\) can produce unique operators.

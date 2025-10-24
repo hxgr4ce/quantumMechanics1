@@ -253,7 +253,6 @@
         <u>Notes</u>:
           <ul>
             <li>When we say \(\langle x|\alpha\rangle\), \(x\) is <i>not</i> a specific value, but a variable, and the state \(|\alpha\rangle\) evolves over time, so \(\langle x|\alpha\rangle\) is not a scalar value even if \(x\) is fixed, it's a vector.</li>
-            <li>If we know what the state of a system is, sometimes we just say \(\psi(x)\) and \(\phi(p)\) instead of \(\psi_\alpha(x)\) and \(\phi_\alpha(p)\).</li>
             <li>
               Say we have two states \(|\alpha\rangle\) and \(|\beta\rangle\), and wave functions \(\psi_\alpha(x)=\langle x|\alpha\rangle\) and \(\psi_\beta(x)=\langle x|\beta\rangle\).
               The <i>probability amplitude for a system in state \(|\alpha\rangle\) to be found in state \(|\beta\rangle\)</i> is:
@@ -278,6 +277,19 @@
         Then, for normalized \(|\alpha\rangle\),
         \[\int|\langle p|\alpha\rangle|^2 dp = 1\]
       </div>
+      <p>
+        <u>Notes</u>: 
+        <ul>
+          <li>
+            For wave functions in general, since the first argument (the \(b\) in \(\langle b| a\rangle)\) is a variable that can be set to a fixed value, and because we can also think of this as projecting \(|a\rangle\) along a specific \(|b\rangle\), 
+            when we operate on a wave function with some operator \(\hat O\), we're really doing \(\langle b|\hat O|a\rangle\).
+            <br><br>
+            In other words, \(\hat O \psi_\alpha(x) = \langle x|\hat O|\alpha\rangle\) and \(\hat O \phi_\alpha(p) = \langle p|\hat O|\alpha\rangle\)
+          </li>
+          <br>
+          <li>If we know what the state of a system is, sometimes we just say \(\psi(x)\) and \(\phi(p)\) instead of \(\psi_\alpha(x)\) and \(\phi_\alpha(p)\).</li>
+        </ul>
+      </p>
       <h2 id="ops">Position and Momentum Operators</h2>
       <div class="mainContent">
         Say we have a system in state \(|\alpha\rangle\). 
