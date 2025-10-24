@@ -15,7 +15,8 @@
             <h1>The Evolution of Quantum States Over Time</h1>
             Since it is the <a href="classical-qm.html#schroe">generator of unitary time translation</a>, we know that the Hamiltonian operator \(\hat{H}\) is crucial to understanding how quantum state evolve over time.
             We now look into the spectral properties of the Hamiltonian operator and discuss how an isolated quantum state evolves over time.
-            <br><br>
+            <h2>Stationary States</h2>
+            <b><i>Systems in a stationary state stay in a stationary state</i></b>.
             For eigenstates \(|\phi_i\rangle\) of \(\hat{H}\):
             \[\hat{H}|\phi_i\rangle = E_i|\phi_i\rangle\]
             So, if the initial state of a system is \(|\psi(t=0)\rangle = |\phi_i\rangle\):
@@ -24,7 +25,7 @@
                 &= e^{-i\hat{H}t/\hbar}|\phi_i\rangle \\
                 &= e^{-iE_it/\hbar}|\phi_i\rangle \\
             \end{align}\]
-            Recalling our <a href="qmPostulates.html">quantum postulates</a> that tell us that a state is a <i>ray</i>, that is a vector whose length does not matter, this above result tells us that if we prepare a system to be in an eigenstate of \(\hat{H}\), \(|\phi_i\rangle\) it will continue to be in that state as long as it remains an isolated system.
+            Recalling our <a href="qmPostulates.html">quantum postulates</a> that tell us that a state is a <i>ray</i>-- that is a vector whose length does not matter-- this above result tells us that if we prepare a system to be in an eigenstate of \(\hat{H}\), \(|\phi_i\rangle\) it will continue to be in that state as long as it remains an isolated system.
             This is because our \(e^{-iE_it/\hbar}\) term simply changes the length of the vector along \(|\phi_i\rangle\).
             <br><br>
             We can see this another way:
@@ -34,6 +35,7 @@
                 &= \langle\phi_i|\hat{A}|\phi_i\rangle \\
                 &= \langle\hat{A}\rangle_{\psi(0)}
             \end{align}\]
+            <b><i>The expectation of a system in a stationary state... is stationary</i></b>.
             The expectation value of the isolated system does not change with time!
             The final state after measurement also does not change:
             \[\begin{align}
@@ -43,8 +45,9 @@
             \end{align}\]
             The end result is a ray that is along the same direction that we would have from measuring the initial state \(|\phi_i\rangle\) right away, \(\hat{P}|\phi_i\rangle\).
             For this reason, the eigenstate of \(\hat{H}\) are called <i>stationary states</i>.
-            <br><hr><br>
-            But what if our initial state is not a stationary state?
+            <h2>Non-stationary Initial States</h2>
+            <b><i>Systems not in a stationary state change over time</i></b>.
+            What if our initial state is not a stationary state?
             We find that the state of the system <i>does</i> change over time:
             \[\begin{align}
                 |\psi(t)\rangle &= \sum_i |\phi_i\rangle\langle\phi_i|\psi(t)\rangle = \sum_i|\phi_i\rangle c_i(t) \\
@@ -57,6 +60,7 @@
             Because the eigenvalue \(E_i\) is different for each \(|\phi_i\rangle\), eacn component of \(|\psi(t)\rangle\) changes differently over time, hence 
             \(|\psi(t)\rangle\) is <i>not</i> the same state as \(|\psi(0)\rangle\). 
             <br><br>
+            <b><i>Systems not in a stationary state have oscillating expectation values (mostly)</i></b>.
             The expectation value is also not constant:
             \[\begin{align}
                 \langle\hat{A}\rangle_{\psi(t)} &= \langle\psi(t)|\hat{A}|\psi(t)\rangle \\
@@ -91,8 +95,9 @@
                 &= \sum_{j=i}A_{ii}|c_i(0)|^2 + 2 \sum_{j\gt i}|A_{ij} c_i^*(0) c_j(0)| \cdot \cos(\omega_{ji}t-\theta_{ij}) \\
             \end{align}\]
             This first term, \(\sum_{j=i}A_{ii}|c_i(0)|^2\), is static since it does not vary with time, and the second term is a sinusoid with period \(T=\frac{2\pi}{\omega_{ji}}\) and is offset a distance of \(\frac{\phi_{ij}}{\omega_{ji}}\) from the origin.
-            So, the expectation value is indeed not constantl it oscillates over time!
+            So, the expectation value is indeed not constant; it oscillates over time!
             <br><br>
+            <b><i>A special case!</i></b>
             The only special case where the expectation value does not vary (aside from when the initial state is a stationary state, like we saw earlier) is when \(\hat A\) commutes with \(\hat H\):
             <br><br>
             In order for the expectation value to be zero, the term that varies with time should be zero.
@@ -126,8 +131,8 @@
           We are only able to move to (2) if \(\hat H\) and \(\hat A\) commute, which allows us to rearrange our operators.
           So, we can only say that \(\langle\hat A\rangle_{\psi(t)} = \langle\hat A\rangle_{\psi(0)}\) for any arbitrary \(t\) if \([\hat H,\hat A]=0\).
           \[[\hat A,\hat H]=0\implies\langle\hat A\rangle_{\psi(t)} \text{ is constant over t.}\]
-          <br><hr><br>
-          We can see this relationship between how \(\langle\hat A\rangle\) changes over time and \([\hat H,\hat A]\) by doing the following:
+          <h2>Expectation Values Over Time (Generally)</h2>
+          We can see the relationship between how \(\langle\hat A\rangle\) changes over time and \([\hat H,\hat A]\) by doing the following:
           \[\begin{align}
             \frac{d}{dt}\langle\hat A\rangle_{\psi(t)} &= \frac{d}{dt}\langle\psi(0)|e^{i\hat H t/\hbar} \hat A e^{-i\hat H t/\hbar}|\psi(0)\rangle \\
             &= \langle\psi(0)|\frac{d}{dt}(e^{i\hat H t/\hbar} \hat A e^{-i\hat H t/\hbar})|\psi(0)\rangle \\
@@ -138,15 +143,50 @@
             <!-- &= \frac{i}{\hbar}\langle\psi(0)|e^{i\hat H t/\hbar} (\hat H\hat A - \hat A \hat H) e^{-i\hat H t/\hbar} |\psi(0)\rangle \\ -->
             &= \frac{i}{\hbar}\langle\psi(0)|e^{i\hat H t/\hbar} [\hat H, \hat A] e^{-i\hat H t/\hbar} |\psi(0)\rangle \\
             &= \frac{i}{\hbar}\langle\psi(t)|[\hat H, \hat A]|\psi(t)\rangle \\
-            \frac{d}{dt}\langle\hat A\rangle_{\psi(t)} &= \frac{i}{\hbar}\langle[\hat H, \hat A]\rangle_{\psi(t)} \\
+            \frac{d}{dt}\langle\hat A\rangle_{\psi(t)} &= \frac{i}{\hbar}\langle[\hat H, \hat A]\rangle_{\psi(t)} \tag{3}\\
           \end{align}\]
+          Clearly, if \(\hat A\) and \(\hat H\) commute, then the expectation value does not change over time; its derivative with respect to time is zero.
+          <br><br>
           We can apply this as follows: Say that we have a free particle in one dimension with \(\hat H=\frac{\hat p^2}{2m} + V(\hat x)\).
           If \(\hat A=\hat p\), then 
           \[\begin{align}
-            \langle x|[\hat H,\hat A] &= \langle x|[\frac{\hat p^2}{2m}+V(\hat x), \hat p] \\
+            \langle x|[\hat H,\hat p] &= \langle x|[\frac{\hat p^2}{2m}+V(\hat x), \hat p] \\
             &= \langle x|[\frac{\hat p^2}{2m}, \hat p] + \langle x|[V(\hat x), \hat p] = 0 + \langle x|[V(\hat x), \hat p] \\
-            &= \langle x|V(\hat x)\hat p + \langle x|\hat p V(\hat x)
+            &= \langle x|V(\hat x)\hat p - \langle x|\hat p V(\hat x) \\
+            &= V(x)\langle x|\hat p - (-i\hbar)\frac{d}{dx} (\langle x|V(\hat x)) \\
+            &= V(x)(-i\hbar\frac{d}{dx}\langle x|) + i\hbar\frac{d}{dx} (V(x)\langle x|) \\
+            &= -i\hbar V(x)\frac{d\langle x|}{dx} + i\hbar (\frac{dV(x)}{dx}\langle x| + \frac{d\langle x|}{dx} V(\hat x)) \\
+            &= i\hbar \frac{dV(x)}{dx}\langle x| \\
+            [\hat H,\hat p] &= i\hbar \frac{dV(x)}{dx}
           \end{align}\]
+          We can plug this final result into (3):
+          \[\begin{align}
+            \frac{d}{dt}\langle\hat A\rangle_{\psi(t)} &= \frac{i}{\hbar}\langle[\hat H, \hat A]\rangle_{\psi(t)} \\
+            \frac{d}{dt}\langle\hat p\rangle_{\psi(t)} &= \frac{i}{\hbar}\langle[\hat H, \hat p]\rangle_{\psi(t)} \\
+            &= \frac{i}{\hbar}\langle i\hbar \frac{dV(x)}{dx}\rangle_{\psi(t)} \\
+            &= -\langle \frac{dV(x)}{dx}\rangle_{\psi(t)} \\
+          \end{align}\]
+          which, may seem familiar if you know Ehrenfest's Theorem.
+          Note that this mirrors \(\frac{dp}{dt}=ma=F=-\frac{dV}{dx}\), from classical mechanics.
+          <h2>Momentum and the Hamiltonian</h2>
+          Now that we know a little more about how states evolve over time than we did before, we now turn our attention to the Hamiltonian as promised.
+          We use the free particle in one dimension with mass \(m\).
+          Classically, \(H=\frac{p^2}{2m}\), so we can say that \(\hat H=\frac{\hat p^2}{2m}\), which tells us that \([\hat H, \hat p]=0\) and that the eigenstates of \(\hat p\) are eigenstates of \(\hat H\).
+          <br><br>
+          Our generalized eigenstates of \(\hat p\) are such that
+          \(\hat p|p\rangle = p|p\rangle\), so \(\sigma(\hat p) = \mathbb{R}\)
+          and 
+          \(\langle p|p'\rangle = \delta(p-p')\),
+          and 
+          \(\hat H|p\rangle = \frac{p^2}{2m}|p\rangle\), so \(\sigma(\hat H) = \mathbb{R_0^+}\) (because the \(p^2\) guarantees that eigenvalues are non-negative).
+          <br><br>
+          Since \(\hat H\) is in terms of \(\hat p\), we take a short detour to discuss the momentum operator.
+          What does \(\hat p|p\rangle\) look like in the position basis?
+          \[\begin{align}
+            \langle x | \hat p|p\rangle &= p\langle x|p\rangle \\
+            &= -i\hbar\frac{d}{dx}\phi_p(x) = p \phi_p(x)
+          \end{align}\]
+
         </div>
     </body>
 </html>
