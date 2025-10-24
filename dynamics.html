@@ -184,9 +184,32 @@
           What does \(\hat p|p\rangle\) look like in the position basis?
           \[\begin{align}
             \langle x | \hat p|p\rangle &= p\langle x|p\rangle \\
-            &= -i\hbar\frac{d}{dx}\phi_p(x) = p \phi_p(x)
+            &= -i\hbar\frac{d}{dx}\phi_p(x) = p \phi_p(x) \\
+            (-i\hbar\frac{d}{dx} - p) \phi_p(x) &= 0
           \end{align}\]
-
+          if we use \(\phi_p(x) = \langle x|p\rangle\).
+          This is a linear first order ordinary differential equation that has a known solution:
+          \[\begin{align}
+            \frac{d\phi_p(x)}{dx}\frac{1}{\phi_p(x)} &= \frac{ip}{\hbar} \\
+            \frac{d \ln{\phi_p(x)}}{dx} &= \frac{ip}{\hbar} \\
+            \ln\phi_p(x) &= \frac{ipx}{\hbar} + c_p \\
+            \phi_p(x) &= e^{c_p}e^{ipx/\hbar} \\
+            &= N_p e^{ipx/\hbar}
+          \end{align}\]
+          We call \(e^{c_p}\) some normalization constation \(N_p\), and determine its value by enforcing \(\langle p|p'\rangle = \delta(p-p')\).
+          We insert the identity \(\hat 1 = \int dx |x\rangle\langle x|\):
+          \[\begin{align}
+            \langle p|p'\rangle &= \int_{-\infty}^\infty dx\langle p|x\rangle\langle x|p'\rangle \\
+            &= \int_{-\infty}^\infty dx\phi_p^*(x)\phi_{p'}(x) \\
+            &= \int_{-\infty}^\infty dx (N_p e^{ipx/\hbar})^*N_{p'} e^{ip'x/\hbar} \\
+            &= N_p^*N_{p'} \int_{-\infty}^\infty dx (e^{ipx/\hbar})^* e^{ip'x/\hbar} = N_p^*N_{p'} \int dx e^{-ipx/\hbar} e^{ip'x/\hbar} \\
+            &= N_p^*N_{p'} \int_{-\infty}^\infty dx e^{i(p'-p)x/\hbar} \\
+            &= \hbar N_p^*N_{p'} \int_{-\infty}^\infty \frac{dx}{\hbar} e^{i(p'-p)x/\hbar} \\
+            \text{if } u &= \frac{x}{\hbar}: \\
+            &= \hbar N_p^*N_{p'} \int_{-\infty}^\infty e^{i(p'-p)u} du \\
+            &= \hbar N^*_pN_{p'}\cdot 2\pi\delta(p'-p)
+          \end{align}\]
+          Using the known solution \(\int_{-\infty}^\infty e^{ikx}dx = 2\pi\delta(k)\).
         </div>
     </body>
 </html>
