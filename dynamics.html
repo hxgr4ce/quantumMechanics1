@@ -181,6 +181,8 @@
           \(\hat H|p\rangle = \frac{p^2}{2m}|p\rangle\), so \(\sigma(\hat H) = \mathbb{R_0^+}\) (because the \(p^2\) guarantees that eigenvalues are non-negative).
           <br><br>
           Since \(\hat H\) is in terms of \(\hat p\), we take a short detour to discuss the momentum operator.
+          <br><br>
+          <b><i>Momentum eigenstates in position space: \(\langle x|p\rangle\)</i></b>.
           What does \(\hat p|p\rangle\) look like in the position basis?
           \[\begin{align}
             \langle x | \hat p|p\rangle &= p\langle x|p\rangle \\
@@ -210,6 +212,82 @@
             &= \hbar N^*_pN_{p'}\cdot 2\pi\delta(p'-p)
           \end{align}\]
           Using the known solution \(\int_{-\infty}^\infty e^{ikx}dx = 2\pi\delta(k)\).
+          Because we want \(\langle p|p'\rangle=\delta(p-p')\) and \(\delta(p-p') = \delta(p'-p)\):
+          \[\begin{align}
+            \delta(p'-p) &= \hbar N^*_pN_{p'}\cdot 2\pi\delta(p'-p) \\
+            |N_p|^2 &= \frac{1}{2\pi\hbar} \\
+            |N_p| &= \frac{1}{\sqrt{2\pi\hbar}} \\
+            N_p &= \frac{1}{\sqrt{2\pi\hbar}} e^{i\theta_p} \\
+          \end{align}\]
+          To determine the value of \(\theta_p\) we want to enforce the action of \(\hat B_{\Delta p}|p\rangle = e^{i\Delta px/\hbar}|p\rangle=|p+\Delta p\rangle\):
+          \[\begin{align}
+            \langle x |\hat B_{\Delta p} | p \rangle &= \langle x | p + \Delta p\rangle \\
+            \langle x |\hat B_{\Delta p} | p \rangle &= e^{i\Delta p x/\hbar} \langle x|p\rangle = e^{i\Delta p x/\hbar} \frac{1}{\sqrt{2\pi\hbar}}e^{i\theta_p}e^{ipx\hbar} \\
+            \langle x | p + \Delta p\rangle &= \phi_{p+\Delta p}(x) = \frac{1}{\sqrt{2\pi\hbar}}e^{i\theta_{p+\Delta p}}e^{i(p+\Delta p)x/\hbar} \\
+            e^{i\Delta p x/\hbar} \frac{1}{\sqrt{2\pi\hbar}}e^{i\theta_p}e^{ipx\hbar} &= \frac{1}{\sqrt{2\pi\hbar}}e^{i\theta_{p+\Delta p}}e^{i(p+\Delta p)x/\hbar} \\
+            e^{i\Delta p x/\hbar} e^{i\theta_p}e^{ipx\hbar} &= e^{i\theta_{p+\Delta p}}e^{i(p+\Delta p)x/\hbar} \\
+            e^{i\theta_p}e^{i(\Delta p + p)x\hbar} &= e^{i\theta_{p+\Delta p}}e^{i(p+\Delta p)x/\hbar} \\
+            e^{i\theta_p} &= e^{i\theta_{p+\Delta p}} \\
+          \end{align}\]
+          Clearly, \(\theta_p=\theta_{p+\Delta p}\) for any \(\Delta p\), so \(\theta_p\) is the same for all \(p\).
+          For convenience we set it to zero, so that we end up with the result:
+          \[\phi_p(x)=\langle x|p\rangle = \frac{1}{\sqrt{2\pi\hbar}}e^{ipx\hbar}\]
+          <b><i>Operating on \(\langle x|p\rangle\)</i></b>.
+          \[\begin{align}
+            \langle x|\hat T_{\Delta x}|p\rangle &= \langle\hat T_{\Delta x}x|p\rangle = \langle x-\Delta x|p\rangle = \frac{1}{\sqrt{2\pi\hbar}} e^{ip(x-\Delta x)/\hbar} \\
+            \langle x|\hat B_{\Delta p}|p\rangle &= \langle x|p+\Delta p\rangle = e^{i\Delta px\hbar}\frac{1}{\sqrt{2\pi\hbar}}e^{ipx/\hbar} = \frac{1}{\sqrt{2\pi\hbar}}e^{i(p+\Delta p)x/\hbar}
+          \end{align}\]
+          <b><i>Are the CSCOs in the room with us right now?</i></b>
+          Since each unique eigenvalue of momentum that we can observe corresponds to a unique eigenvector, \(p\to|p\rangle\) (\(\hat{p}\) is non-degenerate), \(\{\hat p\}\) is a CSCO.
+          <br><br>
+          However, since \(\hat H|p\rangle=\frac{p^2}{2m}|p\rangle\) (let's label eigenvalues \(\frac{p^2}{2m}\) as \(E\)), a single eigenvalue \(E\) corresponds to two eigenvectors, \(|p\rangle = |\sqrt{2mE}\rangle\) and \(|-p\rangle = |-\sqrt{2mE}\rangle\).
+          This means that \(\hat H\) is degenerate! So, \(\{\hat H\}\) is not a CSCO.
+          <br><br>
+          How do we create a simple CSCO that includes \(\hat H\)?
+          First we start be re-definint the set of eigenstates we're working with:
+          \[|\psi\pm\rangle=|p\rangle \pm|-p\rangle\]
+          We can guarantee that these states \(|\psi\pm\rangle\) are still eigenvectors of \(\hat H\) because \(|p\rangle\) and \(|-p\rangle\) have the same eigenvalue!
+          \[\begin{align}
+            \hat H(|p\rangle \pm |-p\rangle) &= \hat H|p\rangle \pm \hat H|-p\rangle = E|p\rangle\pm E|-p\rangle \\
+            &= E(|p\rangle\pm|-p\rangle)
+          \end{align}\]
+          It follows that \(|\psi\pm\rangle\) are not eigenstates of \(\hat p\) since \(|p\rangle\) and \(|-p\rangle\) do <i>not</i> have the same eigenvalues with respect to \(\hat p\):
+          \[\hat p|\psi\pm\rangle = p|p\rangle\pm(-p)|-p\rangle = p|\psi\mp\rangle\]
+          We also can say:
+          \[\langle x|\psi\pm\rangle = \langle x|p\rangle\pm\langle x|-p\rangle = \frac{1}{\sqrt{2\pi\hbar}}(e^{ipx\hbar}\pm e^{-ipx/\hbar})\]
+          If we choose to add the terms together, we get:
+          \[\frac{2}{\sqrt{2\pi\hbar}}\cos(\frac{px}{\hbar}) = \sqrt{\frac{2}{\pi\hbar}}\cos(\frac{px}{\hbar})\]
+          and if we choose to subtract, we get:
+          \[i\sqrt{\frac{2}{\pi\hbar}}\sin(\frac{px}{\hbar})\]
+          This alone, however, does not make \(\{\hat H\}\) as CSCO.
+          We need to introduce a commuting operator that is non-degenerate where \(\hat H\) is degenerate.
+          To do this, we use the <i>parity operator</i>, \(\hat \Pi\):
+          \[\begin{align}
+            \hat \Pi|x\rangle = |-x\rangle \to \hat \Pi|\psi\pm\rangle &= |-p\rangle \pm |p\rangle \\
+            &= |-p\rangle + |p\rangle = +|\psi+\rangle \text{ or } |-p\rangle-|p\rangle = -|\psi-\rangle \\
+            &= \pm|\psi\pm\rangle
+          \end{align}\]
+          \(\hat \Pi\) is self adjoint:
+          \[\begin{align}
+            \langle\phi|\hat \Pi\psi\rangle &= \int_{-\infty}^{\infty} \phi^*(x)\hat\Pi\psi(x)dx \\
+            &= \int_{-\infty}^{\infty}\phi^*(x)\psi(-x)dx \\
+            &\text{if } u = -x: \\
+            &= -\int_{\infty}^{-\infty}\phi^*(-u)\phi(u)du \\
+            &= \int_{-\infty}^{\infty}\phi^*(-u)\psi(u)du \\
+            &= \int_{-\infty}^{\infty}(\hat\Pi\phi(-u))^*\psi(u)du \\
+            &= \langle \hat \Pi\phi|\psi\rangle
+          \end{align}\]
+          and it commutes with \(\hat H\):
+          \[\begin{align}
+            \hat H\hat\Pi|\psi\pm\rangle &= \hat H(\pm|\psi\pm\rangle) = \pm E|\psi\pm\rangle \\
+            \hat \Pi \hat H |\psi\pm\rangle &= \hat \Pi(E|\psi\pm\rangle) + E(\pm|\psi\pm\rangle) = \pm E|\psi\pm\rangle
+          \end{align}\]
+          We can also see that where \(\hat H\) is degenerate, \(\hat \Pi\) is not: for both \(|\psi+\rangle\) and \(|\psi-\rangle\), \(\hat H\) gives eigenvalue \(E\), but \(\hat \Pi\) gives eigenvalues +1 and -1 respectively:
+          \[
+            \hat H|\psi\pm\rangle = E|\psi\pm\rangle \text{ and } \hat \Pi|\psi\pm\rangle = \pm|\psi\pm\rangle
+          \]
+          So, \(\{\hat H, \hat \Pi\}\) is a CSCO.
+
         </div>
     </body>
 </html>
