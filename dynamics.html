@@ -13,8 +13,25 @@
     <body>
         <div class="mainContent">
             <h1>The Evolution of Quantum States Over Time</h1>
-            Since it is the <a href="classical-qm.html#schroe">generator of unitary time translation</a>, we know that the Hamiltonian operator \(\hat{H}\) is crucial to understanding how quantum state evolve over time.
-            We now look into the spectral properties of the Hamiltonian operator and discuss how an isolated quantum state evolves over time.
+            <h2 id="schroe">Systems Over Time</h2>
+            How do we describe isolated quantum systems over time?
+            Stone's theorem tells us that for some family of one-parameter unitary transformation \(\hat{U}\) there is a self-adjoint operator \(\hat{A}\) so that
+            \[\hat{U}(t)=e^{-it \hat{A}}\]
+            We now know the <a href="classical-qm.html#quantizedCTs">quantized canonical time translation</a>. 
+            This then allows us to do:
+            \[\begin{align}
+                \hat{U}(t) &= e^{-it \hat{H}/\hbar} \\
+                |\psi(t)\rangle &= e^{-it \hat{H}/\hbar} |\psi(0)\rangle \\ 
+                |\psi(t+dt)\rangle &= e^{-idt \hat{H}/\hbar} |\psi(t)\rangle \\ 
+                &= |\psi(t)\rangle + dt\frac{\partial}{\partial t}|\psi(t)\rangle \\
+                &= |\psi(t)\rangle + dt\frac{\partial}{\partial t}e^{-it \hat{H}/\hbar} |\psi(0)\rangle \\
+                &= |\psi(t)\rangle i\hat{H}\frac{dt}{\hbar}|\psi(t)\rangle \\
+                i\hbar\frac{\partial}{\partial t}|\psi(t)\rangle &= \hat{H}|\psi(t)\rangle
+            \end{align}\]
+            which recovers the Schroedinger equation.
+            <br><br>
+            Since it is the generator of unitary time translation, the Hamiltonian operator \(\hat{H}\) is crucial to understanding how quantum states evolve over time.
+            We now look into the properties of the Hamiltonian operator and discuss how an isolated quantum state evolves over time.
             <h2>Stationary States</h2>
             <b><i>Systems in a stationary state stay in a stationary state</i></b>.
             For eigenstates \(|\phi_i\rangle\) of \(\hat{H}\):
@@ -182,7 +199,7 @@
           <br><br>
           Since \(\hat H\) is in terms of \(\hat p\), we take a short detour to discuss the momentum operator.
           <br><br>
-          <b><i>Momentum eigenstates in position space: \(\langle x|p\rangle\)</i></b>.
+          <b><i id="momStateinPosBasis">Momentum eigenstates in position space: \(\langle x|p\rangle\)</i></b>.
           What does \(\hat p|p\rangle\) look like in the position basis?
           \[\begin{align}
             \langle x | \hat p|p\rangle &= p\langle x|p\rangle \\
@@ -231,7 +248,7 @@
           \end{align}\]
           Clearly, \(\theta_p=\theta_{p+\Delta p}\) for any \(\Delta p\), so \(\theta_p\) is the same for all \(p\).
           For convenience we set it to zero, so that we end up with the result:
-          \[\phi_p(x)=\langle x|p\rangle = \frac{1}{\sqrt{2\pi\hbar}}e^{ipx\hbar}\]
+          \[\phi_p(x)=\langle x|p\rangle = \frac{1}{\sqrt{2\pi\hbar}}e^{ipx/\hbar}\]
           <b><i>Operating on \(\langle x|p\rangle\)</i></b>.
           \[\begin{align}
             \langle x|\hat T_{\Delta x}|p\rangle &= \langle\hat T_{\Delta x}x|p\rangle = \langle x-\Delta x|p\rangle = \frac{1}{\sqrt{2\pi\hbar}} e^{ip(x-\Delta x)/\hbar} \\
