@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Generalized Eigenstates</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- allow latex, inline equations go between \(\) 
+    and block equations go in \[\]-->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="mainContent">
+        <h1>Generalized Eigenstates</h1>
+        When we transitioned to quantum mechanics, we saw that we work with <a href="classical-qm.html">generalized eigenstates</a>; mathematical devices that are not normalizable, nor in the Hilbert space, and do not represent a physical quantum state.
+        <br><br>
+        Instead, they let us map states in a Hilbert space, \(|\psi\rangle\) to functions that are square integrable, e.g. \(\langle p|\psi\rangle, \langle x|p\rangle \in L^2(\mathbb{R})\) for generalized eigenstates \(|x\rangle\) and \(|p\rangle\) such that \(\hat x|x\rangle = x|x\rangle\) and \(\hat p|p\rangle = p|p\rangle\).
+        <br><br>
+        Given that we know \(|\psi\rangle \in H\), and that \(\int dx |x\rangle\langle x|=\hat 1\), 
+        \[\int_{-\infty}^\infty dx |x\rangle\langle x|\psi\rangle = \int_{-\infty}^\infty dx |x\rangle \psi(x) \in H\]
+        (even if \(\langle x|\psi\rangle = \psi(x)\) is not!)
+        <br><br>
+        Taking a look into the relationship between \(\langle p|\psi\rangle = \phi_\psi(p) = \phi(p)\) and \(\langle x|\psi\rangle = \psi_\psi(x) = \psi(x)\):
+        \[\begin{align}
+            \phi_\psi(p) = \phi(p) = \langle p|\psi\rangle &= \int_{-\infty}^\infty dx \langle p|x\rangle\langle x|\psi\rangle \\
+            &= \int_{-\infty}^\infty dx \frac{1}{\sqrt{2\pi\hbar}}e^{-ipx/\hbar}\psi(x) \tag{1} \\
+            \psi_\psi(x) = \psi(x) = \langle x|\psi\rangle &= \int_{-\infty}^\infty dp \langle x|p\rangle\langle p|\psi\rangle \\
+            &= \int_{-\infty}^\infty dp \frac{1}{\sqrt{2\pi\hbar}}e^{ipx/\hbar}\phi(x) \tag{2}
+        \end{align}\]
+        where (1) is the Fourier transform of \(\psi(x)\) to momentum space and (2) is the inverse Fourier Transform back to position space.
+        <br><br>
+        We can also substitute (2) into (1) to get:
+        \[
+            \psi(x) = \int_{-\infty}^\infty dp \frac{1}{\sqrt{2\pi\hbar}}e^{ipx/\hbar} \int_{-\infty}^\infty dx' \frac{1}{\sqrt{2\pi\hbar}}e^{-ipx'/\hbar}\psi(x')
+        \]
+        We can prove this relationship is true without using any of the above relationships.
+        Starting with the right hand side: 
+        \[\int_{-\infty}^\infty dp \frac{1}{\sqrt{2\pi\hbar}}e^{ipx/\hbar} \int_{-\infty}^\infty dx' \frac{1}{\sqrt{2\pi\hbar}}e^{-ipx'/\hbar}\psi(x')\tag{3}\]
+        <h2>The Quick Way</h2>
+        We start by swapping the integrals, since this yields the convenient result:
+        \[
+            \frac{1}{2\pi\hbar}\int_{-\infty}^\infty dx' \psi(x') \int_{-\infty}^\infty dp e^{ip(x-x')/\hbar}
+        \]
+        but \(e^{ip(x-x')/\hbar}\) is not integrable!
+        So we introduce some regularization factor that makes the integrand 0 at \(-\infty\) and \(\infty\): \(e^{-\lambda|p|/\hbar}\), and then later we simply take the limit as \(\lambda \to 0\) so that our introduced term goes away again:
+        Our integrand is now: \[e^{ip(x-x')/\hbar}e^{-\lambda|p|/\hbar}\]
+        and when we take the integral we get:
+        \[\begin{align}
+            \int_{-\infty}^\infty dp e^{ip(x-x')/\hbar}e^{-\lambda|p|/\hbar} &= \int_{-\infty}^\infty dp e^{ip(x-x')/\hbar-\lambda|p|/\hbar} \\
+            &= \int_{0}^\infty dp e^{ip(x-x')/\hbar-\lambda p/\hbar} + \int_{-\infty}^0 dp e^{ip(x-x')/\hbar+\lambda p/\hbar}
+        \end{align}\]
+        (note that when we split the integral into positive and negative portions, we flip the sign of the exponential term \(-\lambda p/\hbar \to \lambda p/\hbar\) in the negative portion because the bounds of integration would make \(p\) negative, but in that specific term we want it to be positive).
+        \[\begin{align}
+            \int_{-\infty}^\infty dp e^{ip(x-x')/\hbar}e^{-\lambda|p|/\hbar} &= \int_{0}^\infty dp e^{ip(x-x')/\hbar-\lambda p/\hbar} + \int_{-\infty}^0 dp e^{ip(x-x')/\hbar+\lambda p/\hbar} \\
+            &= \frac{1}{\frac{i(x-x')}{\hbar}-\frac{\lambda}{\hbar}}(e^\infty-e^0) + \frac{1}{\frac{i(x-x')}{\hbar}+\frac{\lambda}{\hbar}}(e^0-e^{-\infty}) \\
+            &= \frac{\hbar}{i(x-x')-\lambda}(-1) + \frac{\hbar}{i(x-x')+\lambda}(1) \\
+            &= \frac{2\hbar\lambda}{(x-x')^2+\lambda^2} \tag{4}
+        \end{align}\]
+        Plugging in our regularization factor and then (4):
+        \[\begin{align}
+            \frac{1}{2\pi\hbar}\int_{-\infty}^\infty dx' \psi(x') \int_{-\infty}^\infty dp e^{ip(x-x')/\hbar}
+            &\to \frac{1}{2\pi\hbar}\int_{-\infty}^\infty dx' \psi(x') \int_{-\infty}^\infty dp e^{ip(x-x')/\hbar}e^{-\lambda|p|/\hbar} \tag{5} \\
+            &= \frac{1}{2\pi\hbar}\int_{-\infty}^\infty dx' \psi(x') \frac{2\hbar\lambda}{(x-x')^2+\lambda^2} \\
+            &= \frac{1}{\pi}\int_{-\infty}^\infty dx' \psi(x') \frac{\lambda}{(x-x')^2+\lambda^2} \\
+            &= \frac{1}{\pi}\int_{-\infty}^\infty \frac{dx'}{\lambda} \psi(x') \frac{\lambda^2}{(x-x')^2+\lambda^2} \\
+            &= \frac{1}{\pi}\int_{-\infty}^\infty \frac{dx'}{\lambda} \psi(x') \frac{1}{\frac{(x-x')}{\lambda}^2+1} \\
+        \end{align}\]
+        say that \(u = \frac{x-x'}{\lambda}\), so \(du = \frac{dx'}{\hbar}\) and \(x' = x + u\lambda\):
+        \[\begin{align}
+            \frac{1}{2\pi\hbar}\int_{-\infty}^\infty dx' \psi(x') \int_{-\infty}^\infty dp e^{ip(x-x')/\hbar}e^{-\lambda|p|/\hbar}
+            &= \frac{1}{\pi}\int_{-\infty}^\infty \frac{dx'}{\lambda} \psi(x') \frac{1}{\frac{(x-x')}{\lambda}^2+1} \\
+            &= \frac{1}{\pi}\int_{-\infty}^\infty du \psi(x+u\lambda) \frac{1}{u^2+1} \\
+        \end{align}\]
+        And we want to remove the regularization constant that we added initially:
+        \[\begin{align}
+            \lim_{\lambda\to 0} \frac{1}{\pi}\int_{-\infty}^\infty du \psi(x+u\lambda) \frac{1}{u^2+1} 
+            &= \frac{1}{\pi}\int_{-\infty}^\infty du \psi(x) \frac{1}{u^2+1}  \\
+            &= \frac{1}{\pi}\psi(x)\arctan(u)\big|_{-\infty}^{\infty} \\
+            &= \frac{1}{\pi}\psi(x)(\frac{\pi}{2}-(-\frac{\pi}{2})) \\
+            &= \psi(x)
+        \end{align}\]
+        so, we prove what we set out to prove.
+        Also, if we take a look at the entire equation after swapping the order of integration:
+        \[
+            \int_{-\infty}^\infty dx' \psi(x') \frac{1}{2\pi\hbar}\int_{-\infty}^\infty dp e^{ip(x-x')/\hbar}
+        \]
+        we see that the expression \(\frac{1}{2\pi\hbar}\int_{-\infty}^\infty dp e^{ip(x-x')/\hbar}\) must be \(\delta(x-x')\).
+        <h2>The long way (that is more justified)</h2>
+        <p>
+            For some double integral:
+            \[\int_{-\infty}^\infty dx \int_{-\infty}^\infty dy f(x,y)\]
+            we can ONLY swap the order of integration if
+            \[\int_{-\infty}^\infty dx \int_{-\infty}^\infty dy |f(x,y)| \lt\infty\]
+            in other words, if the integrand is absolutely integrable.
+            In our case, the integrand is \(e^{ip(x-x')/\hbar}\psi(x')\), and \(|e^{ip(x-x')/\hbar}\psi(x')| = |\psi(x')|\).
+            Because \(\psi(x')\) is not in terms of \(p\),
+            \[\int_{-\infty}^\infty dx \int_{-\infty}^\infty dy |\psi(x')| = \infty\]
+            so we cannot, in fact, just swap the order of integration just like that.
+            What we can do is recast the integral so that the integrand eventually behaves like we want it to:
+            For some \(f(x', p)\), if we define \(f_\lambda(x',p) \equiv e^{-\lambda|p|/\hbar}f(x',p)\), then
+            \[f(x',p) = \lim_{\lambda\to 0^+} e^{-\lambda|p|/\hbar} f(x', p)\]
+            pointwise. 
+            We apply this to the right hand side of (3):
+            \[\begin{align}
+                \int_{-\infty}^\infty dp \frac{1}{\sqrt{2\pi\hbar}}e^{ipx/\hbar} \int_{-\infty}^\infty dx' \frac{1}{\sqrt{2\pi\hbar}}e^{-ipx'/\hbar}\psi(x')
+                &= \frac{1}{2\pi\hbar} \int_{-\infty}^\infty dp \lim_{\lambda\to 0^+} e^{\lambda|p|/\hbar}e^{ipx/\hbar} \int_{-\infty}^\infty dx' e^{-ipx'/\hbar}\psi(x')
+            \end{align}\]
+            but we still can't swap the order of integration because we have a limit between the two integrals!
+            We now have to pull out the limit, which we can do by the Dominated Convergence Theorem (DCT).
+        </p>
+        <div class="mainContent">
+            The Dominated Convergence Theorem says that you can swap the integral and a limit:
+            \[\int\lim_{n\to\infty}F_n(x) dx = \lim_{n\to\infty}\int F_n(x) dx\]
+            only if the the following conditions are met:
+            <ul>
+                <li>Say we have a family of functions \(F_n(x):\mathbb{R}\to\mathbb{C}\) parameterized by \(n\), which is continuous.</li>
+                <li>\(\exists F | \lim_{n\to\infty}F_n = F\) pointwise.</li>
+                <li>\(\exists G\) which is positive and integrable (so absolutely integrable) such that \(|F_n(x)| \leq G(x) \forall x\in\mathbb{R}\), since \(\mathbb{R}\) is the domain of \(F_n(x)\).</li>
+            </ul>
+        </div>
+        <p>
+            For \(F_\lambda (p) = e^{-\lambda|p|/\hbar}e^{ipx/\hbar}\int_{-\infty}^\infty dx'e^{-ipx'/\hbar}\psi(x')\), we know that \(|F_lambda(p)|\leq|\phi(p)|c\), where \(c\) is some constant, so we can indeed swap the limit and integral to get:
+            \[\begin{align}
+                &\frac{1}{2\pi\hbar} \int_{-\infty}^\infty dp \lim_{\lambda\to 0^+} e^{\lambda|p|/\hbar}e^{ipx/\hbar} \int_{-\infty}^\infty dx' e^{-ipx'/\hbar}\psi(x') \\
+                &= \frac{1}{2\pi\hbar} \lim_{\lambda\to 0^+} \int_{-\infty}^\infty dp e^{\lambda|p|/\hbar}e^{ipx/\hbar} \int_{-\infty}^\infty dx' e^{-ipx'/\hbar}\psi(x') \\
+            \end{align}\]
+            and finally we can swap the order of integration:
+            \[\begin{align}
+                &\frac{1}{2\pi\hbar} \lim_{\lambda\to 0^+} \int_{-\infty}^\infty dp e^{\lambda|p|/\hbar}e^{ipx/\hbar} \int_{-\infty}^\infty dx' e^{-ipx'/\hbar}\psi(x') \\
+                &= \frac{1}{2\pi\hbar} \lim_{\lambda\to 0^+} \int_{-\infty}^\infty dx' \psi(x') \int_{-\infty}^\infty dp e^{\lambda|p|/\hbar}e^{ipx/\hbar}e^{-ipx'/\hbar} \\
+                &= \frac{1}{2\pi\hbar} \lim_{\lambda\to 0^+} \int_{-\infty}^\infty dx' \psi(x') \int_{-\infty}^\infty dp e^{\lambda|p|/\hbar}e^{ip(x-x')/\hbar}
+            \end{align}\]
+            We can now proceed to solve this just like we did from (5) onwards, until we get to the expression:
+            \[\lim_{\lambda\to 0} \frac{1}{\pi}\int_{-\infty}^\infty du \psi(x+u\lambda) \frac{1}{u^2+1} \]
+            where we can justify swapping the limit and integral again by once again invoking DCT, since \(\frac{\psi(x+\lambda u)}{u^2+1} \leq \frac{max|\psi(x)|}{u^2+1}\).
+            From this, we can do:
+            \[\begin{align}
+                \lim_{\lambda\to 0} \frac{1}{\pi}\int_{-\infty}^\infty du \psi(x+u\lambda) \frac{1}{u^2+1} &= \frac{1}{\pi}\int_{-\infty}^\infty \lim_{\lambda\to 0} \psi(x+u\lambda) \frac{du}{u^2+1} \\
+                &= \frac{1}{\pi}\int_{-\infty}^\infty \psi(x) \frac{du}{u^2+1} \\
+                &= \psi(x)
+            \end{align}\]
+            and we again also see that if 
+            \[\psi(x) = \lim_{\lambda\to 0^+} \int_{-\infty}^\infty dx' \psi(x') \frac{1}{2\pi\hbar}\int_{-\infty}^\infty dp e^{\lambda|p|/\hbar}e^{ip(x-x')/\hbar} \]
+            then \(\frac{1}{2\pi\hbar}\int_{-\infty}^\infty dp e^{\lambda|p|/\hbar}e^{ip(x-x')/\hbar} = \delta(x-x')\).
+            <h2>Functional Analysis?</h2>
+            Conceptually, if you are familiar with functional analysis (I'm not), you may see the connection with some linear functional \(\hat L\), which takes a function \(f\) and evaluates it at some specific \(x\), so that \(\hat Lf = f(x)\).
+            From what I understand, you can use \(F(x) = \int k(x, x')f(x')dx'\) as \(\hat Lf(x)\), where \(k(x,x')\) is \(\delta(x-x')\).
+            \[\begin{align}
+                \int_{-\infty}^\infty dx' \psi(x') \frac{1}{2\pi\hbar}\int_{-\infty}^\infty dp e^{\lambda|p|/\hbar}e^{ip(x-x')/\hbar}
+                &= \int_{-\infty}^\infty dx' \psi(x') \delta(x-x')
+            \end{align}\]
+            fits this form, which I suppose further reinforces that the above expression is equal to \(\psi(x)\).
+        </p>
+        <h2>Generalized Eigenstates and Probability</h2>
+        We now know a little bit more about the mathematical form of the wave functions that generalized eigenstates can create.
+        Do they have any physical meaning?
+        <br><br>
+        Say that we have \(\hat x|x\rangle = x|x\rangle\).
+        For <i>non-generalized</i> eigenstate \(|x\rangle\), we know that \(|x\rangle\langle x|\) is a projector that takes in an arbitrary state vector and returns an eigenvector that represents a state which corresponds to eigenvalue \(x\).
+        <br><br>
+        For <i>generalized</i> eigenstates, however, \(|x\rangle\langle x|\psi\rangle, |\psi\rangle\in H\ = |x\rangle\psi(x)\) which is <i>not</i> an eigenvector that represents some state, and is not in Hilbert space \(H\), because its norm diverges:
+        \[\begin{align}
+            || |x\rangle\langle x|\psi\rangle ||^2 &= \langle \psi|x\rangle\langle x|x\rangle \langle x|\psi\rangle = |\psi(x)|^2\langle x|x\rangle \\
+            &= |\psi(x)|^2\delta(0) = \infty \\
+            || |x\rangle\langle x|\psi\rangle || &= \infty
+        \end{align}\]
+        Recall that we now have continuous eigenvalues, and that \(\langle x|x'\rangle = \delta(x-x')\), which is not a finite scalar product anymore!
+        So, \(|x\rangle\langle x|\) is not a projector.
+        <br><br>
+        For this reason, we can't construct a projector onto a single eigenvalue \(|x\rangle\).
+        We must instead define a projector over an interval of the continuous spectra:
+        \[\begin{align}
+            \hat P_{[a,b]} &= \int_a^b |x\rangle\langle x|dx \\
+            \hat P_{[a,b]}|\psi\rangle &= \int_a^b |x\rangle\langle x|\psi\rangle dx
+            = \int_a^b |x\rangle\psi(x) dx
+        \end{align}\]
+        which has a norm that does not diverge:
+        \[\begin{align}
+            || \int_a^b |x\rangle\psi(x) dx ||^2 &= \langle \int_a^b |x\rangle\psi(x) dx | \int_a^b |x'\rangle\psi(x') dx' \rangle \\
+            &= (\int_a^b |x\rangle\psi(x) dx)^* (\int_a^b |x'\rangle\psi(x') dx' \rangle) \\
+            &= \int_a^b \langle x | \psi^*(x) dx \int_a^b |x'\rangle\psi(x') dx' \\
+            &= \int_a^b \int_a^b \langle x | \psi^*(x) dx |x'\rangle\psi(x') dx' \\
+            &= \int_a^b \int_a^b \psi^*(x) \psi(x') \langle x |x'\rangle dx \text{ } dx' \\
+            &= \int_a^b \int_a^b \psi^*(x) \psi(x') \delta(x-x') dx \text{ } dx' \\
+            &= \int_a^b \psi^*(x) \psi(x) dx = \int_a^b|\psi(x)|^2 dx \\
+        \end{align}\]
+        Since we know that \(\langle x|\psi\rangle \in L^2(\mathbb{R})\), or that it is square integrable, \(\int_a^b|\psi(x)|^2 dx\) does not diverge, so the norm does not diverge, and we are still within the Hilbert space.
+        (Note that the delta function collapses the double integral into one single integral towards the end of the above steps...)
+        This also reinforces the fact that we now use \(\hat 1 = \int_{-\infty}^\infty |x\rangle\langle x| dx\).
+        <br><br>
+        Given that \(\psi\rangle\) is normalized, the associated probabilty when taking a measurement that corresponds to some \(\hat P_{[a,b]}\) is:
+        \[\begin{align}
+            p_{[a,b]} = || \hat P_{[a,b]} |\psi\rangle ||^2 &= \langle \hat P_{[a,b]} \psi | \hat P_{[a,b]}\psi \rangle = \langle \psi |\hat P_{[a,b]} |\psi \rangle \\
+            &= \langle \psi | \int_a^b |x\rangle\langle x | \psi \rangle \\
+            &= \int_a^b \langle \psi | x \rangle\langle x | \psi \rangle = \int_a^b |\psi(x)|^2 dx \\
+        \end{align}\]
+        For an interval \([a-\frac{\Delta x}{2}, a+\frac{\Delta x}{2}]\), the probability is:
+        \[p_{[a-\frac{\Delta x}{2}, a+\frac{\Delta x}{2}]} = \int_{a-\frac{\Delta x}{2}}^{a+\frac{\Delta x}{2}} |\psi(x)|^2 dx = |\psi(a)|^2\cdot\Delta x + o(\Delta x^3)\]
+        and as we make \(\Delta x\) smaller and smaller:
+        \[\lim_{\Delta x\to 0} p_{[a-\frac{\Delta x}{2}, a+\frac{\Delta x}{2}]} = \lim_{\Delta x\to 0}|\psi(a)|^2\cdot\Delta x + o(\Delta x^3)\]
+        \[\lim_{\Delta x\to 0} \frac{p_{[a-\frac{\Delta x}{2}, a+\frac{\Delta x}{2}]}}{\Delta x}= \lim_{\Delta x\to 0}|\psi(a)|^2 = |\psi(a)|^2 \tag{6}\]
+        This tells us that any \(\psi(x) = \langle x | \psi\rangle \) tells us a probability!
+        More specifically, (6) tells us that \(|\psi(x)|^2\) is a <i>probability density</i>, just like \(|x\rangle\langle x|\) is a projector density. In fact, \(|\psi(x)|^2 = \big\langle|x\rangle\langle x|\big\rangle_\psi\)
+        
+        <h2>Approximating Eigenstates</h2>
+        If we have some generalied eigenstate that is not in the Hilbert space, we can still approximate it with some family of functions that is in the Hilbert space.
+        Namely, for each eigenvalue of \(\hat A\), one can find as many vectors in the Hilbert space as there are corresponding eigenvectors \(|\lambda\rangle\) such that \(\hat A|\lambda\rangle = \lambda|\lambda\rangle\), with some non-zero length where
+        \[\lim_{n\to\infty}|| \hat A |\psi_{\lambda,n}\rangle - \lambda |\psi_{\lambda,n}\rangle|| = 0\]
+        In this case, \(\lambda\) represents the associated eigenvalue, and \(n\) is the index of the vector within the family of functions in Hilbert space.
+        Formally, 
+        \[\forall \lambda \in \sigma_c(\hat A), \exists |\psi_{\lambda,n}\rangle \in H, || |\psi_{\lambda, n}\rangle || \gt c \gt 0\]
+        \[\lim_{n\to\infty}|| \hat A |\psi_{\lambda,n}\rangle - \lambda |\psi_{\lambda,n}\rangle|| = 0\]
+        for some constant c.
+        <br><br>
+        <!-- Note that if \(\lim_{n\to\infty}|\psi_{\lambda,n}\rangle\) exists, then it has a finite length and it is actually an eigenstate of \(\hat A\). -->
+        As an example, we can use the Gaussian function as a wave function:
+        \[\psi_{\sigma, x_0}(x) = \langle x |\psi_{\sigma, x_0}\rangle = \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-x_0)^2}{2\sigma^2}}\]
+        where \(|\psi_{\sigma, x_0}\rangle \in H\), and \(\sigma\) is inversely proportional to \(n\), so we want the limit as \(\sigma\) goes to 0, instead of infinity.
+        This \(|\psi_{\sigma, x_0}\rangle\) meets the conditions needed to approximate the eigenstate for some eigenvalue \(x_0\).
+        It is in the Hilbert space, and its norm is non-zero:
+        \[\begin{align}
+            || |\psi_{\sigma, x_0}\rangle||^2 &= \langle \psi_{\sigma, x_0} | \psi_{\sigma, x_0} \rangle = \int_{-\infty}^{\infty} dx \langle \psi_{\sigma, x_0} |x\rangle\langle x| \psi_{\sigma, x_0} \rangle \\
+            &= \int_{-\infty}^{\infty} dx |\psi_{\sigma, x_0}(x)|^2 \\
+            &= \frac{1}{2\pi\sigma^2} \int_{-\infty}^{\infty} dx e^{-\frac{(x-x_0)^2}{\sigma^2}} \\
+            &= \frac{1}{2\pi\sigma^2} \sigma\sqrt{\pi} = \frac{1}{2\sigma\sqrt{\pi}} \\
+            || |\psi_{\sigma, x_0}\rangle|| &= \sqrt{\frac{1}{2\sigma\sqrt{\pi}}} = \frac{1}{\sqrt{2\sigma\sqrt{\pi}}}
+        \end{align}\]
+        We can also enforce that
+        \[\lim_{\sigma\to 0}|| \hat x |\psi_{\sigma, x_0}\rangle - x_0 |\psi_{\sigma, x_0}\rangle|| = 0\]
+        meaning that it does indeed approximate the generalized eigenstate:
+        \[\begin{align}
+            || \hat x |\psi_{\sigma, x_0}\rangle - x_0 |\psi_{\sigma, x_0}\rangle||^2 &= || (\hat x - x_0)|\psi_{\sigma, x_0}\rangle ||^2 \\
+            &= \langle (\hat x - x_0)\psi_{\sigma, x_0} | (\hat x - x_0)\psi_{\sigma, x_0} \rangle 
+            <!-- &= \langle \psi_{\sigma, x_0} |(\hat x - x_0)^\dagger (\hat x - x_0) | \psi_{\sigma, x_0} \rangle \\ -->
+            = \langle \psi_{\sigma, x_0} |(\hat x - x_0)^2 | \psi_{\sigma, x_0} \rangle \\
+            &= \int_{-\infty}^{\infty}\langle \psi_{\sigma, x_0} |(\hat x - x_0)^2 |x\rangle\langle x| \psi_{\sigma, x_0} \rangle
+            = \int_{-\infty}^{\infty}\langle \psi_{\sigma, x_0} |(x - x_0)^2 |x\rangle \psi_{\sigma, x_0} (x) \\
+            &= \int_{-\infty}^{\infty}(x - x_0)^2 \langle \psi_{\sigma, x_0} |x\rangle \psi_{\sigma, x_0} (x)
+            = \int_{-\infty}^{\infty}(x - x_0)^2 \psi_{\sigma, x_0}^*(x) \psi_{\sigma, x_0} (x) \\
+            <!-- &= \int_{-\infty}^{\infty}(x - x_0)^2 |\psi_{\sigma, x_0}(x)|^2dx \\ -->
+            &= \frac{1}{2\pi\sigma^2} \int_{-\infty}^{\infty}(x - x_0)^2 e^{-\frac{(x-x_0)^2}{\sigma^2}} dx \\
+            \text{Say } u = x-x_0, du &= dx \\
+            &= \frac{1}{2\pi\sigma^2} \int_{-\infty}^{\infty} u^2 e^{-\frac{u^2}{\sigma^2}} dx \\
+            &= \frac{1}{2\pi\sigma^2}\frac{1}{2} (\frac{1}{\sigma^2})^{-3/2}\sqrt{\pi}
+            = \frac{1}{4\sqrt{\pi}\sigma^2} \sigma^3 = \frac{\sigma}{4\sqrt{\pi}} \\
+            || \hat x |\psi_{\sigma, x_0}\rangle - x_0 |\psi_{\sigma, x_0}\rangle|| &= \sqrt{\frac{\sigma}{4\sqrt{\pi}}} = \frac{\sqrt \sigma}{2\pi^{1/4}}
+        \end{align}\]
+        So, we see that:
+        \[\lim_{\sigma\to 0}|| \hat x |\psi_{\sigma, x_0}\rangle - x_0 |\psi_{\sigma, x_0}\rangle|| = \lim_{\sigma\to 0} \frac{\sqrt \sigma}{2\pi^{1/4}} = 0\]
+        As \(\sigma\to 0\), the spread of the Gaussian gets narrower and narrower, while the curve stays centered around \(x_0\).
+        We also see that 
+        \[\begin{align}
+            \int_{-\infty}^{\infty} \psi_{\sigma, x_0}(x) dx &= \frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{\infty} e^{-\frac{(x-x_0)^2}{2\sigma^2}} \\
+            &= \frac{\sqrt{2\pi\sigma^2}}{\sqrt{2\pi}\sigma} \\
+            &= 1
+        \end{align}\]
+        which tells us that, in fact, this Gaussian is approaching the Dirac delta, which jumps up to infinity at \(x_0\) (\(\psi_{\sigma, x_0}(x_0) = \frac{1}{\sqrt{2\pi}\sigma}\), which goes to \(\infty\) as \(\sigma\) gets small) and has an integral of 1.
+        <br><br>
+        For any other value of \(x\) that is not extremely close to \(x_0\), the Gaussian function returns 0, so we can say that as \(\sigma \to 0\), \(\langle x|x'\rangle = \delta(x-x')\), which reflects what we disccused earlier on this page.
+        We can also say that the probability of measuring a value that is extreme close (or equal to) \(x_0\) is 1.
+        <!-- \[\begin{align}
+            \hat P_{[x_0-\Delta x, x_0+\Delta x]} &= \int_{x_0-\Delta x}^{x_0-\Delta x} |x\rangle\langle x|dx \\
+            p_{[x_0-\Delta x, x_0+\Delta x]} &= || \hat P_{[x_0-\Delta x, x_0+\Delta x]}|\psi_{\sigma, x_0}\rangle ||^2  \\
+            &= \big\langle\int_{x_0-\Delta x}^{x_0-\Delta x} |x\rangle\langle x|\psi_{\sigma, x_0}\rangle dx | \int_{x_0-\Delta x}^{x_0-\Delta x} |x'\rangle\langle x'|\psi_{\sigma, x_0}\rangle dx' \big\rangle \\
+            &= \int_{x_0-\Delta x}^{x_0+\Delta x} \langle \psi_{\sigma, x_0}|x\rangle\langle x| dx \int_{x_0-\Delta x}^{x_0-\Delta x} |x'\rangle\langle x'|\psi_{\sigma, x_0}\rangle dx' \\
+            &= \cdots \\
+            &= \int_{x_0-\Delta x}^{x_0-\Delta x} \int_{x_0-\Delta x}^{x_0-\Delta x} \langle \psi_{\sigma, x_0}|x\rangle\langle x|x'\rangle\langle x'|\psi_{\sigma, x_0}\rangle dx dx' \\
+            &= \int_{x_0-\Delta x}^{x_0-\Delta x} \int_{x_0-\Delta x}^{x_0-\Delta x} \psi_{\sigma, x_0}^*(x)\delta(x-x') \psi_{\sigma, x_0}(x') dx dx' \\
+            &= \int_{x_0-\Delta x}^{x_0-\Delta x} \psi_{\sigma, x_0}^*(x)\delta(x-x') \psi_{\sigma, x_0}(x) dx \\
+            &= \int_{x_0-\Delta x}^{x_0+\Delta x} |\psi_{\sigma, x_0}(x)|^2 dx \\
+            &= \frac{1}{2\pi\sigma^2}\int_{x_0-\Delta x}^{x_0+\Delta x} e^{-\frac{(x-x_0)^2}{\sigma^2}} dx \\
+            &= \sigma\sqrt{\pi}\text{ erf}(\frac{\Delta x}{\sigma}) \\
+            \lim_{\sigma\to 0} \sigma\sqrt{\pi}\text{ erf}(\frac{\Delta x}{\sigma}) &= 
+        \end{align}\] -->
+    </div>
+  </body>
+</html>
+
+<!-- 
+\[\begin{align}\end{align}\]
+-->

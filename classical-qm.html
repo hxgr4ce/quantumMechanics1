@@ -46,7 +46,9 @@
                 \[\sum_x |x\rangle\langle x|=\hat{1}\]
                 because there is no discrete \(x\) to sum over. Instead, we have to say:
                 \[\hat{1}=\int_{-\infty}^{\infty} dx |x\rangle\langle x|\]
-                Clearly, the familiar \(|x\rangle\langle x|\) is no longer a projector, it is a <i>projector density</i>, \(\frac{d\hat{P}}{dt}\).
+                Clearly, the familiar \(|x\rangle\langle x|\) is no longer a projector, it is a <i>projector density</i>, \(\frac{d\hat{P}}{dx}\), which checks out when we do:
+                \[\hat{1}=\int_{-\infty}^{\infty} dx \frac{d\hat P}{dx} = \int_{-\infty}^{\infty} d\hat P\]
+                (as per the <a href=definitions.html#identity>resolution of identity</a>, the sum of all projectors equals the identity).
                 We also run into the following issue:
                 \[\begin{align}
                     |\psi\rangle=\hat{1}|\psi\rangle &= \int_{-\infty}^{\infty} dx |x\rangle\langle x|\psi\rangle \\
