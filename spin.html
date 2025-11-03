@@ -16,9 +16,9 @@
         <div class="mainContent">
             The <i>operators</i> for measuring spin (for spin \(=1/2\) particles such as electrons) in the \(x\), \(y\), and \(z\) directions are defined as:
             \[
-                S_x=\frac{\hbar}{2}\begin{pmatrix}0&1\\1&0\end{pmatrix},
-                S_y=\frac{\hbar}{2}\begin{pmatrix}0&-i\\i&0\end{pmatrix},
-                S_z=\frac{\hbar}{2}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+                \hat S_x=\frac{\hbar}{2}\begin{pmatrix}0&1\\1&0\end{pmatrix},
+                \hat S_y=\frac{\hbar}{2}\begin{pmatrix}0&-i\\i&0\end{pmatrix},
+                \hat S_z=\frac{\hbar}{2}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
             \]
             where the possible measured values are the eigenvalues of these operators, \(\pm\frac{\hbar}{2}\), and the corresponding eigenvectors are:
             \[
@@ -42,16 +42,16 @@
             You could start by defining states along some other axis in this exact way, but you would end up with a set of definitions in terms of that other axis.
             We also start by saying that the eigenvalues are \(\pm\frac{\hbar}{2}\), which we will just say we know as a fact because Dr. Argenti said so and I trust him implicitly...
             <hr>
-            As we know from our <a href="polarized.html">polarized light</a> analogy and our <a href="qmPostulates.html">quantum postulates</a>, observing the spin along the \(z\) axis (which is the action of operator \(S_z\)) acts as a <a href="definitions.html#projectors">projector</a> of the initial state into the eigenstates of \(S_z\).
+            As we know from our <a href="polarized.html">polarized light</a> analogy and our <a href="qmPostulates.html">quantum postulates</a>, observing the spin along the \(z\) axis (which is the action of operator \(\hat S_z\)) acts as a <a href="definitions.html#projectors">projector</a> of the initial state into the eigenstates of \(S_z\).
             <br><br>
-            So, if we apply \(S_z\) on a system in state \(\mid +\rangle\), we should observe a value of \(\frac{\hbar}{2}\), and if we apply \(S_z\) on a system in state \(\mid -\rangle\), we should observe a value of \(-\frac{\hbar}{2}\).
+            So, if we apply \(\hat S_z\) on a system in state \(\mid +\rangle\), we should observe a value of \(\frac{\hbar}{2}\), and if we apply \(\hat S_z\) on a system in state \(\mid -\rangle\), we should observe a value of \(-\frac{\hbar}{2}\).
             This means that we can simply define \(S_z\) as:
             \[
                 \frac{\hbar}{2} \mid +\rangle \langle+\mid - \frac{\hbar}{2} \mid -\rangle \langle-\mid
                 = \frac{\hbar}{2}\begin{pmatrix}1&0\\0&0\end{pmatrix}-\frac{\hbar}{2} \begin{pmatrix}0&0\\0&1\end{pmatrix}
                 = \frac{\hbar}{2}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
             \]
-            We can think of the elements of this matrix as \(\langle+\mid S_z\mid+\rangle\), \(\langle-\mid S_z\mid-\rangle\), and so on,
+            We can think of the elements of this matrix as \(\langle+\mid \hat S_z\mid+\rangle\), \(\langle-\mid \hat S_z\mid-\rangle\), and so on,
             where \(\langle+\mid +\rangle=\langle-\mid -\rangle=1\) and \(\langle+\mid -\rangle=\langle-\mid +\rangle=0\).
             <hr>
             From here, we define the spin states and operators in the \(x\) and \(y\) directions.
@@ -69,7 +69,7 @@
             <br><br>
             In terms of quantum mechanics: the phase factor \(e^{i\phi_\pm}\) is a scalar, so \(e^{i\phi_\pm}\mid\pm\rangle\) just scales a ket or bra. 
             This means the introduction of a phase factor does not change the expectation values of a Hermitian operator with respect to whatever new scaled state \(e^{i\phi_\pm}\mid\pm\rangle\) we have.
-            That is, the values of \(\langle\phi\mid A \mid\phi\rangle\) and \(\langle\psi\mid A \mid\psi\rangle\), where \(\mid\psi\rangle=e^{i\theta}\mid\phi\rangle\), are the same.
+            That is, the values of \(\langle\phi\mid \hat A \mid\phi\rangle\) and \(\langle\psi\mid \hat A \mid\psi\rangle\), where \(\mid\psi\rangle=e^{i\theta}\mid\phi\rangle\), are the same.
             <br><br>
             In even simpler terms, an eigenket modified by a phase factor is still an eigenket of that operator.
         </div>
@@ -130,9 +130,9 @@
             \]
             We then combine (2) and (3) to get the defintion at the top of this page: 
             \[\mid S_x,\pm\rangle = \frac{\mid +\rangle\pm\mid -\rangle}{\sqrt2}\]
-            We find the operator for \(S_x\) as we did for \(S_z\):
+            We find the operator for \(\hat S_x\) as we did for \(\hat S_z\):
             \[\begin{align}
-                S_x &= \frac{\hbar}{2} \mid S_x,+\rangle \langle S_x,+\mid - \frac{\hbar}{2} \mid S_x,-\rangle \langle S_x,-\mid \\
+                \hat S_x &= \frac{\hbar}{2} \mid S_x,+\rangle \langle S_x,+\mid - \frac{\hbar}{2} \mid S_x,-\rangle \langle S_x,-\mid \\
                 &= \frac{\hbar}{2}(\frac{\mid+\rangle+\mid-\rangle}{\sqrt2})(\frac{\langle+\mid+\langle-\mid}{\sqrt2})
                 -  \frac{\hbar}{2}(\frac{\mid+\rangle-\mid-\rangle}{\sqrt2})(\frac{\langle+\mid-\langle-\mid}{\sqrt2}) \\
                 &= \frac{\hbar}{4}(\mid+\rangle+\mid-\rangle)(\langle+\mid+\langle-\mid) - \frac{\hbar}{4}(\mid+\rangle-\mid-\rangle)(\langle+\mid-\langle-\mid) \\
@@ -145,7 +145,7 @@
             \[
                 \mid S_x, +\rangle\langle S_x,+\mid = \frac{\hbar}{2}\begin{pmatrix}0&1\\0&0\end{pmatrix}, \mid S_x, -\rangle\langle S_x,-\mid = \frac{\hbar}{2}\begin{pmatrix}0&0\\1&0\end{pmatrix} \implies S_x=\frac{\hbar}{2}\begin{pmatrix}0&1\\1&0\end{pmatrix}
             \]
-            Note that the non-zero elements of this matrix are \(\langle+\mid S_x\mid-\rangle=\frac{\hbar}{2}\) and \(\langle-\mid S_x\mid+\rangle=\frac{\hbar}{2}\)...
+            Note that the non-zero elements of this matrix are \(\langle+\mid \hat S_x\mid-\rangle=\frac{\hbar}{2}\) and \(\langle-\mid \hat S_x\mid+\rangle=\frac{\hbar}{2}\)...
             <hr>
             We finally turn our attention to the states \(\mid S_y,\pm\rangle\).
             Similar to the previous demonstration, we write:
@@ -189,11 +189,11 @@
             because \(e^{i\frac{\pi}{2}}=\cos(\frac{\pi}{2})+i\sin(\frac{\pi}{2})=0+i=i\).
             Now we can write 
             \[\mid S_y,\pm\rangle = \frac{\mid+\rangle\pm i\mid-\rangle}{\sqrt2}\]
-            Note that <i>because</i> we define the eigenvalues and eigenvectors of \(S_x\) (and \(S_z\), since we could have done the above derivation with \(\mid\langle S_z, +\mid S_y, \pm\rangle\mid^2\) instead...) to be real, the eigenvectors of \(S_y\) are imaginary.
+            Note that <i>because</i> we define the eigenvalues and eigenvectors of \(\hat S_x\) (and \(\hat S_z\), since we could have done the above derivation with \(\mid\langle S_z, +\mid S_y, \pm\rangle\mid^2\) instead...) to be real, the eigenvectors of \(S_y\) are imaginary.
             <br><br>
-            The matrix for the operator \(S_y\) then is:
+            The matrix for the operator \(\hat S_y\) then is:
             \[\begin{align}
-                S_y &= \frac{\hbar}{2} \mid S_y,+\rangle \langle S_y,+\mid - \frac{\hbar}{2} \mid S_y,-\rangle \langle S_y,-\mid \\
+                \hat S_y &= \frac{\hbar}{2} \mid S_y,+\rangle \langle S_y,+\mid - \frac{\hbar}{2} \mid S_y,-\rangle \langle S_y,-\mid \\
                 &= \frac{\hbar}{2}(\frac{\mid+\rangle+i\mid-\rangle}{\sqrt2})(\frac{\langle+\mid-i\langle-\mid}{\sqrt2})
                 -  \frac{\hbar}{2}(\frac{\mid+\rangle-i\mid-\rangle}{\sqrt2})(\frac{\langle+\mid+i\langle-\mid}{\sqrt2}) \\
                 &= \frac{\hbar}{4}(\mid+\rangle+i\mid-\rangle)(\langle+\mid-i\langle-\mid) - (\mid+\rangle-i\mid-\rangle)(\langle+\mid+i\langle-\mid) \\
@@ -206,13 +206,13 @@
                 \mid S_y, -\rangle\langle S_y,-\mid = \frac{\hbar}{2}\begin{pmatrix}0&0\\i&0\end{pmatrix} 
                 \implies S_y=\frac{\hbar}{2}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
             \]
-            Note that the non-zero elements of this matrix are \(\langle+\mid S_y\mid-\rangle=-i\) and \(\langle-\mid S_y\mid+\rangle=i\)...
+            Note that the non-zero elements of this matrix are \(\langle+\mid \hat S_y\mid-\rangle=-i\) and \(\langle-\mid \hat S_y\mid+\rangle=i\)...
             <hr>
             If you know anything about the Pauli matrices, we can say:
             \[
-                S_x=\frac{\hbar}{2}\sigma_1,
-                S_y=\frac{\hbar}{2}\sigma_2,
-                S_z=\frac{\hbar}{2}\sigma_3
+                \hat S_x=\frac{\hbar}{2}\sigma_1,
+                \hat S_y=\frac{\hbar}{2}\sigma_2,
+                \hat S_z=\frac{\hbar}{2}\sigma_3
             \]
         </p>
     </div>

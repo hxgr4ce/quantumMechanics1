@@ -236,7 +236,7 @@
             A Hilbert space is an inner product space that is also a <a href="rqCompleteness.html#metricIncompleteness">metric space</a> with respect to distance induced by the <a href="#norm">norm</a>.
             As a result, unlike Euclidean space (which is at most three-dimensional), it can describe infinite dimensional spaces.
             <br><br>
-            A Hilbert space space is <i>separable</i> if and only if it has a countable orthonormal basis. 
+            A Hilbert space space is <i>separable</i> if and only if it has a countable orthonormal basis.
         </div>
         <p>
             <u>Note</u>: Most of the Hilbert spaces in quantum mechanics are separable, thus are all isomorphic to each other.
@@ -244,6 +244,10 @@
             And since they're infinite dimensional and have a countable basis, this means their bases are countably infinite!)
             <br><br>
             So some people call all infinite-dimensional separable Hilbert space "the Hilbert space" or just "Hilbert space".
+            <br><br>
+            Once we get into operators with continuous, unbounded spectrums, the Hilbert space is isomorphic to \(L^2(\mathbb{R})\) (at least, in 1D), which is the set of functions \(f(x)\) where
+            \[\int_{-\infty}^{\infty}dx|f(x)|^2\lt\infty\]
+            Given a self-adjoint operator \(\hat{X}\) with non-degenerate, absolutely continuous spectrum equal to \(\mathbb{R}\), the spectral theorem establishes a specific isomorphism between \(H\) and \(L^2(\mathbb{R})\), \(|\psi\rangle \mapsto \psi(x)\), so \(\hat{X}\) in the \(L^2(\mathbb{R})\) space becomes the multiplicative operator "\(x \cdot\)" for eigenvalues \(x\) (which in this case is any value in \(\mathbb{R}\)).
         </p>
         <h2 id="adjoint">Adjoint</h2>
         <div class="mainContent">
