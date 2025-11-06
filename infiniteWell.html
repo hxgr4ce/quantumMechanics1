@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Infinite Potential Well</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </head>
+    <body>
+        <div class="mainContent">
+            <h1>Infinite Potential Well</h1>
+            Say that we have a particle moving in one dimension with the following potential:
+            \[V(x)=
+            \begin{cases}
+                \infty & x \lt 0 \cap x \gt L \\
+                0 & 0 \lt x \lt L
+            \end{cases}\]
+            <div style="width:100%; text-align: center;">
+                <svg style="width:200px; height:150px;">
+                    <line x1="25" y1="100" x2="175" y2="100" stroke="black" stroke-width="1" marker-end="url(#arrow)"></line> 
+                    <line x1="100" y1="100" x2="100" y2="10" stroke="black" stroke-width="1" marker-end="url(#arrow)"></line> 
+
+                    <line x1="50" y1="10" x2="50" y2="100" stroke="black" stroke-width="2"></line> 
+                    <line x1="150" y1="10" x2="150" y2="100" stroke="black" stroke-width="2"></line>
+                    <line x1="50" y1="100" x2="150" y2="100" stroke="black" stroke-width="2"></line>
+                    
+                    <text x="190" y="100" font-size="15">x</text>
+                    <text x="110" y="20" font-size="15">V(x)</text>
+                    <text x="25" y="50" font-size="15">∞</text>
+                    <text x="160" y="50" font-size="15">∞</text>
+                    <text x="40" y="120" font-size="15">0</text>
+                    <text x="140" y="120" font-size="15">L</text>
+                    <defs>
+                        <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L6,3 L0,6 Z" fill="black"></path>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            This is our <a href="finiteWell.html">finite well</a> scenario where \(\lim_{V_0\to\infty}\) (and is also called the particle in the box scenario).
+            Evidently, this is not as realistic as the finite well, but it (according to Wikipedia) "describes the movement of a free particle in a small space surrounded by impenetrable barriers. 
+            The model is mainly used as a hypothetical example to illustrate the differences between classical and quantum systems".
+            <br><br>
+            In the locations where \(V_0=\infty\), the potential becomes infinitely repelling, meaning that a particle is incredibly unlikely to be found there; in fact, it is impossible.
+            This means that in these regions (where \(x\lt 0\) and \(x \gt L\)), the wavefunction (and its squared modulus) must be 0, and there cannot be continuity at these boundaries.
+            We are now working not in \(L^2(\mathbb{R})\), but in \(L^2([0,L])\).
+            This leads to a couple problems, which we will mention later...
+            <br><br>
+            What are the eigenstates of \(\hat H\)?
+            We have the condition that \(\psi(0) = \psi(L) = 0\), and that \(\psi'(0^+) \neq 0, \psi'(L^-) \neq 0\).
+            As before, we start with \(\hat H|\psi\rangle = E|\psi\rangle\) and add \(\langle x|\), so we see it in the Schroedinger representation (or position-space representation, as we're just looking at the operators/states in the position basis).
+            Thus we have the following:
+            <!-- \[\begin{cases}
+                -\frac{\hbar^2}{2m}\frac{d^2}{dx^2} \psi(x) = E\psi(x) \\
+                \psi(0) = \psi(L) = 0
+            \end{cases}\] -->
+            \[\begin{align}
+                \langle x|\hat H|\psi\rangle &= \langle x|E|\psi\rangle \\
+                -\frac{\hbar^2}{2m}\frac{d^2}{dx^2} \psi(x) &= E\psi(x) \\
+                \frac{d^2}{dx^2} \psi(x) &= -\frac{2m}{\hbar^2} E\psi(x) \\
+                \psi^"(x) &= -\frac{2m}{\hbar^2} E\psi(x) \\
+                \psi^"(x) + \frac{2m}{\hbar^2} E\psi(x) &= 0 \\
+                \text{Say } k = \sqrt{\frac{2mE}{\hbar^2}} \text{:  }
+                \psi^"(x) + k^2\psi(x) &= 0
+            \end{align}\]
+            which has the solution
+            \[\psi = A\sin(kx) + B\cos(kx)\]
+            This is the same solution that we got for the finite well, scenario II.
+            <br><br>
+            Because \(\psi(0)=0\), and \(\cos(0) \neq 0\), we have to set \(B=0\).
+            Because \(\psi(L)=0\), we need to make \(A\sin(kL)=0\) without setting \(A=0\) (else we would have a 0 vector which cannot be an eigenvector by definition).
+            Thus, we say that \(kL = n\pi, k_n = \frac{n\pi}{L}\).
+            \(n \neq 0\) lest we get the zero vector, and note that \(\sin(-x) = -\sin(x)\), so a negative value of \(n\) gives us no new information that we got from positive \(n\).
+            We can then define \(n\in\mathbb{N} = 1, 2, \cdots\).
+            <br><br>
+            Now, \(\psi_n(x) = A_n\sin(k_nx) = A_n\sin(\frac{n\pi}{L} x), n\in\mathbb{N}\).
+            We still need to determine what \(A\) is, however, which we do as follows:
+            \[\begin{align}
+                1 &= \langle \psi_n | \psi_n \rangle \\
+                &= \int_0^L (A_n\sin(\frac{n\pi}{L} x))^*(A_n\sin(\frac{n\pi}{L} x)) dx \\
+                &= \int_0^L A_n^2\sin^2(\frac{n\pi}{L} x) dx \\
+                &= A_n^2 \int_0^L \sin^2(\frac{n\pi}{L} x) dx  = A_n^2 \frac{1}{2}\big[x - \frac{L}{2n\pi}\sin(\frac{2n\pi}{L}x) \big]_0^L \\
+                &= A_n^2 \frac{1}{2}(L - \frac{L}{2n\pi}\sin(2n\pi) - \frac{L}{2n\pi}\sin(0) ) \\
+                1 &= A_n^2\frac{L}{2} \\
+                A_n &= \sqrt{\frac{L}{2}}
+            \end{align}\]
+            giving us the final solution that \(\psi_n(x) = \sqrt{\frac{L}{2}}\sin(\frac{n\pi}{L} x), n\in\mathbb{N}\)
+            <br><br>
+            Previously we defined \(k = \sqrt{\frac{2mE}{\hbar^2}}\), and now we know that \(k_n = \frac{n\pi}{L}\), so we can define energy eigenvalue \(E_n\) as:
+            \[\begin{align}
+                \sqrt{\frac{2mE_n}{\hbar^2}} &= \frac{n\pi}{L} \\
+                \frac{2mE_n}{\hbar^2} &= \frac{n^2\pi^2}{L^2} \\
+                E_n &= \frac{n^2\pi^2\hbar^2}{2mL^2} = \frac{\pi^2\hbar^2}{2mL^2} n^2 \\
+            \end{align}\]
+            and since \(\frac{\pi^2\hbar^2}{2mL^2}\) is simply some constant value, we can say that \(E_n\) increases quadratically with \(n\).
+            <p>We also know that for a fixed \(n\), eigenstate \(\psi(x)\) is a sinusoid that looks like the following:</p>
+            <div style="width: 100%; text-align: center;">
+                <img style="width: 23%;" src="images/n1.png">
+                <img style="width: 23%;" src="images/n2.png">
+                <img style="width: 23%;" src="images/n3.png">
+                <img style="width: 23%;" src="images/n4.png">
+            </div>
+            <p style="text-align: center;"><i>Fig 1. From left to right, \(\psi(x)\) for \(n=1, n=2, n=3,\) and \(n=4\).</i></p>
+            Notice how the number of nodes increases linearly with \(n\), and that states are alternatingly even or odd!
+            We could have seen this right off the bat, if we had chosen to center our infinite well around 0 instead of \(\frac{L}{2}\), in which case the parity operator \(\hat \Pi\) commutes with \(\hat H\), and we can follow the same line of reasoning that we did for the finite potential well.
+            <br><br>
+            Additionally, each \(n\) produces one unique eigenvalue, since we said \(n\in\mathbb{N}\), and one unique \(\psi(x)\), indicating that these states are non-degenerate.
+            We can then write
+            \[\hat H = \sum_{\lambda \in \sigma(\hat H)}\lambda\hat P_\lambda = \sum_{n=1}^\infty E_n|\psi_n\rangle\langle\psi_n|\]
+            \[\hat U(t) = e^{-i\hat H t/\hbar} = \sum_{n=1}^\infty e^{-iE_n t/\hbar} |\psi_n\rangle\langle\psi_n|\]
+            which makes it apparent that at very special times, \(e^{-iE_n t/\hbar} = 1\).
+            If we define the time \(T=\frac{4mL^2}{\pi\hbar}\), then the exponent becomes
+            \[-iE_n t/\hbar = -iE_n \frac{4mL^2}{\pi\hbar}/\hbar = -i \frac{\pi^2\hbar^2}{2mL^2} n^2 \frac{4mL^2}{\pi\hbar}/\hbar = -i 2\pi n^2 \]
+            Clearly, \(e^{-i 2\pi n^2} = {e^{i \pi }}^{-2n^2} = (-1)^{-2n^2} = 1^{-n^2} = 1 \), so
+            \[\hat U(T) = \sum_{n=1}^\infty e^{-iE_n T/\hbar} |\psi_n\rangle\langle\psi_n|= \sum_{n=1}^\infty |\psi_n\rangle\langle\psi_n| = \hat 1\]
+            which means that at very special times, the state evolves back to the original state! 
+            This is called <a href="https://en.wikipedia.org/wiki/Quantum_revival">revival</a>.
+            <br><br>
+            A little more about the dynamics of this system:
+            \(|\psi_n\rangle\) are <a href="dynamics.html#stationary">stationary states</a>, but the system can also be in a linear combination of states \(\sum_n c_n |\psi_n\rangle\), which means it moves around/evolves as time passes.
+            Say that we have initial state:
+            \[|\psi(t=0)\rangle = \frac{1}{\sqrt 2} (|\psi_1\rangle + |\psi_2\rangle)\]
+            whose wavefunction looks a little like the following:
+            <div style="width: 100%; text-align: center;">
+                <img style="width: 23%;" src="images/comboinit.png">
+            </div>
+            <p style="text-align: center;"><i>Fig 2. \(\psi_1(x)\) (blue), \(\psi_2(x)\) (red) and \(\psi(x) = \psi_1(x)+\psi_2(x)\) (purple).</i></p>
+            Notice that we no longer have an even or odd function: the wavefunction peaks more on the left side of the box than the right, indicating that the particle is more likely to be on the left side of the box.
+            At some time \(t\), this system will be in state:
+            \[
+                |\psi(t)\rangle = \frac{1}{\sqrt 2}e^{-iE_nt\hbar} (|\psi_1\rangle + e^{-i\omega_{21}t}|\psi_2\rangle)
+            \]
+            And, if this time \(t\) is specifically \(\frac{\pi}{\omega_{21}}\), then 
+            \[\begin{align}
+                |\psi(t)\rangle &= \frac{1}{\sqrt 2}e^{-iE_nt\hbar} (|\psi_1\rangle + e^{-i\pi}|\psi_2\rangle) \\
+                &= \frac{1}{\sqrt 2}e^{-iE_nt\hbar} (|\psi_1\rangle - |\psi_2\rangle)
+            \end{align}\]
+            where \(e^{-iE_nt\hbar}\) is some scalar value.
+            At this point, the wave function would look approximately like:
+            <div style="width: 100%; text-align: center;">
+                <img style="width: 23%;" src="images/combolater.png">
+            </div>
+            <p style="text-align: center;"><i>Fig 3. \(\psi_1(x)\) (blue), \(\psi_2(x)\) (red) and \(\psi_1(x)-\psi_2(x)\) (purple).</i></p>
+            which is clearly skewed more to the right than the left, now.
+            Intuitively, we understand this change as a result of the particle bouncing back and forth off of the sides of the box.
+            <br><br>
+            We now discuss the expectation values for such a state after some time \(t\) has passed.
+            \[\begin{align}
+                \langle\hat x\rangle_{\psi(t)} &= \frac{1}{2} (\langle\psi_1| + e^{i\omega_{21}t} \langle\psi_2|) \hat x (|\psi_1\rangle + e^{-i\omega_{21}t}|\psi_2\rangle) \\
+                &= \frac{1}{2} (\langle\psi_1|\hat x |\psi_1\rangle + e^{i\omega_{21}t} \langle\psi_2|\hat x|\psi_1\rangle + \langle\psi_1|\hat x e^{-i\omega_{21}t}|\psi_2\rangle + e^{i\omega_{21}t} \langle\psi_2| \hat x  e^{-i\omega_{21}t}|\psi_2\rangle) \\
+                &= \frac{1}{2} (\langle\psi_1|\hat x |\psi_1\rangle + e^{i\omega_{21}t} \langle\psi_2|\hat x|\psi_1\rangle + e^{-i\omega_{21}t} \langle\psi_1| \hat x |\psi_2\rangle + \langle\psi_2| \hat x |\psi_2\rangle) \\
+                &= \frac{1}{2} (\frac{L}{2} + e^{i\omega_{21}t} \langle\psi_2|\hat x|\psi_1\rangle + (e^{i\omega_{21}t} \langle\psi_2|\hat x|\psi_1\rangle)^* + \frac{L}{2} ) \\
+                &= \frac{1}{2} (L + 2Re\{e^{i\omega_{21}t} \langle\psi_2|\hat x|\psi_1\rangle\}) \\
+                &= \frac{1}{2} (L + 2\langle\psi_2|\hat x|\psi_1\rangle \cos(\omega_{21}t)) \\
+                &= \frac{L}{2} + \langle\psi_2|\hat x|\psi_1\rangle \cos(\omega_{21}t) \\
+            \end{align}\]
+            The term \(\langle\psi_2|\hat x|\psi_1\rangle\) is the matrix element that is equal to:
+            \[\begin{align}
+                \langle\psi_2|\hat x|\psi_1\rangle &= \int_{0}^L dx \langle\psi_2|\hat x|x\rangle\langle x|\psi_1\rangle \\
+                &= \int_{0}^L \int_{0}^L dx dx' \langle\psi_2|x'\rangle\langle x'|\hat x|x\rangle\langle x|\psi_1\rangle \\
+                &= \int_{0}^L \int_{0}^L dx dx' \psi_2(x') x\langle x'|x\rangle \psi_1(x) \\
+                &= \int_{0}^L dx \psi_2(x) x \psi_1(x) \\
+                &= \int_{0}^L dx \sqrt{\frac{2}{L}} \sin(\frac{2\pi}{L}x) x \sqrt{\frac{2}{L}} \sin(\frac{\pi}{L}x) \\
+                &= \frac{2}{L}\int_{0}^L dx x \sin(\frac{2\pi}{L}x) \sin(\frac{\pi}{L}x) \\
+            \end{align}\]
+            though, I'm not going to work the whole thing out...
+            <br><br>
+            Finally, in this scenario, \(\hat H^{-1}\) is also well-defined:
+            \[\hat H^{-1} = \sum \frac{1}{E_n}|\psi_n\rangle\langle\psi_n|\]
+            and has the same eigenstates as \(\hat H\), however, its discrete eigenvalues vary as \(\frac{1}{n^2}\), and so converge, rather than diverge.
+            this means that \(\hat H^{-1}\) is a compact operator, and it is the simplest case where you can demonstrate the spectral theorem.
+            <hr>
+            <p>As mentioned before, there are a few problems with the particle in a box scenario.
+            Say that we have some arbitrary \(\psi(x)\), pictured below, and we want to know the probability of finding a particle within the interval \([a,b]\).</p>
+            <div style="width: 100%; text-align: center;">
+                <img style="width: 23%;" src="images/arb.png">
+            </div>
+            <p style="text-align: center;"><i>Fig 4. Some arbitrary \(\psi(x)\) (purple), and \(x=a\) and \(x=b\) for some arbitrary \(a\) and \(b\) (orange).</i></p>
+            From our <a href="qmPostulates.html">quantum postulates</a>, we know that this is (for a normalized \(\psi(x)\))
+            \(\langle \psi | \hat P_{[a,b]}|\psi\rangle\)
+            where the (position space) projector is
+            \(\hat P_{[a,b]} = \int_a^b dx|x\rangle\langle x|\).
+            Then, the probability is \(\int_a^b dx |\psi(x)|^2\).
+            <br><br>
+            But what is the state of the system after this measurement?
+            \[|\psi\rangle \to |\psi'\rangle = \hat P_{[a,b]}|\psi\rangle\]
+            \[\psi'(x) = \langle x |\int_a^b dx'|x'\rangle\langle x'|\psi\rangle = \int_a^b dx'\delta(x-x') \langle x'|\psi\rangle \]
+            If we're evaluating \(\psi'(x)\) at \(x\notin [a,b]\), then the entire integral comes out to 0.
+            If \(x\in [a,b]\), then we have \(\langle x'|\psi\rangle\), so simply \(\psi(x)\).
+            This means that our wavefunction now looks like this!
+            \[\psi'(x) = 
+                \begin{cases}
+                    0 & x\notin[a,b]\\
+                    \psi(x) & x\in[a,b]
+                \end{cases}
+            \]
+            <div style="width: 100%; text-align: center;">
+                <img style="width: 23%;" src="images/trunc.png">
+            </div>
+            <p style="text-align: center;"><i>Fig 5. The "truncated" function after measurement.</i></p>
+            Now the function is discontinuous on \([0,L]\), and not in the domain of \(\hat H\) anymore!
+            If we want to, we can still find the expectation value:
+            \[\begin{align}
+                \frac{\langle\hat H\rangle_{\psi'}}{\langle\psi'|\psi'\rangle} &= \frac{\sum_{n=0}^\infty E_n | \langle\psi_n|\psi_n\rangle | ^2}{\int_a^b|\psi|^2 dx}
+            \end{align}\]
+            as \(E_n\) is proportional to \(n^2\), it diverges faster than \(| \langle\psi_n|\psi_n\rangle | ^2\), which means that the entire thing diverges; the measurement puts the system into a state with infinite energy.
+            You could even attempt to use the time evolution operator on it (as unitary \(\hat U(t)\) is defined everywhere), but we would get stuck at \(|\psi'(t)\rangle = \sum_n e^{-i\hat H t/\hbar |\psi_n\rangle\langle\psi_n\psi'\rangle}\) because we can't apply the \(\langle x|\) to represent in the position basis, for Schoedinger's representation.
+            In summary, things get a little tricky, and the quantum postulates are somewhat idealistic, but it seems like we don't talk about that until Quantum Mechanics 2...
+            <hr>
+            The next problem is this:
+            We know that the momentum operator in the position basis is \(\langle x|\hat p = -i\hbar\frac{d}{dx}\langle x|\).
+            <i>This is not an observable anymore</i>.
+            Say that we have function \(\phi\) and state \(\psi\). Then, if we integrate by parts:
+            \[\begin{align}
+                \langle\phi|\hat p|\psi\rangle &= \int_0^L -i\hbar \phi^*\frac{d}{dx}\psi dx = -i\hbar\big[\phi^*(x)\psi(x)\big]_0^L + i\hbar\int_0^L\psi \frac{d}{dx}\phi^* dx \\
+                &= -i\hbar\big[\phi^*(x)\psi(x)\big]_0^L + (-i\hbar\int_0^L \psi^* \frac{d}{dx}\phi dx)^* \\
+                &= -i\hbar\big[\phi^*(x)\psi(x)\big]_0^L + \langle\psi|\hat p|\phi\rangle^* \\
+            \end{align}\]
+            We know that any state must satisfy the boundary conditions that \(\psi(0)=\psi(L)=0\), so \(-i\hbar\big[\phi^*(x)\psi(x)\big]_0^L = 0\).
+            Thus we have that \(\langle\phi|\hat p|\psi\rangle = \langle\psi|\hat p|\phi\rangle^*\) which means the adjoint of \(\hat p\) <i>is</i> defined, but recall that to be <i>self</i>-adjoint, an operator needs to have the same domain as its adjoint.
+            <br><br>
+            The domain of \(\hat p\) is defined by \(|\psi\rangle\) (since we do \(\hat p|\psi\rangle\)... \(|\psi\rangle\) is the input to \(\hat p\)), which is in \(L^2([0,L])\) <i>only</i>. 
+            But the domain of \(\hat p^\dagger\) is defined by \(|\phi\rangle\), which is not restricted at all (it just needs to be continuous and square integrable on \([0,L]\)).
+            It follows that the domain of \(\hat p^\dagger\) is broader than the domain of \(\hat p\).
+            This is an example of an operator being <i>Hermitian but not self-adjoint</i>.
+            <br><br>
+            Physically you may be able to gain an intuition for this by thinking about the <a href="qmDefs.html#ops">eigenstates of \(\hat p\)</a>. 
+            Recall that these are (in the position basis) \(\frac{e^{ipx/\hbar}}{\sqrt{2\pi\hbar}}\).
+            If we want our system to be in an eigenstate of position, then, we need to satisfy the boundary conditions so \(\frac{e^{ip0/\hbar}}{\sqrt{2\pi\hbar}} = \frac{e^{ipL/\hbar}}{\sqrt{2\pi\hbar}} = 0 \)
+            This is clearly impossible, since the exponential function alone never equals 0.
+            Because it is impossible to be in a momentum eigenstate, it is impossible to measure momentum.
+            (Note that this is not the case for the <i>finite</i> potential well, though.)
+            <br><br>
+            Similarly, the translation operator \(\hat T_{\Delta x}\) is not unitary anymore, either, because it can shift a (position) wavefunction completely outside of \([0,L]\), which is not allowed...
+            As a result it is not surjective, and so it is not unitary.
+        </div>
+    </body>
+</html>
