@@ -23,9 +23,14 @@
                 \hat{U}(t) &= e^{-it \hat{H}/\hbar} \\
                 |\psi(t)\rangle &= e^{-it \hat{H}/\hbar} |\psi(0)\rangle \\ 
                 |\psi(t+dt)\rangle &= e^{-idt \hat{H}/\hbar} |\psi(t)\rangle \\ 
-                &= |\psi(t)\rangle + dt\frac{\partial}{\partial t}|\psi(t)\rangle \\
+                &= |\psi(t)\rangle + dt\frac{\partial}{\partial t}|\psi(t)\rangle \tag{a} \\
                 &= |\psi(t)\rangle + dt\frac{\partial}{\partial t}e^{-it \hat{H}/\hbar} |\psi(0)\rangle \\
-                &= |\psi(t)\rangle i\hat{H}\frac{dt}{\hbar}|\psi(t)\rangle \\
+                &= |\psi(t)\rangle - i\hat{H}\frac{dt}{\hbar}|\psi(t)\rangle \tag{b}
+            \end{align}\]
+            Setting (a) and (b) equal to each other gives:
+            \[\begin{align}
+                |\psi(t)\rangle + dt\frac{\partial}{\partial t}|\psi(t)\rangle &= |\psi(t)\rangle - i\hat{H}\frac{dt}{\hbar}|\psi(t)\rangle \\
+                \frac{\partial}{\partial t}|\psi(t)\rangle &= - \frac{i}{\hbar}\hat{H}|\psi(t)\rangle \\
                 i\hbar\frac{\partial}{\partial t}|\psi(t)\rangle &= \hat{H}|\psi(t)\rangle
             \end{align}\]
             which recovers the Schroedinger equation.
