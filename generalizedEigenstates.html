@@ -13,24 +13,26 @@
   <body>
     <div class="mainContent">
         <h1>Generalized Eigenstates</h1>
-        When we transitioned to quantum mechanics, we saw that we work with <a href="classical-qm.html">generalized eigenstates</a>; mathematical devices that are not normalizable, nor in the Hilbert space, and do not represent a physical quantum state.
+        <b><i>Generally, what are generalized eigenstates?</i></b> When we transitioned to quantum mechanics, we saw that we work with <a href="classical-qm.html">generalized eigenstates</a>; mathematical devices that are not normalizable, nor in the Hilbert space, and do not represent a physical quantum state.
         <br><br>
-        Instead, they let us map states in a Hilbert space, \(|\psi\rangle\) to functions that are square integrable, e.g. \(\langle p|\psi\rangle, \langle x|p\rangle \in L^2(\mathbb{R})\) for generalized eigenstates \(|x\rangle\) and \(|p\rangle\) such that \(\hat x|x\rangle = x|x\rangle\) and \(\hat p|p\rangle = p|p\rangle\).
+        Instead, they let us map states in an abstract Hilbert space, \(|\psi\rangle\) to functions that are square integrable, e.g. \(\langle p|\psi\rangle, \langle x|\psi\rangle \in L^2(\mathbb{R})\) for generalized eigenstates \(|x\rangle\) and \(|p\rangle\) such that \(\hat x|x\rangle = x|x\rangle\) and \(\hat p|p\rangle = p|p\rangle\).
         (See note <a href="definitions.html#hilbert">here</a> about how the Hilbert space is isomorphic to the space \(L^2(\mathbb{R})\).)
-        On their own, these square integrable wavefunctions still do not really describe any physical state, however, the modulus squared of a wavefunction tells us about the probability of a system yielding some eigenvalue after measurement (hence, they have to have be square integrable, lest our total probability no longer equal 1).
         <br><br>
-        Given that we know \(|\psi\rangle \in H\), and that \(\int_{-\infty}^\infty dx |x\rangle\langle x|=\hat 1\), 
-        \[\int_{-\infty}^\infty dx |x\rangle\langle x|\psi\rangle = \int_{-\infty}^\infty dx |x\rangle \psi(x) \in H\]
-        (even if \(\langle x|\psi\rangle = \psi(x)\) is not!)
+        On their own, these square integrable wavefunctions still do not really directly describe any physical state like \(|\psi\rangle\in H\), however, the modulus squared of a wavefunction \(|\psi(x)|^2\) tells us about the probability of a system yielding some eigenvalue after measurement (hence, they have to have be square integrable, lest our total probability no longer equal 1), which we discuss later on this page <a href="#prob">here</a>.
         <br><br>
-        Taking a look into the relationship between \(\langle p|\psi\rangle = \phi_\psi(p) = \phi(p)\) and \(\langle x|\psi\rangle = \psi_\psi(x) = \psi(x)\):
+        <b><i>We can still use generalized eigenstates to represent an arbitrary quantum state</i></b>. Given that we know \(|\psi\rangle \in H\), and that \(\int_{-\infty}^\infty dx |x\rangle\langle x|=\hat 1\), 
+        \[|\psi\rangle = \int_{-\infty}^\infty dx |x\rangle\langle x|\psi\rangle = \int_{-\infty}^\infty dx |x\rangle \psi(x) \in H\]
+        which is reminiscent of the representation of an arbitrary \(|\psi\rangle = \sum_{\lambda\in\sigma(\hat A)} c_\lambda |\lambda\rangle\) that we used previously (when discussing linear algebra) when we had a finite set of discrete eigenstates \(|\lambda\rangle\) for some operator \(\hat A\).
+        <br><br>
+        <b><i>Moving between position and momentum wavefunction</i></b>. The relationship between momentum wavefunction \(\langle p|\psi\rangle = \phi_\psi(p) = \phi(p)\) and position wavefunction \(\langle x|\psi\rangle = \psi_\psi(x) = \psi(x)\) is as follows:
         \[\begin{align}
             \phi_\psi(p) = \phi(p) = \langle p|\psi\rangle &= \int_{-\infty}^\infty dx \langle p|x\rangle\langle x|\psi\rangle \\
             &= \int_{-\infty}^\infty dx \frac{1}{\sqrt{2\pi\hbar}}e^{-ipx/\hbar}\psi(x) \tag{1} \\
             \psi_\psi(x) = \psi(x) = \langle x|\psi\rangle &= \int_{-\infty}^\infty dp \langle x|p\rangle\langle p|\psi\rangle \\
-            &= \int_{-\infty}^\infty dp \frac{1}{\sqrt{2\pi\hbar}}e^{ipx/\hbar}\phi(x) \tag{2}
+            &= \int_{-\infty}^\infty dp \frac{1}{\sqrt{2\pi\hbar}}e^{ipx/\hbar}\phi(p) \tag{2}
         \end{align}\]
         where (1) is the Fourier transform of \(\psi(x)\) to momentum space and (2) is the inverse Fourier Transform back to position space.
+        Note that we have already demonstrated what \(\langle x|p\rangle\) is <a href="dynamics.html#momStateinPosBasis">here</a>.
         <br><br>
         We can also substitute (2) into (1) to get:
         \[
@@ -154,7 +156,7 @@
             \end{align}\]
             fits this form, which I suppose further reinforces that the above expression is equal to \(\psi(x)\).
         </p>
-        <h2>Generalized Eigenstates and Probability</h2>
+        <h2 id="prob">Generalized Eigenstates and Probability</h2>
         We now know a little bit more about the mathematical form of the wave functions that generalized eigenstates can create.
         Do they have any physical meaning?
         <br><br>
