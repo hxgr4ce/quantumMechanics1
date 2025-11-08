@@ -22,6 +22,8 @@
         <br><br>
         <b><i>We can still use generalized eigenstates to represent an arbitrary quantum state</i></b>. Given that we know \(|\psi\rangle \in H\), and that \(\int_{-\infty}^\infty dx |x\rangle\langle x|=\hat 1\), 
         \[|\psi\rangle = \int_{-\infty}^\infty dx |x\rangle\langle x|\psi\rangle = \int_{-\infty}^\infty dx |x\rangle \psi(x) \in H\]
+        and similarly we can also write that
+        \[|\psi\rangle = \int_{-\infty}^\infty dp |p\rangle\langle p|\psi\rangle = \int_{-\infty}^\infty dp |p\rangle \phi(p) \in H\]
         which is reminiscent of the representation of an arbitrary \(|\psi\rangle = \sum_{\lambda\in\sigma(\hat A)} c_\lambda |\lambda\rangle\) that we used previously (when discussing linear algebra) when we had a finite set of discrete eigenstates \(|\lambda\rangle\) for some operator \(\hat A\).
         <br><br>
         <b><i>Moving between position and momentum wavefunction</i></b>. The relationship between momentum wavefunction \(\langle p|\psi\rangle = \phi_\psi(p) = \phi(p)\) and position wavefunction \(\langle x|\psi\rangle = \psi_\psi(x) = \psi(x)\) is as follows:
@@ -34,7 +36,7 @@
         where (1) is the Fourier transform of \(\psi(x)\) to momentum space and (2) is the inverse Fourier Transform back to position space.
         Note that we have already demonstrated what \(\langle x|p\rangle\) is <a href="dynamics.html#momStateinPosBasis">here</a>.
         <br><br>
-        We can also substitute (2) into (1) to get:
+        We can also substitute (1) into (2) to get:
         \[
             \psi(x) = \int_{-\infty}^\infty dp \frac{1}{\sqrt{2\pi\hbar}}e^{ipx/\hbar} \int_{-\infty}^\infty dx' \frac{1}{\sqrt{2\pi\hbar}}e^{-ipx'/\hbar}\psi(x')
         \]
@@ -57,8 +59,10 @@
         (note that when we split the integral into positive and negative portions, we flip the sign of the exponential term \(-\lambda p/\hbar \to \lambda p/\hbar\) in the negative portion because the bounds of integration would make \(p\) negative, but in that specific term we want it to be positive).
         \[\begin{align}
             \int_{-\infty}^\infty dp e^{ip(x-x')/\hbar}e^{-\lambda|p|/\hbar} &= \int_{0}^\infty dp e^{ip(x-x')/\hbar-\lambda p/\hbar} + \int_{-\infty}^0 dp e^{ip(x-x')/\hbar+\lambda p/\hbar} \\
-            &= \frac{1}{\frac{i(x-x')}{\hbar}-\frac{\lambda}{\hbar}}(e^\infty-e^0) + \frac{1}{\frac{i(x-x')}{\hbar}+\frac{\lambda}{\hbar}}(e^0-e^{-\infty}) \\
-            &= \frac{\hbar}{i(x-x')-\lambda}(-1) + \frac{\hbar}{i(x-x')+\lambda}(1) \\
+            &= \int_{0}^\infty dp e^{p(i(x-x')/\hbar-\lambda/\hbar)} + \int_{-\infty}^0 dp e^{p(i(x-x')/\hbar+\lambda/\hbar)} \\
+            &= \int_{0}^\infty dp e^{-p(-i(x-x')/\hbar+\lambda/\hbar)} + \int_{-\infty}^0 dp e^{p(i(x-x')/\hbar+\lambda/\hbar)} \\
+            &= -\frac{1}{\frac{\lambda}{\hbar}-\frac{i(x-x')}{\hbar}}(e^{-\infty}-e^0) + \frac{1}{\frac{i(x-x')}{\hbar}+\frac{\lambda}{\hbar}}(e^0-e^{-\infty}) \\
+            &= -\frac{\hbar}{\lambda-i(x-x')}(-1) + \frac{\hbar}{i(x-x')+\lambda}(1) \\
             &= \frac{2\hbar\lambda}{(x-x')^2+\lambda^2} \tag{4}
         \end{align}\]
         Plugging in our regularization factor and then (4):
