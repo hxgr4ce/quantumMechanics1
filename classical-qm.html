@@ -49,7 +49,9 @@
                 Clearly, the familiar \(|x\rangle\langle x|\) is no longer a projector, it is a <i>projector density</i>, \(\frac{d\hat{P}}{dx}\), which checks out when we do:
                 \[\hat{1}=\int_{-\infty}^{\infty} dx \frac{d\hat P}{dx} = \int_{-\infty}^{\infty} d\hat P\]
                 (as per the <a href=definitions.html#identity>resolution of identity</a>, the sum of all projectors equals the identity).
-                We also run into the following issue:
+                <br><br>
+                We also run into the following issue: \(|x\rangle\) is no longer normalizable!
+                We can demonstrate this as follows:
                 \[\begin{align}
                     |\psi\rangle=\hat{1}|\psi\rangle &= \int_{-\infty}^{\infty} dx |x\rangle\langle x|\psi\rangle \\
                     &= \int_{-\infty}^{\infty} dx |x\rangle\psi(x) \\
@@ -57,7 +59,9 @@
                     &= \int_{-\infty}^{\infty} dx' \langle x|x'\rangle\langle x'|\psi\rangle \\
                 \end{align}\]
                 (Note that here, we represent \(\langle x|\psi\rangle\) as \(\psi(x)\) which is the position-space <a href="qmDefs.html#wavefcn">wave function</a>.)
-                The only time that each part of this integral is not 0 is when \(x'=x\), so:
+                We want to know what \(\langle x|x'\rangle\) is in order to make \(\langle x|\psi\rangle = \int_{-\infty}^{\infty} dx' \langle x|x'\rangle\langle x'|\psi\rangle\).
+                This means that we want each infinitesimal piece (\(dx\)) of this integral to yield and area under the curve of 0, <i>unless</i> \(x'=x\), in which case we want the integral to be 1, so that the area corresponding to that \(dx\) is \(1\cdot\psi(x') = \psi(x)\), which means the entire integral yields \(0 + 0 + \cdots + \psi(x) + \cdots + 0 = \psi(x) = \langle x | \psi\rangle\).
+                This is true only if, \(\langle x | x'\rangle = \delta(x-x')\) so we have:
                 \[
                     \langle x|\psi\rangle = \int_{-\infty}^{\infty} dx' \delta(x-x')\langle x'|\psi\rangle
                 \]
@@ -68,10 +72,13 @@
                 In this situation, \(|x\rangle\) is not a ket that represents the state of quantum system, it is a <i>generalized eigenstate</i> which is used as a mathematical tool only.
             </div>
             <p>
+                It might seem like \(|x\rangle\) mapping to \(L^2(\mathbb{R})\) is not all that useful, but it is
+                useful for creating wavefunctions such as \(\psi(x)\) where \(|\psi(x)|^2\) gives us information about the probability of an system yielding a given eigenvalue (in this case, \(x\)).
+                <br><br>
                 The second issue leads us to the following conundrum:
                 The Hellinger-Toeplitz Theorem says that if an operator \(\hat{A}\) is defined on the whole Hilbert space, it is bounded.
                 <br><br>
-                As a corollary, if we know in advance that an operator \(\hat{A}]\) is unbounded, we know that <i>it is not defined on the whole Hilbert space</i>.
+                As a corollary, if we know in advance that an operator \(\hat{A}\) is unbounded, we know that <i>it is not defined on the whole Hilbert space</i>.
             </p>
             <div class="mainContent">
                 Some operators have a non-trivial domain.
