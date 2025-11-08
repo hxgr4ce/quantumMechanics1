@@ -116,13 +116,13 @@
                 <!-- &= \sum_{j=i}A_{ii}|c_i(0)|^2 +  2 \sum_{j\gt i}|A_{ij} c_i^*(0) c_j(0)| \cdot Re\{ e^{-i(\theta_{ij}+\omega_{ji}t)}\} \\ -->
                 &= \sum_{j=i}A_{ii}|c_i(0)|^2 + 2 \sum_{j\gt i}|A_{ij} c_i^*(0) c_j(0)| \cdot \cos(\omega_{ji}t-\theta_{ij}) \\
             \end{align}\]
-            This first term, \(\sum_{j=i}A_{ii}|c_i(0)|^2\), is static since it does not vary with time, and the second term is a sinusoid with period \(T=\frac{2\pi}{\omega_{ji}}\) and is offset a distance of \(\frac{\phi_{ij}}{\omega_{ji}}\) from the origin.
+            This first term, \(\sum_{j=i}A_{ii}|c_i(0)|^2\), is static since it does not vary with time, and the second term is a sinusoid with period \(T=\frac{2\pi}{\omega_{ji}}\) and is offset a distance of \(\frac{\theta_{ij}}{\omega_{ji}}\) from the origin.
             So, the expectation value is indeed not constant; it oscillates over time!
             <br><br>
             <b><i>A special case!</i></b>
             The only special case where the expectation value does not vary (aside from when the initial state is a stationary state, like we saw earlier) is when \(\hat A\) commutes with \(\hat H\):
             <br><br>
-            In order for the expectation value to be zero, the term that varies with time should be zero.
+            In order for the expectation value to be constant, the term that varies with time should be zero.
             However, it's impossible to expect that \(\omega_{ji} = \frac{E_j-E_i}{\hbar}\) is always zero when we explicitly state that we're ranging over indices \(j\gt i\).
             It's also impossible to expect that \(\theta_{ij}\) changes exactly so that \(\omega_{ji}-\theta_{ij}\) does not vary, or that either \(c_i(0)\) or \(c_j(0)\) are always 0.
             Hence we have to rely on \(A_{ij}\).
@@ -244,11 +244,11 @@
           To determine the value of \(\theta_p\) we want to enforce the action of \(\hat B_{\Delta p}|p\rangle = e^{i\Delta px/\hbar}|p\rangle=|p+\Delta p\rangle\):
           \[\begin{align}
             \langle x |\hat B_{\Delta p} | p \rangle &= \langle x | p + \Delta p\rangle \\
-            \langle x |\hat B_{\Delta p} | p \rangle &= e^{i\Delta p x/\hbar} \langle x|p\rangle = e^{i\Delta p x/\hbar} \frac{1}{\sqrt{2\pi\hbar}}e^{i\theta_p}e^{ipx\hbar} \\
+            \langle x |\hat B_{\Delta p} | p \rangle &= e^{i\Delta p x/\hbar} \langle x|p\rangle = e^{i\Delta p x/\hbar} \frac{1}{\sqrt{2\pi\hbar}}e^{i\theta_p}e^{ipx/\hbar} \\
             \langle x | p + \Delta p\rangle &= \phi_{p+\Delta p}(x) = \frac{1}{\sqrt{2\pi\hbar}}e^{i\theta_{p+\Delta p}}e^{i(p+\Delta p)x/\hbar} \\
-            e^{i\Delta p x/\hbar} \frac{1}{\sqrt{2\pi\hbar}}e^{i\theta_p}e^{ipx\hbar} &= \frac{1}{\sqrt{2\pi\hbar}}e^{i\theta_{p+\Delta p}}e^{i(p+\Delta p)x/\hbar} \\
-            e^{i\Delta p x/\hbar} e^{i\theta_p}e^{ipx\hbar} &= e^{i\theta_{p+\Delta p}}e^{i(p+\Delta p)x/\hbar} \\
-            e^{i\theta_p}e^{i(\Delta p + p)x\hbar} &= e^{i\theta_{p+\Delta p}}e^{i(p+\Delta p)x/\hbar} \\
+            e^{i\Delta p x/\hbar} \frac{1}{\sqrt{2\pi\hbar}}e^{i\theta_p}e^{ipx/\hbar} &= \frac{1}{\sqrt{2\pi\hbar}}e^{i\theta_{p+\Delta p}}e^{i(p+\Delta p)x/\hbar} \\
+            e^{i\Delta p x/\hbar} e^{i\theta_p}e^{ipx/\hbar} &= e^{i\theta_{p+\Delta p}}e^{i(p+\Delta p)x/\hbar} \\
+            e^{i\theta_p}e^{i(\Delta p + p)x/\hbar} &= e^{i\theta_{p+\Delta p}}e^{i(p+\Delta p)x/\hbar} \\
             e^{i\theta_p} &= e^{i\theta_{p+\Delta p}} \\
           \end{align}\]
           Clearly, \(\theta_p=\theta_{p+\Delta p}\) for any \(\Delta p\), so \(\theta_p\) is the same for all \(p\).
@@ -257,7 +257,7 @@
           <b><i>Operating on \(\langle x|p\rangle\)</i></b>.
           \[\begin{align}
             \langle x|\hat T_{\Delta x}|p\rangle &= \langle\hat T_{\Delta x}x|p\rangle = \langle x-\Delta x|p\rangle = \frac{1}{\sqrt{2\pi\hbar}} e^{ip(x-\Delta x)/\hbar} \\
-            \langle x|\hat B_{\Delta p}|p\rangle &= \langle x|p+\Delta p\rangle = e^{i\Delta px\hbar}\frac{1}{\sqrt{2\pi\hbar}}e^{ipx/\hbar} = \frac{1}{\sqrt{2\pi\hbar}}e^{i(p+\Delta p)x/\hbar}
+            \langle x|\hat B_{\Delta p}|p\rangle &= \langle x|p+\Delta p\rangle = e^{i\Delta px/\hbar}\frac{1}{\sqrt{2\pi\hbar}}e^{ipx/\hbar} = \frac{1}{\sqrt{2\pi\hbar}}e^{i(p+\Delta p)x/\hbar}
           \end{align}\]
           <b><i id="csco">Are the CSCOs in the room with us right now?</i></b>
           Since each unique eigenvalue of momentum that we can observe corresponds to a unique eigenvector, \(p\to|p\rangle\) (\(\hat{p}\) is non-degenerate), \(\{\hat p\}\) is a CSCO.
