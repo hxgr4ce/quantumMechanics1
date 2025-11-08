@@ -266,7 +266,7 @@
           This means that \(\hat H\) is degenerate! So, \(\{\hat H\}\) is not a CSCO.
           <br><br>
           How do we create a simple CSCO that includes \(\hat H\)?
-          First we start be re-definint the set of eigenstates we're working with:
+          First we start by re-defining the set of eigenstates we're working with:
           \[|\psi\pm\rangle=|p\rangle \pm|-p\rangle\]
           We can guarantee that these states \(|\psi\pm\rangle\) are still eigenvectors of \(\hat H\) because \(|p\rangle\) and \(|-p\rangle\) have the same eigenvalue!
           \[\begin{align}
@@ -276,7 +276,7 @@
           It follows that \(|\psi\pm\rangle\) are not eigenstates of \(\hat p\) since \(|p\rangle\) and \(|-p\rangle\) do <i>not</i> have the same eigenvalues with respect to \(\hat p\):
           \[\hat p|\psi\pm\rangle = p|p\rangle\pm(-p)|-p\rangle = p|\psi\mp\rangle\]
           We also can say:
-          \[\langle x|\psi\pm\rangle = \langle x|p\rangle\pm\langle x|-p\rangle = \frac{1}{\sqrt{2\pi\hbar}}(e^{ipx\hbar}\pm e^{-ipx/\hbar})\]
+          \[\langle x|\psi\pm\rangle = \langle x|p\rangle\pm\langle x|-p\rangle = \frac{1}{\sqrt{2\pi\hbar}}(e^{ipx/\hbar}\pm e^{-ipx/\hbar})\]
           If we choose to add the terms together, we get:
           \[\frac{2}{\sqrt{2\pi\hbar}}\cos(\frac{px}{\hbar}) = \sqrt{\frac{2}{\pi\hbar}}\cos(\frac{px}{\hbar})\]
           and if we choose to subtract, we get:
@@ -294,9 +294,9 @@
             \langle\phi|\hat \Pi\psi\rangle &= \int_{-\infty}^{\infty} \phi^*(x)\hat\Pi\psi(x)dx \\
             &= \int_{-\infty}^{\infty}\phi^*(x)\psi(-x)dx \\
             &\text{if } u = -x: \\
-            &= -\int_{\infty}^{-\infty}\phi^*(-u)\phi(u)du \\
+            &= -\int_{\infty}^{-\infty}\phi^*(-u)\psi(u)du \\
             &= \int_{-\infty}^{\infty}\phi^*(-u)\psi(u)du \\
-            &= \int_{-\infty}^{\infty}(\hat\Pi\phi(-u))^*\psi(u)du \\
+            &= \int_{-\infty}^{\infty}(\hat\Pi\phi(u))^*\psi(u)du \\
             &= \langle \hat \Pi\phi|\psi\rangle
           \end{align}\]
           and it commutes with \(\hat H\):
