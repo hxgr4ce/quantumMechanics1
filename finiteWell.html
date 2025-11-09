@@ -145,12 +145,12 @@
             \[\begin{align}
                 &\begin{cases}
                     \psi_I(-\frac{a}{2}) = \psi_{II}(-\frac{a}{2}) \\
-                    \psi_I^"(-\frac{a}{2}) = \psi_{II}^"(-\frac{a}{2})
+                    \psi_I^{'}(-\frac{a}{2}) = \psi_{II}^{'}(-\frac{a}{2})
                 \end{cases}
                 \\
                 &\begin{cases}
                     \psi_{II}(\frac{a}{2}) = \psi_{III}(\frac{a}{2}) \\
-                    \psi_{II}^"(\frac{a}{2}) = \psi_{III}^"(\frac{a}{2})
+                    \psi_{II}^{'}(\frac{a}{2}) = \psi_{III}^{'}(\frac{a}{2})
                 \end{cases}
             \end{align}\]
             in order to determine the relative magnitudes of each coefficient and also to produce our discrete portion of the spectrum of \(\hat H\).
@@ -175,7 +175,7 @@
             = -\langle x|\psi\rangle + \langle x|-\psi\rangle
             = -\langle x|\psi_-\rangle\).
 
-            Every odd function has a corresponding even function that produces the same probabiliry distribution (since the probability requires we take the modules <i>squared</i>), so we can choose to consider only the even functions (or only the odd functions, but the math comes out easier for even functions).
+            Every odd function has a corresponding even function that produces the same probabiliry distribution (since the probability requires we take the modulus <i>squared</i>), so we can choose to consider only the even functions (or only the odd functions, but the math comes out easier for even functions).
             When even, we have:
             \[\psi(x) = \psi(-x) \implies \psi_{I}(x) = \psi_{III}(-x) \text{ and } \psi_{II}(-x) = \psi_{II}(x)\]
             Meaning that \(A_1 = C_2 = C\), and:
@@ -183,7 +183,7 @@
                 B_1e^{-ikx} + B_2e^{ikx} = B_1e^{ikx} + B_2e^{-ikx} \implies B_1=B_2, \forall |x|\lt\frac{a}{2}
             \]
             (if we had gone with the odd case, \(B_1=-B_2\) instead).
-            As a result, \(\psi_{II} = B(e^{-ikx}+e^{-ikx}) = 2B\cos(kx)\) and \(\psi_{III}(x) = Ce^{-\beta x}\)
+            As a result, \(\psi_{II} = B(e^{-ikx}+e^{ikx}) = 2B\cos(kx)\) and \(\psi_{III}(x) = Ce^{-\beta x}\).
             We can enforce the boundary condition between \(II\) and \(III\):
             \[\begin{align}
                 2B\cos(k\frac{a}{2}) &= Ce^{-\beta\frac{a}{2}} \tag{1} \\
