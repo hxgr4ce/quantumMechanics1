@@ -84,9 +84,9 @@
                 &= A_n^2 \int_0^L \sin^2(\frac{n\pi}{L} x) dx  = A_n^2 \frac{1}{2}\big[x - \frac{L}{2n\pi}\sin(\frac{2n\pi}{L}x) \big]_0^L \\
                 &= A_n^2 \frac{1}{2}(L - \frac{L}{2n\pi}\sin(2n\pi) - \frac{L}{2n\pi}\sin(0) ) \\
                 1 &= A_n^2\frac{L}{2} \\
-                A_n &= \sqrt{\frac{L}{2}}
+                A_n &= \sqrt{\frac{2}{L}}
             \end{align}\]
-            giving us the final solution that \(\psi_n(x) = \sqrt{\frac{L}{2}}\sin(\frac{n\pi}{L} x), n\in\mathbb{N}\)
+            giving us the final solution that \(\psi_n(x) = \sqrt{\frac{2}{L}}\sin(\frac{n\pi}{L} x), n\in\mathbb{N}\)
             <br><br>
             Previously we defined \(k = \sqrt{\frac{2mE}{\hbar^2}}\), and now we know that \(k_n = \frac{n\pi}{L}\), so we can define energy eigenvalue \(E_n\) as:
             \[\begin{align}
@@ -130,14 +130,14 @@
             Notice that we no longer have an even or odd function: the wavefunction peaks more on the left side of the box than the right, indicating that the particle is more likely to be on the left side of the box.
             At some time \(t\), this system will be in state:
             \[
-                |\psi(t)\rangle = \frac{1}{\sqrt 2}e^{-iE_nt\hbar} (|\psi_1\rangle + e^{-i\omega_{21}t}|\psi_2\rangle)
+                |\psi(t)\rangle = \frac{1}{\sqrt 2}e^{-iE_1t\hbar} (|\psi_1\rangle + e^{-i\omega_{21}t}|\psi_2\rangle)
             \]
             And, if this time \(t\) is specifically \(\frac{\pi}{\omega_{21}}\), then 
             \[\begin{align}
-                |\psi(t)\rangle &= \frac{1}{\sqrt 2}e^{-iE_nt\hbar} (|\psi_1\rangle + e^{-i\pi}|\psi_2\rangle) \\
-                &= \frac{1}{\sqrt 2}e^{-iE_nt\hbar} (|\psi_1\rangle - |\psi_2\rangle)
+                |\psi(t)\rangle &= \frac{1}{\sqrt 2}e^{-iE_1t\hbar} (|\psi_1\rangle + e^{-i\pi}|\psi_2\rangle) \\
+                &= \frac{1}{\sqrt 2}e^{-iE_1t\hbar} (|\psi_1\rangle - |\psi_2\rangle)
             \end{align}\]
-            where \(e^{-iE_nt\hbar}\) is some scalar value.
+            where \(e^{-iE_1t\hbar}\) is some scalar value.
             At this point, the wave function would look approximately like:
             <div style="width: 100%; text-align: center;">
                 <img style="width: 23%;" src="images/combolater.png">
@@ -203,10 +203,10 @@
             Now the function is discontinuous on \([0,L]\), and not in the domain of \(\hat H\) anymore!
             If we want to, we can still find the expectation value:
             \[\begin{align}
-                \frac{\langle\hat H\rangle_{\psi'}}{\langle\psi'|\psi'\rangle} &= \frac{\sum_{n=0}^\infty E_n | \langle\psi_n|\psi_n\rangle | ^2}{\int_a^b|\psi|^2 dx}
+                \frac{\langle\hat H\rangle_{\psi'}}{\langle\psi'|\psi'\rangle} &= \frac{\sum_{n=0}^\infty E_n | \langle\psi_n|\psi'\rangle | ^2}{\int_a^b|\psi|^2 dx}
             \end{align}\]
             as \(E_n\) is proportional to \(n^2\), it diverges faster than \(| \langle\psi_n|\psi_n\rangle | ^2\), which means that the entire thing diverges; the measurement puts the system into a state with infinite energy.
-            You could even attempt to use the time evolution operator on it (as unitary \(\hat U(t)\) is defined everywhere), but we would get stuck at \(|\psi'(t)\rangle = \sum_n e^{-i\hat H t/\hbar |\psi_n\rangle\langle\psi_n\psi'\rangle}\) because we can't apply the \(\langle x|\) to represent in the position basis, for Schoedinger's representation.
+            You could even attempt to use the time evolution operator on it (as unitary \(\hat U(t)\) is defined everywhere), but we would get stuck at \(|\psi'(t)\rangle = \sum_n e^{-i\hat H t/\hbar} |\psi_n\rangle\langle\psi_n|\psi'\rangle\) because we can't apply the \(\langle x|\) to represent in the position basis, for Schoedinger's representation.
             In summary, things get a little tricky, and the quantum postulates are somewhat idealistic, but it seems like we don't talk about that until Quantum Mechanics 2...
             <hr>
             The next problem is this:
