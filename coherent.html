@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Coherent States</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </head>
+    <body>
+        <div class="mainContent">
+            <h1>Coherent States</h1>
+            In the material covered on the Harmonic Oscillator (see video lecture notes), we were introduced to operators \(\hat Q, \hat P, \hat a, \hat a^\dagger\).
+            <p>The following is a quick summary:</p>
+            <div class="mainContent">
+                We defined operators
+                \[\begin{align}
+                    \hat Q = \sqrt \frac{m\omega}{\hbar} \hat x \text{ and } \hat P = \frac{1}{\sqrt {m\hbar\omega}} \hat p \\
+                    [\hat Q, \hat P] = i
+                \end{align}\]
+                so that the Hamiltonian for the harmonic oscillator can be written as
+                \[\begin{align}
+                    \hat H = \frac{\hbar\omega}{2}(\hat Q^2 + \hat P^2)
+                \end{align}\]
+                and any transformation in the \(Q-P\) plane leaves \(H\) invariant.
+                <hr>
+                We also defined ladder operators (also called the annihilation and creation operators)
+                \[\begin{align}
+                    \hat a &= \frac{1}{\sqrt 2}(\hat Q + i\hat P) \text{ and } \hat a^\dagger = \frac{1}{\sqrt 2}(\hat Q - i\hat P) \\
+                    [\hat a, \hat a^\dagger] &= 1 \\ 
+                \end{align}\]
+                and the number operator: 
+                \[\begin{align}
+                    \hat n &= \hat a^\dagger\hat a \\ 
+                    \sigma(\hat n) &= \mathbb{N}_0, \text{non-degenerate.} \\
+                    \hat a|0\rangle &= 0 \text{ (the null vector)} \\
+                    \hat a|n\rangle &= \sqrt n |n-1\rangle \text{ and } \hat a^\dagger|n\rangle = \sqrt {n+1} |n+1\rangle
+                \end{align}\]
+                so that the Hamiltonian for the harmonic oscillator can also be written as
+                \[\begin{align}
+                    \hat H = \hbar\omega(\hat n + \frac{1}{2})
+                \end{align}\]
+                and we can use the eigenvalues and eigenvectors of \(\hat n\) to find the eigenvector and eigenvalues of \(\hat H\), the latter of which are clearly evenly spaced by a distance of \(\hbar\omega\).
+            </div>
+            <p>The operator \(\hat a\) is not self-adjoint or normal (recall a normal operator \(\hat N\) can be written as \(\hat A + i\hat B\) where \(\hat A\) and \(\hat B\) commute), so we cannot rely on the spectral theorem to guarantee anything about its eigenvalues or eigenvectors.</p>
+            We are, however, still interested in its eigenvalues, which are called <i>coherent states</i>.
+            Coherent states are used to reproduce classical limits, e.g. <i>cat states</i> can be al inear combination of coherent states, coherent states describe classical limit of monochromatic fields, e.g. light plane waves, etc.
+            <br></br>
+            <h2>The form of coherent states</h2>
+            Let's first determine what these coherent states look like, and what their eigenvalues are.
+            Say that we have \(|\alpha\rangle\) which we can write as a linear combination of \(\hat n\)'s eigenstates, \(|n\rangle\).
+            We can, from there, get an expression for the state \(|\alpha\rangle\) in terms of eigenvalues \(n\) and \(\alpha\):
+            \[\begin{align}
+                |\alpha\rangle &= \sum^\infty_{n=0}|n\rangle c_n \tag{1}\\
+                \hat a |\alpha\rangle &= \alpha|\alpha\rangle = \alpha \sum^\infty_{n=0}|n\rangle c_n = \sum^\infty_{n=0}\alpha |n\rangle c_n = \sum^\infty_{n=1}\alpha |n-1\rangle c_{n-1} \tag{2} \\
+                &= \sum^\infty_{n=0} \hat a |n\rangle c_n = \sum^\infty_{n=1}\sqrt n |n-1\rangle c_n \tag{3}\\
+                \text{Equating (2) and (3): }& \\
+                \sum^\infty_{n=1}\alpha |n-1\rangle c_{n-1} 
+                &= 
+                \sum^\infty_{n=1}\sqrt n |n-1\rangle c_n \\
+                0 &= \sum^\infty_{n=1} \sqrt n |n-1\rangle c_n - \alpha |n-1\rangle c_{n-1} 
+                = \sum^\infty_{n=1}  |n-1\rangle (\sqrt n c_n - \alpha c_{n-1}) \\
+                0 &= \sqrt n c_n - \alpha c_{n-1} \\
+                \sqrt n c_n &= \alpha c_{n-1} \\
+                c_n &= \frac{\alpha}{\sqrt n } c_{n-1} \\
+                &= \frac{\alpha}{\sqrt n } \frac{\alpha}{\sqrt {n-1} } c_{n-2} = \frac{\alpha}{\sqrt n } \frac{\alpha}{\sqrt {n-1} } \frac{\alpha}{\sqrt {n-2} } c_{n-3} = \cdots \\
+                &= \frac{\alpha^n}{\sqrt {n!} }c_0 \tag{4}\\
+                \text{Plug (4) into (1): }& \\
+                |\alpha\rangle &= \sum^\infty_{n=0}|n\rangle c_n = c_0 \sum^\infty_{n=0}|n\rangle \frac{\alpha^n}{\sqrt {n!} }
+            \end{align}\]
+            We can check to make sure that the norm of \(|\alpha\rangle\) does not diverge, and normalize it in the process:
+            \[\begin{align}
+                \langle\alpha|\alpha\rangle &= |c_0|^2 \sum^\infty_{n=0} \sum^\infty_{m=0} \frac{(\alpha^*)^n}{\sqrt {n!} }\langle n|m\rangle \frac{\alpha^m}{\sqrt {m!} } \\
+                &= |c_0|^2 \sum^\infty_{n=0} \sum^\infty_{m=0} \frac{(\alpha^*)^n}{\sqrt {n!} }\delta_{nm} \frac{\alpha^m}{\sqrt {m!} } \\
+                &= |c_0|^2 \sum^\infty_{n=0} \frac{(\alpha^*)^n}{\sqrt {n!} } \frac{\alpha^n}{\sqrt {n!} } \\
+                &= |c_0|^2 \sum^\infty_{n=0} \frac{|\alpha|^{2n}}{n!} = |c_0|^2 e^{|\alpha|^2} \in \mathbb{R^+} \\
+                |c_0|^2 &= \frac{1}{e^{|\alpha|^2}} \to |c_0| = \sqrt{e^{|\alpha|^{-2}}} = e^{|\alpha|^{-2}/2}
+            \end{align}\]
+            Thus the normalized state is 
+            \[|\alpha\rangle=e^{-|\alpha|^2/2}\sum^\infty_{n=0} \frac{\alpha^n}{\sqrt {n!}} |n\rangle \tag{5}\]
+            which is a definition that is valid for any complex value of \(\alpha\).
+            Hence the spectrum \(\sigma(\hat a) = \mathbb{C}\).
+            <br><br>
+            <h2>Properties of Coherent States</h2>
+            <b><i>Orthogonality</i></b>.
+            These coherent states/eigenstates of \(\hat a\) are <i>not</i> orthogonal.
+            For two coherent states \(|\alpha\rangle\) and \(|\beta\rangle\), 
+            \[\begin{align}
+                \langle\alpha|\beta\rangle &= 
+                \big ( e^{-|\alpha|^2/2}\sum^\infty_{n=0} \frac{(\alpha^*)^n}{\sqrt {n!}} \langle n| \big )
+                \big ( e^{-|\beta|^2/2}\sum^\infty_{m=0} \frac{\beta^m}{\sqrt {m!}} |m\rangle \big ) \\
+                &=
+                e^{-(|\alpha|^2+|\beta|^2)/2} 
+                \sum^\infty_{n=0} \sum^\infty_{m=0} \frac{(\alpha^*)^n}{\sqrt {n!}} 
+                \frac{\beta^m}{\sqrt {m!}} 
+                \langle n|m\rangle
+                =
+                e^{-(|\alpha|^2+|\beta|^2)/2} 
+                \sum^\infty_{n=0} \frac{(\alpha^*)^n}{\sqrt {n!}} 
+                \frac{\beta^n}{\sqrt {n!}} \\
+                &=
+                e^{-(|\alpha|^2+|\beta|^2)/2} 
+                \sum^\infty_{n=0} \frac{(\alpha^*\beta)^n}{n!} \\
+                &=
+                e^{-(|\alpha|^2 + |\beta|^2 - 2\alpha^*\beta)/2} \neq 0
+            \end{align}\]
+            but, \(|\langle\alpha|\beta\rangle|^2 = e^{-(|\alpha|^2 + |\beta|^2 - \alpha^*\beta - \alpha\beta^*)} = e^{-|\alpha-\beta|^2}\), which means that the overlap between two eigenstates gets very small when \(\alpha\) and \(\beta\) are very, very far from each other and \(|\alpha-\beta| \gg 1\), so at that point, they're "almost" orthogonal.
+            <br><br>
+            <b><i>Probability</i></b>.
+            The probability of observing state \(|n\rangle\), so of measuring energy \(E_n\), which in state \(|\alpha\rangle\) is:
+            \[\begin{align}
+                p_n &= |\langle n | \alpha\rangle|^2 = \big |e^{-|\alpha|^2/2} \sum_{n'=0}^\infty \frac{\alpha^{n'}}{\sqrt{n'!}} \langle n | n'\rangle\big |^2 \\
+                &= \big |e^{-|\alpha|^2/2} (0 + 0 + \cdots + \frac{\alpha^{n}}{\sqrt{n!}} + \cdots + 0) \big |^2 \\
+                &= e^{-|\alpha|^2}\frac{|\alpha|^{2n}}{n!}
+            \end{align}\]
+            This is called the Poisson distribution, and since it describes the distribution of classical/non-entangled light, it is sometimes used as a sort of measure of "classical-ness" of light.
+            <br><br>
+            <b><i>Expected value/uncertainty of energy</i></b>.
+            \[\begin{align}
+                \langle\hat H\rangle_\alpha &= \hbar\omega\langle\alpha|\hat a^\dagger\hat a + \frac{1}{2}|\alpha\rangle = \hbar\omega(\langle\alpha|\hat a^\dagger\hat a | \alpha\rangle + \frac{1}{2}\langle\alpha|\alpha\rangle) \\
+                &= \hbar\omega(|\alpha|^2 + \frac{1}{2}) \\
+                \langle\hat n\rangle_\alpha &= \langle\alpha|\hat a^\dagger\hat a|\alpha\rangle = |\alpha|^2
+            \end{align}\]
+            So, the expected \(E_n\) is \( \langle\hat H\rangle_\alpha = \hbar\omega(|\alpha|^2 + \frac{1}{2})\) and the average excitation is \(\langle\hat n\rangle_\alpha = |\alpha|^2\), which makes sense, as we can say \(E_n = \hbar\omega(n + \frac{1}{2})\) meaning that \(E_{|\alpha|^2} = \hbar\omega(|\alpha|^2 + \frac{1}{2})\).
+            Now we look at the uncertainty of measuring the energy of such a system:
+            \[\begin{align}
+                \langle\hat H^2\rangle_\alpha &= \hbar^2\omega^2\langle\alpha|(\hat a^\dagger\hat a + \frac{1}{2})(\hat a^\dagger\hat a + \frac{1}{2})|\alpha\rangle \\
+                &= \hbar^2\omega^2\langle\alpha | \hat a^\dagger\hat a\hat a^\dagger\hat a + \hat a^\dagger\hat a + \frac{1}{4}|\alpha\rangle \\
+                \text{Using } [\hat a, \hat a^\dagger] &= 1 \\
+                &= \hbar^2\omega^2\langle\alpha | \hat a^\dagger(\hat a^\dagger\hat a + 1)\hat a + \hat a^\dagger\hat a + \frac{1}{4}|\alpha\rangle \\
+                &= \hbar^2\omega^2\langle\alpha | \hat a^\dagger\hat a^\dagger\hat a \hat a + 2\hat a^\dagger\hat a + \frac{1}{4}|\alpha\rangle \\
+                &= \hbar^2\omega^2 \big( \langle\alpha | \hat a^\dagger\hat a^\dagger\hat a \hat a | \alpha\rangle + 2\langle\alpha | \hat a^\dagger\hat a |\alpha\rangle + \frac{1}{4}\langle\alpha | |\alpha\rangle \big ) \\
+                &= \hbar^2\omega^2(|\alpha|^4+2|\alpha|^2 + \frac{1}{4}) \\
+                \sigma_{\hat H}^2 &= \langle\hat H^2\rangle_\alpha - \langle\hat H\rangle_\alpha^2 = \hbar^2\omega^2(|\alpha|^4+2|\alpha|^2 + \frac{1}{4}) - (\hbar\omega(|\alpha|^2 + \frac{1}{2}))^2 \\
+                &= \hbar^2\omega^2(|\alpha|^4+2|\alpha|^2 + \frac{1}{4} - |\alpha|^4 - |\alpha|^2 - \frac{1}{4}) \\
+                &= \hbar^2\omega^2|\alpha|^2 \\
+                \sigma_{\hat H} &= \hbar\omega|\alpha|
+            \end{align}\]
+            The <i>relative</i> uncertainty of the energy measurement is:
+            \[
+                \frac{\sigma_{\hat H}}{\langle\hat H\rangle_\alpha} = \frac{\hbar\omega|\alpha|}{\hbar\omega(|\alpha|^2 + \frac{1}{2})} = \frac{1}{|\alpha| + \frac{1}{2|\alpha|}}
+            \]
+            which means that as \(\alpha\to\infty\), the precision gets larger and larger (the relative uncertainty gets smaller and smaller), until we approach the classical limit where \(\sigma_{\hat H}= 0\).
+            Similarly, \(\frac{\sigma_{\hat n}}{\langle\hat n\rangle_\alpha} = \frac{1}{|\alpha|}\), where we approach the same classical limit as \(\alpha\to\infty\).
+            <br><br>
+            <b><i>Expected value/uncertainty of position and momentum</i></b>.
+            We have previously defined \(\hat Q\) and \(\hat P\) in terms of \(\hat x\) and \(\hat p\).
+            We can then also write \(\hat x\) and \(\hat p\) in terms of \(\hat Q\) and \(\hat P\):
+            \[
+                \hat x = \sqrt{\frac{\hbar}{m\omega}} \hat Q = \sqrt{\frac{\hbar}{m\omega}} (\hat a + \hat a^\dagger)
+            \]
+            \[
+                \hat p = \sqrt{m\hbar\omega} \hat P = \sqrt \frac{m\hbar\omega}{2}\frac{1}{i} (\hat a - \hat a ^\dagger)
+            \]
+            and use these to find our expectation values instead.
+            \[\begin{align}
+                \langle \hat x \rangle_\alpha 
+                &= 
+                \sqrt\frac{\hbar}{2m\omega} \langle\alpha | \hat a + \hat a^\dagger | \alpha\rangle
+                = \sqrt\frac{\hbar}{2m\omega} \big ( \langle\alpha|\hat a|\alpha\rangle + \langle\alpha|\hat a^\dagger | \alpha\rangle \big ) \\
+                &= \sqrt\frac{\hbar}{2m\omega} (\alpha+\alpha^*) \tag{6} \\
+                &= \sqrt\frac{2\hbar}{m\omega} \text{ Re}(\alpha) \\
+                
+                \langle \hat p \rangle_\alpha
+                &=
+                \sqrt \frac{m\hbar\omega}{2}\frac{1}{i}
+                \langle\alpha|\hat a - \hat a^\dagger | \alpha\rangle \\
+                &=
+                \sqrt{2m\hbar\omega} (\frac{\alpha-\alpha^*}{2i}) \tag{7} \\
+                &= \sqrt{2m\hbar\omega}\text{ Im}(\alpha)
+            \end{align}\]
+            This tells us that the real part of \(\alpha\) is the center of teh distribution in position space, and the imaginary part is the center of the distribution in momentum space.
+            Now, to find the uncertainty:
+            \[\begin{align}
+                \langle\hat x^2\rangle 
+                &= \frac{\hbar}{2m\omega} \langle \alpha | \hat a^2+\hat (a^\dagger)^2 + \hat a^\dagger\hat a + \hat a\hat a^\dagger | \alpha\rangle \\
+                &= \frac{\hbar}{2m\omega}(\alpha^2 + (\alpha^*)^2 + 2|\alpha| + 1) \\
+                
+                \langle\hat p^2\rangle 
+                &= -\frac{m\hbar\omega}{2}\langle\alpha|\hat a^2 + \hat a^\dagger - \hat a^\dagger\hat a - \hat a\hat a^\dagger | \alpha\rangle \\
+                &= -\frac{m\hbar\omega}{2}(\alpha^2 + (\alpha^*)^2 - 2|\alpha|-1) \\
+               
+                \sigma_{\hat x}^2 
+                &= \frac{\hbar}{2m\omega}(\alpha^2 + (\alpha^*)^2 + 2|\alpha| + 1) - (\sqrt\frac{\hbar}{2m\omega} (\alpha+\alpha^*))^2 \\
+                &= \frac{\hbar}{2m\omega}(\alpha^2 + (\alpha^*)^2 + 2|\alpha| + 1 - \alpha^2 - (\alpha^*)^2 - 2|\alpha|)^2 \\
+                &= \frac{\hbar}{2m\omega} \\
+                \sigma_{\hat x} &= \sqrt \frac{\hbar}{2m\omega} \\
+                
+                \sigma_{\hat p}^2 
+                &= -\frac{m\hbar\omega}{2}(\alpha^2 + (\alpha^*)^2 - 2|\alpha|-1) - 2m\hbar\omega (\frac{(\alpha-\alpha^*)^2}{-4}) \\
+                &= -\frac{m\hbar\omega}{2}(\alpha^2 + (\alpha^*)^2 - 2|\alpha|-1) + \frac{m\hbar\omega}{2} (\alpha^2 + (\alpha^*)^2 - 2|\alpha|) \\
+                &= -\frac{m\hbar\omega}{2}(-1) = \frac{m\hbar\omega}{2} \\
+                \sigma_{\hat p} &= \sqrt \frac{m\hbar\omega}{2}
+            \end{align}\]
+            This means that
+            \[\sigma_{\hat x} \sigma_{\hat p} = \sqrt \frac{\hbar}{2m\omega} \sqrt \frac{m\hbar\omega}{2} = \frac{\hbar}{2}\]
+            for <i>EVERY</i> coherent state, as neither \(\sigma_{\hat x}\) or \(\sigma_{\hat p}\) are in terms of \(\alpha\).
+            What's more, \(\frac{\hbar}{2}\) is the minimum uncerttainty possible (see <a href="heisenberg.html">demonstration of the uncertainty principle</a> here), so in fact, <i>EVERY coherent state is a minimum uncertainty wave packet</i>.
+
+            <h2>Time Dependence</h2>
+            Say that the initial state of an isolated system is coherent state \(|\alpha\rangle\).
+            Let's see how the system's state evolves over time.
+            First, we use the expression for the coherent state in (5):
+            \[\begin{align}
+                |\psi(t=0)\rangle &= |\alpha\rangle \\
+                |\psi(t)\rangle &= e^{-i\hat H t/\hbar}|\alpha\rangle \\
+                &= e^{-i\hat H t/\hbar} e^{-|\alpha|^2/2}\sum^\infty_{n=0} \frac{\alpha^n}{\sqrt {n!}} |n\rangle \\
+                &= e^{-i\hbar\omega(\hat n + \frac{1}{2}) t/\hbar} e^{-|\alpha|^2/2}\sum^\infty_{n=0} \frac{\alpha^n}{\sqrt {n!}} |n\rangle \\
+                &= e^{-|\alpha|^2/2}\sum^\infty_{n=0} \frac{\alpha^n}{\sqrt {n!}} e^{-i\omega(n + \frac{1}{2}) t}  |n\rangle \\
+                &= e^{-i\omega t/2}e^{-|\alpha|^2/2}\sum^\infty_{n=0} \frac{\alpha^n}{\sqrt {n!}} e^{-i\omega n t}  |n\rangle \\
+                &= e^{-i\omega t/2}e^{-|\alpha|^2/2}\sum^\infty_{n=0} \frac{(\alpha e^{-i\omega t})^n}{\sqrt {n!}} |n\rangle \\
+                \text{ Because  } &|\alpha e^{-i\omega t}| = |\alpha|: \\
+                |\psi(t)\rangle
+                &=
+                e^{-i\omega t/2}e^{-|\alpha e^{-i\omega t}|^2/2}\sum^\infty_{n=0} \frac{(\alpha e^{-i\omega t})^n}{\sqrt {n!}} |n\rangle \\
+                &=
+                e^{-i\omega t/2}|\alpha e^{-i\omega t}\rangle
+            \end{align}\]
+            where \(|\alpha e^{-i\omega t}\rangle\) is a totally valid coherent state.
+            So, global phase factor aside, coherent states stay in coherent states over time, following \(\alpha(t) = \alpha e^{-i\omega t}\).
+            We can now look at the expectation values for position and momentum over time:
+            \[\begin{align}
+                \langle \hat x \rangle_{\alpha(t)} 
+                &= \sqrt{\frac{2\hbar}{m\omega}}\text{ Re}(\alpha e^{-i\omega t}) \\
+                &= \sqrt{\frac{2\hbar}{m\omega}} |\alpha| \cos(\phi-\omega t) \\
+                
+                \text{Where } & \alpha = |\alpha|e^{i\phi} \\
+                
+                \langle \hat p \rangle_{\alpha(t)} 
+                &= \sqrt{2m\hbar\omega} |\alpha| \sin(\phi-\omega t)
+            \end{align}\]
+            PUT PLOT HERE...
+
+            <h2>The Displacement Operator</h2>
+            Coherent states are translated (position-wise) and boosted (momentum-wise) versions of the harmonic oscillator's ground state.
+            We demonstrate this below.
+            <br><br>
+            Define the displacement operator: 
+            \[\hat D(\alpha) = e^{\alpha\hat a^\dagger - \alpha^*\hat a} = e^{-i(i\alpha\hat a^\dagger - i\alpha^*\hat a)}\]
+            where the expression \(i\alpha\hat a^\dagger - i\alpha^*\hat a\) is clearly a self-adjoint operator.
+            That means that \(\hat D(\alpha) = e^{-i\hat O}\) for self-adjoint operator \(\hat O\), and \(\hat D (\alpha)\) is a unitary operator.
+            <br><br>
+            In order to show that coherent states are shifted and boosted versions of the harmonic oscillator's ground state, we show two things:
+            <ul>
+                <li>\(|\alpha\rangle = \hat D(\alpha)|n=0\rangle\), or that all coherent states \(|\alpha\rangle\) are the result of applying the displacement operator to the ground state of the harmonic oscillator.</li>
+                <li>\(\hat D(\alpha) = e^{i\theta} \hat B_{\langle\hat p\rangle_{\alpha}} \hat T_{\langle\hat x\rangle_{\alpha}}\), to show that applying \(\hat D(\alpha)\) is the same as applying a momentum boost and translation to the ground state.</li>
+            </ul>
+            To do both these things, we need to use Glauber's formula, which says that if \([\hat A, \hat B]\) commutes with \(\hat A\) and \(\hat B\):
+            \[e^{\hat A + \hat B} = e^{-[\hat A, \hat B]/2} e^{\hat A} e^{\hat B}\]
+            <b><i>Coherent states are obtained by applying the displacement operator to \(|n=0\rangle\)</i></b>.
+            We can rewrite \(\hat D(\alpha)\) with Glauber's formula and use the fact that \([\hat a, \hat a^\dagger] = 1 \to [\hat a^\dagger, \hat a] = -1\):
+            \[\begin{align}
+                \hat D(\alpha) &= \exp{(-\frac{[\alpha\hat a^\dagger, -\alpha^*\hat a]}{2})} \cdot e^{\alpha\hat a^\dagger} \cdot e^{-\alpha^*\hat a} \\
+                \hat D(\alpha)|0\rangle 
+                &= \exp{(-\frac{(\alpha)(-\alpha^*)[\hat a^\dagger, \hat a]}{2})} \cdot e^{\alpha\hat a^\dagger} \cdot e^{-\alpha^*\hat a}|0\rangle \\
+                &= \exp{(-\frac{-|\alpha|^2(-1)}{2})} \cdot e^{\alpha\hat a^\dagger} \cdot \sum_{n=0}^\infty \frac{(-\alpha^*\hat a)^n}{n!} |0\rangle \\
+                &= e^{-|\alpha|^2/2} \cdot e^{\alpha\hat a^\dagger} \cdot \sum_{n=0}^\infty \frac{(-\alpha)^n}{n!} \hat a^n |0\rangle \\
+            \end{align}\]
+            \(\hat a^n |0\rangle\) for any \(n\) will always yield 0 (the null vector, not \(|n=0\rangle = |0\rangle\)), the only term in this summation that is non-zero is produced when \(n=0\), which gives \(1\cdot|n\rangle\).
+            So we have:
+            \[\begin{align}
+                \hat D(\alpha)
+                &= e^{-|\alpha|^2/2} \cdot e^{\alpha\hat a^\dagger} \cdot \sum_{n=0}^\infty \frac{(-\alpha)^n}{n!} \hat a^n |0\rangle \\
+                &= e^{-|\alpha|^2/2} \cdot e^{\alpha\hat a^\dagger} |0\rangle \\
+                &= e^{-|\alpha|^2/2} \sum_{n=0}^\infty \frac{\alpha^n}{n!} (\hat a^\dagger)^n |0\rangle \\
+            \end{align}\]
+            We have previously shown that \(\hat a^\dagger|n\rangle = \sqrt {n+1} |n+1\rangle\), 
+            so we can expand once and say that \((\hat a^\dagger)^n|0\rangle = \sqrt {1} (\hat a^\dagger)^{n-1}|1\rangle\), 
+            then expand again and say that \((\hat a^\dagger)^n|0\rangle = \sqrt 1 \sqrt 2 (\hat a^\dagger)^{n-2}|2\rangle\), 
+            and so on until we get \((\hat a^\dagger)^n|0\rangle = \sqrt {n!} (\hat a^\dagger)^{0}|0\rangle = \sqrt {n!}|n\rangle \).
+            \[\begin{align}
+                \hat D(\alpha)
+                &= e^{-|\alpha|^2/2} \sum_{n=0}^\infty \frac{\alpha^n}{n!} \sqrt {n!}|n\rangle \\
+                &= e^{-|\alpha|^2/2} \sum_{n=0}^\infty \frac{\alpha^n}{\sqrt {n!}} |n\rangle \\
+            \end{align}\]
+            which, as you might notice, is exactly (5).
+            So
+            \[\begin{align}
+                \hat D(\alpha) = |\alpha\rangle \\
+            \end{align}\]
+            Yay. Now onto the second point we want to demonstrate.
+            <br><br>
+            <b><i>Applying \(\hat D(\alpha)\) is the same as applying a momentum boost and translation to the ground state</i></b>.
+            This time, we use the fact that \(\hat a = \frac{1}{\sqrt 2}(\hat Q + i\hat P) \) and \(\hat a^\dagger = \frac{1}{\sqrt 2}(\hat Q - i\hat P) \), and the fact that \(\hat Q = \sqrt \frac{m\omega}{\hbar} \hat x \) and \(\hat P = \frac{1}{\sqrt {m\hbar\omega}} \hat p \).
+            This allows us to write \(\hat D(\alpha) \) as:
+            \[\begin{align}
+                \hat D(\alpha) &= \exp\big( (\alpha-\alpha^*)\sqrt \frac{m\omega}{2\hbar}\hat x -i \frac{\alpha+\alpha^*}{\sqrt{2m\hbar\omega}} \hat p \big )
+            \end{align}\]
+            and then use Glauber's formula again:
+            \[\begin{align}
+                \hat D(\alpha) &= \exp\big( (\alpha-\alpha^*)\sqrt \frac{m\omega}{2\hbar}\hat x - i \frac{\alpha+\alpha^*}{\sqrt{2m\hbar\omega}} \hat p \big ) \\
+                &= \exp \big ( -[(\alpha-\alpha^*)\sqrt \frac{m\omega}{2\hbar}\hat x, -i \frac{\alpha+\alpha^*}{\sqrt{2m\hbar\omega}} \hat p] / 2 \big ) \cdot \exp((\alpha-\alpha^*)\sqrt \frac{m\omega}{2\hbar}\hat x) \cdot \exp(-i \frac{\alpha+\alpha^*}{\sqrt{2m\hbar\omega}}) \\
+                &= \exp \big (\frac{i(\alpha-\alpha^*)(\alpha+\alpha^*)}{4\hbar} [\hat x, \hat p] \big ) \cdot \exp((\alpha-\alpha^*)\sqrt \frac{m\omega}{2\hbar}) \cdot \exp(-i \frac{\alpha+\alpha^*}{\sqrt{2m\hbar\omega}}) \\
+                &= \exp \big (-\frac{\alpha^2-(\alpha^*)^2}{4} \big ) \cdot \exp((\alpha-\alpha^*)\sqrt \frac{m\omega}{2\hbar}) \cdot \exp(-i \frac{\alpha+\alpha^*}{\sqrt{2m\hbar\omega}})
+            \end{align}\]
+            Recall our definitions of the expectation value for position and momentum in (6) and (7).
+            With those, we can rewrite \(\hat D(\alpha)\) as:
+            \[\begin{align}
+                \hat D(\alpha) 
+                &= \exp \big (-\frac{\alpha^2-(\alpha^*)^2}{4} \big ) \cdot \exp(i\langle\hat p \rangle_\alpha\hat x/\hbar) \cdot \exp(-i\langle\hat x\rangle_\alpha\hat p/\hbar)
+            \end{align}\]
+            and, if you remember the <a href="classical-qm.html#quantizedCTs">canonical quantizations</a>, this can be written into exactly the form we wanted it to be in:
+            \[\begin{align}
+                \hat D(\alpha) 
+                &= e^{i\theta_d} \hat B_{\langle\hat p \rangle_\alpha} \hat T_{\langle\hat x\rangle_\alpha}
+            \end{align}\]
+            where \(\theta_d = \frac{(\alpha^*)^2 - \alpha^2}{4i}\).
+            Hence applying the displacement operator is the same as applying a space translation, then a momentum boost (and scaling by some global phase factor).
+            <h2>Coherent State Wave Function Over Time</h2>
+            The initial wave function is: 
+            \[\psi_0(x) = \langle x | 0 \rangle = \sqrt[\leftroot{2}\uproot{2}4]{ \frac{m\omega}{\pi\hbar}} \exp(-\frac{m\omega}{2\hbar}\hat x^2)\]
+            (see the notes on the eigenfunctions of the harmonic oscillator in spatial representations from the video lecture). 
+            Then,
+            \[\begin{align}
+                \langle x | \alpha \rangle &= \psi_\alpha (x) = \langle x | \hat D(\alpha)|0\rangle \\
+                &= e^{i\theta_d} \sqrt[\leftroot{2}\uproot{2}4]{ \frac{m\omega}{\pi\hbar}} \exp(i\langle\hat p\rangle_\alpha \hat x/\hbar) \hat T_{\langle\hat x\rangle_\alpha} \exp(-\frac{m\omega}{2\hbar}\hat x^2) \\
+                &= e^{i\theta_d} \sqrt[\leftroot{2}\uproot{2}4]{ \frac{m\omega}{\pi\hbar}} \exp(i\langle\hat p\rangle_\alpha \hat x/\hbar) \psi_0(x-\langle\hat x\rangle_\alpha)
+            \end{align}\]
+            which doesn't directly say a whole lot, but we can see that the squared modulus, so the probability distribution, is
+            \[|\psi_{\alpha(t)}(x)|^2 = \sqrt\frac{m\omega}{\pi\hbar}|\psi_0(x-\langle\hat x\rangle_{\alpha(t)})|^2\]
+            So, the translation is the only thing that has an effect on the probability distribution; essentially, it is shifted along the x-axis, but the shape of the wave packet itself does not change over time.
+        </div>
+    </body>
+</html>
