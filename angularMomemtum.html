@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Angular Momentum</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </head>
+    <body>
+        <div class="mainContent">
+            <h1>Angular Momentum</h1>
+            <h2>Classical Mechanics</h2>
+            We saw the <a href="classical.html#rotTrans">classical rotation operator</a> \(\hat R_{\hat n}(d\phi)\vec v = \vec v + \hat n \times \vec v d\phi\), which applies to any vector \(\vec v\), around any unit vector \(\hat n\).
+            The following is a brief recap (I don't think I explained it very well the first time, anyway).
+            The infinitesimal generator is \(G(\vec r, \vec p) = \hat n \cdot (\vec r \times \vec p) = \hat n \cdot \vec L\), where <i>orbital angular momentum</i> \(\vec L\) is defined as \(\vec L = \vec r \times \vec p\).
+            Classically, we also know that generators have the following property:
+            \[
+                \frac{dA(\vec r, \vec p)}{d\phi} = \{A(\vec r, \vec p), \hat n \cdot \vec L\}
+            \]
+            for some function \(A\) with the same variables as the generator (in this case, \(\hat n \cdot \vec L\)), see the demonstration <a href="classical.html#invar">here</a>.
+            <br><br>
+            A scalar quantity \(S\) (which by definition, is invariant under rotation) naturally has \(\frac{dS}{d\phi} = 0\), so \(\{S, \hat n \cdot \vec L = 0\}\) also.
+            Because this is true for any axis \(\hat n\) that we want to rotate around, we can say the following:
+            \[\begin{align}
+                \{S, \hat n\cdot\vec L\} &= 0 \\
+                &= \{S, \sum_in_iL_i\} = \{S, n_iL_i\} + \{S, n_jL_j\} + \{S, n_kL_k\} \\
+                0 &= n_i\{S, L_i\} + n_j\{S, L_j\} + n_k\{S, L_k\}
+            \end{align}\]
+            since \(\hat n\) can be anything, and point in any direction, \(n_i, n_j, n_k\) can be anything, as long as the length of vector \((n_i, n_j, n_k)\) is 1.
+            Thus, the only solution is that each \(\{S, L_i\} = 0\).
+            <br><br>
+            Because \(L^2 = \vec L \cdot \vec L\), \(\{L^2, \hat L_i\} = 0\).
+            <br><br>
+            What about vectors?
+            For vector \(\vec A\) that is rotated over time by some very small angle \(\Delta\phi\), we have:
+            \[\begin{align}
+                \frac{d\vec A}{d\phi} = \lim_{\Delta\to 0}\frac{\hat R_{\hat n}(\Delta\phi)\vec A - \vec A}{\Delta \phi} = \hat n \times \vec A
+            \end{align}\]
+            where \(\hat R_{\hat n}(\Delta\phi)\vec A\) is the vector after an infinitesimal rotation, and \(\vec A\) is the original vector.
+            For very small angles, the rotation is the same as a displacement in a direction perpendicular to both the axis of rotation and original vector (hence the cross product), with a length of \(\sin\theta \approx \theta\) (see the discussion on the classical rotation linked earlier).
+            This means that 
+            \[\begin{align}
+                \frac{d\vec A}{d\phi} = \hat n \times \vec a = \{\vec A, \hat n \cdot \vec L\}
+            \end{align}\]
+            and again, because this is true for all \(\hat n\), we can draw a similar conclusion:
+            \[\begin{align}
+                \{\vec A, \hat n \cdot \vec L\} &= \{(A_i, A_j, A_k), \sum_l n_lL_l\} \\
+                &= (\{A_i, \sum_l n_lL_l\}, \{A_j, \sum_l n_lL_l\}, \{A_k, \sum_l n_lL_l\}) \\
+                &= (\sum_l\{A_i, n_lL_l\}, \sum_l\{A_j, n_lL_l\}, \sum_l\{A_k, n_lL_l\}) \tag{1} \\
+                = \hat n \times \vec A 
+                &= ((n \times \vec A)_i, (n \times \vec A)_j, (n \times \vec A)_k) \\
+                &= (\sum_{jk}\epsilon_{ijk}n_jA_k, \sum_{jk}\epsilon_{jjk}n_jA_k, \sum_{jk}\epsilon_{kjk}n_jA_k) \tag{2} \\
+            \end{align}\]
+            Setting (1) and (2) equal implies that \(\sum_l\{A_i, n_lL_l\} = \sum_{jk}\epsilon_{ijk}n_jA_k\), and so on.
+            We can expand this even further:
+            \[\begin{align}
+                \sum_l\{A_i, n_lL_l\} &= \sum_{jk}\epsilon_{ijk}n_jA_k \\
+                \{A_i, n_iL_i\} + \{A_i, n_jL_j\} + \{A_i, n_kL_k\} 
+                <!-- &= \sum_{j}\epsilon_{iji}n_jA_i + \sum_{j}\epsilon_{ijj}n_jA_j + \sum_{j}\epsilon_{ijk}n_jA_k \\ -->
+                &= \sum_{k}\epsilon_{iik}n_jA_k + \sum_{k}\epsilon_{ijk}n_jA_k + \sum_{k}\epsilon_{ikk}n_jA_k \\
+            \end{align}\]
+            which is best summarized as 
+            \[\begin{align}
+                \{A_i, n_jL_j\} &= \sum_{k}\epsilon_{ijk}n_jA_k 
+                \\ \{A_i, L_j\} &= \sum_{k}\epsilon_{ijk}A_k \\
+                &= \epsilon_{iji}A_i + \epsilon_{ijj}A_j + \epsilon_{ijk}A_k \\
+                &= 0 + 0 + \epsilon_{ijk}A_k \\
+                \{A_i, L_j\} &= \epsilon_{ijk}A_k
+            \end{align}\]
+            or, since both the Poisson bracket and \(\epsilon_{ijk}\) are anti-symmetric, \(\{L_i, A_j\} = \epsilon_{ijk}A_k\).
+            Then, we can say \(\{L_i, L_j\} = \epsilon_{ijk}L_k\).
+
+            <h2>Quantum Mechanics</h2>
+            <b><i>Rotation and the Total angular momentum operator</i></b>.
+            Rotation is a unitary transformation with a single parameter \(\phi\), we use Stone's theorem to write the rotation operator \(\hat D(R)\) as \(\hat D(R) = e^{-i\phi (\hat n\cdot\hat{\vec J})}\).
+            In this case, \(\hat{\vec J}\) is the infinitesimal generator of rotation, which is <i>NOT</i> the same as orbital angular momentum \(\hat L\); it has been shown through experiment that intrinsic spin \(\hat{\vec S}\) contributes to total angular momentum, so \(\hat{\vec J} = \hat{\vec L} + \hat{\vec S}\).
+            <br><br>
+            We <a href="classical-qm.html#pbtoComm">previously showed</a> that \(\{A, B\} = [\hat A, \hat B]/(i\hbar)\), so we can use the results about the Poisson bracket from the previous section of this page to find the commutator between \(\hat J_i\) and other operators.
+            \[\begin{align}
+                \{L^2, \hat L_i\} = 0 &\to [\hat J^2, \hat J_i] = 0 \tag{3} \\
+                <!-- text{  (scalars)} \\
+                \{L_i, A_j\} = \epsilon_{ijk}A_k &\to [\hat J_i, \hat A_j] = i\hbar\epsilon_{ijk}\hat A_k  \text{  (vectors)} \\ -->
+                \{L_i, L_j\} = \epsilon_{ijk}L_k &\to [\hat J_i, \hat J_j] = i\hbar\epsilon_{ijk}\hat J_k \tag{4} \\
+            \end{align}\]
+            We also demonstrated in class that \([\hat L_i, \hat L_j] = i\hbar\epsilon_{ijk}\hat L_k\), but that's not really relevant to the rest of this page, so you'll just have to look at my week 14 notes...
+            <h2>The spectrum of \(\hat J_z\)</h2>
+            By convention, we find the spectrum of \(\hat J_z\), and can then find the spectra of \(\hat J_x\) and \(\hat J_y\) via rotation.
+            For example, if we want to measure \(\hat J_x\) but for some reason can only perform measurements along the \(z\)-axis, we can rotate the system so that the \(x\)-axis is now aligned to the \(z\)-axis, make our measurement, and then rotate the system back to the orientation it was in before.
+            Mathematically:
+            \[\hat J_x = e^{-i\hat J_y \pi/2}\hat J_z e^{i\hat J_y \pi/2}\]
+            \[\hat J_y = e^{i\hat J_x \pi/2}\hat J_z e^{-i\hat J_x \pi/2}\]
+            Where \(e^{-i\hat J_y \pi/2}\) is our unitary operator that rotates the system around the \(y\)-axis, or in other words, performs a rotation in the \(x-z\)-plane of \(\pi/2\), bringing the \(x\)-axis to the \(z\)-axis.
+            Then, if we know the eigenvalues of \(\hat J_z\), we can find the eigenvalues of \(\hat J_x\) as such:
+            \[\begin{align}
+                \hat J_z|\lambda\rangle &= \lambda|\lambda\rangle \\
+                e^{i\hat J_y \pi/2}\hat J_x e^{-i\hat J_y \pi/2}|\lambda\rangle &= \lambda|\lambda\rangle \\
+                \hat J_xe^{-i\hat J_y \pi/2}|\lambda\rangle &= \lambda e^{-i\hat J_y \pi/2}|\lambda\rangle \\
+            \end{align}\]
+            evidently, the eigenvectors of \(\hat J_x\) are \(e^{-i\hat J_y \pi/2}|\lambda\rangle\), which correspond to the same eigenvalues as \(\hat J_z\) has, \(\lambda\).
+            <br><br>
+            <b><i>Introducing ladder operators</i></b>.
+            It is useful here, as with the harmonic oscillator, to introduces two new ladder operators, in this case, \(\hat J_\pm = \hat J_x \pm i\hat J_y\), where \(\hat J_+^\dagger = \hat J_-\), which commute with other operators as follows:
+            \[\begin{align}
+                [\hat J^2, \hat J_\pm] &= 0 \tag{5} \\
+                [\hat J_z, \hat J_\pm] &= [\hat J_z, \hat J_x \pm i\hat J_y]
+                                        = [\hat J_z, \hat J_x] \pm i[\hat J_z, \hat J_y] \\
+                                       &\text{Using (4): } \\
+                                       &= i\hbar \hat J_y \pm i(-i\hbar)\hat J_x \\
+                                       &= \pm \hbar(\hat J_x \pm i\hat J_y) \\
+                                       &= \pm\hbar\hat J_\pm \tag{6} \\
+                [\hat J_+, \hat J_-] &= [\hat J_x + i\hat J_y, \hat J_x - i\hat J_y] \\
+                                     &= [\hat J_x, \hat J_x] + [\hat J_x, -i\hat J_y] + [i\hat J_y, \hat J_x] + [i\hat J_y, -i\hat J_y] \\
+                                     &= 0 + [\hat J_x, -i\hat J_y] + [i\hat J_y, \hat J_x] + 0 \\
+                                     &= -i[\hat J_x, \hat J_y] + i[\hat J_y, \hat J_x] \\
+                                     &\text{Using (4) again: } \\
+                                     &= -i(i\hbar)\hat J_z + i(-i\hbar)\hat J_z \\
+                                     &= 2\hbar\hat J_z \tag{7}
+            \end{align}\]
+            and applying \(\hat J_+\hat J_-\) and \(\hat J_-\hat J_+\) are the same as applying the following:
+            \[\begin{align}
+                \hat J_+\hat J_- &= (\hat J_x + i\hat J_y)(\hat J_x - i\hat J_y) \\
+                &= \hat J_x^2 + \hat J_y^2 - i\hat J_y\hat J_x -i \hat J_x\hat J_y \\
+                &= \hat J_x^2 + \hat J_y^2 + i[\hat J_y\hat J_x] \\
+                &\text{Using (4): } \\
+                &= \hat J_x^2 + \hat J_y^2 + i(-i\hbar)\hat J_z \\
+                &= \hat J_x^2 + \hat J_y^2 + \hbar\hat J_z \\
+                &\text{Using the fact that  } \hat J^2 = \hat J_x^2 + \hat J_y^2 + \hat J_z^2 \\
+                \hat J_+\hat J_- &= \hat J^2 - \hat J_z^2 + \hbar\hat J_z \tag{8} \\
+                \hat J_-\hat J_+ &= \hat J^2 - \hat J_z^2 - \hbar\hat J_z \tag{9} \\
+            \end{align}\]
+            <b><i>Introducing different expressions for eigenvalues</i></b>.
+            In addition to defining \(\hat J_\pm\), we do one more thing:
+            Because \(\hat J^2\) and \(\hat J_z\) commute (3), the two operators share a basis of common eigenvectors, which we write as such:
+            \[\begin{align}
+                \hat J^2 &= \lambda|k, \lambda, \mu\rangle \\
+                \hat J_z &= \mu|k, \lambda, \mu\rangle \\
+            \end{align}\]
+            The expected values for \(\hat J^2\) are all positive or zero.
+            Conceptually, this is apparent, but mathematically we can also say that this is because 
+            \[\langle \psi | \hat J^2 | \psi\rangle = \langle \psi | \hat J \hat J | \psi\rangle = ||\hat J | \psi\rangle||^2 \gt 0\]
+            so, the eigenvalues for \(\hat J^2\) must all be positive, or, \(\lambda \gt 0\).
+            This allows us to write \(\lambda\) as \(\hbar^2 j(j+1)\), since \(\hbar^2\) is always positive, \(\lambda\) can be \(0\) if \(j\) is 0 or -1, and \(j(j+1)\) will always be positive if \(j\) is not 0 or -1.
+            We also write \(\mu\) as \(\hbar m\) instead.
+            Note here that \(m\) and \(j\) are both dimensionless quantities, and they can be any real value.
+            Thus we have:
+            \[\begin{align}
+                |k, \lambda, \mu\rangle &\to |k, j, m\rangle \\
+                \hat J^2 |k, j, m\rangle &= \hbar^2j(j+1)|k, j, m\rangle \\
+                \hat J_z |k, j, m\rangle &= \hbar m|k, j, m\rangle
+            \end{align}\]
+            These might seem like odd choice, but they make things more convenient, as we will see right now...
+            <br><br>
+            <b><i>The action of our ladder operators</i></b>.
+            Our ladder operators do the following to an eigenstate \(|kjm\rangle\).
+            First, \(\hat J_\pm|kjm\rangle\) is still an eigenvector of \(\hat J^2\), with the exact same eigenvalue as \(|kjm\rangle\):
+            \[\begin{align}
+                \hat J^2\hat J_\pm|kjm\rangle &= \hat J_\pm \hat J^2|kjm\rangle \text{  by (5).} \\
+                &= \hbar^2j(j+1) \hat J_\pm |kjm\rangle
+            \end{align}\]
+            Next, \(\hat J_\pm|kjm\rangle\) is still an eigenvector of \(\hat J_z\), but with a slightly different eigenvalue than \(|kjm\rangle\):
+            \[\begin{align}
+                \hat J_z \hat J_\pm|kjm\rangle &= (\hat J_\pm \hat J_z \pm \hbar \hat J_\pm) |kjm\rangle \text{  by (6).} \\
+                &= \hat J_\pm(\hat J_z \pm \hbar)|kjm\rangle = \hat J_\pm (m\hbar \pm \hbar) |kjm\rangle \\
+                &= \hbar(m\pm 1)\hat J_\pm |kjm\rangle
+            \end{align}\]
+            so, applying \(\hat J_+\) produces an eigenvector with eigenvalue \(\hbar (m+1)\), where \(m\) is incremented, and applying \(\hat J_-\) produces an eigenvector with eigenvalue \(\hbar (m-1)\), where \(m\) is decremented.
+            <br><br>
+            <b><i>Constraining \(m\)</i></b>.
+            We can't, however, just \(\hat J_+\) as many times as we want.
+            \[\begin{align}
+                ||\hat J_+ |kjm\rangle ||^2 &= \langle kjm | \hat J_- \hat J_+|kjm\rangle \\
+                \text{Using (9):}& \\
+                &= \langle kjm | (\hat J^2 - \hat J_z^2 - \hbar\hat J_z) | kjm \rangle \\
+                &= \langle kjm | \hat J^2 | kjm \rangle - \langle kjm | \hat J_z^2 | kjm \rangle - \hbar \langle kjm | \hat J_z | kjm \rangle \\
+                &= \hbar^2 j(j+1) - (\hbar m)^2 - \hbar^2 m \\
+                &= \hbar^2 (j(j+1) - m(m+1))
+            \end{align}\]
+            If \(j(j+1) \le m(m+1) \to j^2 + j \le m^2 + m\), we have the null vector, which is not a valid eigenvector, or a vector with negative length, which is not possible. 
+            <br><br>
+            The only thing we can determine for certain from this constraint is that for all \(m \ge 0\), we can only apply \(\hat J_+\) and expect to get a valid eigenvector if \(j \ge m\). 
+            <!-- (We can't conclusively say anything about \(m\lt0\), since as \(-m\) grows larger and larger, the \(m^2\) makes the expression grow faster than the \(m\) term can make it shrink, but for small \(m\), \(m^2\) is less than \(m\) and so the \(m\) term <i>does</i> stop the expression from getting too large... or something like that). -->
+            <br><br>
+            We also can't just apply \(\hat J_-\) as many times as we want:
+            \[\begin{align}
+                ||\hat J_- |kjm\rangle ||^2 &= \langle kjm | \hat J_+ \hat J_i|kjm\rangle \\
+                \text{Using (8):}& \\
+                &= \langle kjm | (\hat J^2 - \hat J_z^2 + \hbar\hat J_z) | kjm \rangle \\
+                &= \langle kjm | \hat J^2 | kjm \rangle - \langle kjm | \hat J_z^2 | kjm \rangle + \hbar \langle kjm | \hat J_z | kjm \rangle \\
+                &= \hbar^2 j(j+1) - (\hbar m)^2 + \hbar^2 m \\
+                &= \hbar^2 (j(j+1) - m(m-1))
+            \end{align}\]
+            If \(j(j+1) \le m(m-1)\), we have the null vector which is not a valid eigenvector, or a vector with negative length, which is, again, not possible.
+            <br><br>
+            From this constraint we learn that if \(m\lt 0\), \(j^2 + j\) must be greater than \(m^2 - (-|m|) = m^2 + |m|\). 
+            Evidently this means \(|m|\) must be less than or equal to \(j\).
+            <br><br>
+            Putting these two results together: 
+            <ul>
+                <li>If \(m \ge 0\) applying \(\hat J_+\) will only yield an eigenvector if \(j \ge m\)</li>
+                <li>If \(m \lt 0\) applying \(\hat J_-\) will only yield an eigenvector if \(|m| \le j\)</li>
+            </ul>
+            \(\implies\) The value \(m\) must stay within the bounds \(-j \le m \le j\).
+            If it exceeds these bounds, then the ladder operators can no longer produce another eigenstate or indeed another valid vector altogether.
+            <br><br>
+            Let's look at the edges of these bounds a little more closely.
+            If \(m=j\) and we apply \(\hat J_+\), we do indeed get the null vector as expected:
+            \[\begin{align}
+                ||\hat J_+ |kjj\rangle ||^2 &= \langle kjj | \hat J_- \hat J_+ |kjj\rangle \\
+                \text{Using (9):}& \\
+                &= \langle kjj | (\hat J^2 - \hat J_z^2 - \hbar\hat J_z) | kjj \rangle \\
+                &= \hbar^2(j(j+1) - j^2 - j) = 0
+            \end{align}\]
+            and \(m=-j\) and we apply \(\hat J_-\), we also get the null vector as expected:
+            \[\begin{align}
+                ||\hat J_- |kj-j\rangle ||^2 &= \langle kjj | \hat J_+ \hat J_- |kj-j\rangle \\
+                \text{Using (8):}& \\
+                &= \langle kj-j | (\hat J^2 - \hat J_z^2 + \hbar\hat J_z) | kj-j \rangle \\
+                &= \hbar^2j(j+1) - \hbar^2j^2 - \hbar^2j = 0
+            \end{align}\]
+            To reiterate, you can apply \(\hat J_+\) to an eigenstate \(|kjm\rangle\) until \(m=j\), after which you apply \(\hat J_+\) and get the null vector.
+            Similarly, you can apply \(\hat J_-\) to an eigenstate \(|kjm\rangle\) until \(m=-k\), after which you apply \(\hat J_-\) and get the null vector.
+            <br><br>
+            Additionally, if \(m\) and \(\pm j\) are a non-integer distance apart, so \(|\pm j-m| \notin \mathbb{N_0}\), it would be possible to apply the ladder operators, surpass the condition where the null vector appears, and obtain an eigenstate with a negative value.
+            Hence we need \(|j-m| \in \mathbb{N_0}\).
+            <br><br>
+            Distance must be positive (obviously), so the distance from \(m\) to \(-j\), while it can be written as \(|m-j|\), can also written as \(m-(-|j|) = m+|j| = m+j\), which is always positive, even if \(m\) is negative, because we have already established that \(|m| \le j\).
+            Likewise, the distance from \(m\) to \(j\) can be written as \(j-m\), since the magnitude of \(m\) is always less than \(j\).
+            Putting these two results together: 
+            <ul>
+                <li>\(m+j \in \mathbb{N_0}\)</li>
+                <li>\(j-m \in \mathbb{N_0}\)</li>
+            </ul>
+            \(\implies m+j+j-m = 2j \in \mathbb{N_0}\).
+            So, \(j = 0, 1/2, 1, 3/2, 2, \cdots\), and \(m = -j, -j+1, -j+2, \cdots , j-2, j-1, j\), of which there are \(2j+1\) possible values.
+        </div>
+    </body>
+</html>
