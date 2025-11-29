@@ -21,7 +21,7 @@
             \]
             for some function \(A\) with the same variables as the generator (in this case, \(\hat n \cdot \vec L\)), see the demonstration <a href="classical.html#invar">here</a>.
             <br><br>
-            A scalar quantity \(S\) (which by definition, is invariant under rotation) naturally has \(\frac{dS}{d\phi} = 0\), so \(\{S, \hat n \cdot \vec L = 0\}\) also.
+            A scalar quantity \(S\) (which by definition, is invariant under rotation) naturally has \(\frac{dS}{d\phi} = 0\), so \(\{S, \hat n \cdot \vec L\} = 0\) also.
             Because this is true for any axis \(\hat n\) that we want to rotate around, we can say the following:
             \[\begin{align}
                 \{S, \hat n\cdot\vec L\} &= 0 \\
@@ -42,7 +42,7 @@
             For very small angles, the rotation is the same as a displacement in a direction perpendicular to both the axis of rotation and original vector (hence the cross product), with a length of \(\sin\theta \approx \theta\) (see the discussion on the classical rotation linked earlier).
             This means that 
             \[\begin{align}
-                \frac{d\vec A}{d\phi} = \hat n \times \vec a = \{\vec A, \hat n \cdot \vec L\}
+                \frac{d\vec A}{d\phi} = \hat n \times \vec A = \{\vec A, \hat n \cdot \vec L\}
             \end{align}\]
             and again, because this is true for all \(\hat n\), we can draw a similar conclusion:
             \[\begin{align}
@@ -288,7 +288,7 @@
                 &= -i\hbar (\epsilon_{ijk} r_j \frac{\partial}{\partial k}) \langle\vec r| \\
                 \langle \vec r | \hat{\vec L} &= -i\hbar (\vec r \times \vec\nabla) \langle \vec r| \\
             \end{align}\]
-            where in three dimensions, \(\langle \vec r | \hat p = -i\hbar\vec\nabla\langle \vec r|\), or \(\langle \vec r | \hat p_i = -i\hbar\frac{\partial}{\partial i} \langle\vec r|\) for a specific dimension \(i\).
+            where in three dimensions, \(\langle \vec r | \hat{\vec p} = -i\hbar\vec\nabla\langle \vec r|\), or \(\langle \vec r | \hat p_i = -i\hbar\frac{\partial}{\partial i} \langle\vec r|\) for a specific dimension \(i\).
             <br><br>
             <b><i>Operators in spherical coordinates</i></b>.
             Because \(\vec r\) scales with distance from the origin (of whatever it is you're orbiting), and \(\vec\nabla = (\frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z})\) and so is inversely related to length, we can expect \(\vec r \times \vec \nabla\) to be invariant under scaling of \(\vec r\) (so under movement towards and away from the origin).
@@ -484,7 +484,7 @@
             \[Y_{ll}(\theta, \phi) = c_l\sin^l\theta e^{il\phi}\]
             We find, through normalization (and sign conventions), what \(c_l\) is, which gives us:
             \[Y_{ll}(\theta, \phi) = \frac{(-1)^l}{2^l l!}\sqrt{\frac{(2l+1)!}{4\pi}}\sin^l\theta e^{il\phi}\]
-            We can then repeatedly apply \(\hat L_-\) to \(Y_{ll}(\theta, \phi)\) to get some \(y_{lm}(\theta, \phi)\):
+            We can then repeatedly apply \(\hat L_-\) to \(Y_{ll}(\theta, \phi)\) to get some \(Y_{lm}(\theta, \phi)\):
             \[\begin{align}
                 \hat L_\pm Y_{lm} &= \hbar\sqrt{l(l+1) + m(m\pm1)}Y_{lm\pm1} \\
                 Y_{lm}(\theta, \phi) &= \sqrt{\frac{(l+m)!}{(2l)!(l-m)!}} (\frac{\hat L_-}{\hbar})^{l-m}Y_{ll}(\theta, \phi)
@@ -527,7 +527,7 @@
             To demonstrate this, we do the following:
             \[\begin{align}
                 \hat H |\Psi_{nlm}\rangle &= E_{nl}|\Psi_{nlm}\rangle \\
-                \hat L^2 |\Psi_{nlm}\rangle &= \hbar l(l+1)|\Psi_{nlm}\rangle \\
+                \hat L^2 |\Psi_{nlm}\rangle &= \hbar^2 l(l+1)|\Psi_{nlm}\rangle \\
                 \hat L_z |\Psi_{nlm}\rangle &= \hbar m|\Psi_{nlm}\rangle \\
                 \text{where  } \Psi_{nlm}(\vec r) &= \langle\vec r | \Psi_{nlm}\rangle = R_{nl}(r) Y_{lm}(\theta, \phi)
             \end{align}\]
@@ -629,9 +629,9 @@
                 E_{nl}R_{nl}(r) &= (\frac{\hbar^2}{2\mu\hat r^2}(l(l+1) - r\partial_r^2 r) + \hat V(r)) R_{nl}(r) \\
                 E_{nl}rR_{nl}(r) &= (\frac{\hbar^2}{2\mu\hat r^2}(l(l+1) - r\partial_r^2 r) + \hat V(r)) rR_{nl}(r) \\
                 u_{l}(r) &= rR_{nl}(r) \\
-                E_{nl}u_{l}(r) &= (\frac{\hbar^2l(l+1)}{2\mu\hat r^2} - \frac{\hbar^2\partial_r^2}{2\mu}) + \hat V(r) u_{l}(r) \\
+                E_{nl}u_{l}(r) &= ((\frac{\hbar^2l(l+1)}{2\mu\hat r^2} - \frac{\hbar^2\partial_r^2}{2\mu}) + \hat V(r)) u_{l}(r) \\
                 V_{eff}(r) &\equiv V(r) + \frac{\hbar^2 l(l+1)}{2\mu r^2} \\
-                E_{nl}u_l &= -\frac{\hbar^2}{2\mu} u^"_l(r)V_{eff}(u_l(r))
+                E_{nl}u_l &= -\frac{\hbar^2}{2\mu} u^"_l(r) + V_{eff}(r)u_l(r)
             \end{align}\]
             where the effective potential is the potential plus some "centrifugal" force that prevents the particle from falling into the center of the potential.
             <br><br>
