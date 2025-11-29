@@ -178,7 +178,7 @@
             \end{align}\]
             If \(j(j+1) \le m(m+1) \to j^2 + j \le m^2 + m\), we have the null vector, which is not a valid eigenvector, or a vector with negative length, which is not possible. 
             <br><br>
-            The only thing we can determine for certain from this constraint is that for all \(m \ge 0\), we can only apply \(\hat J_+\) and expect to get a valid eigenvector if \(j \ge m\). 
+            The only thing we can determine for certain from this constraint is that for all \(m \ge 0\), we can only apply \(\hat J_+\) and expect to get a valid eigenvector if \(j \gt m\). 
             <!-- (We can't conclusively say anything about \(m\lt0\), since as \(-m\) grows larger and larger, the \(m^2\) makes the expression grow faster than the \(m\) term can make it shrink, but for small \(m\), \(m^2\) is less than \(m\) and so the \(m\) term <i>does</i> stop the expression from getting too large... or something like that). -->
             <br><br>
             We also can't just apply \(\hat J_-\) as many times as we want:
@@ -193,12 +193,12 @@
             If \(j(j+1) \le m(m-1)\), we have the null vector which is not a valid eigenvector, or a vector with negative length, which is, again, not possible.
             <br><br>
             From this constraint we learn that if \(m\lt 0\), \(j^2 + j\) must be greater than \(m^2 - (-|m|) = m^2 + |m|\). 
-            Evidently this means \(|m|\) must be less than or equal to \(j\).
+            Evidently this means \(|m|\) must be less than \(j\).
             <br><br>
             Putting these two results together: 
             <ul>
-                <li>If \(m \ge 0\) applying \(\hat J_+\) will only yield an eigenvector if \(j \ge m\)</li>
-                <li>If \(m \lt 0\) applying \(\hat J_-\) will only yield an eigenvector if \(|m| \le j\)</li>
+                <li>If \(m \ge 0\) applying \(\hat J_+\) will only yield an eigenvector if \(j \gt m\)</li>
+                <li>If \(m \lt 0\) applying \(\hat J_-\) will only yield an eigenvector if \(|m| \lt j\)</li>
             </ul>
             \(\implies\) The value \(m\) must stay within the bounds \(-j \le m \le j\).
             If it exceeds these bounds, then the ladder operators can no longer produce another eigenstate or indeed another valid vector altogether.
@@ -266,7 +266,7 @@
             \[\begin{align}
                 \langle k'jm|\hat J_- \hat J_+|kjm\rangle &= \langle k'jm|\hat J^2 - \hat J_z^2 - \hbar\hat J_z|kjm\rangle \text{ from (9)} \\
                 &= \hbar^2(j(j+1) - m(m+1)) \langle k'jm|kjm\rangle \\
-                &= \delta_{kk'}
+                &= \hbar^2(j(j+1) - m(m+1)) \delta_{kk'}
             \end{align}\]
             (and similarly, it follows \(\hat J_-|kjm\rangle \perp \hat J_-|k'jm\rangle\)).
             Thus we see that applying the ladder operators to orthogonal eigenstates produce orthogonal eigenstates that correspond to different values of \(m\) than before, while the corresponding value of \(j\) does not change.
@@ -285,13 +285,13 @@
                 &= \epsilon_{ijk} \langle \vec r | \hat r_j \hat p_k \\
                 &= \epsilon_{ijk} r_j \langle \vec r | \hat p_k \\
                 &= \epsilon_{ijk} r_j (-i\hbar \frac{\partial}{\partial k} \langle \vec r|) \\
-                &= -i\hbar (\epsilon_{ijk} r_j \frac{\partial}{\partial k}) \vec r| \\
+                &= -i\hbar (\epsilon_{ijk} r_j \frac{\partial}{\partial k}) \langle\vec r| \\
                 \langle \vec r | \hat{\vec L} &= -i\hbar (\vec r \times \vec\nabla) \langle \vec r| \\
             \end{align}\]
             where in three dimensions, \(\langle \vec r | \hat p = -i\hbar\vec\nabla\langle \vec r|\), or \(\langle \vec r | \hat p_i = -i\hbar\frac{\partial}{\partial i} \langle\vec r|\) for a specific dimension \(i\).
             <br><br>
             <b><i>Operators in spherical coordinates</i></b>.
-            Because \(\vec r\) scales with distance from the origin (of whatever it is you're orbiting), and \(\vec\nabla = (\frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z})\) and so is incersely related to length, we can expect \(\vec r \times \vec \nabla\) to be invariant underscaling of \(\vec r\) (so under movement towards and away from the origin).
+            Because \(\vec r\) scales with distance from the origin (of whatever it is you're orbiting), and \(\vec\nabla = (\frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z})\) and so is inversely related to length, we can expect \(\vec r \times \vec \nabla\) to be invariant under scaling of \(\vec r\) (so under movement towards and away from the origin).
             Thus, we are motivated to use <i>spherical coordinates</i>.
             <br><br>
             <div style="text-align: center;"><img src="images/spherical.jpg" style="width:80%"></div>
